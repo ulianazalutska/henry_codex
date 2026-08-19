@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { CSSProperties, PointerEvent as ReactPointerEvent, WheelEvent as ReactWheelEvent } from "react";
+import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
 type MaterialKey = "leather" | "alcantara" | "wood" | "quilting" | "combinations";
@@ -88,14 +88,26 @@ export function ProductExperience({ collection, product, isReady }: { collection
   const [materialKey, setMaterialKey] = useState<MaterialKey>("leather");
   const [activeSwatch, setActiveSwatch] = useState(0);
   const [openDetail, setOpenDetail] = useState(-1);
-  const dragStartX = useRef<number | null>(null);
-  const wheelLocked = useRef(false);
+  const carouselViewport = useRef<HTMLDivElement>(null);
+  const carouselIndex = useRef(1);
+  const carouselMoving = useRef(false);
+  const carouselTimer = useRef<number | null>(null);
+  const dragState = useRef<{ pointerId: number; startX: number; startLeft: number } | null>(null);
 
   const slides = useMemo(() => isReady ? novaSlides : [
     { src: product.image, label: `${product.name} / materiały w przygotowaniu` },
     { src: product.catalogueImage || product.image, label: `${collection.name} / zapowiedź` },
     { src: collection.hero, label: `${collection.name} / kolekcja` },
   ], [collection.hero, collection.name, isReady, product]);
+  const carouselSlides = useMemo(() => {
+    const last = slides[slides.length - 1];
+    const first = slides[0];
+    return [
+      { ...last, logicalIndex: slides.length - 1, key: "clone-last" },
+      ...slides.map((slide, index) => ({ ...slide, logicalIndex: index, key: `slide-${index}` })),
+      { ...first, logicalIndex: 0, key: "clone-first" },
+    ];
+  }, [slides]);
   const activeMaterial = materials.find((item) => item.key === materialKey) ?? materials[0];
 
   useEffect(() => {
@@ -112,42 +124,98 @@ export function ProductExperience({ collection, product, isReady }: { collection
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const syncPosition = () => {
+      const viewport = carouselViewport.current;
+      const slide = viewport?.querySelector<HTMLElement>(".product-carousel__slide");
+      const track = viewport?.querySelector<HTMLElement>(".product-carousel__track");
+      if (!viewport || !slide || !track) return;
+      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+      viewport.scrollTo({ left: carouselIndex.current * (slide.getBoundingClientRect().width + gap), behavior: "auto" });
+    };
+    const frame = window.requestAnimationFrame(syncPosition);
+    window.addEventListener("resize", syncPosition);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", syncPosition);
+      if (carouselTimer.current !== null) window.clearTimeout(carouselTimer.current);
+    };
+  }, [slides.length]);
+
   const changeMaterial = (key: MaterialKey) => {
     setMaterialKey(key);
     setActiveSwatch(0);
   };
 
+  const carouselStep = () => {
+    const viewport = carouselViewport.current;
+    const slide = viewport?.querySelector<HTMLElement>(".product-carousel__slide");
+    const track = viewport?.querySelector<HTMLElement>(".product-carousel__track");
+    if (!viewport || !slide || !track) return 0;
+    const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+    return slide.getBoundingClientRect().width + gap;
+  };
+
+  const settleCarousel = (target: number) => {
+    const viewport = carouselViewport.current;
+    const step = carouselStep();
+    if (!viewport || !step) return;
+    let normalized = target;
+    if (target === 0) normalized = slides.length;
+    if (target === slides.length + 1) normalized = 1;
+    if (normalized !== target) viewport.scrollTo({ left: normalized * step, behavior: "auto" });
+    carouselIndex.current = normalized;
+    carouselMoving.current = false;
+  };
+
+  const goToPhysicalSlide = (target: number) => {
+    const viewport = carouselViewport.current;
+    const step = carouselStep();
+    if (!viewport || !step || carouselMoving.current) return;
+    carouselMoving.current = true;
+    const logicalIndex = (target - 1 + slides.length) % slides.length;
+    setActiveSlide(logicalIndex);
+    viewport.scrollTo({ left: target * step, behavior: "smooth" });
+    if (carouselTimer.current !== null) window.clearTimeout(carouselTimer.current);
+    carouselTimer.current = window.setTimeout(() => settleCarousel(target), 620);
+  };
+
   const moveSlide = (direction: number) => {
-    setActiveSlide((current) => (current + direction + slides.length) % slides.length);
+    goToPhysicalSlide(carouselIndex.current + direction);
   };
 
-  const slidePosition = (index: number) => {
-    if (index === activeSlide) return "is-active";
-    if (index === (activeSlide - 1 + slides.length) % slides.length) return "is-prev";
-    if (index === (activeSlide + 1) % slides.length) return "is-next";
-    return "is-hidden";
-  };
-
-  const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
-    const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
-    const delta = horizontal ? event.deltaX : event.deltaY;
-    if (Math.abs(delta) < 12 || wheelLocked.current) return;
-    if (horizontal || event.shiftKey) event.preventDefault();
-    wheelLocked.current = true;
-    moveSlide(delta > 0 ? 1 : -1);
-    window.setTimeout(() => { wheelLocked.current = false; }, 520);
+  const selectSlide = (index: number) => {
+    goToPhysicalSlide(index + 1);
   };
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    dragStartX.current = event.clientX;
+    if (event.button !== 0 || carouselMoving.current) return;
+    event.preventDefault();
+    dragState.current = { pointerId: event.pointerId, startX: event.clientX, startLeft: event.currentTarget.scrollLeft };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = dragState.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    event.currentTarget.scrollLeft = drag.startLeft - (event.clientX - drag.startX);
+  };
+
   const handlePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (dragStartX.current === null) return;
-    const distance = event.clientX - dragStartX.current;
-    dragStartX.current = null;
-    if (Math.abs(distance) > 42) moveSlide(distance < 0 ? 1 : -1);
+    const drag = dragState.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const distance = event.clientX - drag.startX;
+    dragState.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    if (Math.abs(distance) > 48) moveSlide(distance < 0 ? 1 : -1);
+    else event.currentTarget.scrollTo({ left: carouselIndex.current * carouselStep(), behavior: "smooth" });
+  };
+
+  const handlePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    dragState.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    event.currentTarget.scrollTo({ left: carouselIndex.current * carouselStep(), behavior: "smooth" });
   };
 
   const heroImage = isReady ? `${novaRoot}/hero.png` : product.image;
@@ -184,27 +252,31 @@ export function ProductExperience({ collection, product, isReady }: { collection
         </header>
         <div className="product-carousel" data-product-reveal aria-roledescription="carousel" aria-label={`Wizualizacje ${product.name}`}>
           <div
+            ref={carouselViewport}
             className="product-carousel__viewport"
-            onWheel={handleWheel}
             onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            onPointerCancel={() => { dragStartX.current = null; }}
+            onPointerCancel={handlePointerCancel}
+            onDragStart={(event) => event.preventDefault()}
             onKeyDown={(event) => {
               if (event.key === "ArrowLeft") moveSlide(-1);
               if (event.key === "ArrowRight") moveSlide(1);
             }}
             tabIndex={0}
           >
-            {slides.map((slide, index) => (
-              <figure className={slidePosition(index)} aria-hidden={index !== activeSlide} key={slide.src}>
-                <img src={slide.src} alt={index === activeSlide ? `${product.name}: ${slide.label}` : ""} />
-                <figcaption>{slide.label}</figcaption>
-              </figure>
-            ))}
+            <div className="product-carousel__track">
+              {carouselSlides.map((slide) => (
+                <figure className={`product-carousel__slide ${slide.logicalIndex === activeSlide ? "is-active" : ""}`} aria-hidden={slide.logicalIndex !== activeSlide} key={slide.key}>
+                  <img src={slide.src} alt={slide.logicalIndex === activeSlide ? `${product.name}: ${slide.label}` : ""} draggable={false} />
+                  <figcaption>{slide.label}</figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
           <div className="product-carousel__controls">
             <button onClick={() => moveSlide(-1)} aria-label="Poprzednie zdjęcie"><Arrow direction="left" /></button>
-            <div>{slides.map((_, index) => <button key={index} onClick={() => setActiveSlide(index)} aria-label={`Pokaż zdjęcie ${index + 1}`} aria-current={index === activeSlide} />)}</div>
+            <div>{slides.map((_, index) => <button key={index} onClick={() => selectSlide(index)} aria-label={`Pokaż zdjęcie ${index + 1}`} aria-current={index === activeSlide} />)}</div>
             <button onClick={() => moveSlide(1)} aria-label="Następne zdjęcie"><Arrow direction="right" /></button>
           </div>
         </div>
