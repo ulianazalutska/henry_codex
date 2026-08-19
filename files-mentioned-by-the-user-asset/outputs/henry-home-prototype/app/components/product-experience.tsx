@@ -91,7 +91,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
   const carouselViewport = useRef<HTMLDivElement>(null);
   const carouselIndex = useRef(1);
   const carouselMoving = useRef(false);
-  const carouselTimer = useRef<number | null>(null);
+  const carouselAnimation = useRef<number | null>(null);
   const dragState = useRef<{ pointerId: number; startX: number; startLeft: number } | null>(null);
 
   const slides = useMemo(() => isReady ? novaSlides : [
@@ -131,14 +131,14 @@ export function ProductExperience({ collection, product, isReady }: { collection
       const track = viewport?.querySelector<HTMLElement>(".product-carousel__track");
       if (!viewport || !slide || !track) return;
       const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
-      viewport.scrollTo({ left: carouselIndex.current * (slide.getBoundingClientRect().width + gap), behavior: "auto" });
+      viewport.scrollLeft = carouselIndex.current * (slide.getBoundingClientRect().width + gap);
     };
     const frame = window.requestAnimationFrame(syncPosition);
     window.addEventListener("resize", syncPosition);
     return () => {
       window.cancelAnimationFrame(frame);
       window.removeEventListener("resize", syncPosition);
-      if (carouselTimer.current !== null) window.clearTimeout(carouselTimer.current);
+      if (carouselAnimation.current !== null) window.cancelAnimationFrame(carouselAnimation.current);
     };
   }, [slides.length]);
 
@@ -163,9 +163,37 @@ export function ProductExperience({ collection, product, isReady }: { collection
     let normalized = target;
     if (target === 0) normalized = slides.length;
     if (target === slides.length + 1) normalized = 1;
-    if (normalized !== target) viewport.scrollTo({ left: normalized * step, behavior: "auto" });
+    if (normalized !== target) viewport.scrollLeft = normalized * step;
     carouselIndex.current = normalized;
     carouselMoving.current = false;
+  };
+
+  const animateCarouselTo = (targetLeft: number, onComplete: () => void) => {
+    const viewport = carouselViewport.current;
+    if (!viewport) return;
+    if (carouselAnimation.current !== null) window.cancelAnimationFrame(carouselAnimation.current);
+    const startLeft = viewport.scrollLeft;
+    const distance = targetLeft - startLeft;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duration = reduceMotion ? 0 : 560;
+    if (duration === 0 || Math.abs(distance) < 1) {
+      viewport.scrollLeft = targetLeft;
+      onComplete();
+      return;
+    }
+    const startedAt = window.performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      viewport.scrollLeft = startLeft + distance * eased;
+      if (progress < 1) carouselAnimation.current = window.requestAnimationFrame(tick);
+      else {
+        carouselAnimation.current = null;
+        viewport.scrollLeft = targetLeft;
+        onComplete();
+      }
+    };
+    carouselAnimation.current = window.requestAnimationFrame(tick);
   };
 
   const goToPhysicalSlide = (target: number) => {
@@ -175,9 +203,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
     carouselMoving.current = true;
     const logicalIndex = (target - 1 + slides.length) % slides.length;
     setActiveSlide(logicalIndex);
-    viewport.scrollTo({ left: target * step, behavior: "smooth" });
-    if (carouselTimer.current !== null) window.clearTimeout(carouselTimer.current);
-    carouselTimer.current = window.setTimeout(() => settleCarousel(target), 620);
+    animateCarouselTo(target * step, () => settleCarousel(target));
   };
 
   const moveSlide = (direction: number) => {
@@ -199,7 +225,9 @@ export function ProductExperience({ collection, product, isReady }: { collection
     const drag = dragState.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
     event.preventDefault();
-    event.currentTarget.scrollLeft = drag.startLeft - (event.clientX - drag.startX);
+    const step = carouselStep();
+    const desiredLeft = drag.startLeft - (event.clientX - drag.startX);
+    event.currentTarget.scrollLeft = Math.max(0, Math.min((slides.length + 1) * step, desiredLeft));
   };
 
   const handlePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -209,13 +237,17 @@ export function ProductExperience({ collection, product, isReady }: { collection
     dragState.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     if (Math.abs(distance) > 48) moveSlide(distance < 0 ? 1 : -1);
-    else event.currentTarget.scrollTo({ left: carouselIndex.current * carouselStep(), behavior: "smooth" });
+    else {
+      carouselMoving.current = true;
+      animateCarouselTo(carouselIndex.current * carouselStep(), () => { carouselMoving.current = false; });
+    }
   };
 
   const handlePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
     dragState.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-    event.currentTarget.scrollTo({ left: carouselIndex.current * carouselStep(), behavior: "smooth" });
+    carouselMoving.current = true;
+    animateCarouselTo(carouselIndex.current * carouselStep(), () => { carouselMoving.current = false; });
   };
 
   const heroImage = isReady ? `${novaRoot}/hero.png` : product.image;
