@@ -66,14 +66,14 @@
 .pending small { display: block; margin-bottom: 9px; color: #766f68; text-transform: uppercase; letter-spacing: .13em; font-size: 7px; }
 .pending p, .pending a { margin: 0; color: #aaa39c; font-size: 11px; }
 
-.gallery { position: relative; min-height: 980px; padding: 0 var(--gutter) 18vh; }
+.gallery { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .75fr); gap: clamp(28px, 5vw, 80px); align-items: end; padding: 0 var(--gutter) 18vh; }
 .gallery figure { margin: 0; }
 .gallery figure > div { overflow: hidden; background: #111; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s cubic-bezier(.16, 1, .3, 1), filter .8s ease; }
 .gallery figure:hover img { transform: scale(1.035); filter: brightness(1.06); }
-.galleryPrimary { width: 68%; }
+.galleryPrimary { width: 100%; }
 .galleryPrimary > div { aspect-ratio: 1.72 / 1; }
-.gallerySecondary { position: absolute; right: var(--gutter); top: 34vh; width: 34%; }
+.gallerySecondary { width: 100%; margin-bottom: clamp(0px, 5vw, 75px); }
 .gallerySecondary > div { aspect-ratio: .92 / 1; }
 .gallery figcaption { margin-top: 13px; color: #817a73; text-transform: uppercase; letter-spacing: .13em; font-size: 7px; }
 
@@ -83,7 +83,7 @@
 .form { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 24px; align-content: start; padding-top: 4vh; }
 .form label { display: flex; flex-direction: column; gap: 13px; }
 .form label > span { color: #8e8780; text-transform: uppercase; letter-spacing: .12em; font-size: 8px; }
-.form input, .form select, .form textarea {
+.form input, .form textarea {
   width: 100%;
   border: 0;
   border-bottom: 1px solid rgba(255, 255, 255, .25);
@@ -95,10 +95,33 @@
   font-size: 13px;
   transition: border-color .35s ease;
 }
-.form input, .form select { height: 46px; }
+.form input { height: 46px; }
 .form textarea { min-height: 130px; padding: 13px 0; resize: vertical; }
-.form select { color-scheme: dark; }
-.form input:focus, .form select:focus, .form textarea:focus { border-color: #d9a341; }
+.form input:focus, .form textarea:focus { border-color: #d9a341; }
+.form input:-webkit-autofill, .form input:-webkit-autofill:hover, .form input:-webkit-autofill:focus, .form textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset;
+  -webkit-text-fill-color: #f3f0ec;
+  caret-color: #f3f0ec;
+  transition: background-color 9999s ease-out;
+}
+.form input::selection, .form textarea::selection { background: rgba(217, 163, 65, .36); color: #fff; }
+.topicField { position: relative; display: flex; min-width: 0; flex-direction: column; gap: 13px; }
+.topicField > span { color: #8e8780; text-transform: uppercase; letter-spacing: .12em; font-size: 8px; }
+.topicField > input { display: none; }
+.topicTrigger { position: relative; z-index: 3; display: flex; width: 100%; height: 46px; align-items: center; justify-content: space-between; gap: 18px; padding: 0; border-bottom: 1px solid rgba(255, 255, 255, .25); color: #f3f0ec; text-align: left; font-size: 13px; transition: border-color .35s ease, color .35s ease; }
+.topicTrigger:hover, .topicTrigger[aria-expanded="true"] { border-color: #d9a341; color: #fff; }
+.topicTrigger i { position: relative; width: 12px; height: 12px; flex: 0 0 12px; }
+.topicTrigger i::before, .topicTrigger i::after { content: ""; position: absolute; top: 5px; width: 7px; height: 1px; background: #d9a341; transition: transform .55s cubic-bezier(.16, 1, .3, 1); }
+.topicTrigger i::before { left: 0; transform: rotate(45deg); }
+.topicTrigger i::after { right: 0; transform: rotate(-45deg); }
+.topicTrigger[aria-expanded="true"] i::before { transform: rotate(-45deg); }
+.topicTrigger[aria-expanded="true"] i::after { transform: rotate(45deg); }
+.topicMenu { position: absolute; z-index: 4; left: 0; right: 0; top: calc(100% + 1px); overflow: hidden; padding: 8px 0; border: 1px solid rgba(217, 163, 65, .25); background: rgba(23, 22, 21, .98); box-shadow: 0 24px 55px rgba(0, 0, 0, .36); opacity: 0; visibility: hidden; transform: translateY(-12px) scaleY(.94); transform-origin: top; transition: opacity .35s ease, transform .55s cubic-bezier(.16, 1, .3, 1), visibility 0s .55s; }
+.topicMenuOpen { opacity: 1; visibility: visible; transform: translateY(0) scaleY(1); transition-delay: 0s; }
+.topicMenu button { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 18px; color: #8f8881; text-align: left; font-size: 12px; transition: color .3s ease, background .3s ease, padding .45s cubic-bezier(.16, 1, .3, 1); }
+.topicMenu button:hover, .topicMenu button:focus-visible, .topicMenu button[aria-selected="true"] { padding-left: 25px; background: rgba(217, 163, 65, .07); color: #fff; outline: 0; }
+.topicMenu button i { width: 5px; height: 5px; border-radius: 50%; background: #d9a341; opacity: 0; transform: scale(0); transition: opacity .3s ease, transform .4s cubic-bezier(.16, 1, .3, 1); }
+.topicMenu button[aria-selected="true"] i { opacity: 1; transform: scale(1); }
 .messageField, .consent, .form > button, .formNote { grid-column: 1 / -1; }
 .consent { display: grid !important; grid-template-columns: 18px 1fr; gap: 13px !important; align-items: start; }
 .consent input { width: 16px; height: 16px; margin: 0; accent-color: #d9a341; }
@@ -122,9 +145,7 @@
   .heroIntro { width: 76%; }
   .directoryGrid { grid-template-columns: 1fr 1fr; }
   .directoryGrid article:last-child { grid-column: 2; }
-  .gallery { min-height: 800px; }
-  .galleryPrimary { width: 74%; }
-  .gallerySecondary { width: 38%; }
+  .gallery { grid-template-columns: minmax(0, 1.25fr) minmax(220px, .75fr); }
   .formSection { gap: 6vw; }
 }
 
@@ -140,8 +161,8 @@
   .directoryGrid { grid-template-columns: 1fr; gap: 70px; margin-top: 110px; }
   .directoryGrid article, .directoryGrid article:last-child { grid-column: 1; min-height: 0; }
   .directoryGrid h3 { margin-top: 42px; }
-  .gallery { display: grid; min-height: 0; gap: 75px; padding-bottom: 140px; }
-  .galleryPrimary, .gallerySecondary { position: relative; inset: auto; width: 100%; }
+  .gallery { grid-template-columns: 1fr; gap: 75px; padding-bottom: 140px; }
+  .galleryPrimary, .gallerySecondary { width: 100%; }
   .gallerySecondary { width: 78%; margin-left: auto; }
   .gallerySecondary > div { aspect-ratio: .88 / 1; }
   .formSection { grid-template-columns: 1fr; gap: 105px; padding-top: 135px; padding-bottom: 145px; }

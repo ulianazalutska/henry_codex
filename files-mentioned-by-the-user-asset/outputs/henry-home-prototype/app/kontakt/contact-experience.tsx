@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import type { FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { FormEvent, KeyboardEvent } from "react";
 import { SiteFooter } from "../components/site-footer";
 import { SiteNavigation } from "../components/site-navigation";
 import styles from "./contact.module.css";
@@ -12,8 +12,19 @@ const socialLinks = [
   { label: "YouTube", icon: "/media/youtube.svg" },
 ];
 
+const contactTopics = [
+  "Projekt prywatnej sali kinowej",
+  "Wybór fotela lub kolekcji",
+  "Projekt indywidualny",
+  "Współpraca dla architektów",
+  "Inne zapytanie",
+];
+
 export function ContactExperience() {
   const [formOpened, setFormOpened] = useState(false);
+  const [topicOpen, setTopicOpen] = useState(false);
+  const [topic, setTopic] = useState(contactTopics[0]);
+  const topicField = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-contact-reveal]"));
@@ -28,6 +39,23 @@ export function ContactExperience() {
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const closeTopic = (event: PointerEvent) => {
+      if (!topicField.current?.contains(event.target as Node)) setTopicOpen(false);
+    };
+    window.addEventListener("pointerdown", closeTopic);
+    return () => window.removeEventListener("pointerdown", closeTopic);
+  }, []);
+
+  const handleTopicKey = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "Escape") setTopicOpen(false);
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setTopicOpen(true);
+      window.requestAnimationFrame(() => topicField.current?.querySelector<HTMLButtonElement>("[role='option']")?.focus());
+    }
+  };
 
   const sendMessage = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -105,29 +133,33 @@ export function ContactExperience() {
           <span>Odpowiemy i pomożemy wybrać najlepszy kierunek — od pojedynczego fotela po kompletną prywatną salę kinową.</span>
         </div>
 
-        <form className={styles.form} onSubmit={sendMessage} data-contact-reveal>
+        <form className={styles.form} onSubmit={sendMessage} autoComplete="off" data-contact-reveal>
           <label>
             <span>Imię i nazwisko *</span>
-            <input name="name" autoComplete="name" required />
+            <input name="name" autoComplete="off" autoCorrect="off" spellCheck={false} data-lpignore="true" data-1p-ignore required />
           </label>
           <label>
             <span>Adres e-mail *</span>
-            <input name="email" type="email" autoComplete="email" required />
+            <input name="email" type="email" autoComplete="off" autoCorrect="off" spellCheck={false} data-lpignore="true" data-1p-ignore required />
           </label>
           <label>
             <span>Telefon</span>
-            <input name="phone" type="tel" autoComplete="tel" />
+            <input name="phone" type="tel" autoComplete="off" data-lpignore="true" data-1p-ignore />
           </label>
-          <label>
+          <div className={styles.topicField} ref={topicField}>
             <span>Temat rozmowy *</span>
-            <select name="topic" defaultValue="Projekt prywatnej sali kinowej" required>
-              <option>Projekt prywatnej sali kinowej</option>
-              <option>Wybór fotela lub kolekcji</option>
-              <option>Projekt indywidualny</option>
-              <option>Współpraca dla architektów</option>
-              <option>Inne zapytanie</option>
-            </select>
-          </label>
+            <input type="hidden" name="topic" value={topic} />
+            <button type="button" className={styles.topicTrigger} onClick={() => setTopicOpen((current) => !current)} onKeyDown={handleTopicKey} aria-haspopup="listbox" aria-expanded={topicOpen}>
+              <span>{topic}</span><i aria-hidden="true" />
+            </button>
+            <div className={`${styles.topicMenu} ${topicOpen ? styles.topicMenuOpen : ""}`} role="listbox" aria-label="Temat rozmowy" aria-hidden={!topicOpen}>
+              {contactTopics.map((option) => (
+                <button type="button" role="option" aria-selected={topic === option} tabIndex={topicOpen ? 0 : -1} onClick={() => { setTopic(option); setTopicOpen(false); }} key={option}>
+                  <span>{option}</span><i aria-hidden="true" />
+                </button>
+              ))}
+            </div>
+          </div>
           <label className={styles.messageField}>
             <span>Wiadomość *</span>
             <textarea name="message" rows={5} required />
