@@ -5,49 +5,25 @@ import { SiteFooter } from "../components/site-footer";
 import { SiteNavigation } from "../components/site-navigation";
 import styles from "./personalization.module.css";
 
+const details = [
+  { image: "/media/personalizacja/detail-table.png", label: "Stolik osobisty" },
+  { image: "/media/personalizacja/detail-floor-led.png", label: "Światło ambientowe" },
+  { image: "/media/personalizacja/detail-base.png", label: "Podświetlana podstawa" },
+  { image: "/media/personalizacja/detail-pocket.png", label: "Kieszeń boczna" },
+  { image: "/media/personalizacja/detail-usb.png", label: "Złącza USB", cta: true },
+  { image: "/media/personalizacja/detail-embroidery.png", label: "Indywidualny haft" },
+  { image: "/media/personalizacja/detail-speaker.png", label: "Dźwięk osobisty" },
+  { image: "/media/personalizacja/detail-cup.png", label: "Cup holder Hot & Cold" },
+  { image: "/media/personalizacja/detail-controls.png", label: "Sterowanie pod ręką" },
+];
+
 const equipment = [
-  {
-    key: "headrest",
-    number: "01",
-    title: "Elektryczny zagłówek",
-    description: "Płynna regulacja dopasowana do sylwetki i pozycji oglądania.",
-    image: "/media/personalizacja/headrest.png",
-  },
-  {
-    key: "cup",
-    number: "02",
-    title: "Cup holder Hot & Cold",
-    description: "Chłodzi lub podgrzewa napój — także podczas seansu.",
-    image: "/media/personalizacja/cup.png",
-  },
-  {
-    key: "recline",
-    number: "03",
-    title: "Dwa niezależne silniki",
-    description: "Oparcie i podnóżek pracują niezależnie.",
-    image: "/media/personalizacja/recline.png",
-  },
-  {
-    key: "heat",
-    number: "04",
-    title: "Mata grzewcza",
-    description: "Dyskretne ciepło w oparciu i siedzisku.",
-    image: "/media/personalizacja/heat.png",
-  },
-  {
-    key: "holder",
-    number: "05",
-    title: "Uchwyt na telefon lub tablet",
-    description: "Regulowane ramię na telefon lub tablet.",
-    image: "/media/personalizacja/holder.png",
-  },
-  {
-    key: "wood",
-    number: "06",
-    title: "Indywidualny kolor drewna",
-    description: "Odcień i połysk dopasowane do wnętrza.",
-    image: "/media/personalizacja/wood.png",
-  },
+  { key: "headrest", number: "01", title: "Elektryczny zagłówek", description: "Płynna regulacja dopasowana do sylwetki.", image: "/media/personalizacja/headrest.png" },
+  { key: "cup", number: "02", title: "Cup holder Hot & Cold", description: "Chłodzi lub podgrzewa napój.", image: "/media/personalizacja/cup.png" },
+  { key: "recline", number: "03", title: "Dwa niezależne silniki", description: "Oparcie i podnóżek pracują osobno.", image: "/media/personalizacja/recline.png" },
+  { key: "heat", number: "04", title: "Mata grzewcza", description: "Ciepło w oparciu i siedzisku.", image: "/media/personalizacja/heat.png" },
+  { key: "holder", number: "05", title: "Uchwyt na telefon lub tablet", description: "Ekran zawsze w odpowiednim miejscu.", image: "/media/personalizacja/holder.png" },
+  { key: "wood", number: "06", title: "Indywidualny kolor drewna", description: "Wykończenie dopasowane do wnętrza.", image: "/media/personalizacja/wood.png" },
 ];
 
 export function PersonalizationExperience() {
@@ -62,89 +38,85 @@ export function PersonalizationExperience() {
         entry.target.classList.add(styles.isVisible);
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.1, rootMargin: "0px 0px -8%" });
+    }, { threshold: 0.08, rootMargin: "0px 0px -7%" });
+
     nodes.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
   }, []);
 
   return (
     <main id="top" className={styles.page}>
-      <SiteNavigation solid={false} />
+      <SiteNavigation solid />
 
-      <header className={styles.hero}>
-        <img src="/media/personalizacja/hero.png" alt="Rząd indywidualnie skonfigurowanych foteli HENRY" />
-        <div className={styles.heroShade} />
-        <p>HENRY / Personalizacja</p>
-        <h1>Jedyny taki.<br /><em>Twój.</em></h1>
-        <div className={styles.heroMeta}><span>Haft</span><span>Komfort</span><span>Technologia</span><span>Wykończenie</span></div>
-        <i aria-hidden="true" />
-      </header>
+      <section className={styles.intro} aria-labelledby="personalization-title">
+        <p className={styles.eyebrow} data-personal-reveal>Nie wybierasz gotowego fotela</p>
+        <h1 id="personalization-title" data-personal-reveal>Budujesz własny<br /><em>standard komfortu.</em></h1>
 
-      <section className={styles.manifesto}>
-        <p data-personal-reveal>Nie wybierasz gotowego fotela.</p>
-        <h2 data-personal-reveal>Budujesz własny<br /><em>standard komfortu.</em></h2>
-        <p className={styles.manifestoNote} data-personal-reveal>Każdy detal powstaje dla jednej osoby<br />i jednego wnętrza.</p>
-      </section>
+        <div className={styles.introStory}>
+          <figure data-personal-reveal><img src="/media/personalizacja/intro-lineup.png" alt="Trzy spersonalizowane fotele HENRY" /></figure>
+          <p data-personal-reveal>Od osobistego haftu po sposób, w jaki fotel reaguje na dotyk.</p>
+          <span data-personal-reveal>Rzemiosło i technologia.<br />Jeden indywidualny egzemplarz.</span>
+        </div>
 
-      <section className={styles.embroidery} aria-labelledby="embroidery-title">
-        <div className={styles.embroideryComposition} data-personal-reveal>
-          <div className={styles.embroideryTitle}>
-            <p>01 / Haft</p>
-            <h2 id="embroidery-title">Podpisane<br /><em>przez Ciebie.</em></h2>
-          </div>
-          <figure className={styles.embroideryPreview}>
-            <img src="/media/personalizacja/embroidery.png" alt="Podgląd indywidualnego haftu na zagłówku fotela" />
-            <figcaption>Logo · Imię · Inicjały · Data</figcaption>
-          </figure>
-          <div className={styles.embroiderySignature} aria-hidden="true"><span>H</span><i /></div>
+        <div className={styles.introLegend} data-personal-reveal aria-label="Zakres personalizacji">
+          <span>Haft</span><span>Technologia</span><span>Komfort</span><span>Wykończenie</span>
         </div>
       </section>
 
-      <section className={styles.technology} aria-labelledby="technology-title">
+      <section className={styles.detailGallery} aria-label="Detale personalizacji HENRY">
+        {details.map((detail) => (
+          <figure className={detail.cta ? styles.detailCta : ""} data-personal-reveal key={detail.label}>
+            <img src={detail.image} alt={detail.label} />
+            {detail.cta ? <a href="#technology">Skonfiguruj <i aria-hidden="true">↗</i></a> : <figcaption>{detail.label}</figcaption>}
+          </figure>
+        ))}
+      </section>
+
+      <section className={styles.cinematic} data-personal-reveal>
+        <img src="/media/personalizacja/recline.png" alt="Fotel HENRY z niezależnie regulowanym oparciem i podnóżkiem" />
+        <div><p>Pozycja zapamiętana.</p><h2>Komfort,<br />który podąża.</h2></div>
+        <span>Dwa silniki · niezależna regulacja</span>
+      </section>
+
+      <section id="technology" className={styles.technology} aria-labelledby="technology-title">
         <header data-personal-reveal>
           <p>02 / Wyposażenie dodatkowe</p>
           <h2 id="technology-title">Technologia<br /><em>pod skórą.</em></h2>
+          <span>Wybierz detal, aby zobaczyć więcej.</span>
         </header>
 
         <div className={styles.equipmentExplorer}>
           <div className={styles.equipmentList} data-personal-reveal role="tablist" aria-label="Wyposażenie fotela">
             {equipment.map((item, index) => (
               <button className={activeEquipment === index ? styles.isActive : ""} onClick={() => setActiveEquipment(index)} role="tab" aria-selected={activeEquipment === index} aria-controls="equipment-preview" key={item.key}>
-                <span>{item.number}</span>
-                <div><strong>{item.title}</strong></div>
-                <i aria-hidden="true" />
+                <span>{item.number}</span><strong>{item.title}</strong><i aria-hidden="true" />
               </button>
             ))}
           </div>
 
           <article id="equipment-preview" className={styles.equipmentPreview} data-personal-reveal role="tabpanel">
             <figure key={selectedEquipment.key}><img src={selectedEquipment.image} alt={selectedEquipment.title} /></figure>
-            <div>
-              <span>{selectedEquipment.number} / 06</span>
-              <h3>{selectedEquipment.title}</h3>
-              <p>{selectedEquipment.description}</p>
-            </div>
+            <div><span>{selectedEquipment.number} / 06</span><h3>{selectedEquipment.title}</h3><p>{selectedEquipment.description}</p></div>
           </article>
         </div>
       </section>
 
-      <section className={styles.finishStory}>
-        <figure data-personal-reveal><img src="/media/personalizacja/wood.png" alt="Cztery warianty wykończenia drewna fotela HENRY" /></figure>
-        <div data-personal-reveal>
-          <p>03 / Wykończenie</p>
-          <h2>Ten sam fotel.<br /><em>Inny charakter.</em></h2>
-          <span>Skóra, pikowanie, nić i drewno — jedna kompozycja.</span>
-          <div><small>Skóra</small><small>Pikowanie</small><small>Nić</small><small>Drewno</small></div>
+      <section className={styles.materials} aria-labelledby="materials-title">
+        <header data-personal-reveal>
+          <p>03 / Materiały</p>
+          <h2 id="materials-title">Dotyk.<br /><em>Kolor. Rytm.</em></h2>
+        </header>
+        <div className={styles.materialGrid}>
+          <figure className={styles.leather} data-personal-reveal><img src="/media/personalizacja/material-leather.png" alt="Paleta kolorów skóry" /><figcaption>Skóra</figcaption></figure>
+          <figure className={styles.wood} data-personal-reveal><img src="/media/personalizacja/material-wood.png" alt="Trzy odcienie wykończenia drewna" /><figcaption>Drewno</figcaption></figure>
+          <figure className={styles.quilting} data-personal-reveal><img src="/media/personalizacja/material-quilting.png" alt="Warianty koloru pikowanej skóry" /><figcaption>Pikowanie</figcaption></figure>
         </div>
       </section>
 
       <section className={styles.closing} data-personal-reveal>
-        <img src="/media/personalizacja/chair.png" alt="Spersonalizowany fotel HENRY" />
-        <div>
-          <p>Twój projekt zaczyna się tutaj</p>
-          <h2>Stwórzmy<br /><em>Twój fotel.</em></h2>
-          <a href="/kontakt">Porozmawiaj z nami <i aria-hidden="true">↗</i></a>
-        </div>
+        <p>Twój egzemplarz HENRY</p>
+        <h2>Skonfigurujmy<br /><em>Twój fotel.</em></h2>
+        <a href="/kontakt"><span>Zapytaj o model</span><i aria-hidden="true">↗</i></a>
       </section>
 
       <SiteFooter />
