@@ -321,18 +321,20 @@ export function ProductExperience({ collection, product, isReady }: { collection
         </header>
         <div className="product-features__grid">
           {isReady ? featureCards.map((feature, index) => (
-            <article data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
+            <article className={`product-feature-box box${String.fromCharCode(65 + index)}`} data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
               <figure><img src={feature.image} alt={feature.title} /></figure>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{feature.title}</h3>
-              <p>{feature.copy}</p>
+              <div className="product-feature-box__caption">
+                <h3>{feature.title}</h3>
+                <p>{feature.copy}</p>
+              </div>
             </article>
           )) : Array.from({ length: 4 }, (_, index) => (
-            <article className="is-placeholder" data-product-reveal key={index}>
+            <article className={`product-feature-box box${String.fromCharCode(65 + index)} is-placeholder`} data-product-reveal key={index}>
               <figure><span>H</span><small>Materiały w przygotowaniu</small></figure>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{["Sterowanie", "Komfort", "Detale", "Oświetlenie"][index]}</h3>
-              <p>Opis wyposażenia modelu zostanie dodany w kolejnym etapie.</p>
+              <div className="product-feature-box__caption">
+                <h3>{["Sterowanie", "Komfort", "Detale", "Oświetlenie"][index]}</h3>
+                <p>Opis wyposażenia modelu zostanie dodany w kolejnym etapie.</p>
+              </div>
             </article>
           ))}
         </div>
