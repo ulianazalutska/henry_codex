@@ -10,70 +10,48 @@ const equipment = [
     key: "headrest",
     number: "01",
     title: "Elektryczny zagłówek",
-    short: "Precyzyjne podparcie głowy i szyi.",
-    description: "Płynna, elektryczna regulacja wysokości pozwala ustawić zagłówek dokładnie do sylwetki i pozycji oglądania.",
+    description: "Płynna regulacja dopasowana do sylwetki i pozycji oglądania.",
     image: "/media/personalizacja/headrest.png",
   },
   {
     key: "cup",
     number: "02",
     title: "Cup holder Hot & Cold",
-    short: "Temperatura napoju pod kontrolą.",
-    description: "Dedykowany uchwyt może chłodzić lub podgrzewać napój. Dyskretne podświetlenie pokazuje wybrany tryb również podczas seansu.",
+    description: "Chłodzi lub podgrzewa napój — także podczas seansu.",
     image: "/media/personalizacja/cup.png",
   },
   {
     key: "recline",
     number: "03",
     title: "Dwa niezależne silniki",
-    short: "Oparcie i podnóżek pracują osobno.",
-    description: "Dwa mechanizmy elektryczne pozwalają niezależnie regulować kąt oparcia i wysunięcie podnóżka, tworząc naturalną pozycję relaksu.",
+    description: "Oparcie i podnóżek pracują niezależnie.",
     image: "/media/personalizacja/recline.png",
   },
   {
     key: "heat",
     number: "04",
     title: "Mata grzewcza",
-    short: "Ciepło w oparciu i siedzisku.",
-    description: "Zintegrowane strefy grzewcze równomiernie ogrzewają siedzisko i oparcie, pozostając całkowicie niewidoczne pod tapicerką.",
+    description: "Dyskretne ciepło w oparciu i siedzisku.",
     image: "/media/personalizacja/heat.png",
   },
   {
     key: "holder",
     number: "05",
     title: "Uchwyt na telefon lub tablet",
-    short: "Ekran dokładnie tam, gdzie go potrzebujesz.",
-    description: "Stabilne, regulowane ramię dopasowuje położenie telefonu lub tabletu i można je łatwo zdemontować, gdy nie jest potrzebne.",
+    description: "Regulowane ramię na telefon lub tablet.",
     image: "/media/personalizacja/holder.png",
   },
   {
     key: "wood",
     number: "06",
     title: "Indywidualny kolor drewna",
-    short: "Wykończenie dopasowane do wnętrza.",
-    description: "Dobieramy gatunek, odcień i stopień połysku drewna tak, aby podłokietniki tworzyły spójną całość z architekturą pomieszczenia.",
+    description: "Odcień i połysk dopasowane do wnętrza.",
     image: "/media/personalizacja/wood.png",
   },
 ];
 
-const markingTypes = [
-  { key: "initials", label: "Inicjały", example: "AH" },
-  { key: "name", label: "Imię", example: "Anna" },
-  { key: "date", label: "Data", example: "19 · 08 · 26" },
-  { key: "logo", label: "Logo", example: "H" },
-];
-
-const threadColors = [
-  { name: "Royal Gold", value: "#d0a15b" },
-  { name: "Warm Ivory", value: "#d8cfc1" },
-  { name: "Bordeaux", value: "#7f3029" },
-];
-
 export function PersonalizationExperience() {
   const [activeEquipment, setActiveEquipment] = useState(0);
-  const [markingType, setMarkingType] = useState("initials");
-  const [markingText, setMarkingText] = useState("AH");
-  const [thread, setThread] = useState(threadColors[0]);
   const selectedEquipment = equipment[activeEquipment];
 
   useEffect(() => {
@@ -88,11 +66,6 @@ export function PersonalizationExperience() {
     nodes.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
   }, []);
-
-  const chooseMarkingType = (key: string, example: string) => {
-    setMarkingType(key);
-    setMarkingText(example);
-  };
 
   return (
     <main id="top" className={styles.page}>
@@ -110,53 +83,20 @@ export function PersonalizationExperience() {
       <section className={styles.manifesto}>
         <p data-personal-reveal>Nie wybierasz gotowego fotela.</p>
         <h2 data-personal-reveal>Budujesz własny<br /><em>standard komfortu.</em></h2>
-        <div data-personal-reveal>
-          <p>Od osobistego haftu po sposób, w jaki fotel reaguje na dotyk — każdy detal może odzwierciedlać Ciebie, markę lub charakter wnętrza.</p>
-          <span>Personalizacja HENRY łączy pracę rzemieślnika z precyzją nowoczesnej technologii. Efektem nie jest wariant produktu, lecz indywidualny egzemplarz.</span>
-        </div>
+        <p className={styles.manifestoNote} data-personal-reveal>Każdy detal powstaje dla jednej osoby<br />i jednego wnętrza.</p>
       </section>
 
       <section className={styles.embroidery} aria-labelledby="embroidery-title">
-        <div className={styles.embroideryHeading} data-personal-reveal>
-          <p>01 / Indywidualny haft</p>
-          <h2 id="embroidery-title">Zostaw swój<br /><em>znak.</em></h2>
-          <span>Logo firmy, imię, inicjały, ważna data — haft wykonujemy indywidualnie, dobierając skalę, umiejscowienie i kolor nici.</span>
-        </div>
-
-        <div className={styles.embroideryLab} data-personal-reveal>
+        <div className={styles.embroideryComposition} data-personal-reveal>
+          <div className={styles.embroideryTitle}>
+            <p>01 / Haft</p>
+            <h2 id="embroidery-title">Podpisane<br /><em>przez Ciebie.</em></h2>
+          </div>
           <figure className={styles.embroideryPreview}>
             <img src="/media/personalizacja/embroidery.png" alt="Podgląd indywidualnego haftu na zagłówku fotela" />
-            <div className={styles.previewMark} style={{ color: thread.value }}>
-              <strong>{markingType === "logo" ? "H" : markingText || "AH"}</strong>
-              <small>{markingType === "logo" ? "YOUR LOGO" : "HENRY BESPOKE"}</small>
-            </div>
-            <figcaption><span>Podgląd poglądowy</span><span>{thread.name}</span></figcaption>
+            <figcaption>Logo · Imię · Inicjały · Data</figcaption>
           </figure>
-
-          <div className={styles.embroideryControls}>
-            <div>
-              <span>Rodzaj znakowania</span>
-              <div className={styles.markingTabs}>
-                {markingTypes.map((type) => (
-                  <button className={markingType === type.key ? styles.isActive : ""} onClick={() => chooseMarkingType(type.key, type.example)} key={type.key}>{type.label}</button>
-                ))}
-              </div>
-            </div>
-            <label>
-              <span>Treść haftu</span>
-              <input value={markingText} onChange={(event) => setMarkingText(event.target.value.slice(0, 12))} aria-label="Treść haftu" maxLength={12} disabled={markingType === "logo"} />
-              <small>{markingText.length} / 12</small>
-            </label>
-            <div>
-              <span>Kolor nici</span>
-              <div className={styles.threadColors}>
-                {threadColors.map((color) => (
-                  <button className={thread.name === color.name ? styles.isActive : ""} onClick={() => setThread(color)} aria-label={color.name} title={color.name} key={color.name}><i style={{ backgroundColor: color.value }} /></button>
-                ))}
-              </div>
-            </div>
-            <p>Finalny projekt haftu przygotowujemy do akceptacji przed rozpoczęciem produkcji.</p>
-          </div>
+          <div className={styles.embroiderySignature} aria-hidden="true"><span>H</span><i /></div>
         </div>
       </section>
 
@@ -164,7 +104,6 @@ export function PersonalizationExperience() {
         <header data-personal-reveal>
           <p>02 / Wyposażenie dodatkowe</p>
           <h2 id="technology-title">Technologia<br /><em>pod skórą.</em></h2>
-          <span>Sześć rozwiązań, które możesz połączyć w jednej, indywidualnej konfiguracji.</span>
         </header>
 
         <div className={styles.equipmentExplorer}>
@@ -172,7 +111,7 @@ export function PersonalizationExperience() {
             {equipment.map((item, index) => (
               <button className={activeEquipment === index ? styles.isActive : ""} onClick={() => setActiveEquipment(index)} role="tab" aria-selected={activeEquipment === index} aria-controls="equipment-preview" key={item.key}>
                 <span>{item.number}</span>
-                <div><strong>{item.title}</strong><small>{item.short}</small></div>
+                <div><strong>{item.title}</strong></div>
                 <i aria-hidden="true" />
               </button>
             ))}
@@ -194,7 +133,7 @@ export function PersonalizationExperience() {
         <div data-personal-reveal>
           <p>03 / Wykończenie</p>
           <h2>Ten sam fotel.<br /><em>Inny charakter.</em></h2>
-          <span>Odcień skóry, rodzaj pikowania, kolor nici i drewna projektujemy jako jedną kompozycję. Możemy dopasować ją do próbki materiału, zabudowy lub palety całego wnętrza.</span>
+          <span>Skóra, pikowanie, nić i drewno — jedna kompozycja.</span>
           <div><small>Skóra</small><small>Pikowanie</small><small>Nić</small><small>Drewno</small></div>
         </div>
       </section>

@@ -21,38 +21,22 @@
 .manifesto { padding: 20vh var(--gutter); }
 .manifesto > p, .embroideryHeading > p, .technology header > p, .finishStory > div > p, .closing > div > p { margin: 0; color: #d9a341; text-transform: uppercase; letter-spacing: .17em; font-size: 8px; }
 .manifesto > h2, .embroideryHeading h2, .technology header h2, .finishStory h2, .closing h2 { margin: 10vh 0 0; font-size: clamp(4.6rem, 10vw, 10.5rem); font-weight: 300; line-height: .8; letter-spacing: -.075em; }
-.manifesto > div { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; width: min(870px, 70%); margin: 14vh 0 0 auto; }
-.manifesto > div p { margin: 0; font-size: clamp(1.25rem, 2vw, 2rem); line-height: 1.27; letter-spacing: -.035em; }
-.manifesto > div span, .embroideryHeading > span, .technology header > span, .finishStory > div > span { color: #928b84; font-size: 12px; line-height: 1.75; }
+.manifestoNote { width: min(560px, 70%); margin: 14vh 0 0 auto !important; color: #928b84; font-size: clamp(1.15rem, 2vw, 1.85rem); line-height: 1.35; letter-spacing: -.03em; }
+.finishStory > div > span { color: #928b84; font-size: 12px; line-height: 1.75; }
 
-.embroidery { padding: 19vh var(--gutter) 21vh; background: #1a1a1a; }
-.embroideryHeading { display: grid; grid-template-columns: .6fr 1.4fr; gap: 7vw; }
-.embroideryHeading h2 { margin: 0; }
-.embroideryHeading > span { grid-column: 2; max-width: 540px; margin-top: 3vh; }
-.embroideryLab { display: grid; grid-template-columns: 1.4fr .6fr; gap: 7vw; align-items: center; margin-top: 15vh; }
-.embroideryPreview { position: relative; margin: 0; overflow: hidden; background: #0d0d0d; }
-.embroideryPreview > img { width: 100%; aspect-ratio: 1.45 / 1; object-fit: cover; transition: transform 1.4s cubic-bezier(.16, 1, .3, 1); }
+.embroidery { padding: 18vh var(--gutter) 20vh; background: #1a1a1a; }
+.embroideryComposition { position: relative; min-height: min(83vw, 1040px); }
+.embroideryTitle { position: relative; z-index: 3; display: grid; grid-template-columns: .58fr 1.42fr; gap: 7vw; }
+.embroideryTitle > p { margin: 0; color: #d9a341; text-transform: uppercase; letter-spacing: .17em; font-size: 8px; }
+.embroideryTitle h2 { margin: 0; font-size: clamp(4.6rem, 10vw, 10.5rem); font-weight: 300; line-height: .8; letter-spacing: -.075em; }
+.embroideryPreview { position: absolute; left: 19%; right: 0; top: 24%; bottom: 0; margin: 0; overflow: hidden; background: #0d0d0d; }
+.embroideryPreview::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(217, 163, 65, .17); pointer-events: none; }
+.embroideryPreview > img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.16, 1, .3, 1); }
 .embroideryPreview:hover > img { transform: scale(1.025); }
-.previewMark { position: absolute; left: 50%; top: 38%; display: flex; min-width: 120px; padding: 12px 18px; flex-direction: column; align-items: center; background: rgba(15, 14, 13, .72); box-shadow: 0 10px 30px rgba(0, 0, 0, .28); text-align: center; transform: translate(-50%, -50%); transition: color .4s ease; }
-.previewMark strong { font-family: Georgia, serif; font-size: clamp(1.3rem, 2.4vw, 2.6rem); font-weight: 400; line-height: 1; letter-spacing: .08em; }
-.previewMark small { margin-top: 7px; font-size: 6px; letter-spacing: .18em; }
-.embroideryPreview figcaption { position: absolute; left: 18px; right: 18px; bottom: 15px; color: rgba(255, 255, 255, .58); text-transform: uppercase; letter-spacing: .14em; font-size: 6px; }
-.embroideryControls { display: flex; flex-direction: column; gap: 5vh; }
-.embroideryControls > div > span, .embroideryControls label > span { display: block; margin-bottom: 18px; color: #817a74; text-transform: uppercase; letter-spacing: .14em; font-size: 7px; }
-.markingTabs { display: grid; grid-template-columns: 1fr 1fr; }
-.markingTabs button { padding: 13px 2px; border-bottom: 1px solid rgba(255, 255, 255, .18); color: #817b75; text-align: left; font-size: 11px; transition: color .3s ease, border-color .3s ease; }
-.markingTabs button.isActive { border-color: #d9a341; color: #fff; }
-.embroideryControls label { position: relative; }
-.embroideryControls input { width: 100%; height: 48px; padding: 0 42px 0 0; border: 0; border-bottom: 1px solid rgba(255, 255, 255, .22); outline: 0; background: transparent; color: #fff; font: inherit; font-size: 16px; letter-spacing: .04em; }
-.embroideryControls input:focus { border-color: #d9a341; }
-.embroideryControls input:disabled { color: #625c56; }
-.embroideryControls label small { position: absolute; right: 0; bottom: 15px; color: #6f6862; font-size: 7px; }
-.threadColors { display: flex; gap: 11px; }
-.threadColors button { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid transparent; border-radius: 50%; transition: border-color .3s ease, transform .35s ease; }
-.threadColors button:hover { transform: scale(1.08); }
-.threadColors button.isActive { border-color: #d9a341; }
-.threadColors i { width: 20px; height: 20px; border-radius: 50%; }
-.embroideryControls > p { margin: 0; padding-top: 22px; border-top: 1px solid rgba(217, 163, 65, .25); color: #77706a; font-size: 10px; line-height: 1.65; }
+.embroideryPreview figcaption { position: absolute; z-index: 2; left: 22px; bottom: 20px; color: rgba(255, 255, 255, .62); text-transform: uppercase; letter-spacing: .18em; font-size: 7px; }
+.embroiderySignature { position: absolute; z-index: 4; left: 0; bottom: 6%; display: flex; align-items: flex-end; gap: 22px; color: #d9a341; }
+.embroiderySignature span { font-family: Georgia, serif; font-size: clamp(8rem, 21vw, 22rem); font-weight: 400; line-height: .7; }
+.embroiderySignature i { width: clamp(50px, 9vw, 140px); height: 1px; margin-bottom: 1.4vw; background: #d9a341; transform-origin: left; animation: signatureLine 2s .4s cubic-bezier(.16, 1, .3, 1) both; }
 
 .technology { padding: 20vh var(--gutter) 22vh; }
 .technology > header { display: grid; grid-template-columns: .58fr 1.42fr; gap: 7vw; }
@@ -64,8 +48,6 @@
 .equipmentList > button:hover, .equipmentList > button.isActive { padding-left: 11px; padding-right: 11px; color: #fff; }
 .equipmentList > button > span { color: #d9a341; font-size: 7px; }
 .equipmentList strong { display: block; font-size: clamp(.9rem, 1.2vw, 1.15rem); font-weight: 400; }
-.equipmentList small { display: block; overflow: hidden; max-height: 0; margin-top: 0; color: #7f7871; font-size: 9px; line-height: 1.5; opacity: 0; transition: max-height .5s ease, margin .5s ease, opacity .35s ease; }
-.equipmentList button.isActive small { max-height: 35px; margin-top: 8px; opacity: 1; }
 .equipmentList button > i { position: relative; width: 12px; height: 12px; }
 .equipmentList button > i::before, .equipmentList button > i::after { content: ""; position: absolute; left: 0; top: 5px; width: 12px; height: 1px; background: currentColor; }
 .equipmentList button > i::after { transform: rotate(90deg); transition: transform .4s ease; }
@@ -100,11 +82,11 @@
 @keyframes heroImageIn { from { transform: scale(1.1); filter: brightness(.4) blur(7px); } to { transform: scale(1); filter: brightness(1) blur(0); } }
 @keyframes heroTitleIn { from { opacity: 0; transform: translateY(65px); filter: blur(9px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 @keyframes previewIn { from { opacity: .25; transform: scale(.96); filter: blur(6px); } to { opacity: 1; transform: scale(1); filter: blur(0); } }
+@keyframes signatureLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 @media (max-width: 900px) {
   .heroMeta { display: none; }
-  .manifesto > div { width: 82%; }
-  .embroideryLab { grid-template-columns: 1.25fr .75fr; gap: 5vw; }
+  .manifestoNote { width: 82%; }
   .equipmentExplorer { grid-template-columns: .8fr 1.2fr; gap: 5vw; }
   .finishStory { grid-template-columns: 1fr 1fr; }
 }
@@ -115,13 +97,15 @@
   .hero > i { top: 99px; }
   .hero h1 { bottom: 9vh; font-size: 20vw; line-height: .78; }
   .manifesto, .embroidery, .technology { padding-top: 130px; padding-bottom: 145px; }
-  .manifesto > h2, .embroideryHeading h2, .technology header h2 { margin-top: 70px; font-size: 17vw; }
-  .manifesto > div { grid-template-columns: 1fr; gap: 32px; width: 100%; margin-top: 95px; }
-  .embroideryHeading, .technology > header { grid-template-columns: 1fr; gap: 65px; }
-  .embroideryHeading > span, .technology header > span { grid-column: 1; margin-top: 0; }
-  .embroideryLab { grid-template-columns: 1fr; gap: 75px; margin-top: 100px; }
-  .embroideryPreview > img { aspect-ratio: .95 / 1; }
-  .previewMark { top: 35%; min-width: 95px; padding: 10px 13px; }
+  .manifesto > h2, .technology header h2 { margin-top: 70px; font-size: 17vw; }
+  .manifestoNote { width: 100%; margin-top: 95px !important; }
+  .embroideryComposition { min-height: 780px; }
+  .embroideryTitle, .technology > header { grid-template-columns: 1fr; gap: 65px; }
+  .embroideryTitle h2 { font-size: 17vw; }
+  .embroideryPreview { left: 13%; top: 36%; bottom: 5%; }
+  .embroideryPreview > img { object-position: 54% center; }
+  .embroiderySignature { bottom: 0; }
+  .embroiderySignature span { font-size: 42vw; }
   .equipmentExplorer { grid-template-columns: 1fr; gap: 80px; margin-top: 105px; }
   .equipmentPreview { position: relative; top: auto; grid-row: 1; }
   .equipmentList { grid-row: 2; }
