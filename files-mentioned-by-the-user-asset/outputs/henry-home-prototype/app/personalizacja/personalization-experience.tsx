@@ -26,9 +26,61 @@ const equipment = [
   { key: "wood", number: "06", title: "Indywidualny kolor drewna", description: "Wykończenie dopasowane do wnętrza.", image: "/media/personalizacja/wood.png" },
 ];
 
+const materials = [
+  {
+    key: "leather",
+    number: "01",
+    title: "Skóra",
+    note: "12 odcieni",
+    images: [
+      "/media/personalizacja/materials/leather-black.png",
+      "/media/personalizacja/materials/leather-graphite.png",
+      "/media/personalizacja/materials/leather-cognac.png",
+      "/media/personalizacja/materials/leather-bordeaux.png",
+      "/media/personalizacja/materials/leather-navy.png",
+      "/media/personalizacja/materials/leather-forest.png",
+      "/media/personalizacja/materials/leather-ivory.png",
+      "/media/personalizacja/materials/leather-sand.png",
+    ],
+  },
+  {
+    key: "wood",
+    number: "02",
+    title: "Drewno",
+    note: "4 wykończenia",
+    images: [
+      "/media/personalizacja/materials/wood-smoked-gloss.png",
+      "/media/personalizacja/materials/wood-walnut.png",
+      "/media/personalizacja/materials/wood-oak.png",
+      "/media/personalizacja/materials/wood-ebony.png",
+    ],
+  },
+  {
+    key: "stitching",
+    number: "03",
+    title: "Pikowanie",
+    note: "6 rytmów",
+    images: [
+      "/media/personalizacja/materials/stitch-diamond.png",
+      "/media/personalizacja/materials/stitch-square.png",
+      "/media/personalizacja/materials/stitch-button.png",
+      "/media/personalizacja/materials/stitch-harlequin.png",
+      "/media/personalizacja/materials/stitch-vertical.png",
+      "/media/personalizacja/materials/stitch-horizontal.png",
+    ],
+  },
+];
+
 export function PersonalizationExperience() {
   const [activeEquipment, setActiveEquipment] = useState(0);
+  const [activeMaterial, setActiveMaterial] = useState(0);
+  const [materialVariants, setMaterialVariants] = useState([0, 0, 0]);
   const selectedEquipment = equipment[activeEquipment];
+
+  const selectMaterialVariant = (materialIndex: number, variantIndex: number) => {
+    setActiveMaterial(materialIndex);
+    setMaterialVariants((current) => current.map((value, index) => index === materialIndex ? variantIndex : value));
+  };
 
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-personal-reveal]"));
@@ -64,12 +116,14 @@ export function PersonalizationExperience() {
       </section>
 
       <section className={styles.detailGallery} aria-label="Detale personalizacji HENRY">
-        {details.map((detail) => (
-          <figure className={detail.cta ? styles.detailCta : ""} data-personal-reveal key={detail.label}>
-            <img src={detail.image} alt={detail.label} />
-            {detail.cta ? <a href="#technology">Skonfiguruj <i aria-hidden="true">↗</i></a> : <figcaption>{detail.label}</figcaption>}
-          </figure>
-        ))}
+        <div className={styles.detailGalleryInner}>
+          {details.map((detail) => (
+            <figure className={detail.cta ? styles.detailCta : ""} data-personal-reveal key={detail.label}>
+              <img src={detail.image} alt={detail.label} />
+              {detail.cta ? <a href="#technology">Skonfiguruj <i aria-hidden="true">↗</i></a> : <figcaption>{detail.label}</figcaption>}
+            </figure>
+          ))}
+        </div>
       </section>
 
       <section className={styles.cinematic} data-personal-reveal>
@@ -106,10 +160,23 @@ export function PersonalizationExperience() {
           <p>03 / Materiały</p>
           <h2 id="materials-title">Dotyk.<br /><em>Kolor. Rytm.</em></h2>
         </header>
-        <div className={styles.materialGrid}>
-          <figure className={styles.leather} data-personal-reveal><img src="/media/personalizacja/material-leather.png" alt="Paleta kolorów skóry" /><figcaption>Skóra</figcaption></figure>
-          <figure className={styles.wood} data-personal-reveal><img src="/media/personalizacja/material-wood.png" alt="Trzy odcienie wykończenia drewna" /><figcaption>Drewno</figcaption></figure>
-          <figure className={styles.quilting} data-personal-reveal><img src="/media/personalizacja/material-quilting.png" alt="Warianty koloru pikowanej skóry" /><figcaption>Pikowanie</figcaption></figure>
+        <div className={styles.materialPanels} data-personal-reveal>
+          {materials.map((material, materialIndex) => (
+            <article className={activeMaterial === materialIndex ? styles.isActive : ""} key={material.key}>
+              <button className={styles.materialTrigger} onClick={() => setActiveMaterial(materialIndex)} aria-expanded={activeMaterial === materialIndex}>
+                <img key={material.images[materialVariants[materialIndex]]} src={material.images[materialVariants[materialIndex]]} alt={`${material.title} — wybrany wariant`} />
+                <span>{material.number}</span>
+                <div><small>{material.note}</small><h3>{material.title}</h3></div>
+              </button>
+              <div className={styles.materialVariants} aria-label={`Warianty: ${material.title}`}>
+                {material.images.map((image, variantIndex) => (
+                  <button className={materialVariants[materialIndex] === variantIndex ? styles.isSelected : ""} onClick={() => selectMaterialVariant(materialIndex, variantIndex)} aria-label={`${material.title}, wariant ${variantIndex + 1}`} key={image}>
+                    <img src={image} alt="" />
+                  </button>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 

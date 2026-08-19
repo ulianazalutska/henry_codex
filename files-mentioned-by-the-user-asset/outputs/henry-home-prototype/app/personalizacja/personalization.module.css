@@ -46,13 +46,15 @@
 
 .detailGallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(18px, 3.8vw, 58px);
-  padding: 15vh var(--gutter) 23vh;
+  height: 100vh;
+  min-height: 720px;
+  padding: 4vh var(--gutter);
+  place-items: center;
   background: #1a1a1a;
 }
-.detailGallery figure { position: relative; margin: 0; overflow: hidden; background: #111; }
-.detailGallery img { width: 100%; aspect-ratio: 1.15 / 1; object-fit: cover; transition: transform .9s cubic-bezier(.16, 1, .3, 1), filter .7s ease; }
+.detailGalleryInner { display: grid; width: min(90vw, 90vh, 960px); aspect-ratio: 1; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: clamp(10px, 1.5vw, 22px); }
+.detailGallery figure { position: relative; z-index: 1; min-width: 0; min-height: 0; margin: 0; overflow: hidden; background: #111; }
+.detailGallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.16, 1, .3, 1), filter .7s ease; }
 .detailGallery figcaption,
 .detailGallery a {
   position: absolute;
@@ -77,12 +79,31 @@
 .detailGallery .detailCta a { top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; gap: 12px; opacity: 1; transform: none; }
 .detailCta a i { color: #d9a341; font-style: normal; transition: transform .35s ease; }
 .detailCta a:hover i { transform: translate(4px, -4px); }
+.detailGalleryInner [data-personal-reveal] { opacity: .15; filter: blur(8px); transition-duration: 1.25s; transition-timing-function: cubic-bezier(.16, 1, .3, 1); }
+.detailGalleryInner [data-personal-reveal]:nth-child(1) { transform: translate(108%, 108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(2) { transform: translateY(108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(3) { transform: translate(-108%, 108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(4) { transform: translateX(108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(5) { z-index: 3; transform: scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(6) { transform: translateX(-108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(7) { transform: translate(108%, -108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(8) { transform: translateY(-108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal]:nth-child(9) { transform: translate(-108%, -108%) scale(.7); }
+.detailGalleryInner [data-personal-reveal].isVisible { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0); }
+.detailGalleryInner [data-personal-reveal]:nth-child(2),
+.detailGalleryInner [data-personal-reveal]:nth-child(4),
+.detailGalleryInner [data-personal-reveal]:nth-child(6),
+.detailGalleryInner [data-personal-reveal]:nth-child(8) { transition-delay: .08s; }
+.detailGalleryInner [data-personal-reveal]:nth-child(1),
+.detailGalleryInner [data-personal-reveal]:nth-child(3),
+.detailGalleryInner [data-personal-reveal]:nth-child(7),
+.detailGalleryInner [data-personal-reveal]:nth-child(9) { transition-delay: .16s; }
 
-.cinematic { position: relative; min-height: min(74vw, 930px); overflow: hidden; }
+.cinematic { position: relative; height: 75vh; min-height: 560px; max-height: 900px; overflow: hidden; }
 .cinematic > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.66); transition: transform 1.5s cubic-bezier(.16, 1, .3, 1); }
 .cinematic:hover > img { transform: scale(1.018); }
 .cinematic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, .48), transparent 58%), linear-gradient(0deg, rgba(0, 0, 0, .32), transparent 45%); }
-.cinematic > div { position: absolute; z-index: 2; left: 40%; top: 46%; }
+.cinematic > div { position: absolute; z-index: 2; left: 40%; top: 48%; transform: translateY(-50%); }
 .cinematic p { margin: 0 0 18px; color: #d9a341; text-transform: uppercase; letter-spacing: .17em; font-size: 8px; }
 .cinematic h2 { margin: 0; font-size: clamp(3.4rem, 7vw, 7.5rem); font-weight: 300; line-height: .86; letter-spacing: -.065em; }
 .cinematic > span { position: absolute; z-index: 2; right: var(--gutter); bottom: 4vh; color: rgba(255, 255, 255, .58); text-transform: uppercase; letter-spacing: .17em; font-size: 7px; }
@@ -125,14 +146,25 @@
 .materials { padding: 20vh var(--gutter) 24vh; background: #1a1a1a; }
 .materials > header { display: grid; grid-template-columns: .55fr 1.45fr; gap: 7vw; }
 .materials header h2 { margin: 0; }
-.materialGrid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5vw 3vw; margin-top: 17vh; }
-.materialGrid figure { position: relative; margin: 0; overflow: hidden; }
-.materialGrid img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.16, 1, .3, 1); }
-.materialGrid figure:hover img { transform: scale(1.025); }
-.materialGrid figcaption { position: absolute; left: 15px; bottom: 13px; color: rgba(255, 255, 255, .68); text-transform: uppercase; letter-spacing: .16em; font-size: 7px; }
-.leather { grid-column: 1 / 7; aspect-ratio: 2.08 / 1; }
-.wood { grid-column: 8 / 13; aspect-ratio: 1.66 / 1; margin-top: 7vh !important; }
-.quilting { grid-column: 1 / 6; aspect-ratio: 1.5 / 1; margin: 8vh 0 0 3vw !important; }
+.materialPanels { display: flex; height: min(72vh, 760px); min-height: 590px; gap: 12px; margin-top: 15vh; }
+.materialPanels article { position: relative; min-width: 0; overflow: hidden; flex: 1 1 0; background: #111; transition: flex-grow 1s cubic-bezier(.16, 1, .3, 1); }
+.materialPanels article.isActive { flex-grow: 3.5; }
+.materialTrigger { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; text-align: left; }
+.materialTrigger::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0, 0, 0, .82), transparent 52%), rgba(0, 0, 0, .18); transition: background-color .7s ease; }
+.materialTrigger > img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) brightness(.66); transition: transform 1.1s cubic-bezier(.16, 1, .3, 1), filter .8s ease, opacity .4s ease; animation: materialImageIn .65s ease both; }
+.materialPanels article:hover .materialTrigger > img,
+.materialPanels article.isActive .materialTrigger > img { transform: scale(1.025); filter: saturate(.9) brightness(.82); }
+.materialTrigger > span { position: absolute; z-index: 2; left: 24px; top: 22px; color: #d9a341; font-size: 7px; }
+.materialTrigger > div { position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 28px; transition: bottom .8s cubic-bezier(.16, 1, .3, 1); }
+.materialPanels article.isActive .materialTrigger > div { bottom: 112px; }
+.materialTrigger small { color: rgba(255, 255, 255, .54); text-transform: uppercase; letter-spacing: .16em; font-size: 7px; }
+.materialTrigger h3 { margin: 9px 0 0; color: #f4f1ed; font-size: clamp(1.5rem, 2.8vw, 3.4rem); font-weight: 300; letter-spacing: -.045em; white-space: nowrap; }
+.materialVariants { position: absolute; z-index: 3; left: 28px; right: 28px; bottom: 28px; display: flex; gap: 8px; overflow: hidden; opacity: 0; pointer-events: none; transform: translateY(14px); transition: opacity .45s .25s ease, transform .65s .2s cubic-bezier(.16, 1, .3, 1); }
+.materialPanels article.isActive .materialVariants { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.materialVariants button { width: 34px; height: 48px; padding: 2px; flex: 0 0 auto; border: 1px solid rgba(255, 255, 255, .2); transition: border-color .3s ease, transform .3s ease; }
+.materialVariants button:hover { transform: translateY(-3px); }
+.materialVariants button.isSelected { border-color: #d9a341; }
+.materialVariants img { width: 100%; height: 100%; object-fit: cover; }
 
 .closing { padding: 22vh var(--gutter) 24vh; background: #151413; }
 .closing h2 { max-width: 1250px; }
@@ -144,6 +176,7 @@
   from { opacity: .2; transform: scale(.965); filter: blur(6px); }
   to { opacity: 1; transform: scale(1); filter: blur(0); }
 }
+@keyframes materialImageIn { from { opacity: .35; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
 
 @media (max-width: 900px) {
   .introStory { grid-template-columns: 1.25fr .75fr; }
@@ -161,12 +194,15 @@
   .introStory { grid-template-columns: 1fr; gap: 52px; margin-top: 85px; }
   .introStory > p { width: 82%; margin: 0 0 0 auto; }
   .introLegend { width: 100%; margin-top: 55px; font-size: 6px; }
-  .detailGallery { grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 90px; padding-bottom: 130px; }
+  .detailGallery { height: auto; min-height: 0; padding-top: 90px; padding-bottom: 130px; }
+  .detailGalleryInner { width: 100%; aspect-ratio: auto; grid-template-columns: 1fr 1fr; grid-template-rows: none; gap: 12px; }
   .detailGallery figure:last-child { grid-column: 1 / -1; width: calc(50% - 6px); }
+  .detailGalleryInner [data-personal-reveal] { transform: translateY(36px) scale(.96) !important; transition-delay: 0s !important; }
+  .detailGalleryInner [data-personal-reveal].isVisible { transform: translateY(0) scale(1) !important; }
   .detailGallery figcaption { display: none; }
-  .cinematic { min-height: 650px; }
+  .cinematic { height: 75svh; min-height: 560px; }
   .cinematic > img { object-position: 57% center; }
-  .cinematic > div { left: 24px; right: 24px; top: 55%; }
+  .cinematic > div { left: 24px; right: 24px; top: 52%; }
   .cinematic h2 { font-size: 15vw; }
   .cinematic > span { right: 22px; }
   .technology,
@@ -179,10 +215,12 @@
   .equipmentPreview figure img { aspect-ratio: 1 / 1; }
   .equipmentPreview > div { grid-template-columns: 44px 1fr; }
   .equipmentList { grid-row: 2; }
-  .materialGrid { grid-template-columns: 1fr; gap: 65px; margin-top: 100px; }
-  .leather,
-  .wood,
-  .quilting { grid-column: 1; width: 100%; margin: 0 !important; }
+  .materialPanels { height: 850px; min-height: 0; flex-direction: column; margin-top: 100px; }
+  .materialPanels article.isActive { flex-grow: 3; }
+  .materialTrigger > div { left: 20px; bottom: 20px; }
+  .materialPanels article.isActive .materialTrigger > div { bottom: 82px; }
+  .materialVariants { left: 20px; right: 20px; bottom: 20px; }
+  .materialVariants button { width: 29px; height: 38px; }
   .closing { padding-top: 150px; padding-bottom: 165px; }
   .closing a { margin-top: 95px; }
 }
@@ -192,5 +230,5 @@
   .introStory img,
   .detailGallery img,
   .cinematic > img,
-  .materialGrid img { transition: none; }
+  .materialTrigger > img { transition: none; }
 }
