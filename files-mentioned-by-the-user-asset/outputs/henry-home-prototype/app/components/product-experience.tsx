@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import type { CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { CSSProperties, PointerEvent as ReactPointerEvent, WheelEvent as ReactWheelEvent } from "react";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
 type MaterialKey = "leather" | "alcantara" | "wood" | "quilting" | "combinations";
@@ -87,12 +87,15 @@ export function ProductExperience({ collection, product, isReady }: { collection
   const [activeSlide, setActiveSlide] = useState(0);
   const [materialKey, setMaterialKey] = useState<MaterialKey>("leather");
   const [activeSwatch, setActiveSwatch] = useState(0);
-  const [openDetail, setOpenDetail] = useState(0);
+  const [openDetail, setOpenDetail] = useState(-1);
+  const dragStartX = useRef<number | null>(null);
+  const wheelLocked = useRef(false);
 
   const slides = useMemo(() => isReady ? novaSlides : [
     { src: product.image, label: `${product.name} / materiały w przygotowaniu` },
     { src: product.catalogueImage || product.image, label: `${collection.name} / zapowiedź` },
-  ], [collection.name, isReady, product]);
+    { src: collection.hero, label: `${collection.name} / kolekcja` },
+  ], [collection.hero, collection.name, isReady, product]);
   const activeMaterial = materials.find((item) => item.key === materialKey) ?? materials[0];
 
   useEffect(() => {
@@ -116,6 +119,35 @@ export function ProductExperience({ collection, product, isReady }: { collection
 
   const moveSlide = (direction: number) => {
     setActiveSlide((current) => (current + direction + slides.length) % slides.length);
+  };
+
+  const slidePosition = (index: number) => {
+    if (index === activeSlide) return "is-active";
+    if (index === (activeSlide - 1 + slides.length) % slides.length) return "is-prev";
+    if (index === (activeSlide + 1) % slides.length) return "is-next";
+    return "is-hidden";
+  };
+
+  const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+    const delta = horizontal ? event.deltaX : event.deltaY;
+    if (Math.abs(delta) < 12 || wheelLocked.current) return;
+    if (horizontal || event.shiftKey) event.preventDefault();
+    wheelLocked.current = true;
+    moveSlide(delta > 0 ? 1 : -1);
+    window.setTimeout(() => { wheelLocked.current = false; }, 520);
+  };
+
+  const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    dragStartX.current = event.clientX;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (dragStartX.current === null) return;
+    const distance = event.clientX - dragStartX.current;
+    dragStartX.current = null;
+    if (Math.abs(distance) > 42) moveSlide(distance < 0 ? 1 : -1);
   };
 
   const heroImage = isReady ? `${novaRoot}/hero.png` : product.image;
@@ -151,9 +183,20 @@ export function ProductExperience({ collection, product, isReady }: { collection
           <p>{isReady ? "Trzy interpretacje tej samej bryły. Zmieniaj kolorystykę i zobacz, jak Nova Solo reaguje na charakter wnętrza." : "Kolejne wizualizacje modelu pojawią się tutaj po przygotowaniu materiałów."}</p>
         </header>
         <div className="product-carousel" data-product-reveal aria-roledescription="carousel" aria-label={`Wizualizacje ${product.name}`}>
-          <div className="product-carousel__viewport">
+          <div
+            className="product-carousel__viewport"
+            onWheel={handleWheel}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={() => { dragStartX.current = null; }}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowLeft") moveSlide(-1);
+              if (event.key === "ArrowRight") moveSlide(1);
+            }}
+            tabIndex={0}
+          >
             {slides.map((slide, index) => (
-              <figure className={index === activeSlide ? "is-active" : ""} aria-hidden={index !== activeSlide} key={slide.src}>
+              <figure className={slidePosition(index)} aria-hidden={index !== activeSlide} key={slide.src}>
                 <img src={slide.src} alt={index === activeSlide ? `${product.name}: ${slide.label}` : ""} />
                 <figcaption>{slide.label}</figcaption>
               </figure>
@@ -161,7 +204,6 @@ export function ProductExperience({ collection, product, isReady }: { collection
           </div>
           <div className="product-carousel__controls">
             <button onClick={() => moveSlide(-1)} aria-label="Poprzednie zdjęcie"><Arrow direction="left" /></button>
-            <p><strong>{String(activeSlide + 1).padStart(2, "0")}</strong> / {String(slides.length).padStart(2, "0")}</p>
             <div>{slides.map((_, index) => <button key={index} onClick={() => setActiveSlide(index)} aria-label={`Pokaż zdjęcie ${index + 1}`} aria-current={index === activeSlide} />)}</div>
             <button onClick={() => moveSlide(1)} aria-label="Następne zdjęcie"><Arrow direction="right" /></button>
           </div>
