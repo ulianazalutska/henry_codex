@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { siteUrl } from "./site-config";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -9,7 +10,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://henry-private-showroom.urbanowiczseo.chatgpt.site"),
+  metadataBase: new URL(siteUrl),
   title: "HENRY — Private Cinema Seating",
   description: "Premium seating and bespoke furniture created around the private cinema experience.",
   icons: { icon: "/media/henry-logo-gold.png" },
