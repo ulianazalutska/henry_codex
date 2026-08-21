@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { collections } from "../collections-data";
 
 export function SiteNavigation({ solid = true }: { solid?: boolean }) {
@@ -77,7 +78,7 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
           <span className="menu-lines" aria-hidden="true"><i /><i /><i /></span>
           <span>Menu</span>
         </button>
-        <a className="nav-mark" href="/" aria-label="HENRY — strona główna"><img src="/media/henry-logo-gold.png" alt="" /></a>
+        <Link className="nav-mark" href="/" aria-label="HENRY — strona główna"><img src="/media/henry-logo-gold.png" alt="" /></Link>
         <label className="language" aria-label="Wybierz język">
           <select defaultValue="pl"><option value="pl">PL</option><option value="en" disabled>EN</option></select>
           <img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
@@ -92,17 +93,21 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
             <button className={`menu-list__item menu-list__item--toggle ${collectionsOpen ? "is-active" : ""}`} onClick={toggleCollections} aria-expanded={collectionsOpen}>
               <span>Kolekcje</span><img src="/media/vector-chevron.svg" alt="" />
             </button>
-            <a href="/personalizacja" onClick={closeMenu}>Personalizacja</a>
-            <a href="/projekty-indywidualne" onClick={closeMenu}>Projekty indywidualne</a>
-            <a href="/filozofia-henry" onClick={closeMenu}>Filozofia Henry</a>
-            <a href="/dla-architektow" onClick={closeMenu}>Dla architektów</a>
-            <a href="/kontakt" onClick={closeMenu}>Kontakt</a>
+            <Link href="/personalizacja" onClick={closeMenu}>Personalizacja</Link>
+            <Link href="/projekty-indywidualne" onClick={closeMenu}>Projekty indywidualne</Link>
+            <Link href="/filozofia-henry" onClick={closeMenu}>Filozofia Henry</Link>
+            <Link href="/dla-architektow" onClick={closeMenu}>Dla architektów</Link>
+            <Link href="/kontakt" onClick={closeMenu}>Kontakt</Link>
           </nav>
           <div className="menu-panel__footer"><span>Warszawa / Polska</span><span>Private cinema seating</span></div>
         </aside>
 
         <aside className={`menu-column menu-column--collections ${collectionsOpen ? "is-open" : ""}`} data-active={menuOpen && collectionsOpen} aria-hidden={!collectionsOpen}>
           <div className="menu-panel__mobile-top"><button onClick={toggleCollections}>← Menu</button></div>
+          <div className="menu-products-heading">
+            <p>02 / Kolekcje</p>
+            <Link href="/kolekcje" onClick={closeMenu}>Wszystkie kolekcje <span className="diagonal-arrow" aria-hidden="true" /></Link>
+          </div>
           <nav className="menu-list menu-list--sub" aria-label="Kolekcje">
             {collections.map((collection) => (
               <button className={`menu-list__item menu-list__item--toggle ${openCollection === collection.slug ? "is-active" : ""}`} onClick={() => toggleCollection(collection.slug)} aria-expanded={openCollection === collection.slug} key={collection.slug}>
@@ -119,13 +124,13 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
               <div className="menu-panel__mobile-top"><button onClick={() => setOpenCollection(null)}>← Kolekcje</button></div>
               <div className="menu-products-heading">
                 <p>{activeCollection.index} / Kolekcja</p>
-                <a href={`/kolekcje/${activeCollection.slug}`} onClick={closeMenu}>{activeCollection.name} <span className="diagonal-arrow" aria-hidden="true" /></a>
+                <Link href={`/kolekcje/${activeCollection.slug}`} onClick={closeMenu}>{activeCollection.name} <span className="diagonal-arrow" aria-hidden="true" /></Link>
               </div>
               <nav className="menu-list menu-list--products" aria-label={`Modele ${activeCollection.name}`}>
                 {activeCollection.products.map((product, index) => (
-                  <a href={`/kolekcje/${activeCollection.slug}/${product.slug}`} onClick={closeMenu} key={product.slug}>
+                  <Link href={`/kolekcje/${activeCollection.slug}/${product.slug}`} onClick={closeMenu} key={product.slug}>
                     <span>{String(index + 1).padStart(2, "0")}</span>{product.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
               <div className="menu-panel__footer"><span>Warszawa / Polska</span><span>{String(activeCollection.products.length).padStart(2, "0")} modeli</span></div>

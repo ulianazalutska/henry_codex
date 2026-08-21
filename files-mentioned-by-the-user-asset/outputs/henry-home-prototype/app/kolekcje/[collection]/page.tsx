@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavigation } from "../../components/site-navigation";
 import { collections, getCollection } from "../../collections-data";
@@ -61,7 +62,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
         </header>
         <div className="product-gallery">
           {collection.products.map((product, index) => (
-            <a className={`product-pair ${index % 2 ? "product-pair--reverse" : ""} ${product.catalogueScene && product.catalogueCutout ? "is-ready" : "is-placeholder"}`} href={`/kolekcje/${collection.slug}/${product.slug}`} key={product.slug}>
+            <Link className={`product-pair ${index % 2 ? "product-pair--reverse" : ""} ${product.catalogueScene && product.catalogueCutout ? "is-ready" : "is-placeholder"}`} href={`/kolekcje/${collection.slug}/${product.slug}`} key={product.slug}>
               <figure className="product-pair__cutout">
                 {product.catalogueCutout ? (
                   <img src={product.catalogueCutout} alt={`${product.name} — widok produktu`} loading="lazy" />
@@ -78,15 +79,15 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
                 )}
                 <i className="diagonal-arrow" aria-hidden="true" />
               </figure>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
 
-      <a className="next-collection" href={`/kolekcje/${next.slug}`}>
+      <Link className="next-collection" href={`/kolekcje/${next.slug}`}>
         <p>Następna kolekcja</p><h2>{next.name}</h2><span>Odkryj <i className="diagonal-arrow" aria-hidden="true" /></span>
         <img src={next.hero} alt="" loading="lazy" />
-      </a>
+      </Link>
       <SiteFooter />
     </main>
   );

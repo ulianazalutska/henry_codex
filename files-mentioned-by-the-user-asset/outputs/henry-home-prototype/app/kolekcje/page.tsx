@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteFooter } from "../components/site-footer";
 import { SiteNavigation } from "../components/site-navigation";
 import { collections } from "../collections-data";
@@ -30,13 +31,13 @@ export default function CollectionsPage() {
 
       <section className="collection-chapters" aria-label="Kolekcje HENRY">
         {collections.map((collection) => (
-          <a id={collection.slug} className="collection-chapter" href={`/kolekcje/${collection.slug}`} key={collection.slug}>
+          <Link id={collection.slug} className="collection-chapter" href={`/kolekcje/${collection.slug}`} key={collection.slug}>
             <img src={collection.hero} alt={`Kolekcja ${collection.name} HENRY`} />
             <span className="collection-chapter__shade" />
             <p>{collection.index} / {collection.overline}</p>
             <h2>{collection.name}</h2>
             <div><span>{collection.description}</span><b>Odkryj kolekcję <i>↗</i></b></div>
-          </a>
+          </Link>
         ))}
       </section>
 

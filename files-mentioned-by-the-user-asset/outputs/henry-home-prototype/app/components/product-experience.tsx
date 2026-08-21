@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
+import Link from "next/link";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
 type MaterialKey = "leather" | "alcantara" | "wood" | "quilting" | "combinations";
@@ -257,7 +258,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
       <section className={`product-hero ${isReady ? "" : "product-hero--placeholder"}`}>
         <img src={heroImage} alt={`${product.name} — ${collection.name}`} />
         <div className="product-hero__veil" />
-        <a className="product-hero__back" href={`/kolekcje/${collection.slug}`}>← Kolekcja {collection.name}</a>
+        <Link className="product-hero__back" href={`/kolekcje/${collection.slug}`}>← Kolekcja {collection.name}</Link>
         <p className="product-hero__index">{collection.index} / {String(collection.products.findIndex((item) => item.slug === product.slug) + 1).padStart(2, "0")}</p>
         <h1>{product.name}</h1>
         <div className="product-hero__meta"><span>Private cinema seating</span><span>Made in Poland</span></div>
@@ -414,7 +415,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
       <section className="product-contact" data-product-reveal>
         <p>Twój egzemplarz HENRY</p>
         <h2>Skonfigurujmy<br /><em>{product.name}.</em></h2>
-        <a href="/kontakt">Zapytaj o model <span className="diagonal-arrow" aria-hidden="true" /></a>
+        <Link href="/kontakt">Zapytaj o model <span className="diagonal-arrow" aria-hidden="true" /></Link>
       </section>
     </>
   );

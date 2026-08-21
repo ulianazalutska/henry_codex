@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { SiteFooter } from "../components/site-footer";
 import { SiteNavigation } from "../components/site-navigation";
 import styles from "./personalization.module.css";
@@ -183,7 +184,7 @@ export function PersonalizationExperience() {
       <section className={styles.closing} data-personal-reveal>
         <p>Twój egzemplarz HENRY</p>
         <h2>Skonfigurujmy<br /><em>Twój fotel.</em></h2>
-        <a href="/kontakt"><span>Zapytaj o model</span><i aria-hidden="true">↗</i></a>
+        <Link href="/kontakt"><span>Zapytaj o model</span><i aria-hidden="true">↗</i></Link>
       </section>
 
       <SiteFooter />

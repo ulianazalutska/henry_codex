@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function SiteFooter({ showInvitation = false }: { showInvitation?: boolean }) {
   return (
     <footer id="kontakt" className={`contact ${showInvitation ? "" : "contact--compact"}`}>
@@ -16,8 +18,8 @@ export function SiteFooter({ showInvitation = false }: { showInvitation?: boolea
           <img src="/media/henry-logo-gold.png" alt="HENRY" />
           <p>Premium Cinema Seating<br />Made in Poland</p>
         </div>
-        <div><h3>Kolekcje</h3><a href="/kolekcje/atelier">Atelier</a><a href="/kolekcje/lounge">Lounge</a><a href="/kolekcje/studio">Studio</a></div>
-        <div><h3>Dla klienta</h3><a href="/filozofia-henry">O nas</a><a href="/faq">FAQ</a><a href="/blog">Blog</a><a href="/kontakt">Kontakt</a></div>
+        <div><h3>Kolekcje</h3><Link href="/kolekcje/atelier">Atelier</Link><Link href="/kolekcje/lounge">Lounge</Link><Link href="/kolekcje/studio">Studio</Link></div>
+        <div><h3>Dla klienta</h3><Link href="/filozofia-henry">O nas</Link><Link href="/faq">FAQ</Link><Link href="/blog">Blog</Link><Link href="/kontakt">Kontakt</Link></div>
         <div><h3>Kontakt</h3><a href="tel:+48604783396">+48 604 783 396</a><a href="mailto:info@henryseating.com">info@henryseating.com</a><p>Otowice 41<br />86-070 Dąbrowa Chełmińska<br />Polska</p></div>
         <div className="footer-directory__social">
           <h3>Obserwuj nas</h3>

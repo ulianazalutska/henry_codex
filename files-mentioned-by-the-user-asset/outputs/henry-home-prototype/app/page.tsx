@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Link from "next/link";
 import { SiteFooter } from "./components/site-footer";
 import { SiteNavigation } from "./components/site-navigation";
 
@@ -241,19 +242,19 @@ export default function Home() {
         <div className="collections-stage">
           <div className="collections-head"><span>02 / Kolekcje</span><p>Trzy sposoby<br />odczuwania komfortu.</p></div>
           <div className="collections-track" ref={collectionsTrackRef}>
-            <a href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
+            <Link href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
               <img src="/media/atelier-caramel-room.webp" alt="Karmelowy fotel HENRY w ciepłym wnętrzu" loading="lazy" />
               <div className="collection__veil" /><p>01 / Rzemiosło</p><h3>Atelier</h3>
               <span>Rzeźbiarska forma. Indywidualne wykończenie. <b>Odkryj kolekcję <i className="collection-arrow diagonal-arrow" aria-hidden="true" /></b></span>
-            </a>
-            <a href="/kolekcje/studio" className="collection collection--studio" aria-label="Zobacz kolekcję Studio">
+            </Link>
+            <Link href="/kolekcje/studio" className="collection collection--studio" aria-label="Zobacz kolekcję Studio">
               <div className="collection__copy"><p>02 / Architektura kina</p><h3>Studio</h3><span>Kompletne doświadczenie prywatnej sali. <b>Odkryj kolekcję <i className="collection-arrow diagonal-arrow" aria-hidden="true" /></b></span></div>
               <img src="/media/studio-cinema-front.webp" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
-            </a>
-            <a href="/kolekcje/lounge" className="collection collection--lounge" aria-label="Zobacz kolekcję Lounge">
+            </Link>
+            <Link href="/kolekcje/lounge" className="collection collection--lounge" aria-label="Zobacz kolekcję Lounge">
               <img src="/media/lounge-pair.webp" alt="Dwa czarne fotele HENRY w spokojnym wnętrzu" loading="lazy" />
               <div className="collection__copy"><p>03 / Codzienny rytuał</p><h3>Lounge</h3><span>Kino, muzyka, chwila ciszy — w Twoim rytmie. <b>Odkryj kolekcję <i className="collection-arrow diagonal-arrow" aria-hidden="true" /></b></span></div>
-            </a>
+            </Link>
           </div>
           <div className="collections-progress"><i ref={collectionsProgressRef} /></div>
         </div>
@@ -279,7 +280,7 @@ export default function Home() {
             <figcaption>Forma wykonywana na zamówienie</figcaption>
           </figure>
         </div>
-        <a className="text-link" href="/projekty-indywidualne" data-reveal>Zobacz projekty indywidualne <span className="diagonal-arrow" aria-hidden="true" /></a>
+        <Link className="text-link" href="/projekty-indywidualne" data-reveal>Zobacz projekty indywidualne <span className="diagonal-arrow" aria-hidden="true" /></Link>
       </section>
 
       <section id="filozofia-henry" className="philosophy">
@@ -293,7 +294,7 @@ export default function Home() {
           </figure>
           <blockquote data-reveal>„Projektujemy dla momentu, który zostaje z Tobą po napisach.”</blockquote>
         </div>
-        <a className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></a>
+        <Link className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></Link>
       </section>
 
       <SiteFooter showInvitation />
