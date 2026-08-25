@@ -177,7 +177,8 @@ export default function Home() {
             <div className="cinematic-hero__shade" />
           </div>
           <div className="hero-intro">
-            <p>Prywatne kino. Zaprojektowane wokół Ciebie.</p>
+            <p>Prywatne kino. Zaprojektowane wokół Ciebie
+            </p>
             <h1>Wejdź do świata<br /><span>HENRY</span></h1>
           </div>
           <div className="hero-moment" aria-live="polite">
@@ -201,7 +202,7 @@ export default function Home() {
         <h2 className="about__statement about__statement--compact" data-reveal>
           Komfort nie zaczyna się<br />
           <span>w fotelu.</span> Zaczyna się<br />
-          w tym, co czujesz.
+          w tym, co czujesz
         </h2>
         <div className="about__composition">
           <figure className="about__image image-reveal" data-reveal>
@@ -209,15 +210,15 @@ export default function Home() {
             <figcaption>Private Cinema / Kolekcja Atelier</figcaption>
           </figure>
           <div className="about__copy" data-reveal>
-            <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem.</p>
-            <p>Forma, ergonomia i technologia spotykają się w jednym celu: stworzyć miejsce, do którego chcesz wracać.</p>
+            <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem</p>
+            <p>Forma, ergonomia i technologia spotykają się w jednym celu: stworzyć miejsce, do którego chcesz wracać</p>
           </div>
         </div>
       </section>
 
       <section id="kolekcje" className="collections" ref={collectionsRef}>
         <div className="collections-stage">
-          <div className="collections-head"><p>Trzy sposoby<br />odczuwania komfortu.</p></div>
+          <div className="collections-head"><p className="collections-head__left">Nasze kolekcje</p><p>Trzy sposoby<br />odczuwania komfortu</p></div>
           <div className="collections-track" ref={collectionsTrackRef}>
             <Link href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
               <img src="/media/atelier-cinema-row.png" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
@@ -245,41 +246,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projekty-indywidualne" className="bespoke section-base">
-        <div className="section-kicker" data-reveal><span>03</span><p>Projekty indywidualne</p></div>
+      <section id="projekty-indywidualne" className="bespoke bespoke--compact section-base">
         <div className="bespoke__intro">
-          <h2 data-reveal>Od pierwszej linii<br />do ostatniego <span>detalu.</span></h2>
-          <p data-reveal>Pracujemy z architektami, projektantami i prywatnymi klientami, tworząc meble oraz całe układy dopasowane do przestrzeni.</p>
+          <h2 data-reveal>Od pierwszej linii<br />do ostatniego <span>detalu</span></h2>
+          <p data-reveal>Pracujemy z architektami, projektantami i prywatnymi klientami, tworząc meble oraz całe układy dopasowane do przestrzeni</p>
         </div>
         <div className="bespoke__gallery">
           <figure className="bespoke__main spread-reveal spread-reveal--center" data-reveal>
-            <img src="/media/studio-cinema-wide.webp" alt="Indywidualny projekt prywatnej sali kinowej HENRY" loading="lazy" />
-            <figcaption><span>Private Residence</span><span>Warsaw / 2026</span></figcaption>
+            <img src="/media/bespoke-private-residence.webp" alt="Indywidualny projekt prywatnej sali kinowej HENRY" loading="lazy" />
+            <figcaption><span>Private Residence</span><span>2026</span></figcaption>
           </figure>
           <figure className="bespoke__detail spread-reveal spread-reveal--left" data-reveal>
-            <img src="/media/private-viewing.webp" alt="Fotel HENRY w prywatnej sali podczas seansu" loading="lazy" />
+            <img src="/media/bespoke-reading-nook.webp" alt="Fotel HENRY w prywatnej bibliotece" loading="lazy" />
             <figcaption>Projektowanie doświadczenia</figcaption>
           </figure>
           <figure className="bespoke__object spread-reveal spread-reveal--right" data-reveal>
-            <img src="/media/atelier-ivory-portrait.webp" alt="Fotel HENRY w jasnym wnętrzu" loading="lazy" />
+            <img src="/media/bespoke-custom-form.webp" alt="Fotele HENRY wykonane na zamówienie w sali kinowej" loading="lazy" />
             <figcaption>Forma wykonywana na zamówienie</figcaption>
           </figure>
         </div>
-        <Link className="text-link" href="/projekty-indywidualne" data-reveal>Zobacz projekty indywidualne <span className="diagonal-arrow" aria-hidden="true" /></Link>
+        <div className="bespoke__cta-row">
+          <Link className="text-link bespoke__cta" href="/projekty-indywidualne" data-reveal>Zobacz projekty indywidualne <span className="diagonal-arrow" aria-hidden="true" /></Link>
+        </div>
       </section>
 
-      <section id="filozofia-henry" className="philosophy">
-        <div className="section-kicker" data-reveal><span>04</span><p>Filozofia HENRY</p></div>
-        <p className="philosophy__lead" data-reveal>Najwyższa jakość<br />nie potrzebuje hałasu.</p>
+      <section id="filozofia-henry" className="philosophy philosophy--compact">
+        <p className="philosophy__lead" data-reveal>Najwyższa jakość<br />nie potrzebuje hałasu</p>
         <div className="philosophy__spread">
-          <p data-reveal>Wierzymy, że luksus zaczyna się tam, gdzie wszystko ma swoje uzasadnienie — proporcja, materiał, dotyk i światło.</p>
+          <p data-reveal>Wierzymy, że luksus zaczyna się tam, gdzie wszystko ma swoje uzasadnienie — proporcja, materiał, dotyk i światło</p>
           <figure className="image-reveal" data-reveal>
-            <img src="/media/atelier-caramel-study.webp" alt="Karmelowy fotel HENRY na tle fornirowanej ściany" loading="lazy" />
-            <figcaption>Atelier / Deep Caramel</figcaption>
+            <img src="/media/philosophy-office-caramel.webp" alt="Karmelowy fotel HENRY w gabinecie przy regale z książkami" loading="lazy" />
           </figure>
-          <blockquote data-reveal>„Projektujemy dla momentu, który zostaje z Tobą po napisach.”</blockquote>
+          <div className="philosophy__quote-block">
+            <blockquote data-reveal>„Projektujemy dla momentu, który zostaje z Tobą po napisach”</blockquote>
+            <Link className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></Link>
+          </div>
         </div>
-        <Link className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></Link>
       </section>
 
       <SiteFooter showInvitation />

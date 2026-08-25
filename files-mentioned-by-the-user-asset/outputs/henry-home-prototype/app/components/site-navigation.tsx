@@ -123,7 +123,10 @@ export function SiteNavigation() {
             <Link href="/dla-architektow" onClick={closeMenu}>Dla architektów</Link>
             <Link href="/kontakt" onClick={closeMenu}>Kontakt</Link>
           </nav>
-          <div className="menu-panel__footer"><span>Warszawa / Polska</span><span>Private cinema seating</span></div>
+          <div className="menu-panel__footer"><Link href="/kontakt" className="menu-panel__contact" onClick={closeMenu}>
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1" y="2.2" width="10" height="7.6" rx="1" stroke="currentColor" strokeWidth="1" /><path d="M1.3 3 6 6.4 10.7 3" stroke="currentColor" strokeWidth="1" /></svg>
+              Kontakt
+            </Link><span>Private cinema seating</span></div>
         </aside>
 
         <aside className={`menu-column menu-column--collections ${collectionsOpen ? "is-open" : ""}`} data-active={menuOpen && collectionsOpen} aria-hidden={!collectionsOpen}>
@@ -138,7 +141,10 @@ export function SiteNavigation() {
               </button>
             ))}
           </nav>
-          <div className="menu-panel__footer"><span>Warszawa / Polska</span><span>02 / Kolekcje</span></div>
+          <div className="menu-panel__footer"><Link href="/kontakt" className="menu-panel__contact" onClick={closeMenu}>
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1" y="2.2" width="10" height="7.6" rx="1" stroke="currentColor" strokeWidth="1" /><path d="M1.3 3 6 6.4 10.7 3" stroke="currentColor" strokeWidth="1" /></svg>
+              Kontakt
+            </Link><span>02 / Kolekcje</span></div>
         </aside>
 
         <aside className={`menu-column menu-column--products ${openCollection ? "is-open" : ""}`} data-active={menuOpen && Boolean(openCollection)} aria-hidden={!openCollection}>
@@ -155,7 +161,10 @@ export function SiteNavigation() {
                   </Link>
                 ))}
               </nav>
-              <div className="menu-panel__footer"><span>Warszawa / Polska</span><span>{String(activeCollection.products.length).padStart(2, "0")} modeli</span></div>
+              <div className="menu-panel__footer"><Link href="/kontakt" className="menu-panel__contact" onClick={closeMenu}>
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1" y="2.2" width="10" height="7.6" rx="1" stroke="currentColor" strokeWidth="1" /><path d="M1.3 3 6 6.4 10.7 3" stroke="currentColor" strokeWidth="1" /></svg>
+              Kontakt
+            </Link><span>{String(activeCollection.products.length).padStart(2, "0")} modeli</span></div>
             </>
           )}
         </aside>

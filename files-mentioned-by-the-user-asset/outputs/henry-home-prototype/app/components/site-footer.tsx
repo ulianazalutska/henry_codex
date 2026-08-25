@@ -5,7 +5,7 @@ export function SiteFooter({ showInvitation = false }: { showInvitation?: boolea
     <footer id="kontakt" className={`contact ${showInvitation ? "" : "contact--compact"}`}>
       {showInvitation && (
         <>
-          <div className="contact__top"><img src="/media/henry-logo-white.png" alt="" /><p>Private cinema seating<br />designed for the moment.</p></div>
+          <div className="contact__top"><p>Private cinema seating<br />designed for the moment.</p></div>
           <div className="contact__invitation" data-reveal>
             <span>Wejdź do świata</span><h2>HENRY</h2>
             <a href="mailto:info@henryseating.com">info@henryseating.com <span className="diagonal-arrow" aria-hidden="true" /></a>
