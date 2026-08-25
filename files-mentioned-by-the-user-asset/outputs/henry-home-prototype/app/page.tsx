@@ -57,8 +57,6 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [storyPlaying, setStoryPlaying] = useState(false);
   const [heroMoment, setHeroMoment] = useState(-1);
-  const [heroStage, setHeroStage] = useState(1);
-  const [navSolid, setNavSolid] = useState(false);
 
   useReveal();
 
@@ -74,8 +72,6 @@ export default function Home() {
     let targetTime = 0;
     let lastSeek = 0;
     let lastMoment = -1;
-    let lastStage = 1;
-    let wasSolid = false;
 
     const measure = () => {
       const distance = Math.max(1, hero.offsetHeight - window.innerHeight);
@@ -98,18 +94,6 @@ export default function Home() {
       if (moment !== lastMoment) {
         lastMoment = moment;
         setHeroMoment(moment);
-      }
-
-      const stage = Math.min(5, Math.floor(next * 5) + 1);
-      if (stage !== lastStage) {
-        lastStage = stage;
-        setHeroStage(stage);
-      }
-
-      const solid = next > 0.94;
-      if (solid !== wasSolid) {
-        wasSolid = solid;
-        setNavSolid(solid);
       }
     };
 
@@ -182,7 +166,7 @@ export default function Home() {
 
   return (
     <main>
-      <SiteNavigation solid={navSolid} />
+      <SiteNavigation />
 
       <section id="top" className="cinematic-hero" ref={heroRef} aria-label="Cinematic entrance to HENRY">
         <div className="cinematic-hero__sticky">
@@ -200,7 +184,6 @@ export default function Home() {
             {heroMoment >= 0 && <p key={heroMoment}><span>0{heroMoment + 1}</span>{heroMoments[heroMoment]}</p>}
           </div>
           <div className="scroll-cue"><span>Przewiń, aby wejść</span><i><b /></i></div>
-          <p className="hero-stage"><span>{String(heroStage).padStart(2, "0")}</span> / 05</p>
         </div>
       </section>
 
@@ -215,45 +198,47 @@ export default function Home() {
       </section>
 
       <section id="istota-henry" className="about section-base">
-        <div className="section-kicker" data-reveal><span>01</span><p>Istota HENRY</p></div>
-        <h2 className="about__statement" data-reveal>
+        <h2 className="about__statement about__statement--compact" data-reveal>
           Komfort nie zaczyna się<br />
           <span>w fotelu.</span> Zaczyna się<br />
           w tym, co czujesz.
         </h2>
         <div className="about__composition">
           <figure className="about__image image-reveal" data-reveal>
-            <img src="/media/cinema-coast.webp" alt="Prywatna sala kinowa z fotelami HENRY i widokiem na morze" loading="lazy" />
-            <figcaption>Private Cinema / Kolekcja Studio</figcaption>
+            <img src="/media/about-cinema-row.png" alt="Prywatna sala kinowa HENRY z rzędem foteli kinowych" loading="lazy" />
+            <figcaption>Private Cinema / Kolekcja Atelier</figcaption>
           </figure>
           <div className="about__copy" data-reveal>
             <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem.</p>
             <p>Forma, ergonomia i technologia spotykają się w jednym celu: stworzyć miejsce, do którego chcesz wracać.</p>
-            <dl>
-              <div><dt>Made in</dt><dd>Poland</dd></div>
-              <div><dt>Materiały</dt><dd>Wybrane ręcznie</dd></div>
-              <div><dt>Forma</dt><dd>Indywidualna</dd></div>
-            </dl>
           </div>
         </div>
       </section>
 
       <section id="kolekcje" className="collections" ref={collectionsRef}>
         <div className="collections-stage">
-          <div className="collections-head"><span>02 / Kolekcje</span><p>Trzy sposoby<br />odczuwania komfortu.</p></div>
+          <div className="collections-head"><p>Trzy sposoby<br />odczuwania komfortu.</p></div>
           <div className="collections-track" ref={collectionsTrackRef}>
             <Link href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
-              <img src="/media/atelier-caramel-room.webp" alt="Karmelowy fotel HENRY w ciepłym wnętrzu" loading="lazy" />
-              <div className="collection__veil" /><p>01 / Rzemiosło</p><h3>Atelier</h3>
-              <span>Rzeźbiarska forma. Indywidualne wykończenie. <b>Odkryj kolekcję <i className="collection-arrow diagonal-arrow" aria-hidden="true" /></b></span>
+              <img src="/media/atelier-cinema-row.png" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
+              <div className="collection__veil" /><h3>Atelier</h3>
+              <div className="collection__cta" aria-hidden="true">
+                <i className="diagonal-arrow collection__cta-icon" />
+              </div>
             </Link>
-            <Link href="/kolekcje/studio" className="collection collection--studio" aria-label="Zobacz kolekcję Studio">
-              <div className="collection__copy"><p>02 / Architektura kina</p><h3>Studio</h3><span>Kompletne doświadczenie prywatnej sali. <b>Odkryj kolekcję <i className="collection-arrow diagonal-arrow" aria-hidden="true" /></b></span></div>
-              <img src="/media/studio-cinema-front.webp" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
+            <Link href="/kolekcje/studio" className="collection collection--atelier" aria-label="Zobacz kolekcję Studio">
+              <img src="/media/studio-study-chair.png" alt="Bordowy fotel HENRY w gabinecie" loading="lazy" />
+              <div className="collection__veil" /><h3>Studio</h3>
+              <div className="collection__cta" aria-hidden="true">
+                <i className="diagonal-arrow collection__cta-icon" />
+              </div>
             </Link>
-            <Link href="/kolekcje/lounge" className="collection collection--lounge" aria-label="Zobacz kolekcję Lounge">
-              <img src="/media/lounge-pair.webp" alt="Dwa czarne fotele HENRY w spokojnym wnętrzu" loading="lazy" />
-              <div className="collection__copy"><p>03 / Codzienny rytuał</p><h3>Lounge</h3><span>Kino, muzyka, chwila ciszy — w Twoim rytmie. <b>Odkryj kolekcję <i className="collection-arrow diagonal-arrow" aria-hidden="true" /></b></span></div>
+            <Link href="/kolekcje/lounge" className="collection collection--atelier" aria-label="Zobacz kolekcję Lounge">
+              <img src="/media/lounge-fireplace.png" alt="Zielony fotel HENRY przy kominku" loading="lazy" />
+              <div className="collection__veil" /><h3>Lounge</h3>
+              <div className="collection__cta" aria-hidden="true">
+                <i className="diagonal-arrow collection__cta-icon" />
+              </div>
             </Link>
           </div>
           <div className="collections-progress"><i ref={collectionsProgressRef} /></div>

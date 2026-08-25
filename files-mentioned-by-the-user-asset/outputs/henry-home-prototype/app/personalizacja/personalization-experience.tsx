@@ -99,7 +99,7 @@ export function PersonalizationExperience() {
 
   return (
     <main id="top" className={styles.page}>
-      <SiteNavigation solid />
+      <SiteNavigation />
 
       <section className={styles.intro} aria-labelledby="personalization-title">
         <p className={styles.eyebrow} data-personal-reveal>Nie wybierasz gotowego fotela</p>

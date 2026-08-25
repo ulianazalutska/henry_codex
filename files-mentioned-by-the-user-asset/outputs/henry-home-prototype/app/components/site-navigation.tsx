@@ -4,20 +4,39 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { collections } from "../collections-data";
 
-export function SiteNavigation({ solid = true }: { solid?: boolean }) {
+export function SiteNavigation() {
   const stackRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
   const [openCollection, setOpenCollection] = useState<string | null>(null);
+  const [navHidden, setNavHidden] = useState(false);
+  const [instantClose, setInstantClose] = useState(false);
+  const [closingAll, setClosingAll] = useState(false);
   const activeCollection = collections.find((collection) => collection.slug === openCollection);
 
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const measure = () => {
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+      setNavHidden(goingDown && y > 120);
+      lastY = y;
+    };
+    window.addEventListener("scroll", measure, { passive: true });
+    return () => window.removeEventListener("scroll", measure);
+  }, []);
+
   const openMenu = () => {
+    setInstantClose(false);
+    setClosingAll(false);
     setCollectionsOpen(false);
     setOpenCollection(null);
     setMenuOpen(true);
   };
 
   const closeMenu = () => {
+    setInstantClose(true);
+    setClosingAll(true);
     setMenuOpen(false);
     setCollectionsOpen(false);
     setOpenCollection(null);
@@ -25,14 +44,20 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
 
   const toggleCollections = () => {
     if (collectionsOpen) {
+      setInstantClose(Boolean(openCollection));
+      setClosingAll(false);
       setCollectionsOpen(false);
       setOpenCollection(null);
       return;
     }
+    setInstantClose(false);
+    setClosingAll(false);
     setCollectionsOpen(true);
   };
 
   const toggleCollection = (slug: string) => {
+    setInstantClose(false);
+    setClosingAll(false);
     setOpenCollection((current) => current === slug ? null : slug);
   };
 
@@ -48,7 +73,6 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
       if (event.key === "Escape") {
         if (openCollection) setOpenCollection(null);
         else if (collectionsOpen) setCollectionsOpen(false);
-        else closeMenu();
         return;
       }
       const focusable = Array.from(stack.querySelectorAll<HTMLElement>('[data-active="true"] button:not([disabled]), [data-active="true"] a[href]'));
@@ -73,9 +97,9 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
 
   return (
     <>
-      <header className={`site-nav ${solid ? "site-nav--solid" : ""}`}>
+      <header className={`site-nav ${navHidden && !menuOpen ? "site-nav--hidden" : ""}`}>
         <button className="menu-trigger" onClick={openMenu} aria-label="Otwórz menu">
-          <span className="menu-lines" aria-hidden="true"><i /><i /><i /></span>
+          <span className="menu-lines" aria-hidden="true"><i /><i /></span>
           <span>Menu</span>
         </button>
         <Link className="nav-mark" href="/" aria-label="HENRY — strona główna"><img src="/media/henry-logo-gold.png" alt="" /></Link>
@@ -85,8 +109,8 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
         </label>
       </header>
 
-      <button className={`menu-backdrop ${menuOpen ? "is-open" : ""}`} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1} aria-label="Zamknij menu" />
-      <div ref={stackRef} className={`menu-stack ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen} role="dialog" aria-modal="true" aria-label="Menu główne">
+      <div className={`menu-backdrop ${menuOpen ? "is-open" : ""}`} aria-hidden="true" />
+      <div ref={stackRef} className={`menu-stack ${menuOpen ? "is-open" : ""} ${instantClose ? "menu-stack--instant-close" : ""} ${closingAll ? "menu-stack--close-all" : ""}`} aria-hidden={!menuOpen} role="dialog" aria-modal="true" aria-label="Menu główne">
         <aside className="menu-column menu-column--primary" data-active={menuOpen}>
           <div className="menu-panel__top"><button onClick={closeMenu}>Zamknij</button></div>
           <nav className="menu-list" aria-label="Menu główne">
@@ -105,7 +129,6 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
         <aside className={`menu-column menu-column--collections ${collectionsOpen ? "is-open" : ""}`} data-active={menuOpen && collectionsOpen} aria-hidden={!collectionsOpen}>
           <div className="menu-panel__mobile-top"><button onClick={toggleCollections}>← Menu</button></div>
           <div className="menu-products-heading">
-            <p>02 / Kolekcje</p>
             <Link href="/kolekcje" onClick={closeMenu}>Wszystkie kolekcje <span className="diagonal-arrow" aria-hidden="true" /></Link>
           </div>
           <nav className="menu-list menu-list--sub" aria-label="Kolekcje">
@@ -123,13 +146,12 @@ export function SiteNavigation({ solid = true }: { solid?: boolean }) {
             <>
               <div className="menu-panel__mobile-top"><button onClick={() => setOpenCollection(null)}>← Kolekcje</button></div>
               <div className="menu-products-heading">
-                <p>{activeCollection.index} / Kolekcja</p>
                 <Link href={`/kolekcje/${activeCollection.slug}`} onClick={closeMenu}>{activeCollection.name} <span className="diagonal-arrow" aria-hidden="true" /></Link>
               </div>
               <nav className="menu-list menu-list--products" aria-label={`Modele ${activeCollection.name}`}>
-                {activeCollection.products.map((product, index) => (
+                {activeCollection.products.map((product) => (
                   <Link href={`/kolekcje/${activeCollection.slug}/${product.slug}`} onClick={closeMenu} key={product.slug}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>{product.name}
+                    {product.name}
                   </Link>
                 ))}
               </nav>

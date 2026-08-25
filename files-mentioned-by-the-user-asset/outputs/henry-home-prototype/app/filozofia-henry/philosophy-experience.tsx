@@ -52,7 +52,7 @@ export function PhilosophyExperience() {
 
   return (
     <main id="top" className={styles.page}>
-      <SiteNavigation solid={false} />
+      <SiteNavigation />
 
       <section className={styles.hero} aria-labelledby="philosophy-title">
         <img className={styles.heroImage} src="/media/filozofia-henry/workshop.png" alt="Rzemieślnik pracujący nad skórzanym fotelem HENRY" />
