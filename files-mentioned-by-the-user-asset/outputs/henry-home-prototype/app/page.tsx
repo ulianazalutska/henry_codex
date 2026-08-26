@@ -72,6 +72,21 @@ export default function Home() {
     let targetTime = 0;
     let lastSeek = 0;
     let lastMoment = -1;
+    let objectUrl: string | null = null;
+    let cancelled = false;
+
+    // Cloudflare's static-asset serving doesn't honor open-ended Range
+    // requests (bytes=0-) the way <video> streaming expects, which leaves
+    // the element stuck at readyState 0 forever. Fetching the file into
+    // memory and handing the browser a blob URL sidesteps Range entirely.
+    fetch("/media/henry-entrance.mp4")
+      .then((response) => response.blob())
+      .then((blob) => {
+        if (cancelled) return;
+        objectUrl = URL.createObjectURL(blob);
+        video.src = objectUrl;
+      })
+      .catch(() => {});
 
     const measure = () => {
       const distance = Math.max(1, hero.offsetHeight - window.innerHeight);
@@ -122,10 +137,12 @@ export default function Home() {
     frame = requestAnimationFrame(tick);
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(frame);
       video.removeEventListener("loadedmetadata", initialize);
       window.removeEventListener("scroll", measure);
       window.removeEventListener("resize", measure);
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
   }, []);
 
@@ -171,9 +188,7 @@ export default function Home() {
       <section id="top" className="cinematic-hero" ref={heroRef} aria-label="Cinematic entrance to HENRY">
         <div className="cinematic-hero__sticky">
           <div className="cinematic-hero__frame" ref={heroFrameRef}>
-            <video ref={videoRef} className="cinematic-hero__video" muted playsInline preload="auto" poster="/media/henry-entrance-poster.jpg" aria-label="Przejście korytarzem do prywatnej sali kinowej HENRY">
-              <source src="/media/henry-entrance.mp4" type="video/mp4" />
-            </video>
+            <video ref={videoRef} className="cinematic-hero__video" muted playsInline preload="auto" poster="/media/henry-entrance-poster.jpg" aria-label="Przejście korytarzem do prywatnej sali kinowej HENRY" />
             <div className="cinematic-hero__shade" />
           </div>
           <div className="hero-intro">
