@@ -133,11 +133,11 @@ export function SiteNavigation() {
             <Link href="/kolekcje" onClick={closeMenu}>Wszystkie kolekcje <span className="diagonal-arrow" aria-hidden="true" /></Link>
           </div>
           <nav className="menu-list menu-list--sub" aria-label="Kolekcje">
-            {/* Trzecia kolumna (lista modeli) jest tymczasowo wyłączona — strzałka zostaje wyłącznie jako element dekoracyjny, bez akcji po kliknięciu. */}
+            {/* Trzecia kolumna (lista modeli) jest tymczasowo wyłączona — strzałka zostaje jako element dekoracyjny, ale cały wiersz prowadzi bezpośrednio do strony kolekcji. */}
             {collections.map((collection) => (
-              <div className="menu-list__item menu-list__item--toggle" key={collection.slug}>
+              <Link className="menu-list__item menu-list__item--toggle" href={`/kolekcje/${collection.slug}`} onClick={closeMenu} key={collection.slug}>
                 <span>{collection.name}</span><img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
-              </div>
+              </Link>
             ))}
           </nav>
           <div className="menu-panel__footer"><Link href="/kontakt" className="menu-panel__contact" onClick={closeMenu}>

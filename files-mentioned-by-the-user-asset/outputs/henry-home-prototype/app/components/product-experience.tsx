@@ -256,12 +256,10 @@ export function ProductExperience({ collection, product, isReady }: { collection
   return (
     <>
       <section className={`product-hero ${isReady ? "" : "product-hero--placeholder"}`}>
-        <img src={heroImage} alt={`${product.name} — ${collection.name}`} />
+        <img className="product-hero__photo" src={heroImage} alt={`${product.name} — ${collection.name}`} />
         <div className="product-hero__veil" />
-        <Link className="product-hero__back" href={`/kolekcje/${collection.slug}`}>← Kolekcja {collection.name}</Link>
-        <p className="product-hero__index">{collection.index} / {String(collection.products.findIndex((item) => item.slug === product.slug) + 1).padStart(2, "0")}</p>
         <h1>{product.name}</h1>
-        <div className="product-hero__meta"><span>Private cinema seating</span><span>Made in Poland</span></div>
+        <img className="product-hero__scroll" src="/media/product-pages/nova-solo/arrow-down.svg" alt="" aria-hidden="true" />
       </section>
 
       <section className="product-manifesto">
