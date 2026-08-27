@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { collections } from "../collections-data";
 
+// Lista modeli (trzecia kolumna menu) jest jeszcze niepotrzebna — przełącznik
+// zostaje na miejscu, żeby przywrócić kolumnę wystarczyło ustawić true.
+const PRODUCT_COLUMN_ENABLED = false;
+
 export function SiteNavigation() {
   const stackRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,12 +57,6 @@ export function SiteNavigation() {
     setInstantClose(false);
     setClosingAll(false);
     setCollectionsOpen(true);
-  };
-
-  const toggleCollection = (slug: string) => {
-    setInstantClose(false);
-    setClosingAll(false);
-    setOpenCollection((current) => current === slug ? null : slug);
   };
 
   useEffect(() => {
@@ -135,10 +133,11 @@ export function SiteNavigation() {
             <Link href="/kolekcje" onClick={closeMenu}>Wszystkie kolekcje <span className="diagonal-arrow" aria-hidden="true" /></Link>
           </div>
           <nav className="menu-list menu-list--sub" aria-label="Kolekcje">
+            {/* Trzecia kolumna (lista modeli) jest tymczasowo wyłączona — strzałka zostaje wyłącznie jako element dekoracyjny, bez akcji po kliknięciu. */}
             {collections.map((collection) => (
-              <button className={`menu-list__item menu-list__item--toggle ${openCollection === collection.slug ? "is-active" : ""}`} onClick={() => toggleCollection(collection.slug)} aria-expanded={openCollection === collection.slug} key={collection.slug}>
-                <span>{collection.name}</span><img src="/media/vector-chevron.svg" alt="" />
-              </button>
+              <div className="menu-list__item menu-list__item--toggle" key={collection.slug}>
+                <span>{collection.name}</span><img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
+              </div>
             ))}
           </nav>
           <div className="menu-panel__footer"><Link href="/kontakt" className="menu-panel__contact" onClick={closeMenu}>
@@ -147,27 +146,36 @@ export function SiteNavigation() {
             </Link><span>02 / Kolekcje</span></div>
         </aside>
 
-        <aside className={`menu-column menu-column--products ${openCollection ? "is-open" : ""}`} data-active={menuOpen && Boolean(openCollection)} aria-hidden={!openCollection}>
-          {activeCollection && (
-            <>
-              <div className="menu-panel__mobile-top"><button onClick={() => setOpenCollection(null)}>← Kolekcje</button></div>
-              <div className="menu-products-heading">
-                <Link href={`/kolekcje/${activeCollection.slug}`} onClick={closeMenu}>{activeCollection.name} <span className="diagonal-arrow" aria-hidden="true" /></Link>
-              </div>
-              <nav className="menu-list menu-list--products" aria-label={`Modele ${activeCollection.name}`}>
-                {activeCollection.products.map((product) => (
-                  <Link href={`/kolekcje/${activeCollection.slug}/${product.slug}`} onClick={closeMenu} key={product.slug}>
-                    {product.name}
-                  </Link>
-                ))}
-              </nav>
-              <div className="menu-panel__footer"><Link href="/kontakt" className="menu-panel__contact" onClick={closeMenu}>
-              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1" y="2.2" width="10" height="7.6" rx="1" stroke="currentColor" strokeWidth="1" /><path d="M1.3 3 6 6.4 10.7 3" stroke="currentColor" strokeWidth="1" /></svg>
-              Kontakt
-            </Link><span>{String(activeCollection.products.length).padStart(2, "0")} modeli</span></div>
-            </>
-          )}
-        </aside>
+        {/*
+          Trzecia kolumna (lista modeli danej kolekcji) jest tymczasowo wyłączona —
+          jeszcze nie jest potrzebna. Strzałka przy Atelier/Studio/Lounge zostaje
+          wyłącznie jako dekoracja (patrz menu-column--collections wyżej).
+          Żeby przywrócić: odkomentować poniższy blok i przywrócić onClick/aria-expanded
+          na przyciskach kolekcji.
+        */}
+        {PRODUCT_COLUMN_ENABLED && (
+          <aside className={`menu-column menu-column--products ${openCollection ? "is-open" : ""}`} data-active={menuOpen && Boolean(openCollection)} aria-hidden={!openCollection}>
+            {activeCollection && (
+              <>
+                <div className="menu-panel__mobile-top"><button onClick={() => setOpenCollection(null)}>← Kolekcje</button></div>
+                <div className="menu-products-heading">
+                  <Link href={`/kolekcje/${activeCollection.slug}`} onClick={closeMenu}>{activeCollection.name} <span className="diagonal-arrow" aria-hidden="true" /></Link>
+                </div>
+                <nav className="menu-list menu-list--products" aria-label={`Modele ${activeCollection.name}`}>
+                  {activeCollection.products.map((product) => (
+                    <Link href={`/kolekcje/${activeCollection.slug}/${product.slug}`} onClick={closeMenu} key={product.slug}>
+                      {product.name}
+                    </Link>
+                  ))}
+                </nav>
+                <div className="menu-panel__footer"><Link href="/kontakt" className="menu-panel__contact" onClick={closeMenu}>
+                <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1" y="2.2" width="10" height="7.6" rx="1" stroke="currentColor" strokeWidth="1" /><path d="M1.3 3 6 6.4 10.7 3" stroke="currentColor" strokeWidth="1" /></svg>
+                Kontakt
+              </Link><span>{String(activeCollection.products.length).padStart(2, "0")} modeli</span></div>
+              </>
+            )}
+          </aside>
+        )}
       </div>
     </>
   );

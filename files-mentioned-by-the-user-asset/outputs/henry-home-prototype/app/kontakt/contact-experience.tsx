@@ -28,6 +28,7 @@ export function ContactExperience() {
 
   useEffect(() => {
     const requested = new URLSearchParams(window.location.search).get("topic");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing initial dropdown value with a query param read on mount; avoids SSR/CSR hydration mismatch from reading window during render.
     if (requested && contactTopics.includes(requested)) setTopic(requested);
   }, []);
 
