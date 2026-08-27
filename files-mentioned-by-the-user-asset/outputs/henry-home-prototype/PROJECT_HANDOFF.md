@@ -197,9 +197,12 @@ Footer має бути однаковим на всіх сторінках і в
 
 ### Основний backlog
 
-1. **Projekty indywidualne** — `/projekty-indywidualne`.
-   - Папка вихідних матеріалів уже є: `asset/Projekty Indywidualne/`.
-   - На home уже є CTA на цей відсутній маршрут.
+1. ~~**Projekty indywidualne** — `/projekty-indywidualne`.~~ Реалізовано (2026-08-27).
+   - Компоненти: `app/projekty-indywidualne/page.tsx`, `bespoke-experience.tsx`, `bespoke.module.css`.
+   - Секції: hero зі "stitch"-лінією, koncepcja-рендер (позначений як "wizualizacja koncepcyjna" — AI-концепт, не реальний продукт HENRY), zakres personalizacji, Realizacje (асиметрична галерея з легким диференційним parallax на реальних фото з `asset/Projekty Indywidualne/`), Tkaniny i materiały (лупа на курсорі по macro-текстурах, крадені тайли з `asset/Projekty Indywidualne/2.PROJEKTY INDYWIDUALNE.jpeg`), Proces (scroll-driven progress line), CTA на `/kontakt?topic=Projekt%20indywidualny`.
+   - `app/kontakt/contact-experience.tsx` тепер читає `?topic=` з query і підставляє відповідний пункт у dropdown.
+   - Assets: `public/media/projekty-indywidualne/` (фото реалізацій, macro-тайли пікування, koncepcja-рендер).
+   - Наступний крок: клієнт має підтвердити текст process-кроків (Konsultacja/Projekt/Dobór materiałów/Realizacja/Montaż) і чи можна лишати AI-рендер на сторінці постійно.
 2. **Dla architektów** — `/dla-architektow`.
    - Пункт уже є в burger, маршрут відсутній.
 3. **Inspiracje для кожної моделі**.

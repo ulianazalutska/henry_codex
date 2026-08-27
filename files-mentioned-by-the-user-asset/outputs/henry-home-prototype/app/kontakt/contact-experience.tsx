@@ -27,6 +27,11 @@ export function ContactExperience() {
   const topicField = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("topic");
+    if (requested && contactTopics.includes(requested)) setTopic(requested);
+  }, []);
+
+  useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-contact-reveal]"));
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
