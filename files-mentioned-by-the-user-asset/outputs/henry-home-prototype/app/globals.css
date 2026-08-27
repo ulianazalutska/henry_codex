@@ -2271,12 +2271,12 @@ button:hover .diagonal-arrow,
   color: #6f675f;
 }
 
-/* Strona Studio dopasowana 1:1 do makiety Figma — bez intro/nagłówka katalogu, podpis pod zdjęciem, footer z paddingiem. */
-.collection-detail--studio .product-catalogue {
+/* Wszystkie kolekcje dopasowane 1:1 do makiety Figma (wzór: Studio) — bez intro/nagłówka katalogu, podpis pod zdjęciem, footer z paddingiem. */
+.product-catalogue {
   padding-top: clamp(40px, 6vh, 88px);
 }
 
-.collection-detail--studio .product-pair__cutout figcaption {
+.product-pair__cutout figcaption {
   display: block;
   bottom: 6%;
   font-size: 20px;
@@ -2284,7 +2284,7 @@ button:hover .diagonal-arrow,
   text-align: center;
 }
 
-.collection-detail--studio .contact--compact {
+.contact--compact {
   padding-top: clamp(56px, 9vh, 120px);
 }
 
