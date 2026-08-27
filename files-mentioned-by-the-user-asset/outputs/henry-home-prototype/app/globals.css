@@ -223,8 +223,7 @@ blockquote {
   overflow-y: auto;
   pointer-events: auto;
   background: rgba(19, 9, 2, .72);
-    backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(26px) saturate(1.05);
+  backdrop-filter: blur(14px);
   transform: translateX(-101%);
   visibility: hidden;
   box-shadow: 24px 0 55px rgba(0, 0, 0, .16);
