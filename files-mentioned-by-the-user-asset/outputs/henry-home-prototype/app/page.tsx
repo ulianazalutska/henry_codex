@@ -299,7 +299,7 @@ export default function Home() {
         </div>
       </section>
 
-      <SiteFooter showInvitation />
+      <SiteFooter />
     </main>
   );
 }
