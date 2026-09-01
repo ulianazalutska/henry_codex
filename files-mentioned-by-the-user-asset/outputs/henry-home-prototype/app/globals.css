@@ -3457,6 +3457,7 @@ button:hover .diagonal-arrow,
 .material-lab__swatches button.is-active {
   border-color: var(--gold);
   box-shadow: 0 0 0 2px rgba(217, 163, 65, .12);
+  transform: scale(1.02);
 }
 
 .material-lab__swatches img {
@@ -3470,11 +3471,26 @@ button:hover .diagonal-arrow,
   width: min(390px, 100%);
 }
 
-.material-lab__preview>img {
+.material-lab__preview-stack {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
+}
+
+.material-lab__preview-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  animation: materialIn .7s var(--ease) both;
+}
+
+.material-lab__preview-img.is-current {
+  animation: materialCrossIn .7s var(--ease) both;
+}
+
+.material-lab__preview-img.is-outgoing {
+  animation: materialCrossOut .7s var(--ease) both;
 }
 
 .material-lab__preview figcaption {
@@ -3490,6 +3506,7 @@ button:hover .diagonal-arrow,
   color: #fff;
   font-size: 11px;
   font-weight: 400;
+  animation: labelFadeIn .5s ease both;
 }
 
 .material-lab__empty {
@@ -3512,64 +3529,60 @@ button:hover .diagonal-arrow,
   font-size: 12px;
 }
 
-.product-closing {
+.product-arrangements {
   position: relative;
   display: grid;
-  grid-template-columns: .8fr 1.2fr;
+  place-items: center;
   width: calc(100% - var(--product-gutter) * 2);
-  min-height: 480px;
+  height: 62vh;
+  min-height: 420px;
   margin: 18vh var(--product-gutter);
   overflow: hidden;
   background: #111;
 }
 
-.product-closing>div {
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 6vw;
+.product-arrangements__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
 }
 
-.product-closing>div>p {
-  margin: 0;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: .15em;
-  font-size: 8px;
-}
-
-.product-closing h2 {
-  margin: 5vh 0 4vh;
-  font-size: clamp(3.2rem, 6vw, 6.2rem);
-  font-weight: 300;
-  line-height: .88;
-  letter-spacing: -.065em;
-}
-
-.product-closing>div>span {
-  max-width: 370px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.product-closing small {
-  width: max-content;
-  margin-top: 5vh;
-  padding: 10px 15px;
-  border: 1px solid rgba(217, 163, 65, .4);
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: .15em;
-  font-size: 7px;
-}
-
-.product-closing>img {
+.product-arrangements__img {
+  position: absolute;
+  left: 0;
+  top: -56px;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 112px);
   object-fit: cover;
-  filter: brightness(.6);
+  will-change: transform;
+}
+
+.product-arrangements__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .15) 40%, rgba(0, 0, 0, .4));
+}
+
+.product-arrangements__heading {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0 24px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: .06em;
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-arrangements__img {
+    top: 0;
+    height: 100%;
+    transform: none !important;
+  }
 }
 
 
@@ -3608,6 +3621,40 @@ button:hover .diagonal-arrow,
 
   50% {
     transform: translate(-50%, 8px);
+  }
+}
+
+@keyframes materialCrossIn {
+  from {
+    opacity: 0;
+    transform: scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes materialCrossOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes labelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -3829,26 +3876,15 @@ button:hover .diagonal-arrow,
     font-size: 9px;
   }
 
-  .product-closing {
-    grid-template-columns: 1fr;
+  .product-arrangements {
     width: calc(100% - 44px);
-    min-height: 630px;
+    height: 46vh;
+    min-height: 320px;
     margin: 120px 22px;
   }
 
-  .product-closing>div {
-    grid-row: 2;
-    padding: 45px 25px;
-  }
-
-  .product-closing>img {
-    grid-row: 1;
-    height: 280px;
-  }
-
-  .product-closing h2 {
-    margin: 38px 0 28px;
-    font-size: 14vw;
+  .product-arrangements__heading {
+    font-size: 6.6vw;
   }
 
   .product-contact {

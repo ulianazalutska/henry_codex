@@ -1,3 +1,9 @@
+export type HenryLeatherSwatch = {
+  name: string;
+  swatch: string;
+  preview: string;
+};
+
 export type HenryProduct = {
   name: string;
   slug: string;
@@ -6,6 +12,9 @@ export type HenryProduct = {
   catalogueFit?: "cover" | "contain";
   catalogueScene?: string;
   catalogueCutout?: string;
+  galleryImages?: string[];
+  leatherSwatches?: HenryLeatherSwatch[];
+  arrangementsImage?: string;
   description: string;
 };
 
@@ -32,7 +41,20 @@ export const collections: HenryCollection[] = [
     hero: "/media/collection-pages/atelier-hero.webp",
     detail: "/media/collection-pages/atelier-detail.webp",
     products: [
-      { name: "Vesper Solo", slug: "vesper-solo", image: "/media/vesper-stone.webp", catalogueImage: "/media/collection-pages/atelier-vesper-solo.webp", catalogueFit: "contain", description: "Indywidualny fotel kinowy o pełnej, otulającej formie." },
+      { name: "Vesper Solo", slug: "vesper-solo", image: "/media/atelier-vesper-solo-hero.webp", catalogueImage: "/media/collection-pages/atelier-vesper-solo.webp", catalogueFit: "contain", galleryImages: ["/media/product-pages/vesper-solo/vesper-solo-01.webp", "/media/product-pages/vesper-solo/vesper-solo-02.webp", "/media/product-pages/vesper-solo/vesper-solo-03.webp"], leatherSwatches: [
+        { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-01.webp" },
+        { name: "Ivory Cream", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-02.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-02.webp" },
+        { name: "Sand Beige", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-03.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-03.webp" },
+        { name: "Cool Taupe", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-04.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-04.webp" },
+        { name: "Cognac Tan", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-05.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-05.webp" },
+        { name: "Deep Chocolate", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-06.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-06.webp" },
+        { name: "Muted Olive", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-07.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-07.webp" },
+        { name: "Deep Forest", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-08.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-08.webp" },
+        { name: "Warm Graphite", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-09.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-09.webp" },
+        { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-10.webp" },
+        { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-11.webp" },
+        { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-12.webp" },
+      ], arrangementsImage: "/media/product-pages/vesper-solo/vesper-solo-arrangements.webp", description: "Indywidualny fotel kinowy o pełnej, otulającej formie." },
       { name: "Vesper Duo", slug: "vesper-duo", image: "/media/atelier-ivory.webp", catalogueImage: "/media/collection-pages/atelier-vesper-duo.webp", description: "Dwa miejsca połączone wspólnym rytmem i detalem." },
       { name: "Vesper Ensemble", slug: "vesper-ensemble", image: "/media/atelier-caramel-room.webp", catalogueImage: "/media/collection-pages/atelier-vesper-ensemble.webp", catalogueFit: "contain", description: "Modułowy układ dla większej, prywatnej strefy seansu." },
       { name: "Vesper Chaise", slug: "vesper-chaise", image: "/media/vesper-graphite.webp", catalogueImage: "/media/collection-pages/atelier-vesper-chaise.webp", description: "Wydłużona forma stworzona do pełnego odprężenia." },

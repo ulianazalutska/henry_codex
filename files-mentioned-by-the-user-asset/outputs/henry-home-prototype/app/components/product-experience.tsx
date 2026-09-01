@@ -4,7 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
-type MaterialKey = "leather" | "alcantara" | "wood" | "quilting" | "combinations";
+type MaterialKey = "leather" | "wood" | "quilting" | "combinations";
+type MaterialSwatch = { name: string; swatchImg: string; previewImg: string };
 
 const novaRoot = "/media/product-pages/nova-solo";
 
@@ -47,41 +48,111 @@ const featureCards = [
   },
 ];
 
-const materials: Array<{ key: MaterialKey; label: string; files: string[]; names: string[] }> = [
-  {
-    key: "leather",
-    label: "Skóra",
-    files: Array.from({ length: 12 }, (_, index) => `${novaRoot}/materials/leather/leather-${String(index + 1).padStart(2, "0")}.png`),
-    names: ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"],
-  },
-  { key: "alcantara", label: "Alcantara", files: [], names: [] },
-  {
-    key: "wood",
-    label: "Drewno",
-    files: Array.from({ length: 4 }, (_, index) => `${novaRoot}/materials/wood/wood-${String(index + 1).padStart(2, "0")}.png`),
-    names: ["Natural Oak", "American Walnut", "Dark Walnut", "Smoked Ebony Gloss"],
-  },
-  {
-    key: "quilting",
-    label: "Pikowanie",
-    files: Array.from({ length: 6 }, (_, index) => `${novaRoot}/materials/quilting/quilting-${String(index + 1).padStart(2, "0")}.png`),
-    names: ["Diamond", "Channel", "Chevron", "Linear", "Contour", "Classic"],
-  },
-  { key: "combinations", label: "Kombinacje", files: [], names: [] },
+const novaLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
+  const file = `${novaRoot}/materials/leather/leather-${String(index + 1).padStart(2, "0")}.png`;
+  return { name, swatchImg: file, previewImg: file };
+});
+
+const novaWoodSwatches: MaterialSwatch[] = ["Natural Oak", "American Walnut", "Dark Walnut", "Smoked Ebony Gloss"].map((name, index) => {
+  const file = `${novaRoot}/materials/wood/wood-${String(index + 1).padStart(2, "0")}.png`;
+  return { name, swatchImg: file, previewImg: file };
+});
+
+const novaQuiltingSwatches: MaterialSwatch[] = ["Diamond", "Channel", "Chevron", "Linear", "Contour", "Classic"].map((name, index) => {
+  const file = `${novaRoot}/materials/quilting/quilting-${String(index + 1).padStart(2, "0")}.png`;
+  return { name, swatchImg: file, previewImg: file };
+});
+
+const materialTabs: Array<{ key: MaterialKey; label: string }> = [
+  { key: "leather", label: "Skóra" },
+  { key: "wood", label: "Drewno" },
+  { key: "quilting", label: "Pikowanie" },
+  { key: "combinations", label: "Kombinacje" },
 ];
+
+const PARALLAX_INTENSITY = 0.12;
+const PARALLAX_MAX_OFFSET = 56;
+
+function useParallax() {
+  const containerRef = useRef<HTMLElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const img = imgRef.current;
+    if (!container || !img) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const rect = container.getBoundingClientRect();
+      const elementCenter = rect.top + rect.height / 2;
+      const viewportCenter = window.innerHeight / 2;
+      const raw = (viewportCenter - elementCenter) * PARALLAX_INTENSITY;
+      const offset = Math.max(-PARALLAX_MAX_OFFSET, Math.min(PARALLAX_MAX_OFFSET, raw));
+      img.style.transform = `translate3d(0, ${offset}px, 0)`;
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return { containerRef, imgRef };
+}
 
 export function ProductExperience({ collection, product, isReady }: { collection: HenryCollection; product: HenryProduct; isReady: boolean }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [materialKey, setMaterialKey] = useState<MaterialKey>("leather");
   const [activeSwatch, setActiveSwatch] = useState(0);
   const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
+  const { containerRef: arrangementsRef, imgRef: arrangementsImgRef } = useParallax();
 
-  const slides = useMemo(() => isReady ? novaSlides : [
-    { src: product.image, label: `${product.name} / materiały w przygotowaniu` },
-    { src: product.catalogueImage || product.image, label: `${collection.name} / zapowiedź` },
-    { src: collection.hero, label: `${collection.name} / kolekcja` },
-  ], [collection.hero, collection.name, isReady, product]);
-  const activeMaterial = materials.find((item) => item.key === materialKey) ?? materials[0];
+  const slides = useMemo(() => {
+    if (isReady) return novaSlides;
+    if (product.galleryImages && product.galleryImages.length > 0) {
+      return product.galleryImages.map((src) => ({ src, label: product.name }));
+    }
+    return [
+      { src: product.image, label: `${product.name} / materiały w przygotowaniu` },
+      { src: product.catalogueImage || product.image, label: `${collection.name} / zapowiedź` },
+      { src: collection.hero, label: `${collection.name} / kolekcja` },
+    ];
+  }, [collection.hero, collection.name, isReady, product]);
+  const materialSwatches = useMemo<Record<MaterialKey, MaterialSwatch[]>>(() => ({
+    leather: product.leatherSwatches
+      ? product.leatherSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
+      : isReady ? novaLeatherSwatches : [],
+    wood: isReady ? novaWoodSwatches : [],
+    quilting: isReady ? novaQuiltingSwatches : [],
+    combinations: [],
+  }), [isReady, product.leatherSwatches]);
+  const activeMaterialLabel = materialTabs.find((item) => item.key === materialKey)?.label ?? materialTabs[0].label;
+  const activeSwatches = materialSwatches[materialKey];
+  const activeSwatchData = activeSwatches[Math.min(activeSwatch, activeSwatches.length - 1)] as MaterialSwatch | undefined;
+  const [outgoingPreview, setOutgoingPreview] = useState<string | null>(null);
+  const previousPreviewRef = useRef<string | undefined>(activeSwatchData?.previewImg);
+
+  useEffect(() => {
+    const nextPreview = activeSwatchData?.previewImg;
+    if (previousPreviewRef.current && previousPreviewRef.current !== nextPreview) {
+      setOutgoingPreview(previousPreviewRef.current);
+      const timeout = setTimeout(() => setOutgoingPreview(null), 700);
+      previousPreviewRef.current = nextPreview;
+      return () => clearTimeout(timeout);
+    }
+    previousPreviewRef.current = nextPreview;
+  }, [activeSwatchData?.previewImg]);
+
   const prevIndex = (activeSlide - 1 + slides.length) % slides.length;
   const nextIndex = (activeSlide + 1) % slides.length;
 
@@ -187,28 +258,35 @@ export function ProductExperience({ collection, product, isReady }: { collection
           <div className="product-eyebrow"><p>Materiały i wykończenia</p></div>
           <h2>Dotyk tworzy<br /><em>charakter.</em></h2>
         </header>
-        <div className={`material-lab ${isReady ? "" : "is-placeholder"}`} data-product-reveal>
+        <div className="material-lab" data-product-reveal>
           <div className="material-lab__tabs" role="tablist" aria-label="Kategorie wykończeń">
-            {materials.map((material) => (
+            {materialTabs.map((material) => (
               <button role="tab" aria-selected={material.key === materialKey} className={material.key === materialKey ? "is-active" : ""} onClick={() => changeMaterial(material.key)} key={material.key}>{material.label}</button>
             ))}
           </div>
-          {isReady && activeMaterial.files.length > 0 ? (
+          {activeSwatches.length > 0 ? (
             <div className="material-lab__content">
               <div className="material-lab__swatches">
-                {activeMaterial.files.map((file, index) => (
-                  <button className={index === activeSwatch ? "is-active" : ""} onClick={() => setActiveSwatch(index)} aria-label={`Wybierz ${activeMaterial.names[index]}`} aria-pressed={index === activeSwatch} key={file}>
-                    <img src={file} alt="" />
+                {activeSwatches.map((swatch, index) => (
+                  <button className={index === activeSwatch ? "is-active" : ""} onClick={() => setActiveSwatch(index)} aria-label={`Wybierz ${swatch.name}`} aria-pressed={index === activeSwatch} key={swatch.name}>
+                    <img src={swatch.swatchImg} alt="" />
                   </button>
                 ))}
               </div>
               <figure className="material-lab__preview">
-                <img src={activeMaterial.files[activeSwatch]} alt={`Próbka: ${activeMaterial.names[activeSwatch]}`} />
-                <figcaption><span>{activeMaterial.label}</span><strong>{activeMaterial.names[activeSwatch]}</strong></figcaption>
+                <div className="material-lab__preview-stack">
+                  {outgoingPreview && outgoingPreview !== activeSwatchData?.previewImg && (
+                    <img key={`prev-${outgoingPreview}`} className="material-lab__preview-img is-outgoing" src={outgoingPreview} alt="" aria-hidden="true" />
+                  )}
+                  {activeSwatchData && (
+                    <img key={`current-${activeSwatchData.previewImg}`} className="material-lab__preview-img is-current" src={activeSwatchData.previewImg} alt={`${product.name} — ${activeSwatchData.name}`} />
+                  )}
+                </div>
+                <figcaption key={activeSwatchData?.name}><span>{activeMaterialLabel}</span><strong>{activeSwatchData?.name}</strong></figcaption>
               </figure>
             </div>
           ) : (
-            <div className="material-lab__empty"><span>H</span><p>{isReady ? `Wzornik ${activeMaterial.label.toLowerCase()} jest w przygotowaniu.` : `Wzorniki dla ${product.name} zostaną uzupełnione.`}</p></div>
+            <div className="material-lab__empty"><span>H</span><p>{`Wzornik „${activeMaterialLabel}” dla ${product.name} jest w przygotowaniu.`}</p></div>
           )}
         </div>
       </section>
@@ -239,14 +317,12 @@ export function ProductExperience({ collection, product, isReady }: { collection
         </div>
       </section>
 
-      <section className="product-closing" data-product-reveal>
-        <div>
-          <p>Inspiracje / osobna podstrona</p>
-          <h2>{product.name}<br /><em>w aranżacjach.</em></h2>
-          <span>Galeria wnętrz i wariantów kolorystycznych powstanie w kolejnym etapie.</span>
-          <small>Wkrótce</small>
+      <section className="product-arrangements" ref={arrangementsRef} data-product-reveal>
+        <div className="product-arrangements__frame">
+          <img ref={arrangementsImgRef} className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${product.name} w aranżacjach`} />
+          <div className="product-arrangements__veil" />
         </div>
-        <img src={isReady ? `${novaRoot}/carousel-01.png` : product.image} alt="" />
+        <h2 className="product-arrangements__heading">Zobacz {product.name}<br />w aranżacjach</h2>
       </section>
 
       <section className="product-specification">
