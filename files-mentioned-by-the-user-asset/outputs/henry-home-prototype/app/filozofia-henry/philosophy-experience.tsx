@@ -1,40 +1,87 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { SiteFooter } from "../components/site-footer";
 import { SiteNavigation } from "../components/site-navigation";
 import styles from "./philosophy.module.css";
 
-const principles = [
+const sketchGalleryImages = [
+  "/media/filozofia-henry/sketch-gallery-1.png",
+  "/media/filozofia-henry/sketch-gallery-2.png",
+];
+
+const timeline = [
   {
-    number: "01",
-    title: "Forma",
-    statement: "Zanim usiądziesz.",
-    description: "Proporcja, linia i detal budują obecność fotela we wnętrzu.",
-    image: "/media/filozofia-henry/design-studio.png",
-    position: "center",
+    label: "Lata 80.",
+    caption: "Początek historii",
+    image: "/media/filozofia-henry/timeline-lata80.png",
   },
   {
-    number: "02",
-    title: "Komfort",
-    statement: "Kiedy zostajesz.",
-    description: "Mechanika ma działać intuicyjnie, a ciało po prostu odpoczywać.",
-    image: "/media/filozofia-henry/comfort.png",
-    position: "center",
+    label: "Pierwsze lata",
+    caption: "Rzemiosło i doświadczenie",
+    image: "/media/filozofia-henry/timeline-pierwsze-lata.png",
   },
   {
-    number: "03",
-    title: "Trwałość",
-    statement: "Przez lata.",
-    description: "Materiały, konstrukcja i ręczne wykończenie tworzą jakość, która nie przemija.",
-    image: "/media/filozofia-henry/hand-stitching.png",
-    position: "center",
+    label: "Ludzie",
+    caption: "Współpraca, która tworzy jakość",
+    image: "/media/filozofia-henry/timeline-ludzie.png",
+  },
+  {
+    label: "Indywidualne projekty",
+    caption: "Każdy fotel był inny",
+    image: "/media/filozofia-henry/timeline-indywidualne.png",
   },
 ];
 
+const values = [
+  { title: "Forma", image: "/media/filozofia-henry/value-forma.png" },
+  { title: "Komfort", image: "/media/filozofia-henry/value-komfort.png" },
+  { title: "Trwałość", image: "/media/filozofia-henry/value-trwalosc.png" },
+];
+
+const testimonials = [
+  {
+    quote: "Fotele z Henry Seating wspaniale skomponowały się z moją salką kinową. Najchętniej w ogóle bym z nimi nie wychodził.",
+    author: "Klient prywatny / sala kinowa",
+  },
+  {
+    quote: "Jakość wykonania i dbałość o detale są widoczne od pierwszego dotyku. To fotele, które starzeją się z klasą.",
+    author: "Klient prywatny / Warszawa",
+  },
+  {
+    quote: "Współpraca z HENRY, od projektu po montaż, przebiegła bez najmniejszego zgrzytu. Efekt przerósł nasze oczekiwania.",
+    author: "Architekt wnętrz",
+  },
+];
+
+function AutoGallery({
+  images,
+  className,
+  interval = 3200,
+}: {
+  images: string[];
+  className: string;
+  interval?: number;
+}) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % images.length);
+    }, interval);
+    return () => window.clearInterval(id);
+  }, [images.length, interval]);
+
+  return (
+    <div className={className}>
+      <img key={index} className={styles.galleryFlipImage} src={images[index]} alt="" />
+    </div>
+  );
+}
+
 export function PhilosophyExperience() {
-  const [activePrinciple, setActivePrinciple] = useState(0);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-philosophy-reveal]"));
@@ -50,115 +97,128 @@ export function PhilosophyExperience() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActiveTestimonial((current) => (current + 1) % testimonials.length);
+    }, 7000);
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <main id="top" className={styles.page}>
       <SiteNavigation />
 
-      <section className={styles.hero} aria-labelledby="philosophy-title">
-        <img className={styles.heroImage} src="/media/filozofia-henry/workshop.png" alt="Rzemieślnik pracujący nad skórzanym fotelem HENRY" />
-        <div className={styles.heroShade} />
-        <div className={styles.heroCopy}>
-          <p>Filozofia HENRY / od lat 80.</p>
-          <h1 id="philosophy-title"><span>Rzemiosło,</span><br /><em>które patrzy w przyszłość.</em></h1>
-        </div>
-        <span className={styles.heroScroll}>Przewiń, aby poznać historię <i aria-hidden="true">↓</i></span>
+      <section className={styles.intro} aria-labelledby="philosophy-title" data-philosophy-reveal>
+        <p>Stworzone na tę chwilę</p>
+        <h1 id="philosophy-title">O HENRY</h1>
+        <p className={styles.introText}>
+          HENRY powstało wokół prostej idei — że fotel powinien być czymś więcej niż meblem. Poprzez ponadczasowy
+          design, najwyższej jakości materiały i bezkompromisowe rzemiosło zmieniamy sposób, w jaki przeżywasz film,
+          muzykę i przestrzeń wokół siebie.
+        </p>
+        <span className={styles.introLabel}>To jest HENRY</span>
       </section>
 
-      <section className={styles.origin} aria-labelledby="origin-title">
-        <div className={styles.originHeading} data-philosophy-reveal>
-          <p>01 / Początek</p>
-          <h2 id="origin-title">Zaczęło się<br /><em>od miłości do foteli.</em></h2>
-        </div>
+      <figure className={styles.hero} data-philosophy-reveal>
+        <img src="/media/filozofia-henry/hero.png" alt="Wejście do prywatnej sali kinowej HENRY" />
+      </figure>
 
-        <div className={styles.originGrid}>
-          <figure className={styles.originDrawing} data-philosophy-reveal>
-            <img src="/media/filozofia-henry/drawing.png" alt="Rysunek techniczny fotela HENRY przy stole projektowym" />
-            <figcaption>Od pomysłu do proporcji</figcaption>
+      <section className={styles.designed} data-philosophy-reveal>
+        <h2>Projektowane z myślą<br />o wyjątkowych chwilach</h2>
+        <p>
+          HENRY tworzy fotele kinowe, w których ponadczasowy design łączy się z wyjątkowym komfortem i dbałością o
+          każdy detal. Naszym celem jest stworzenie domowego kina, które nie tylko pozwala oglądać filmy, ale staje
+          się wyjątkową częścią całego wnętrza.
+        </p>
+      </section>
+
+      <section className={styles.sketch} data-philosophy-reveal>
+        <div className={styles.sketchText}>
+          <h2>nowe spojrzenie<br />na domowe kino</h2>
+          <p>
+            Wierzymy, że prawdziwy komfort zaczyna się tam, gdzie funkcjonalność spotyka się z dobrym designem.
+            Dlatego każdy fotel HENRY został zaprojektowany tak, aby zapewniać wygodę, elegancję i pełne zanurzenie
+            w kinowym doświadczeniu.
+          </p>
+        </div>
+        <AutoGallery images={sketchGalleryImages} className={styles.sketchGallery} interval={3400} />
+      </section>
+
+      <p className={styles.materialsNote} data-philosophy-reveal>
+        Starannie dobrane materiały, precyzyjne wykonanie i przemyślane detale tworzą fotele stworzone z myślą o
+        długich seansach i codziennym użytkowaniu. HENRY to miejsce, w którym można się zatrzymać, zrelaksować i po
+        prostu cieszyć filmem.
+      </p>
+
+      <figure className={styles.craftsman} data-philosophy-reveal>
+        <img src="/media/filozofia-henry/craftsman.png" alt="Rzemieślnik HENRY ręcznie wykańczający skórzane obicie fotela" />
+      </figure>
+
+      <section className={styles.timeline} aria-label="Historia HENRY" data-philosophy-reveal>
+        {timeline.map((item) => (
+          <figure key={item.label}>
+            <div className={styles.timelineImage}>
+              <img src={item.image} alt={item.label} />
+              <span>{item.label}</span>
+            </div>
+            <figcaption>{item.caption}</figcaption>
           </figure>
-          <div className={styles.originText} data-philosophy-reveal>
-            <strong>Lata 80. / Bydgoszcz</strong>
-            <p>W oficynie kamienicy w centrum miasta powstał mały zakład tapicerski. Od początku liczyły się jakość, odwaga w szukaniu rozwiązań i uważne słuchanie ludzi.</p>
+        ))}
+      </section>
+
+      <h2 className={styles.valuesHeading} data-philosophy-reveal>
+        Trzy wartości.<br /><em>Jeden efekt.</em>
+      </h2>
+
+      <section className={styles.values} aria-label="Wartości HENRY" data-philosophy-reveal>
+        {values.map((value) => (
+          <div className={styles.valuePanel} key={value.title}>
+            <img src={value.image} alt="" />
+            <span>{value.title}</span>
           </div>
-          <figure className={styles.originDetail} data-philosophy-reveal>
-            <img src="/media/filozofia-henry/cnc-detail.png" alt="Precyzyjna obróbka drewnianego elementu fotela" />
-            <figcaption>Precyzja w każdym etapie</figcaption>
-          </figure>
-          <p className={styles.originNow} data-philosophy-reveal>Dziś tę samą wrażliwość łączymy z technologią — projektując fotele skrojone do człowieka, wnętrza i chwili.</p>
+        ))}
+      </section>
+
+      <p className={styles.valuesCaption} data-philosophy-reveal>
+        Przez lata budowaliśmy relacje z zaufanymi dostawcami i rzemieślnikami, aby każdy detal fotela HENRY
+        spełniał nasze standardy.
+      </p>
+
+      <section className={styles.manifesto} data-philosophy-reveal>
+        <img src="/media/lounge-pair.webp" alt="Dwa fotele HENRY w prywatnym wnętrzu z widokiem na palmy" />
+        <div className={styles.manifestoShade} />
+        <div className={styles.manifestoCopy}>
+          <span>Nie produkujemy po prostu mebli</span>
+          <h2>Projektujemy sposób,<br /><em>w jaki przeżywasz chwilę.</em></h2>
         </div>
       </section>
 
-      <section className={styles.manifesto} data-philosophy-reveal aria-label="Manifest HENRY">
-        <span>Nie produkujemy po prostu mebli.</span>
-        <h2>Projektujemy sposób,<br /><em>w jaki przeżywasz chwilę.</em></h2>
-      </section>
+      <section className={styles.testimonials} aria-label="Opinie klientów HENRY" data-philosophy-reveal>
+        <span className={styles.testimonialsWord} aria-hidden="true">opinie</span>
+        <div className={styles.testimonialsCard}>
+          <h2>Perfekcja <em>w każdym calu</em></h2>
+          <p key={activeTestimonial}>&bdquo;{testimonials[activeTestimonial].quote}&rdquo;</p>
+          <span className={styles.testimonialsAuthor}>{testimonials[activeTestimonial].author}</span>
 
-      <section className={styles.principles} aria-labelledby="principles-title">
-        <header data-philosophy-reveal>
-          <p>02 / Filozofia produktu</p>
-          <h2 id="principles-title">Trzy wartości.<br /><em>Jeden efekt.</em></h2>
-          <span>Wybierz wartość, aby zobaczyć więcej.</span>
-        </header>
-
-        <div className={styles.principlePanels} data-philosophy-reveal>
-          {principles.map((principle, index) => (
-            <article
-              className={activePrinciple === index ? styles.activePrinciple : ""}
-              key={principle.title}
-              onMouseEnter={() => setActivePrinciple(index)}
-              onFocus={() => setActivePrinciple(index)}
-            >
-              <button type="button" onClick={() => setActivePrinciple(index)} aria-expanded={activePrinciple === index}>
-                <img src={principle.image} alt="" style={{ objectPosition: principle.position }} />
-                <span className={styles.principleNumber}>{principle.number}</span>
-                <div className={styles.principleName}>
-                  <small>{principle.statement}</small>
-                  <h3>{principle.title}</h3>
-                </div>
-                <p>{principle.description}</p>
-              </button>
-            </article>
-          ))}
+          <div className={styles.testimonialsFooter}>
+            <div className={styles.testimonialsDots}>
+              {testimonials.map((testimonial, index) => (
+                <button
+                  key={testimonial.author}
+                  type="button"
+                  className={index === activeTestimonial ? styles.isActiveDot : ""}
+                  aria-label={`Pokaż opinię ${index + 1}`}
+                  aria-current={index === activeTestimonial}
+                  onClick={() => setActiveTestimonial(index)}
+                />
+              ))}
+            </div>
+            <span className={styles.testimonialsCount}>{String(activeTestimonial + 1).padStart(2, "0")}</span>
+          </div>
+          <div className={styles.testimonialsProgress}>
+            <span style={{ width: `${((activeTestimonial + 1) / testimonials.length) * 100}%` }} />
+          </div>
         </div>
-      </section>
-
-      <section className={styles.craft} aria-labelledby="craft-title">
-        <header data-philosophy-reveal>
-          <p>03 / Produkcja</p>
-          <h2 id="craft-title">Najpierw człowiek.<br /><em>Potem technologia.</em></h2>
-          <span>Każdy model przechodzi przez ręce projektantów, konstruktorów i tapicerów.</span>
-        </header>
-
-        <div className={styles.craftGrid}>
-          <figure className={styles.craftMain} data-philosophy-reveal>
-            <img src="/media/filozofia-henry/hand-stitching.png" alt="Ręczne szycie skórzanego obicia fotela" />
-            <figcaption>Ręka pamięta to, czego maszyna nie czuje.</figcaption>
-          </figure>
-          <figure className={styles.craftMaterials} data-philosophy-reveal>
-            <img src="/media/filozofia-henry/materials.png" alt="Skóra, tkaniny i drewno wykorzystywane w fotelach HENRY" />
-            <figcaption>Materiały dobierane do wnętrza</figcaption>
-          </figure>
-          <figure className={styles.craftStudio} data-philosophy-reveal>
-            <img src="/media/filozofia-henry/design-studio.png" alt="Gotowy fotel HENRY w studiu projektowym" />
-            <figcaption>Projekt sprawdzony w rzeczywistości</figcaption>
-          </figure>
-          <blockquote data-philosophy-reveal>Technologia ma wspierać rękę.<br /><em>Nigdy jej nie zastępować.</em></blockquote>
-        </div>
-      </section>
-
-      <section className={styles.effect} data-philosophy-reveal>
-        <img src="/media/filozofia-henry/cinema.png" alt="Prywatna sala kinowa wyposażona w fotele HENRY" />
-        <div>
-          <p>04 / Efekt</p>
-          <h2>Komfort, który<br /><em>zostaje z Tobą.</em></h2>
-          <span>Fotel ma wyglądać właściwie, działać bez wysiłku i po latach dawać tę samą satysfakcję.</span>
-          <Link href="/kolekcje"><b>Poznaj kolekcje</b><i aria-hidden="true">↗</i></Link>
-        </div>
-      </section>
-
-      <section className={styles.closing} data-philosophy-reveal>
-        <p>Twój rozdział historii HENRY</p>
-        <h2>Stwórzmy coś,<br /><em>co pozostanie.</em></h2>
-        <Link href="/kontakt"><span>Porozmawiajmy o projekcie</span><i aria-hidden="true">↗</i></Link>
       </section>
 
       <SiteFooter />

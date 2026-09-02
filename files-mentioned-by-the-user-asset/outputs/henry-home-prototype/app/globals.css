@@ -3467,8 +3467,8 @@ button:hover .diagonal-arrow,
 }
 
 .material-lab__preview {
-  justify-self: end;
-  width: min(390px, 100%);
+  justify-self: stretch;
+  width: 100%;
 }
 
 .material-lab__preview-stack {
@@ -3482,7 +3482,7 @@ button:hover .diagonal-arrow,
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .material-lab__preview-img.is-current {
@@ -3859,8 +3859,8 @@ button:hover .diagonal-arrow,
 
   .material-lab__preview {
     justify-self: stretch;
-    width: 76%;
-    margin-left: auto;
+    width: 100%;
+    margin: 0;
   }
 
   .material-lab__empty {

@@ -84,21 +84,15 @@ export function ContactExperience() {
       <SiteNavigation />
 
       <header className={styles.hero}>
-        <p className={styles.eyebrow}>HENRY / Kontakt</p>
-        <h1>Porozmawiajmy<span>o przestrzeni.</span></h1>
+        <h1>Porozmawiajmy<span>o przestrzeni</span></h1>
         <div className={styles.heroIntro}>
-          <p>Każdy wyjątkowy projekt zaczyna się od rozmowy.</p>
+          <p>Każdy wyjątkowy projekt zaczyna się od rozmowy</p>
           <span>Opowiedz nam o swoim wnętrzu, jego rytmie i o tym, jak chcesz się w nim czuć.</span>
         </div>
         <i className={styles.heroLine} aria-hidden="true" />
       </header>
 
-      <section className={styles.directory} aria-labelledby="contact-directory-title">
-        <div className={styles.sectionLead} data-contact-reveal>
-          <p>Bezpośredni kontakt</p>
-          <h2 id="contact-directory-title">Jesteśmy<br /><em>blisko.</em></h2>
-        </div>
-
+      <section className={styles.directory} aria-label="Dane kontaktowe">
         <div className={styles.directoryGrid}>
           <article data-contact-reveal>
             <span>01 / Adres</span>
@@ -123,20 +117,20 @@ export function ContactExperience() {
 
       <section className={styles.gallery} aria-label="Przestrzenie HENRY">
         <figure className={styles.galleryPrimary} data-contact-reveal>
-          <div><img src="/media/henry-entrance-poster.jpg" alt="Eleganckie wejście do przestrzeni HENRY" /></div>
+          <div><img src="/media/kontakt/showroom.png" alt="Gabinet HENRY z biurkiem i fotelem premium" /></div>
           <figcaption><span>Przestrzeń HENRY</span><span>Otowice / Polska</span></figcaption>
         </figure>
         <figure className={styles.gallerySecondary} data-contact-reveal>
-          <div><img src="/media/studio-cinema-bespoke.webp" alt="Showroom prywatnej sali kinowej HENRY" /></div>
+          <div><img src="/media/kontakt/przestrzen.png" alt="Showroom HENRY z fotelami do prywatnej sali kinowej" /></div>
           <figcaption><span>Private showroom</span><span>By appointment</span></figcaption>
         </figure>
       </section>
 
       <section className={styles.formSection} aria-labelledby="contact-form-title">
         <div className={styles.formHeading} data-contact-reveal>
-          <p>Opowiedz nam o swoim projekcie</p>
-          <h2 id="contact-form-title">Zacznijmy<br /><em>rozmowę.</em></h2>
-          <span>Odpowiemy i pomożemy wybrać najlepszy kierunek — od pojedynczego fotela po kompletną prywatną salę kinową.</span>
+          <h2 id="contact-form-title">Zacznijmy<br /><em>rozmowę</em></h2>
+          <p className={styles.formLead}>Jesteśmy do Twojej dyspozycji</p>
+          <span>Masz pytania, potrzebujesz indywidualnej wyceny lub chcesz umówić się na spotkanie w showroomie? Skontaktuj się z nami – odpowiemy najszybciej, jak to możliwe</span>
         </div>
 
         <form className={styles.form} onSubmit={sendMessage} autoComplete="off" data-contact-reveal>
@@ -174,13 +168,12 @@ export function ContactExperience() {
             <input name="consent" type="checkbox" required />
             <span>Wyrażam zgodę na kontakt w sprawie przesłanego zapytania i akceptuję politykę prywatności.</span>
           </label>
-          <button type="submit"><span>Wyślij wiadomość</span><i aria-hidden="true">↗</i></button>
+          <button type="submit">Wyślij wiadomość</button>
           {formOpened && <p className={styles.formNote} role="status">Wiadomość została przygotowana w Twoim programie pocztowym.</p>}
         </form>
       </section>
 
       <section className={styles.social} data-contact-reveal>
-        <p>Pozostańmy w kontakcie</p>
         <h2>Obserwuj<br /><em>HENRY.</em></h2>
         <div>
           {socialLinks.map((social) => (
