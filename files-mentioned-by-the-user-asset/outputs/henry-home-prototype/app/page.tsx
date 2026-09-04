@@ -221,8 +221,7 @@ export default function Home() {
         </h2>
         <div className="about__composition">
           <figure className="about__image image-reveal" data-reveal>
-            <img src="/media/about-cinema-row.png" alt="Prywatna sala kinowa HENRY z rzędem foteli kinowych" loading="lazy" />
-            <figcaption>Private Cinema / Kolekcja Atelier</figcaption>
+            <img src="/media/about-feeling.jpg" alt="Kobieta odpoczywająca w naturalnym świetle" loading="lazy" />
           </figure>
           <div className="about__copy" data-reveal>
             <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem</p>
@@ -261,6 +260,35 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="aranzacje" className="arrangements section-base">
+        <div className="arrangements__head">
+          <p className="arrangements__head-left" data-reveal>Aranżacje</p>
+          <p data-reveal>Zobacz, jak fotele HENRY<br />żyją w rzeczywistych wnętrzach</p>
+        </div>
+        <div className="arrangements__grid">
+          <Link href="/kolekcje/atelier/inspiracje?from=%2F%23aranzacje" className="arrangement arrangement--featured" data-reveal aria-label="Zobacz aranżacje kolekcji Atelier">
+            <figure>
+              <img src="/media/inspiracje/atelier/atelier-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Atelier" loading="lazy" />
+              <div className="arrangement__veil" />
+              <h3>Atelier</h3>
+              <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
+            </figure>
+          </Link>
+          <Link href="/kolekcje/studio/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Studio">
+            <img src="/media/inspiracje/studio/studio-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Studio" loading="lazy" />
+            <div className="arrangement__veil" />
+            <h3>Studio</h3>
+            <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
+          </Link>
+          <Link href="/kolekcje/lounge/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Lounge">
+            <img src="/media/inspiracje/lounge/lounge-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Lounge" loading="lazy" />
+            <div className="arrangement__veil" />
+            <h3>Lounge</h3>
+            <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
+          </Link>
+        </div>
+      </section>
+
       <section id="projekty-indywidualne" className="bespoke bespoke--compact section-base">
         <div className="bespoke__intro">
           <h2 data-reveal>Od pierwszej linii<br />do ostatniego <span>detalu</span></h2>
@@ -276,8 +304,7 @@ export default function Home() {
             <figcaption>Projektowanie doświadczenia</figcaption>
           </figure>
           <figure className="bespoke__object spread-reveal spread-reveal--right" data-reveal>
-            <img src="/media/bespoke-custom-form.webp" alt="Fotele HENRY wykonane na zamówienie w sali kinowej" loading="lazy" />
-            <figcaption>Forma wykonywana na zamówienie</figcaption>
+            <img src="/media/bespoke-custom-form.jpg" alt="Fotele HENRY wykonane na zamówienie w sali kinowej" loading="lazy" />
           </figure>
         </div>
         <div className="bespoke__cta-row">

@@ -12,7 +12,7 @@ export function InspiracjeExperience({ collection }: { collection: HenryCollecti
 
   useEffect(() => {
     const from = new URLSearchParams(window.location.search).get("from");
-    if (from && from.startsWith(`/kolekcje/${collection.slug}/`)) {
+    if (from && (from.startsWith(`/kolekcje/${collection.slug}/`) || from.startsWith("/#"))) {
       setBackHref(from);
     }
   }, [collection.slug]);
