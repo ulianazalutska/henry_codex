@@ -8,15 +8,42 @@ import { collections } from "../collections-data";
 // zostaje na miejscu, żeby przywrócić kolumnę wystarczyło ustawić true.
 const PRODUCT_COLUMN_ENABLED = false;
 
+// Przełącznik języka jest na razie wyłącznie wizualny — PL to jedyna wersja
+// treści. EN/DE widoczne w menu, ale celowo nieaktywne, dopóki nie powstanie
+// prawdziwe tłumaczenie.
+const LANGUAGES = [
+  { code: "pl", label: "Polski", available: true },
+  { code: "en", label: "English", available: false },
+  { code: "de", label: "Deutsch", available: false },
+] as const;
+
 export function SiteNavigation() {
   const stackRef = useRef<HTMLDivElement>(null);
+  const langRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
   const [openCollection, setOpenCollection] = useState<string | null>(null);
   const [navHidden, setNavHidden] = useState(false);
   const [instantClose, setInstantClose] = useState(false);
   const [closingAll, setClosingAll] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const activeCollection = collections.find((collection) => collection.slug === openCollection);
+
+  useEffect(() => {
+    if (!languageOpen) return;
+    const handleClick = (event: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) setLanguageOpen(false);
+    };
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setLanguageOpen(false);
+    };
+    window.addEventListener("mousedown", handleClick);
+    window.addEventListener("keydown", handleKey);
+    return () => {
+      window.removeEventListener("mousedown", handleClick);
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [languageOpen]);
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -101,10 +128,31 @@ export function SiteNavigation() {
           <span>Menu</span>
         </button>
         <Link className="nav-mark" href="/" aria-label="HENRY — strona główna"><img src="/media/henry-logo-gold.png" alt="" /></Link>
-        <label className="language" aria-label="Wybierz język">
-          <select defaultValue="pl"><option value="pl">PL</option><option value="en" disabled>EN</option></select>
-          <img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
-        </label>
+        <div className="language" ref={langRef}>
+          <button
+            type="button"
+            className={`language__trigger ${languageOpen ? "is-open" : ""}`}
+            onClick={() => setLanguageOpen((open) => !open)}
+            aria-haspopup="listbox"
+            aria-expanded={languageOpen}
+          >
+            <span>PL</span>
+            <img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
+          </button>
+          <ul className={`language__menu ${languageOpen ? "is-open" : ""}`} role="listbox" aria-label="Wybierz język">
+            {LANGUAGES.map((lang) => (
+              <li key={lang.code} role="option" aria-selected={lang.code === "pl"}>
+                <button
+                  type="button"
+                  className={lang.code === "pl" ? "is-active" : ""}
+                  disabled={!lang.available}
+                >
+                  <span className="language__code">{lang.code}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </header>
 
       <div className={`menu-backdrop ${menuOpen ? "is-open" : ""}`} aria-hidden="true" />
