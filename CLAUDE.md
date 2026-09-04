@@ -49,7 +49,7 @@ npm run db:generate  # drizzle-kit generate, only after schema.ts changes
 
 ## Architecture
 
-- **Routes**: `app/page.tsx` (home), `app/kolekcje/page.tsx` (collections index), `app/kolekcje/[collection]/page.tsx` (collection template — Atelier/Studio/Lounge), `app/kolekcje/[collection]/[product]/page.tsx` (product template, dynamic for all 14 models), `app/kontakt/`, `app/personalizacja/`, `app/filozofia-henry/`.
+- **Routes**: `app/page.tsx` (home), `app/kolekcje/page.tsx` (collections index), `app/kolekcje/[collection]/page.tsx` (collection template — Atelier/Studio/Lounge), `app/kolekcje/[collection]/[product]/page.tsx` (product template, dynamic for all 14 models), `app/kontakt/`, `app/personalizacja/`, `app/filozofia-henry/`, `app/faq/`.
 - **Shared chrome**: every finished page must use `app/components/site-navigation.tsx` (three-panel sliding burger: sections → Atelier/Studio/Lounge → models of the active collection) and `app/components/site-footer.tsx` (same social SVG icons everywhere), unless the user explicitly asks for an exception.
 - **Product experience**: `app/components/product-experience.tsx` drives the shared product-page behavior (infinite drag/swipe carousel showing neighbor edges, specs/dimensions/materials blocks, an initially-collapsed technical accordion). Only `/kolekcje/studio/nova-solo` is fully populated with real content today; the other 13 product routes render the same structure with placeholder content — check `PROJECT_HANDOFF.md` for current status before assuming a page is done.
 - **Content data**: `app/collections-data.ts` is the single source of truth for collections/models, and drives both the product routes and `app/sitemap.ts`.
