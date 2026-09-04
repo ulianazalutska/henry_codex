@@ -137,6 +137,18 @@ npm test
 
 Accordion технічних деталей має бути початково повністю закритий.
 
+### Inspiracje — `/kolekcje/[collection]/inspiracje`
+
+Реалізовано (2026-09-03): одна спільна сторінка на колекцію (не на продукт). Компоненти: `app/kolekcje/[collection]/inspiracje/page.tsx`, `app/components/inspiracje-experience.tsx`.
+
+- Без `SiteNavigation`/`SiteFooter` — лише фіксована стрілка "Wróć" зліва вгорі, що веде на `/kolekcje/[collection]`.
+- Masonry-галерея (CSS `columns`, 3/2/1 колонки залежно від ширини екрана), фото не кропляться й не закруглюються — природне співвідношення сторін кожного фото, `break-inside: avoid`.
+- Reveal-анімація по скролу через `IntersectionObserver` (клас `is-visible`), з `prefers-reduced-motion` fallback.
+- Джерело фото: `collections.inspirationImages?: string[]` у `app/collections-data.ts` — поки не заповнено для жодної колекції (порожній масив → показує "Zdjęcia aranżacji kolekcji … są w przygotowaniu."). Користувач повинен покласти фото в `asset/aranżacje/<atelier|studio|lounge>/`, після чого їх треба скопіювати в `public/media/inspiracje/<collection>/` і прописати шляхи в `inspirationImages`.
+- На кожній продуктовій сторінці секція "Zobacz {collection.name} w aranżacjach" (раніше була з назвою продукту) тепер клікабельна (`Link`) і веде на цю сторінку колекції — див. `product-experience.tsx`, `.product-arrangements`.
+
+Наступний крок: дочекатися фото від користувача (папка `asset/aranżacje/`), скопіювати в `public/media/inspiracje/`, заповнити `inspirationImages` для Atelier/Studio/Lounge.
+
 ### Kontakt — `/kontakt`
 
 Візуальна сторінка реалізована: контакти, два зображення, custom topic dropdown, форма, social секція й footer.
@@ -205,9 +217,7 @@ Footer має бути однаковим на всіх сторінках і в
    - Наступний крок: клієнт має підтвердити текст process-кроків (Konsultacja/Projekt/Dobór materiałów/Realizacja/Montaż) і чи можна лишати AI-рендер на сторінці постійно.
 2. **Dla architektów** — `/dla-architektow`.
    - Пункт уже є в burger, маршрут відсутній.
-3. **Inspiracje для кожної моделі**.
-   - Клієнт вимагає окрему підсторінку для кожного продукту з великою кількістю інтер'єрних фото цієї моделі в різних кольорах.
-   - Рекомендована структура маршруту: `/kolekcje/[collection]/[product]/inspiracje`, але перед реалізацією звірити з користувачем.
+3. ~~**Inspiracje для колекції**~~ Реалізовано (2026-09-03) як `/kolekcje/[collection]/inspiracje` — одна сторінка на колекцію (Atelier/Studio/Lounge), а не на продукт; кожна продуктова сторінка лінкує на inspiracje своєї колекції. Чекає на реальні фото від користувача (див. розділ 6).
 4. Повне наповнення 13 placeholder product pages.
 5. Фінальні paired scene/cutout assets для Atelier і Lounge.
 

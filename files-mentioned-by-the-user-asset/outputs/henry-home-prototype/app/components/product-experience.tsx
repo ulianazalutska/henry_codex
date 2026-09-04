@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
+import Link from "next/link";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
 type MaterialKey = "leather" | "wood" | "quilting" | "combinations";
@@ -70,52 +71,11 @@ const materialTabs: Array<{ key: MaterialKey; label: string }> = [
   { key: "combinations", label: "Kombinacje" },
 ];
 
-const PARALLAX_INTENSITY = 0.12;
-const PARALLAX_MAX_OFFSET = 56;
-
-function useParallax() {
-  const containerRef = useRef<HTMLElement | null>(null);
-  const imgRef = useRef<HTMLImageElement | null>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const img = imgRef.current;
-    if (!container || !img) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const rect = container.getBoundingClientRect();
-      const elementCenter = rect.top + rect.height / 2;
-      const viewportCenter = window.innerHeight / 2;
-      const raw = (viewportCenter - elementCenter) * PARALLAX_INTENSITY;
-      const offset = Math.max(-PARALLAX_MAX_OFFSET, Math.min(PARALLAX_MAX_OFFSET, raw));
-      img.style.transform = `translate3d(0, ${offset}px, 0)`;
-    };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
-
-  return { containerRef, imgRef };
-}
-
 export function ProductExperience({ collection, product, isReady }: { collection: HenryCollection; product: HenryProduct; isReady: boolean }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [materialKey, setMaterialKey] = useState<MaterialKey>("leather");
   const [activeSwatch, setActiveSwatch] = useState(0);
   const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
-  const { containerRef: arrangementsRef, imgRef: arrangementsImgRef } = useParallax();
 
   const slides = useMemo(() => {
     if (isReady) return novaSlides;
@@ -255,8 +215,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
 
       <section className="product-materials">
         <header data-product-reveal>
-          <div className="product-eyebrow"><p>Materiały i wykończenia</p></div>
-          <h2>Dotyk tworzy<br /><em>charakter.</em></h2>
+          <h2>Dotyk tworzy<br /><em>charakter</em></h2>
         </header>
         <div className="material-lab" data-product-reveal>
           <div className="material-lab__tabs" role="tablist" aria-label="Kategorie wykończeń">
@@ -294,7 +253,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
       <section className="product-features">
         <header data-product-reveal>
           <div className="product-eyebrow"><p>Wyposażenie</p></div>
-          <h2>Technologia,<br /><em>która znika.</em></h2>
+          <h2>Technologia,<br /><em>która znika</em></h2>
         </header>
         <div className="product-features__grid">
           {isReady ? featureCards.map((feature, index) => (
@@ -317,18 +276,17 @@ export function ProductExperience({ collection, product, isReady }: { collection
         </div>
       </section>
 
-      <section className="product-arrangements" ref={arrangementsRef} data-product-reveal>
+      <Link href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}`)}`} className="product-arrangements" data-product-reveal>
         <div className="product-arrangements__frame">
-          <img ref={arrangementsImgRef} className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${product.name} w aranżacjach`} />
+          <img className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${collection.name} w aranżacjach`} />
           <div className="product-arrangements__veil" />
         </div>
-        <h2 className="product-arrangements__heading">Zobacz {product.name}<br />w aranżacjach</h2>
-      </section>
+        <h2 className="product-arrangements__heading">Zobacz {collection.name}<br />w aranżacjach <span className="diagonal-arrow" aria-hidden="true" /></h2>
+      </Link>
 
       <section className="product-specification">
         <header data-product-reveal>
-          <div className="product-eyebrow"><p>Proporcje</p></div>
-          <h2>Technical<br /><em>features.</em></h2>
+          <h2>Technical <em>features</em></h2>
         </header>
         <figure className={isReady ? "" : "is-placeholder"} data-product-reveal>
           {isReady ? <img src={`${novaRoot}/dimensions.png`} alt="Nova Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>Rysunek techniczny</span><small>W przygotowaniu</small></>}

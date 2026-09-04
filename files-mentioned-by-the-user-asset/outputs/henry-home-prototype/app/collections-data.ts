@@ -28,6 +28,7 @@ export type HenryCollection = {
   hero: string;
   detail: string;
   products: HenryProduct[];
+  inspirationImages?: string[];
 };
 
 export const collections: HenryCollection[] = [
@@ -40,6 +41,7 @@ export const collections: HenryCollection[] = [
     statement: "Rzeźbiarska forma. Precyzja wykonania. Komfort dopasowany do Ciebie.",
     hero: "/media/collection-pages/atelier-hero.webp",
     detail: "/media/collection-pages/atelier-detail.webp",
+    inspirationImages: Array.from({ length: 9 }, (_, i) => `/media/inspiracje/atelier/atelier-${String(i + 1).padStart(2, "0")}.webp`),
     products: [
       { name: "Vesper Solo", slug: "vesper-solo", image: "/media/atelier-vesper-solo-hero.webp", catalogueImage: "/media/collection-pages/atelier-vesper-solo.webp", catalogueFit: "contain", galleryImages: ["/media/product-pages/vesper-solo/vesper-solo-01.webp", "/media/product-pages/vesper-solo/vesper-solo-02.webp", "/media/product-pages/vesper-solo/vesper-solo-03.webp"], leatherSwatches: [
         { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-01.webp" },
@@ -70,8 +72,22 @@ export const collections: HenryCollection[] = [
     statement: "Każdy rząd, światło i proporcja budują jedno doświadczenie.",
     hero: "/media/collection-pages/studio-hero.webp",
     detail: "/media/collection-pages/studio-detail.webp",
+    inspirationImages: Array.from({ length: 9 }, (_, i) => `/media/inspiracje/studio/studio-${String(i + 1).padStart(2, "0")}.webp`),
     products: [
-      { name: "Nova Solo", slug: "nova-solo", image: "/media/studio-black.webp", catalogueImage: "/media/collection-pages/studio-nova-solo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-solo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-solo-cutout.png", description: "Samodzielny fotel o czystej, architektonicznej linii." },
+      { name: "Nova Solo", slug: "nova-solo", image: "/media/studio-black.webp", catalogueImage: "/media/collection-pages/studio-nova-solo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-solo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-solo-cutout.png", arrangementsImage: "/media/product-pages/nova-solo/nova-solo-arrangements.png", description: "Samodzielny fotel o czystej, architektonicznej linii.", leatherSwatches: [
+        { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-01.png" },
+        { name: "Ivory Cream", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-02.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-02.png" },
+        { name: "Sand Beige", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-03.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-03.png" },
+        { name: "Cool Taupe", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-04.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-04.png" },
+        { name: "Cognac Tan", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-05.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-05.png" },
+        { name: "Deep Chocolate", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-06.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-06.png" },
+        { name: "Muted Olive", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-07.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-07.png" },
+        { name: "Deep Forest", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-08.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-08.png" },
+        { name: "Warm Graphite", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-09.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-09.png" },
+        { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-10.png" },
+        { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-11.png" },
+        { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-12.png" },
+      ] },
       { name: "Nova Duo", slug: "nova-duo", image: "/media/studio-cinema-front.webp", catalogueImage: "/media/collection-pages/studio-nova-duo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-duo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-duo-cutout.png", description: "Kameralna konfiguracja dla dwojga." },
       { name: "Nova Ensemble", slug: "nova-ensemble", image: "/media/studio-cinema-wide.webp", catalogueImage: "/media/collection-pages/studio-nova-ensemble.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-ensemble-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-ensemble-cutout.png", description: "Elastyczny układ dla wielorzędowych sal kinowych." },
       { name: "Nova Chaise", slug: "nova-chaise", image: "/media/private-viewing.webp", catalogueImage: "/media/collection-pages/studio-nova-chaise.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-chaise-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-chaise-cutout.png", description: "Kinowa ergonomia w bardziej swobodnej proporcji." },
@@ -87,6 +103,7 @@ export const collections: HenryCollection[] = [
     statement: "Kino, muzyka i cisza — w rytmie codzienności.",
     hero: "/media/collection-pages/lounge-hero.webp",
     detail: "/media/collection-pages/lounge-detail.webp",
+    inspirationImages: Array.from({ length: 15 }, (_, i) => `/media/inspiracje/lounge/lounge-${String(i + 1).padStart(2, "0")}.webp`),
     products: [
       { name: "Solaris Solo", slug: "solaris-solo", image: "/media/lounge-evening-alt.webp", catalogueImage: "/media/collection-pages/lounge-solaris-solo.webp", catalogueFit: "contain", leatherSwatches: [
         { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-01.webp" },
