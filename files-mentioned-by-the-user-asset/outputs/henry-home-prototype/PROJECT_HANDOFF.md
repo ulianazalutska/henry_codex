@@ -1,6 +1,6 @@
 # HENRY website — передача проєкту
 
-Оновлено: 2026-08-20
+Оновлено: 2026-09-04
 
 Цей документ дає новому Codex або розробнику короткий, але достатній контекст для продовження роботи. Спочатку також прочитати `AGENTS.md` і `CREATIVE_DIRECTION.md`.
 
@@ -144,10 +144,10 @@ Accordion технічних деталей має бути початково �
 - Без `SiteNavigation`/`SiteFooter` — лише фіксована стрілка "Wróć" зліва вгорі, що веде на `/kolekcje/[collection]`.
 - Masonry-галерея (CSS `columns`, 3/2/1 колонки залежно від ширини екрана), фото не кропляться й не закруглюються — природне співвідношення сторін кожного фото, `break-inside: avoid`.
 - Reveal-анімація по скролу через `IntersectionObserver` (клас `is-visible`), з `prefers-reduced-motion` fallback.
-- Джерело фото: `collections.inspirationImages?: string[]` у `app/collections-data.ts` — поки не заповнено для жодної колекції (порожній масив → показує "Zdjęcia aranżacji kolekcji … są w przygotowaniu."). Користувач повинен покласти фото в `asset/aranżacje/<atelier|studio|lounge>/`, після чого їх треба скопіювати в `public/media/inspiracje/<collection>/` і прописати шляхи в `inspirationImages`.
+- Джерело фото: `collections.inspirationImages?: string[]` у `app/collections-data.ts` — **заповнено для всіх трьох колекцій** (Atelier: 9 фото, Studio: 9 фото, Lounge: 15 фото), реальні файли лежать у `public/media/inspiracje/<atelier|studio|lounge>/`.
 - На кожній продуктовій сторінці секція "Zobacz {collection.name} w aranżacjach" (раніше була з назвою продукту) тепер клікабельна (`Link`) і веде на цю сторінку колекції — див. `product-experience.tsx`, `.product-arrangements`.
 
-Наступний крок: дочекатися фото від користувача (папка `asset/aranżacje/`), скопіювати в `public/media/inspiracje/`, заповнити `inspirationImages` для Atelier/Studio/Lounge.
+Статус: готово для всіх трьох колекцій. Наступний крок хіба що — за потреби донаповнити/замінити фото, якщо у користувача з'являться нові матеріали.
 
 ### Kontakt — `/kontakt`
 
@@ -202,7 +202,7 @@ Footer має бути однаковим на всіх сторінках і в
 Поки не завершено:
 
 - реальні social URL;
-- `/faq` і `/blog`, хоча footer уже містить ці посилання;
+- `/blog` — маршрут існує, але контент плейсхолдерний і зміни ще не закомічені (`/faq` вже готовий і закомічений);
 - окремі маршрути Polityka prywatności та Regulamin.
 
 ## 8. Сторінки, яких ще немає
@@ -217,14 +217,14 @@ Footer має бути однаковим на всіх сторінках і в
    - Наступний крок: клієнт має підтвердити текст process-кроків (Konsultacja/Projekt/Dobór materiałów/Realizacja/Montaż) і чи можна лишати AI-рендер на сторінці постійно.
 2. **Dla architektów** — `/dla-architektow`.
    - Пункт уже є в burger, маршрут відсутній.
-3. ~~**Inspiracje для колекції**~~ Реалізовано (2026-09-03) як `/kolekcje/[collection]/inspiracje` — одна сторінка на колекцію (Atelier/Studio/Lounge), а не на продукт; кожна продуктова сторінка лінкує на inspiracje своєї колекції. Чекає на реальні фото від користувача (див. розділ 6).
+3. ~~**Inspiracje для колекції**~~ Реалізовано (2026-09-03) як `/kolekcje/[collection]/inspiracje` — одна сторінка на колекцію (Atelier/Studio/Lounge), а не на продукт; кожна продуктова сторінка лінкує на inspiracje своєї колекції. Фото заповнені для всіх трьох колекцій (див. розділ 6).
 4. Повне наповнення 13 placeholder product pages.
 5. Фінальні paired scene/cutout assets для Atelier і Lounge.
 
 ### Другорядний backlog
 
-- FAQ.
-- Blog.
+- ~~FAQ.~~ Реалізовано, закомічено (`4fe18b9`, "Add FAQ route, RODO/GDPR notes, cinema reference photos").
+- Blog — структура і роутинг готові (`app/blog/`, `blog-data.ts`, `blog/[slug]`), зараз untracked у git; весь контент — плейсхолдери `[Placeholder]`, чекає реальних статей перед публікацією.
 - Polityka prywatności.
 - Regulamin.
 - Реальна серверна відправка contact form.

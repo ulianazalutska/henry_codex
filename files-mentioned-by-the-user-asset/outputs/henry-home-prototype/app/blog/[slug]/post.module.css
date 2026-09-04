@@ -1,0 +1,64 @@
+.page {
+  --gutter: clamp(24px, 5.2vw, 82px);
+  background: #171615;
+  color: #f2efeb;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: clamp(106px, 19vh, 172px) var(--gutter) 5vh;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.back { color: #a7a19a; font-size: .8rem; text-decoration: none; transition: color .3s ease; }
+.back:hover { color: #d9a341; }
+.meta { color: #d9a341; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+.hero h1 { margin: 0; font-size: clamp(1.9rem, 3.6vw, 2.9rem); font-weight: 300; letter-spacing: -.02em; line-height: 1.15; }
+.excerpt { margin: 0; max-width: 480px; color: #a7a19a; font-size: .95rem; line-height: 1.7; }
+
+.heroImage {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  max-width: 1180px;
+  margin: 0 auto;
+  margin-bottom: clamp(40px, 6vh, 80px);
+  padding: 0 var(--gutter);
+}
+.heroImage img { width: 100%; height: 100%; object-fit: cover; }
+
+.body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) 12vh;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.body p { margin: 0; color: #d7d2ca; font-size: 1rem; line-height: 1.85; }
+
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 3vw, 40px);
+  padding: 6vh var(--gutter) 16vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(242, 239, 235, .12);
+}
+
+.pagerItem { display: flex; flex-direction: column; gap: 8px; color: inherit; text-decoration: none; padding-top: 24px; }
+.pagerItem span { color: #d9a341; font-size: .78rem; letter-spacing: .04em; }
+.pagerItem strong { font-weight: 400; font-size: .95rem; line-height: 1.4; transition: color .3s ease; }
+.pagerItem:hover strong { color: #d9a341; }
+.pagerItem[data-direction="next"] { text-align: right; align-items: flex-end; }
+
+@media (max-width: 860px) {
+  .hero { padding-top: clamp(130px, 18vh, 180px); }
+  .pager { grid-template-columns: 1fr; }
+  .pagerItem[data-direction="next"] { text-align: left; align-items: flex-start; border-top: 1px solid rgba(242, 239, 235, .12); padding-top: 24px; }
+}

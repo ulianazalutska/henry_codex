@@ -35,28 +35,33 @@ npm run db:generate  # drizzle-kit generate, only after schema.ts changes
 - If `dev` reports "Missing script", the command wasn't run from the app folder.
 - If vinext reports another dev server is already running, don't start a second one — check the PID/directory and reuse `http://localhost:3000`, or stop only that confirmed process.
 - There is no single-test-file runner beyond `node --test tests/rendered-html.test.mjs`; the test suite is small and requires a build first.
+- **Deploy** (only when explicitly asked): the site runs as the Cloudflare Worker `henry-seating-preview` at `https://henry-seating-preview.ccode-crush.workers.dev` — independent of any ChatGPT Sites hosting. There is no `wrangler.toml`/`wrangler.jsonc` at the repo root, so the generated config's default name must be overridden explicitly:
+  ```bash
+  npm run build
+  npx wrangler deploy --config dist/server/wrangler.json --name henry-seating-preview
+  ```
+  A transient 503 from the asset-upload step is common and safe to retry as-is.
 
 ## Critical working rules (from `AGENTS.md`)
 
 - Read `PROJECT_HANDOFF.md` (current route/feature status, known issues, backlog) and the relevant parts of `CREATIVE_DIRECTION.md` before changing anything.
 - Check `git status --short` first. The working tree often has the user's own in-progress staged/untracked changes (asset uploads, WIP edits) — never discard, reset, or overwrite them.
 - Never invent facts about HENRY (products, specs, contact info, company history). Leave an explicit placeholder or ask for material instead.
-- Don't add production dependencies if the task is achievable with existing React/CSS/browser APIs — justify any new dependency first.
-- Don't commit, push, or deploy unless explicitly asked. Never touch `.openai/hosting.json` or run a deploy without a direct request. Never use destructive git commands on the user's own changes.
+- Don't add production dependencies if the task is achievable with existing React/CSS/browser APIs — justify any new dependency first. `framer-motion` is already a dependency and is fine to use for animation.
+- Don't commit, push, or deploy unless explicitly asked. Never use destructive git commands on the user's own changes.
 - Copy any asset actually used by the site into `public/media/<section>/` with a clear name — never reference `asset/`, `Downloads`, or `Documents` paths from app code.
 - After behavior/style changes, manually check the affected route in a browser at desktop and mobile widths — especially the burger menu, scroll behavior, carousels, accordions, footer, and console errors.
 - After finishing a page or major status change, update `PROJECT_HANDOFF.md` (route, readiness, assets used, known limitations, next step). Keep `AGENTS.md` itself short and stable; put transient state in `PROJECT_HANDOFF.md`.
 
 ## Architecture
 
-- **Routes**: `app/page.tsx` (home), `app/kolekcje/page.tsx` (collections index), `app/kolekcje/[collection]/page.tsx` (collection template — Atelier/Studio/Lounge), `app/kolekcje/[collection]/[product]/page.tsx` (product template, dynamic for all 14 models), `app/kontakt/`, `app/personalizacja/`, `app/filozofia-henry/`, `app/faq/`.
+- **Routes**: `app/page.tsx` (home), `app/kolekcje/page.tsx` (collections index), `app/kolekcje/[collection]/page.tsx` (collection template — Atelier/Studio/Lounge), `app/kolekcje/[collection]/[product]/page.tsx` (product template, dynamic for all 14 models), `app/kontakt/`, `app/personalizacja/`, `app/filozofia-henry/`, `app/faq/`, `app/projekty-indywidualne/` (bespoke/custom projects page, driven by `bespoke-experience.tsx`), `app/blog/` (index) and `app/blog/[slug]/` (post template, dynamic for all entries in `app/blog-data.ts`).
 - **Shared chrome**: every finished page must use `app/components/site-navigation.tsx` (three-panel sliding burger: sections → Atelier/Studio/Lounge → models of the active collection) and `app/components/site-footer.tsx` (same social SVG icons everywhere), unless the user explicitly asks for an exception.
 - **Product experience**: `app/components/product-experience.tsx` drives the shared product-page behavior (infinite drag/swipe carousel showing neighbor edges, specs/dimensions/materials blocks, an initially-collapsed technical accordion). Only `/kolekcje/studio/nova-solo` is fully populated with real content today; the other 13 product routes render the same structure with placeholder content — check `PROJECT_HANDOFF.md` for current status before assuming a page is done.
-- **Content data**: `app/collections-data.ts` is the single source of truth for collections/models, and drives both the product routes and `app/sitemap.ts`.
-- **Styling**: `app/globals.css` holds the shared design system; `app/kontakt/`, `app/personalizacja/`, and `app/filozofia-henry/` additionally use CSS Modules scoped to those pages.
+- **Content data**: `app/collections-data.ts` is the single source of truth for collections/models, and drives both the product routes and `app/sitemap.ts`. `app/blog-data.ts` is the equivalent source of truth for blog posts/categories, driving `app/blog/` and its sitemap entries; current posts are placeholder copy (marked `[Placeholder]`) awaiting real editorial content — see the "never invent facts" rule below before adding more.
+- **Styling**: `app/globals.css` holds the shared design system; most route folders (`kontakt/`, `personalizacja/`, `filozofia-henry/`, `faq/`, `blog/`, `projekty-indywidualne/`) additionally use a CSS Module scoped to that page.
 - **Site config**: `app/site-config.ts` sets the production URL (`https://henryseating.com`, overridable via `NEXT_PUBLIC_SITE_URL`).
-- **Auth**: `app/chatgpt-auth.ts` provides optional/required "Sign in with ChatGPT" helpers for Sites hosting (`getChatGPTUser`, `requireChatGPTUser`, `chatGPTSignInPath`/`chatGPTSignOutPath`). Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback` — don't implement routes at those paths. Not currently used for any live page; public content should stay anonymous.
-- **Cloudflare worker**: `worker/index.ts` is the deployed entry point — handles `/_vinext/image` image optimization, then delegates everything else to vinext's app-router entry. `vite.config.ts` wires up the Cloudflare plugin and simulates D1/R2 bindings declared in `.openai/hosting.json` for local dev (`db/schema.ts` currently empty; `examples/d1/` shows optional D1 usage).
+- **Cloudflare worker**: `worker/index.ts` is the deployed entry point — handles `/_vinext/image` image optimization, then delegates everything else to vinext's app-router entry. `vite.config.ts` wires up the Cloudflare plugin with a hardcoded local binding config (empty D1/R2) for dev (`db/schema.ts` currently empty; `examples/d1/` shows optional D1 usage). The project has no `wrangler.toml`/`wrangler.jsonc`; the deployed worker config is generated by `npm run build` into `dist/server/wrangler.json`. There is no `.openai/hosting.json` and no ChatGPT Sites/Sign-in-with-ChatGPT integration in this codebase — the site is hosted solely as an independent Cloudflare Worker (see Commands above for the deploy invocation).
 - **Tests**: `tests/rendered-html.test.mjs` runs against the built worker output (`dist/server/index.js`) and currently asserts the starter's default loading-skeleton HTML/CSS — it has not yet been updated to assert on real HENRY page content.
 
 ## Design system
