@@ -11,6 +11,8 @@ const sketchGalleryImages = [
   "/media/filozofia-henry/sketch-gallery-3.png",
 ];
 
+// Karuzela historii tymczasowo wyłączona (patrz sekcja "Dziedzictwo kina" niżej) — dane zachowane na wypadek powrotu.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const timeline = [
   {
     label: "Lata 80.",
@@ -64,9 +66,20 @@ const timeline = [
 ];
 
 const values = [
-  { title: "Forma", image: "/media/filozofia-henry/value-forma.png" },
+  { title: "Niezawodność", image: "/media/filozofia-henry/value-forma.png" },
   { title: "Komfort", image: "/media/filozofia-henry/value-komfort.png" },
-  { title: "Trwałość", image: "/media/filozofia-henry/value-trwalosc.png" },
+  { title: "Precyzja", image: "/media/filozofia-henry/value-trwalosc.png" },
+];
+
+const manifestoMessages = [
+  {
+    line: "Prawdziwy luksus nie polega na tym, by mieć więcej",
+    emphasis: "Polega na tym, by wszystko było dokładnie takie, jak powinno",
+  },
+  {
+    line: "HENRY Seating",
+    emphasis: "Designed for the moment",
+  },
 ];
 
 const testimonials = [
@@ -274,8 +287,11 @@ function TimelineCarousel({ items }: { items: typeof timeline }) {
   );
 }
 
+void TimelineCarousel; // karuzela historii tymczasowo wyłączona, kod zachowany na wypadek powrotu
+
 export function PhilosophyExperience() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [activeManifesto, setActiveManifesto] = useState(0);
 
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-philosophy-reveal]"));
@@ -298,6 +314,13 @@ export function PhilosophyExperience() {
     return () => window.clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActiveManifesto((current) => (current + 1) % manifestoMessages.length);
+    }, 5000);
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <main id="top" className={styles.page}>
       <SiteNavigation />
@@ -306,55 +329,85 @@ export function PhilosophyExperience() {
         <p>Stworzone na tę chwilę</p>
         <h1 id="philosophy-title">O HENRY</h1>
         <p className={styles.introText}>
-          HENRY powstało wokół prostej idei — że fotel powinien być czymś więcej niż meblem. Poprzez ponadczasowy
-          design, najwyższej jakości materiały i bezkompromisowe rzemiosło zmieniamy sposób, w jaki przeżywasz film,
-          muzykę i przestrzeń wokół siebie.
+          25 lat doświadczenia. Ponad 1,5 miliona wyprodukowanych foteli kinowych. Jedna pasja do doskonałego
+          komfortu — od profesjonalnych sal kinowych po najbardziej osobiste wnętrza
         </p>
         <span className={styles.introLabel}>To jest HENRY</span>
       </section>
 
       <figure className={styles.hero} data-philosophy-reveal>
-        <img src="/media/filozofia-henry/hero.png" alt="Wejście do prywatnej sali kinowej HENRY" />
+        <picture>
+          <source media="(max-width: 640px)" srcSet="/media/filozofia-henry/hero-mobile.png" />
+          <source media="(max-width: 980px)" srcSet="/media/filozofia-henry/hero-tablet.png" />
+          <img src="/media/filozofia-henry/hero.png" alt="Rzędy zabytkowych foteli kinowych oświetlonych światłem projektora" />
+        </picture>
       </figure>
 
       <section className={styles.designed} data-philosophy-reveal>
-        <h2>Projektowane z myślą o wyjątkowych chwilach</h2>
+        <h2>Jakość, która nie kończy się na designie</h2>
         <p>
-          HENRY tworzy fotele kinowe, w których ponadczasowy design łączy się z wyjątkowym komfortem i dbałością o
-          każdy detal. Naszym celem jest stworzenie domowego kina, które nie tylko pozwala oglądać filmy, ale staje
-          się wyjątkową częścią całego wnętrza.
+          Tworzą ją również komfort, bezpieczeństwo, precyzja wykonania i niezawodność. Rygorystyczne wymagania
+          międzynarodowego rynku kinowego ukształtowały standardy, które dziś są fundamentem HENRY.
         </p>
       </section>
 
       <section className={styles.sketch} data-philosophy-reveal>
         <div className={styles.sketchText}>
-          <h2>nowe spojrzenie na domowe kino</h2>
+          <h2>firma rodzinna. manufaktura w Polsce</h2>
           <p>
-            Wierzymy, że prawdziwy komfort zaczyna się tam, gdzie funkcjonalność spotyka się z dobrym designem.
-            Dlatego każdy fotel HENRY został zaprojektowany tak, aby zapewniać wygodę, elegancję i pełne zanurzenie
-            w kinowym doświadczeniu.
+            Jesteśmy firmą rodzinną. Wierzymy w relacje, odpowiedzialność za produkt i indywidualne podejście do
+            każdego projektu. Dlatego fotele HENRY nie powstają na anonimowej linii produkcyjnej. Projektujemy je i
+            tworzymy w Polsce, w naszej manufakturze w Dąbrowie Chełmińskiej, wykorzystując starannie wybrane
+            materiały i sprawdzone komponenty.
           </p>
         </div>
         <AutoGallery images={sketchGalleryImages} className={styles.sketchGallery} interval={3400} />
       </section>
 
       <p className={styles.materialsNote} data-philosophy-reveal>
-        Starannie dobrane materiały, precyzyjne wykonanie i przemyślane detale tworzą fotele stworzone z myślą o
-        długich seansach i codziennym użytkowaniu. HENRY to miejsce, w którym można się zatrzymać, zrelaksować i po
-        prostu cieszyć filmem.
+        Każdy fotel HENRY może zostać dopasowany do swojego właściciela: od konfiguracji i funkcji, przez rodzaj
+        skóry i tkaniny, aż po drewno, przeszycia i detale wykończenia.
       </p>
 
       <figure className={styles.craftsman} data-philosophy-reveal>
         <img src="/media/filozofia-henry/craftsman.png" alt="Rzemieślnik HENRY ręcznie wykańczający skórzane obicie fotela" />
       </figure>
 
-      <section aria-label="Historia HENRY" data-philosophy-reveal>
+      {/* Karuzela historii tymczasowo wyłączona — do ustalenia, czy wraca. */}
+      {/* <section aria-label="Historia HENRY" data-philosophy-reveal>
         <TimelineCarousel items={timeline} />
+      </section> */}
+
+      <section className={styles.cinemaGrid} aria-label="Dziedzictwo kina" data-philosophy-reveal>
+        <div className={styles.cinemaGridPhotos}>
+          <img
+            className={styles.cinemaGridLarge}
+            src="/media/filozofia-henry/cinema-grid-neon.png"
+            alt="Neonowy szyld &quot;Cinema&quot; na fasadzie kina"
+          />
+          <img
+            src="/media/filozofia-henry/cinema-grid-cinetech.png"
+            alt="Nowoczesna sala kinowa z ekranem Cinetech"
+          />
+          <img
+            src="/media/filozofia-henry/cinema-grid-teatro.png"
+            alt="Archiwalne zdjęcie fasady zabytkowego kina Teatro Cinema"
+          />
+        </div>
+        <div className={styles.cinemaGridText}>
+          <h2>25 lat dla największych kin na świecie</h2>
+          <p>
+            HENRY wyrasta z ponad 25 lat doświadczenia w projektowaniu i produkcji foteli kinowych. Przez lata
+            tworzyliśmy rozwiązania dla największych operatorów kinowych na świecie, w tym dla Cineworld,
+            dostarczając ponad 1,5 miliona foteli do obiektów w wielu krajach.
+          </p>
+        </div>
       </section>
 
-      <h2 className={styles.valuesHeading} data-philosophy-reveal>
-        Trzy wartości.<br /><em>Jeden efekt.</em>
-      </h2>
+      <div className={styles.valuesHeading} data-philosophy-reveal>
+        <p>Trzy wartości.</p>
+        <h2>Jeden efekt.</h2>
+      </div>
 
       <section className={styles.values} aria-label="Wartości HENRY" data-philosophy-reveal>
         {values.map((value) => (
@@ -366,15 +419,19 @@ export function PhilosophyExperience() {
       </section>
 
       <p className={styles.valuesCaption} data-philosophy-reveal>
-        Przez lata budowaliśmy relacje z zaufanymi dostawcami i rzemieślnikami, aby każdy detal fotela HENRY
-        spełniał nasze standardy.
+        Dziś przenosimy doświadczenie zdobyte w profesjonalnych salach kinowych do najbardziej osobistych
+        przestrzeni — prywatnych kin, apartamentów i wyjątkowych wnętrz.
       </p>
 
       <section className={styles.manifesto} data-philosophy-reveal>
-        <img src="/media/lounge-pair.webp" alt="Dwa fotele HENRY w prywatnym wnętrzu z widokiem na palmy" />
+        <img src="/media/filozofia-henry/manifesto.jpg" alt="Zabytkowa sala kinowa Picturehouse z rzędami czerwonych foteli" />
         <div className={styles.manifestoShade} />
         <div className={styles.manifestoCopy}>
-          <h2>Projektujemy sposób,<br /><em>w jaki przeżywasz chwilę.</em></h2>
+          <h2 key={activeManifesto}>
+            {manifestoMessages[activeManifesto].line}
+            <br />
+            <em>{manifestoMessages[activeManifesto].emphasis}</em>
+          </h2>
         </div>
       </section>
 

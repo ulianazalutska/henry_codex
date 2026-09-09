@@ -19,13 +19,32 @@
 .intro { padding: clamp(150px, 20vh, 220px) var(--gutter) 9vh; text-align: center; }
 .intro > p:first-child { margin: 0; color: #d9a341; font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
 .intro h1 { margin: 3px 0 0; font-size: clamp(2.4rem, 4.6vw, 3.6rem); font-weight: 300; letter-spacing: -.03em; }
-.introText { max-width: 640px; margin: 0px auto 0; color: #a7a19a; font-size: clamp(.85rem, 1vw, .95rem); line-height: 1.7; }
+.introText { max-width: 555px; margin: 0px auto 0; color: #a7a19a; font-size: clamp(.85rem, 1vw, .95rem); line-height: 1.7; }
 .introLabel { display: block; margin-top: 22px; color: #d9a341; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
 
-.hero { height: min(66vh, 640px); min-height: 420px; margin: 4vh var(--gutter) 0; overflow: hidden; background: #101010; }
-.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero { height: min(72vh, 700px); min-height: 460px; margin: 4vh var(--gutter) 0; overflow: hidden; background: #101010; }
+.hero picture { display: block; width: 100%; height: 100%; }
+.hero img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 68%; }
 
 .galleryFlipImage { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 1.6s cubic-bezier(.16, 1, .3, 1); }
+
+.cinemaGrid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 4vw, 64px); align-items: center; padding: 0 var(--gutter) 12vh; }
+.cinemaGridPhotos { display: grid; grid-template-columns: .85fr .85fr; grid-template-rows: repeat(2, minmax(140px, 1fr)); gap: 14px; height: min(74vh, 760px); }
+.cinemaGridPhotos img { width: 100%; height: 100%; object-fit: cover; }
+.cinemaGridLarge { grid-row: 1 / 3; }
+.cinemaGridText h2 { margin: 0; font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 300; line-height: 1.2; letter-spacing: -.02em; }
+.cinemaGridText p { max-width: 480px; margin: 22px 0 0; color: #a7a19a; font-size: clamp(.95rem, 1.4vw, 1.05rem); line-height: 1.8; }
+
+@media (max-width: 980px) {
+  .cinemaGrid { grid-template-columns: 1fr; }
+  .cinemaGridPhotos { height: 70vh; }
+}
+
+@media (max-width: 640px) {
+  .cinemaGrid { padding: 0 var(--gutter) 90px; gap: 32px; }
+  .cinemaGridPhotos { height: 64vh; grid-template-columns: 1fr; grid-template-rows: 1.2fr 1fr 1fr; }
+  .cinemaGridLarge { grid-row: auto; }
+}
 
 .designed { padding: 10vh var(--gutter) 4vh; text-align: center; }
 .designed h2 { margin: 0; font-size: clamp(1.8rem, 3.1vw, 1.6rem); font-weight: 300; line-height: 1.15; }
@@ -101,7 +120,9 @@
 .timelineArrow:hover { background: rgba(255, 255, 255, .16); }
 .timelineArrow:disabled { opacity: .25; cursor: not-allowed; }
 
-.valuesHeading { margin: 0; padding: 0 var(--gutter); font-size: clamp(2.2rem, 4.4vw, 3.6rem); font-weight: 300; line-height: 1.1; letter-spacing: -.02em; text-align: center; }
+.valuesHeading { padding: 0 var(--gutter); text-align: center; }
+.valuesHeading p { margin: 0; color: #d9a341; font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.valuesHeading h2 { margin: 3px 0 0; font-size: clamp(2.2rem, 4.4vw, 3.6rem); font-weight: 300; line-height: 1.1; letter-spacing: -.02em; }
 
 .values { display: flex; gap: 12px; height: min(58vh, 560px); min-height: 400px; padding: 8vh var(--gutter) 0; }
 .valuePanel { position: relative; flex: 1 1 0; overflow: hidden; background: #101010; }
@@ -110,7 +131,7 @@
 .valuePanel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0, 0, 0, .68), transparent 55%); pointer-events: none; }
 .valuePanel span { position: absolute; z-index: 2; left: 22px; bottom: 22px; font-size: clamp(1.1rem, 1.6vw, 1.4rem); font-weight: 300; }
 
-.valuesCaption { max-width: 560px; margin: 0 auto; padding: 10vh 10vh; color: #817b75; font-size: .82rem; line-height: 1.7; text-align: center; }
+.valuesCaption { max-width: 560px; margin: 0 auto; padding: 10vh 0vh; color: #817b75; font-size: .99rem; line-height: 1.7; text-align: center; }
 
 .manifesto { position: relative; height: 82svh; min-height: 560px; overflow: hidden; }
 .manifesto > img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s cubic-bezier(.16, 1, .3, 1); }
@@ -118,7 +139,8 @@
 .manifestoShade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10, 9, 8, .75), rgba(10, 9, 8, .12) 55%); }
 .manifestoCopy { position: absolute; z-index: 2; left: 0; right: 0; bottom: 8vh; text-align: center; }
 .manifestoCopy > span { color: #d9a341; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
-.manifestoCopy h2 { margin: 18px auto 0; max-width: 760px; font-size: clamp(1.8rem, 3.4vw, 2.8rem); font-weight: 300; line-height: 1.2; letter-spacing: -.02em; }
+.manifestoCopy h2 { margin: 0 auto; max-width: 977px; padding: 0 var(--gutter); font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 300; line-height: 1.35; letter-spacing: -.01em; animation: fadeIn 1.1s ease both; }
+.manifestoCopy h2 em { display: inline-block; margin-top: 8px; color: #d9a341; font-size: clamp(.85rem, 1.3vw, 1.05rem); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
 
 .testimonials { position: relative; padding: 20vh var(--gutter) 22vh; background: #1a1a1a; text-align: center; overflow: hidden; }
 .testimonialsWord { position: absolute; left: 50%; top: 6vh; transform: translateX(-50%); color: rgba(255, 255, 255, .05); font-size: clamp(6rem, 16vw, 13rem); font-weight: 700; letter-spacing: -.03em; text-transform: uppercase; pointer-events: none; user-select: none; }
@@ -152,7 +174,7 @@
   .sketchGallery { aspect-ratio: 1 / 1; }
   .timelineCarousel { padding-bottom: 110px; }
   .timelineCard { flex-basis: 66vw; }
-  .valuesHeading { font-size: 12vw; }
+  .valuesHeading h2 { font-size: 12vw; }
   .craftsman { height: 56svh; min-height: 380px; margin-bottom: 90px; }
   .manifesto { height: 70svh; min-height: 480px; }
   .testimonials { padding: 130px var(--gutter) 150px; }
@@ -164,6 +186,7 @@
   .craftsman img,
   .manifesto > img,
   .valuePanel img,
-  .timelineImage img { animation: none; transition: none; transform: none; }
+  .timelineImage img,
+  .manifestoCopy h2 { animation: none; transition: none; transform: none; }
   .timelineTrack { transition: none; }
 }
