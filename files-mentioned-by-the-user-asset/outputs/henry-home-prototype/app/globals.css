@@ -3809,6 +3809,88 @@ button:hover .diagonal-arrow,
   font-size: 12px;
 }
 
+.material-lab__equipment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  padding: 8vh 0 5vh;
+}
+
+.material-lab__equipment-list {
+  flex: 0 1 420px;
+  border-top: 1px solid rgba(217, 163, 65, .28);
+}
+
+.material-lab__equipment-list button {
+  display: grid;
+  grid-template-columns: 1fr 12px;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 4px;
+  border-bottom: 1px solid rgba(217, 163, 65, .28);
+  color: #a6a09a;
+  text-align: left;
+  transition: color .3s ease, padding .3s ease;
+}
+
+.material-lab__equipment-list button:hover,
+.material-lab__equipment-list button.is-active {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+}
+
+.material-lab__equipment-list button strong {
+  font-size: clamp(.9rem, 1.15vw, 1.1rem);
+  font-weight: 400;
+}
+
+.material-lab__equipment-list button i {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.material-lab__equipment-list button i::before,
+.material-lab__equipment-list button i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+}
+
+.material-lab__equipment-list button i::after {
+  transform: rotate(90deg);
+  transition: transform .4s ease;
+}
+
+.material-lab__equipment-list button.is-active i::after {
+  transform: rotate(0);
+}
+
+.material-lab__equipment-preview {
+  flex: 0 0 487px;
+  max-width: 487px;
+}
+
+.material-lab__equipment-preview figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #111;
+}
+
+.material-lab__equipment-preview figure img {
+  width: 100%;
+  aspect-ratio: 1.35 / 1;
+  object-fit: cover;
+}
+
 .product-arrangements {
   position: relative;
   display: grid;
@@ -3984,6 +4066,32 @@ button:hover .diagonal-arrow,
 
   .material-lab__swatches {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .material-lab__equipment {
+    gap: 5vw;
+  }
+
+  .material-lab__equipment-preview {
+    flex-basis: 340px;
+  }
+}
+
+@media (max-width: 640px) {
+  .material-lab__equipment {
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+
+  .material-lab__equipment-preview {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .material-lab__equipment-list {
+    flex-basis: auto;
+    width: 100%;
   }
 }
 

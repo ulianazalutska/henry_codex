@@ -18,35 +18,33 @@ const novaSlides = [
 
 const featureCards = [
   {
-    title: "Integrated Controls",
-    image: `${novaRoot}/feature-controls.png`,
-    copy: "Intuicyjny panel sterowania pozwala wygodnie regulować pozycję fotela, zapewniając pełną kontrolę bez przerywania seansu.",
-  },
-  {
-    title: "Personal Side Table",
-    image: `${novaRoot}/feature-side-table.png`,
-    copy: "Praktyczny stolik boczny pozwala mieć najważniejsze rzeczy zawsze pod ręką — od napoju po pilot czy smartfon.",
-  },
-  {
-    title: "Electric Recline",
+    title: "Regulacja oparcia i podnóżka",
     image: `${novaRoot}/feature-recline.png`,
-    copy: "Płynna, elektryczna regulacja oparcia i podnóżka pozwala dopasować pozycję do chwili pełnego relaksu.",
+    copy: "Płynna regulacja oparcia i podnóżka pozwala dopasować pozycję do chwili pełnego relaksu — w standardzie każdego modelu.",
   },
   {
-    title: "Illuminated Cup Holder",
+    title: "Uchwyt na butelkę",
     image: `${novaRoot}/feature-cup-holder.png`,
-    copy: "Podświetlany uchwyt na kubek zapewnia wygodny dostęp do napoju, nawet podczas seansu przy zgaszonym świetle.",
+    copy: "Wygodny uchwyt na napój w podłokietniku, dostępny w standardzie każdego modelu.",
   },
   {
-    title: "Adjustable Headrest",
-    image: `${novaRoot}/feature-headrest.png`,
-    copy: "Regulowany zagłówek pozwala precyzyjnie dopasować podparcie głowy i szyi, zapewniając komfort podczas każdego seansu.",
+    title: "Rodzaj skóry",
+    image: `${novaRoot}/materials/leather/leather-01.png`,
+    copy: "Szeroki wybór kolorów i faktur skóry dostępny w standardzie, dopasowany do charakteru wnętrza.",
   },
   {
-    title: "Ambient LED Lighting",
-    image: `${novaRoot}/feature-led.png`,
-    copy: "Subtelne podświetlenie LED tworzy wyjątkową atmosferę i podkreśla elegancję fotela nawet w całkowitej ciemności.",
+    title: "Wykończenie drewnem",
+    image: `${novaRoot}/materials/wood/wood-01.png`,
+    copy: "Wykończenia drewniane dobierane tak, aby harmonizowały z pozostałymi elementami wnętrza.",
   },
+];
+
+const equipmentOptions = [
+  { key: "cup", number: "01", title: "Cup holder Hot & Cold", description: "Chłodzi lub podgrzewa napój.", image: "/media/personalizacja/cup.png" },
+  { key: "heat", number: "02", title: "Mata grzewcza", description: "Ciepło w oparciu i siedzisku.", image: "/media/personalizacja/heat.png" },
+  { key: "speaker", number: "03", title: "Dźwięk osobisty", description: "Głośniki zintegrowane z zagłówkiem.", image: "/media/personalizacja/detail-speaker.png" },
+  { key: "holder", number: "04", title: "Uchwyt na telefon lub tablet", description: "Ekran zawsze w odpowiednim miejscu.", image: "/media/personalizacja/holder.png" },
+  { key: "headrest", number: "05", title: "Elektryczny zagłówek", description: "Płynna regulacja dopasowana do sylwetki.", image: "/media/personalizacja/headrest.png" },
 ];
 
 const novaLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
@@ -68,13 +66,14 @@ const materialTabs: Array<{ key: MaterialKey; label: string }> = [
   { key: "leather", label: "Skóra" },
   { key: "wood", label: "Drewno" },
   { key: "quilting", label: "Pikowanie" },
-  { key: "combinations", label: "Kombinacje" },
+  { key: "combinations", label: "Opcje wyposażenia" },
 ];
 
 export function ProductExperience({ collection, product, isReady }: { collection: HenryCollection; product: HenryProduct; isReady: boolean }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [materialKey, setMaterialKey] = useState<MaterialKey>("leather");
   const [activeSwatch, setActiveSwatch] = useState(0);
+  const [activeEquipmentOption, setActiveEquipmentOption] = useState(0);
   const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
 
   const slides = useMemo(() => {
@@ -98,6 +97,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
   }), [isReady, product.leatherSwatches]);
   const activeMaterialLabel = materialTabs.find((item) => item.key === materialKey)?.label ?? materialTabs[0].label;
   const activeSwatches = materialSwatches[materialKey];
+  const activeEquipmentData = equipmentOptions[Math.min(activeEquipmentOption, equipmentOptions.length - 1)];
   const activeSwatchData = activeSwatches[Math.min(activeSwatch, activeSwatches.length - 1)] as MaterialSwatch | undefined;
   const [outgoingPreview, setOutgoingPreview] = useState<string | null>(null);
   const previousPreviewRef = useRef<string | undefined>(activeSwatchData?.previewImg);
@@ -223,7 +223,27 @@ export function ProductExperience({ collection, product, isReady }: { collection
               <button role="tab" aria-selected={material.key === materialKey} className={material.key === materialKey ? "is-active" : ""} onClick={() => changeMaterial(material.key)} key={material.key}>{material.label}</button>
             ))}
           </div>
-          {activeSwatches.length > 0 ? (
+          {materialKey === "combinations" ? (
+            <div className="material-lab__equipment">
+              <div className="material-lab__equipment-list" role="tablist" aria-label="Opcje wyposażenia">
+                {equipmentOptions.map((item, index) => (
+                  <button
+                    className={index === activeEquipmentOption ? "is-active" : ""}
+                    onClick={() => setActiveEquipmentOption(index)}
+                    role="tab"
+                    aria-selected={index === activeEquipmentOption}
+                    aria-controls="product-equipment-preview"
+                    key={item.key}
+                  >
+                    <strong>{item.title}</strong><i aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
+              <article id="product-equipment-preview" className="material-lab__equipment-preview" role="tabpanel">
+                <figure key={activeEquipmentData.key}><img src={activeEquipmentData.image} alt={activeEquipmentData.title} /></figure>
+              </article>
+            </div>
+          ) : activeSwatches.length > 0 ? (
             <div className="material-lab__content">
               <div className="material-lab__swatches">
                 {activeSwatches.map((swatch, index) => (
@@ -252,7 +272,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
 
       <section className="product-features">
         <header data-product-reveal>
-          <h2>OPCJE WYPOSAŻENIA</h2>
+          <h2>Technologia która znika</h2>
         </header>
         <div className="product-features__grid">
           {isReady ? featureCards.map((feature, index) => (
@@ -267,7 +287,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
             <article className={`product-feature-box box${String.fromCharCode(65 + index)} is-placeholder`} data-product-reveal key={index}>
               <figure><span>H</span><small>Materiały w przygotowaniu</small></figure>
               <div className="product-feature-box__caption">
-                <h3>{["Sterowanie", "Komfort", "Detale", "Oświetlenie"][index]}</h3>
+                <h3>{["Regulacja oparcia i podnóżka", "Uchwyt na butelkę", "Rodzaj skóry", "Wykończenie drewnem"][index]}</h3>
                 <p>Opis wyposażenia modelu zostanie dodany w kolejnym etapie.</p>
               </div>
             </article>
