@@ -15,8 +15,6 @@ const heroMoments = [
 
 const storyParagraphs = [
   "Henry tworzy fotele premium do prywatnych sal kinowych, stref relaksu oraz nowoczesnych wnętrz mieszkalnych. Łączymy ponadczasowy design, najwyższej jakości materiały oraz precyzyjne wykonanie, aby stworzyć meble, które zapewniają wyjątkowy komfort na długie lata.",
-  "Każdy model powstaje z myślą o indywidualnych potrzebach użytkownika. Szeroki wybór skór, tkanin, wykończeń drewnianych oraz wyposażenia pozwala stworzyć fotel idealnie dopasowany do charakteru wnętrza i osobistych preferencji.",
-  "Projektowane i produkowane w Polsce, fotele Henry są efektem rzemiosła, nowoczesnych technologii oraz dbałości o każdy detal. To kolekcje stworzone dla osób, które oczekują najwyższej jakości, elegancji i komfortu bez kompromisów.",
 ];
 
 function HighlightText({ text, offset }: { text: string; offset: number }) {
@@ -205,30 +203,17 @@ export default function Home() {
       </section>
 
       <section className={`brand-story ${storyPlaying ? "is-playing" : ""}`} ref={storyRef} aria-label="O marce HENRY">
-        <img src="/media/henry-logo-white.png" alt="HENRY Seating — Designed for the moment" />
         <div className="brand-story__copy">
           {storyParagraphs.map((paragraph, index) => {
             const offset = storyParagraphs.slice(0, index).reduce((sum, item) => sum + item.split(" ").length, 0);
             return <p key={paragraph}><HighlightText text={paragraph} offset={offset} /></p>;
           })}
+          <p className="brand-story__origin">Designed &amp; Made in Poland</p>
         </div>
-      </section>
-
-      <section id="istota-henry" className="about section-base">
-        <h2 className="about__statement about__statement--compact" data-reveal>
-          Komfort nie zaczyna się<br />
-          <span>w fotelu.</span> Zaczyna się<br />
-          w tym, co czujesz
-        </h2>
-        <div className="about__composition">
-          <figure className="about__image image-reveal" data-reveal>
-            <img src="/media/about-feeling.jpg" alt="Kobieta odpoczywająca w naturalnym świetle" loading="lazy" />
-          </figure>
-          <div className="about__copy" data-reveal>
-            <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem</p>
-            <p>Forma, ergonomia i technologia spotykają się w jednym celu: stworzyć miejsce, do którego chcesz wracać</p>
-          </div>
-        </div>
+        <figure className="brand-story__photo image-reveal" data-reveal>
+          <img src="/media/brand-story-recliner.png" alt="Fotel HENRY z pledem i miską popcornu" loading="lazy" />
+          <figcaption className="concept-note">Concept visualization</figcaption>
+        </figure>
       </section>
 
       <section id="kolekcje" className="collections" ref={collectionsRef}>
@@ -289,6 +274,37 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="filozofia-henry" className="philosophy philosophy--compact">
+        <p className="philosophy__lead" data-reveal>Najwyższa jakość<br />nie potrzebuje hałasu</p>
+        <div className="philosophy__spread">
+          <p data-reveal>Naszą inspiracją jest historia kina, miejsca w którym rzemiosło i emocje zawsze szły w parze</p>
+          <figure className="image-reveal" data-reveal>
+            <img src="/media/philosophy-cinema-seats.png" alt="Rząd zabytkowych foteli kinowych i rzutnik filmowy" loading="lazy" />
+          </figure>
+          <div className="philosophy__quote-block">
+            <blockquote data-reveal>„Projektujemy dla momentu, który zostaje z Tobą po napisach”</blockquote>
+            <Link className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="istota-henry" className="about section-base">
+        <h2 className="about__statement about__statement--compact" data-reveal>
+          Komfort nie zaczyna się<br />
+          <span>w fotelu.</span> Zaczyna się<br />
+          w tym, co czujesz
+        </h2>
+        <div className="about__composition">
+          <figure className="about__image image-reveal" data-reveal>
+            <img src="/media/about-feeling.jpg" alt="Kobieta odpoczywająca w naturalnym świetle" loading="lazy" />
+          </figure>
+          <div className="about__copy" data-reveal>
+            <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem</p>
+            <p>Forma, ergonomia i technologia spotykają się w jednym celu: stworzyć miejsce, do którego chcesz wracać</p>
+          </div>
+        </div>
+      </section>
+
       <section id="projekty-indywidualne" className="bespoke bespoke--compact section-base">
         <div className="bespoke__intro">
           <h2 data-reveal>Od pierwszej linii<br />do ostatniego <span>detalu</span></h2>
@@ -309,21 +325,6 @@ export default function Home() {
         </div>
         <div className="bespoke__cta-row">
           <Link className="text-link bespoke__cta" href="/projekty-indywidualne" data-reveal>Zobacz projekty indywidualne <span className="diagonal-arrow" aria-hidden="true" /></Link>
-        </div>
-      </section>
-
-      <section id="filozofia-henry" className="philosophy philosophy--compact">
-        <p className="philosophy__lead" data-reveal>Najwyższa jakość<br />nie potrzebuje hałasu</p>
-        <div className="philosophy__spread">
-          <p data-reveal>Wierzymy, że luksus zaczyna się tam, gdzie wszystko ma swoje uzasadnienie — proporcja, materiał, dotyk i światło</p>
-          <figure className="image-reveal" data-reveal>
-            <img src="/media/philosophy-office-caramel.webp" alt="Karmelowy fotel HENRY w gabinecie przy regale z książkami" loading="lazy" />
-            <figcaption>Concept visualization</figcaption>
-          </figure>
-          <div className="philosophy__quote-block">
-            <blockquote data-reveal>„Projektujemy dla momentu, który zostaje z Tobą po napisach”</blockquote>
-            <Link className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></Link>
-          </div>
         </div>
       </section>
 
