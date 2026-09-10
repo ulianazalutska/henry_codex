@@ -163,7 +163,6 @@ export function SiteNavigation() {
             <button className={`menu-list__item menu-list__item--toggle ${collectionsOpen ? "is-active" : ""}`} onClick={toggleCollections} aria-expanded={collectionsOpen}>
               <span>Kolekcje</span><img src="/media/vector-chevron.svg" alt="" />
             </button>
-            <Link href="/personalizacja" onClick={closeMenu}>Personalizacja</Link>
             <Link href="/projekty-indywidualne" onClick={closeMenu}>Projekty indywidualne</Link>
             <Link href="/filozofia-henry" onClick={closeMenu}>Filozofia Henry</Link>
             <Link href="/dla-architektow" onClick={closeMenu}>Dla architektów</Link>

@@ -252,8 +252,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
 
       <section className="product-features">
         <header data-product-reveal>
-          <div className="product-eyebrow"><p>Wyposażenie</p></div>
-          <h2>Technologia,<br /><em>która znika</em></h2>
+          <h2>OPCJE WYPOSAŻENIA</h2>
         </header>
         <div className="product-features__grid">
           {isReady ? featureCards.map((feature, index) => (

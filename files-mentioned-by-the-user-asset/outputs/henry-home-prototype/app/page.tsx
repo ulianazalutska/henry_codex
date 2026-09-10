@@ -268,13 +268,11 @@ export default function Home() {
         </div>
         <p className="arrangements__note concept-note" data-reveal>Concept visualization</p>
         <div className="arrangements__grid">
-          <Link href="/kolekcje/atelier/inspiracje?from=%2F%23aranzacje" className="arrangement arrangement--featured" data-reveal aria-label="Zobacz aranżacje kolekcji Atelier">
-            <figure>
-              <img src="/media/inspiracje/atelier/atelier-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Atelier" loading="lazy" />
-              <div className="arrangement__veil" />
-              <h3>Atelier</h3>
-              <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
-            </figure>
+          <Link href="/kolekcje/atelier/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Atelier">
+            <img src="/media/inspiracje/atelier/atelier-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Atelier" loading="lazy" />
+            <div className="arrangement__veil" />
+            <h3>Atelier</h3>
+            <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
           </Link>
           <Link href="/kolekcje/studio/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Studio">
             <img src="/media/inspiracje/studio/studio-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Studio" loading="lazy" />
