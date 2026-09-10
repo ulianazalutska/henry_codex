@@ -27,11 +27,17 @@ export default async function ProductPage({ params }: { params: Promise<{ collec
   const record = getProduct(collectionSlug, productSlug);
   if (!record) notFound();
   const { collection, product } = record;
+  const isHero = collection.products[0]?.slug === product.slug;
 
   return (
     <main id="top" className="product-detail-page">
       <SiteNavigation />
-      <ProductExperience collection={collection} product={product} isReady={collection.slug === "studio" && product.slug === "nova-solo"} />
+      <ProductExperience
+        collection={collection}
+        product={product}
+        isReady={collection.slug === "studio" && product.slug === "nova-solo"}
+        isHero={isHero}
+      />
       <SiteFooter />
     </main>
   );

@@ -1,6 +1,6 @@
 # HENRY website — передача проєкту
 
-Оновлено: 2026-09-04
+Оновлено: 2026-09-10
 
 Цей документ дає новому Codex або розробнику короткий, але достатній контекст для продовження роботи. Спочатку також прочитати `AGENTS.md` і `CREATIVE_DIRECTION.md`.
 
@@ -195,6 +195,29 @@ Accordion технічних деталей має бути початково �
 3. перевірити browser console і terminal;
 4. перевірити, що reveal-анімації мають видимий fallback, якщо JavaScript не стартує;
 5. перевірити burger на цій та інших сторінках.
+
+## 6.1. Зміни 2026-09-10 (Strona Główna, karta produktu, Filozofia Henry)
+
+Велика сесія правок за прямими вказівками клієнта. Все запушено в `main`, задеплоєно на `henry-seating-preview`.
+
+**Strona Główna (`app/page.tsx`, `app/globals.css`):**
+- Секція 2 (`brand-story`): залишено лише перший абзац опису, прибрано біле лого HENRY, додано рядок "Designed & Made in Poland" і фото крісла (`brand-story-recliner.png`) під текстом.
+- Порядок секцій змінено на: 1 Film (hero) → 2 Brand story → 3 Kolekcje → 4 Aranżacje → 5 Filozofia/jakość (переставлена вище, одразу після Aranżacje) → далі istota-henry ("Komfort nie zaczyna się w fotelu"), projekty-indywidualne. Мета — швидший перехід до kolekcje/aranżacje.
+- Секція 5 (`filozofia-henry`, тепер вище на сторінці): новий текст "Naszą inspiracją jest historia kina...", нове фото (`philosophy-cinema-seats.png` — вінтажні крісла кінотеатру), лінк на `/filozofia-henry` без змін.
+- Підпис `Concept visualization` перекладено на "Wizualizacja koncepcyjna" і залишено **тільки** при кімнатних/інтер'єрних візуалізаціях (hero-відео, Nasze kolekcje, Aranżacje, Projekty indywidualne); прибрано з фото крісла в секції 2 (це студійний продуктовий кадр, не кімната).
+- Питання клієнту ще не закрите: чи видаляти секції "Komfort nie zaczyna się w fotelu" і "Od pierwszej linii do ostatniego detalu" зі Strona Główna — очікує відповіді.
+
+**Karta produktu (`app/components/product-experience.tsx`, `app/globals.css`):**
+- Введено концепцію **hero vs non-hero продукту**. Hero = перший товар кожної колекції (Vesper Solo / Nova Solo / Solaris Solo), обчислюється в `app/kolekcje/[collection]/[product]/page.tsx` як `collection.products[0]?.slug === product.slug`, передається пропом `isHero`.
+- **Не-hero продукти** (Duo/Ensemble/Chaise/Crest/Orbit) тепер спрощені: секція "Dotyk tworzy charakter" (вибір Skóra/Drewno/Pikowanie/Opcje wyposażenia) повністю прибрана. Замість колишньої "Technologia która znika" — 3 фото товару (`product.image`, full-bleed lifestyle-кадр, **не** `catalogueImage`, бо той — обрізаний/з паддінгами) з короткими підписами, без заголовка секції. Підсумкова структура: hero-фото → карусель → 3 фото з описами → "Zobacz w aranżacjach" → Technical features.
+- **Hero-продукти**: таб матеріалів "Kombinacje" перейменовано на "Opcje wyposażenia" — показує опційне обладнання (Cup holder Hot & Cold, mata grzewcza, głośniki, uchwyt na telefon, elektryczny zagłówek), реалізовано як список+прев'ю модуль за зразком `app/personalizacja/personalization-experience.tsx` (секція `equipment`). Секція, що раніше звалася "Opcje wyposażenia" (featureCards, 6 карток: Integrated Controls / Personal Side Table / Electric Recline / Illuminated Cup Holder / Adjustable Headrest / Ambient LED Lighting), перейменована на "Technologia która znika" і показує це саме стандартне обладнання — **контент і мозаїчна розкладка (box A–F) повністю оригінальні, не змінювати без звірки з клієнтським референсом-скріншотом**.
+- **Важливий технічний момент — авто-висота мозаїки `.product-features__grid`:** бокси A–F позиційовані `position:absolute` з `top`/`height` у відсотках, що завжди рахуються від висоти самого контейнера — тому просте зменшення `aspect-ratio` контейнера НЕ прибирає зайвий пустий простір знизу (відсоток порожнечі лишається сталим при будь-якій висоті). Рішення: `.product-features__grid` завжди тримає оригінальну пропорцію `1313/2475` (щоб % боксів рахувались коректно завжди), а зовні обгорнутий у `.product-features__grid-clip` з `overflow:hidden` і **JS-обрахованою** `height` (via `useEffect` + `featureGridRef`, слухає `resize`) — вимірює реальну ширину контейнера і рахує потрібну видиму висоту через `featureGridBottomFraction(boxCount)` (масив `featureBoxBottomPercent` — bottom-edge % кожного box A–F, перерахувати вручну, якщо будуть змінені `top`/`height` окремих боксів у CSS). На мобільному (`max-width:640px`) `.product-features__grid-clip` скидається на `height:auto!important; overflow:visible`, бо там мозаїка перетворюється на простий вертикальний список (окремий responsive-блок, теж новий).
+- Окремий менший відступ до "Zobacz w aranżacjach" для не-hero сторінок: клас `.product-arrangements--tight` (`margin-top: 8vh` замість `25vh` для hero).
+
+**Filozofia Henry (`app/filozofia-henry/philosophy-experience.tsx`):**
+- Текст під "materialsNote" замінено на "Naszą inspiracją jest historia kina...".
+- Заголовок "Firma rodzinna. Manufaktura w Polsce" розбито на два рядки.
+- Фото в секції `manifesto` (крісло з золотою сіткою Фібоначчі, наприкінці сторінки) замінено на версію з більшим порожнім простором знизу — текст, що з'являється поверх (`manifestoCopy`), більше не перетинає золоту рамку.
 
 ## 7. Спільна навігація та footer
 

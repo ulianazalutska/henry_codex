@@ -18,24 +18,34 @@ const novaSlides = [
 
 const featureCards = [
   {
-    title: "Regulacja oparcia i podnóżka",
+    title: "Integrated Controls",
+    image: `${novaRoot}/feature-controls.png`,
+    copy: "Intuicyjny panel sterowania pozwala wygodnie regulować pozycję fotela, zapewniając pełną kontrolę bez przerywania seansu.",
+  },
+  {
+    title: "Personal Side Table",
+    image: `${novaRoot}/feature-side-table.png`,
+    copy: "Praktyczny stolik boczny pozwala mieć najważniejsze rzeczy zawsze pod ręką — od napoju po pilot czy smartfon.",
+  },
+  {
+    title: "Electric Recline",
     image: `${novaRoot}/feature-recline.png`,
-    copy: "Płynna regulacja oparcia i podnóżka pozwala dopasować pozycję do chwili pełnego relaksu — w standardzie każdego modelu.",
+    copy: "Płynna, elektryczna regulacja oparcia i podnóżka pozwala dopasować pozycję do chwili pełnego relaksu.",
   },
   {
-    title: "Uchwyt na butelkę",
+    title: "Illuminated Cup Holder",
     image: `${novaRoot}/feature-cup-holder.png`,
-    copy: "Wygodny uchwyt na napój w podłokietniku, dostępny w standardzie każdego modelu.",
+    copy: "Podświetlany uchwyt na kubek zapewnia wygodny dostęp do napoju, nawet podczas seansu przy zgaszonym świetle.",
   },
   {
-    title: "Rodzaj skóry",
-    image: `${novaRoot}/materials/leather/leather-01.png`,
-    copy: "Szeroki wybór kolorów i faktur skóry dostępny w standardzie, dopasowany do charakteru wnętrza.",
+    title: "Adjustable Headrest",
+    image: `${novaRoot}/feature-headrest.png`,
+    copy: "Regulowany zagłówek pozwala precyzyjnie dopasować podparcie głowy i szyi, zapewniając komfort podczas każdego seansu.",
   },
   {
-    title: "Wykończenie drewnem",
-    image: `${novaRoot}/materials/wood/wood-01.png`,
-    copy: "Wykończenia drewniane dobierane tak, aby harmonizowały z pozostałymi elementami wnętrza.",
+    title: "Ambient LED Lighting",
+    image: `${novaRoot}/feature-led.png`,
+    copy: "Subtelne podświetlenie LED tworzy wyjątkową atmosferę i podkreśla elegancję fotela nawet w całkowitej ciemności.",
   },
 ];
 
@@ -69,12 +79,42 @@ const materialTabs: Array<{ key: MaterialKey; label: string }> = [
   { key: "combinations", label: "Opcje wyposażenia" },
 ];
 
-export function ProductExperience({ collection, product, isReady }: { collection: HenryCollection; product: HenryProduct; isReady: boolean }) {
+// Bottom edge (top% + height%) of each mosaic slot box{A..F} in .product-feature-box,
+// relative to the 1313x2475 design the CSS percentages were authored against.
+// The grid itself always keeps the full 1313/2475 ratio (so box top/height percentages,
+// which resolve against the grid's own rendered height, stay pixel-identical to the design
+// no matter how many boxes are shown) — a wrapper then clips away the unused height below
+// the last box, measured in JS since that can't be derived from the box percentages alone.
+const featureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 103.68, 94.68];
+
+function featureGridBottomFraction(boxCount: number) {
+  return Math.max(...featureBoxBottomPercent.slice(0, boxCount)) / 100;
+}
+
+export function ProductExperience({ collection, product, isReady, isHero }: { collection: HenryCollection; product: HenryProduct; isReady: boolean; isHero: boolean }) {
+  const productPhotoCards = [
+    { title: product.name, copy: product.description },
+    { title: "Detal wykończenia", copy: "Pełna sesja zdjęciowa modelu zostanie dodana wkrótce." },
+    { title: "W aranżacji", copy: "Zobacz więcej w sekcji Aranżacje poniżej." },
+  ];
   const [activeSlide, setActiveSlide] = useState(0);
   const [materialKey, setMaterialKey] = useState<MaterialKey>("leather");
   const [activeSwatch, setActiveSwatch] = useState(0);
   const [activeEquipmentOption, setActiveEquipmentOption] = useState(0);
   const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
+  const featureGridRef = useRef<HTMLDivElement>(null);
+  const [featureGridClipHeight, setFeatureGridClipHeight] = useState<number>();
+  const featureBoxCount = isHero ? featureCards.length : productPhotoCards.length;
+
+  useEffect(() => {
+    const grid = featureGridRef.current;
+    if (!grid) return;
+    const bottomFraction = featureGridBottomFraction(featureBoxCount);
+    const measure = () => setFeatureGridClipHeight(grid.offsetWidth * (2475 / 1313) * bottomFraction);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [featureBoxCount]);
 
   const slides = useMemo(() => {
     if (isReady) return novaSlides;
@@ -213,6 +253,7 @@ export function ProductExperience({ collection, product, isReady }: { collection
         </div>
       </section>
 
+      {isHero && (
       <section className="product-materials">
         <header data-product-reveal>
           <h2>Dotyk tworzy<br /><em>charakter</em></h2>
@@ -269,33 +310,44 @@ export function ProductExperience({ collection, product, isReady }: { collection
           )}
         </div>
       </section>
+      )}
 
       <section className="product-features">
-        <header data-product-reveal>
-          <h2>Technologia która znika</h2>
-        </header>
-        <div className="product-features__grid">
-          {isReady ? featureCards.map((feature, index) => (
-            <article className={`product-feature-box box${String.fromCharCode(65 + index)}`} data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
-              <figure><img src={feature.image} alt={feature.title} /></figure>
-              <div className="product-feature-box__caption">
-                <h3>{feature.title}</h3>
-                <p>{feature.copy}</p>
-              </div>
-            </article>
-          )) : Array.from({ length: 4 }, (_, index) => (
-            <article className={`product-feature-box box${String.fromCharCode(65 + index)} is-placeholder`} data-product-reveal key={index}>
-              <figure><span>H</span><small>Materiały w przygotowaniu</small></figure>
-              <div className="product-feature-box__caption">
-                <h3>{["Regulacja oparcia i podnóżka", "Uchwyt na butelkę", "Rodzaj skóry", "Wykończenie drewnem"][index]}</h3>
-                <p>Opis wyposażenia modelu zostanie dodany w kolejnym etapie.</p>
-              </div>
-            </article>
-          ))}
+        {isHero && (
+          <header data-product-reveal>
+            <h2>Technologia która znika</h2>
+          </header>
+        )}
+        <div className="product-features__grid-clip" style={{ height: featureGridClipHeight ? `${featureGridClipHeight}px` : undefined }}>
+        <div className="product-features__grid" ref={featureGridRef}>
+          {isHero ? (
+            featureCards.map((feature, index) => (
+              <article className={`product-feature-box box${String.fromCharCode(65 + index)}${isReady ? "" : " is-placeholder"}`} data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
+                <figure>
+                  {isReady ? <img src={feature.image} alt={feature.title} /> : <><span>H</span><small>Materiały w przygotowaniu</small></>}
+                </figure>
+                <div className="product-feature-box__caption">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.copy}</p>
+                </div>
+              </article>
+            ))
+          ) : (
+            productPhotoCards.map((card, index) => (
+              <article className={`product-feature-box box${String.fromCharCode(65 + index)}`} data-product-reveal key={card.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
+                <figure><img src={product.image} alt={product.name} /></figure>
+                <div className="product-feature-box__caption">
+                  <h3>{card.title}</h3>
+                  <p>{card.copy}</p>
+                </div>
+              </article>
+            ))
+          )}
+        </div>
         </div>
       </section>
 
-      <Link href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}`)}`} className="product-arrangements" data-product-reveal>
+      <Link href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}`)}`} className={`product-arrangements${isHero ? "" : " product-arrangements--tight"}`} data-product-reveal>
         <div className="product-arrangements__frame">
           <img className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${collection.name} w aranżacjach`} />
           <div className="product-arrangements__veil" />
