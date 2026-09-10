@@ -355,7 +355,7 @@ export function PhilosophyExperience() {
 
       <section className={styles.sketch} data-philosophy-reveal>
         <div className={styles.sketchText}>
-          <h2>Firma rodzinna. Manufaktura w Polsce</h2>
+          <h2>Firma rodzinna<br />Manufaktura w Polsce.</h2>
           <p>
             Jesteśmy firmą rodzinną dlatego wierzymy w relacje, odpowiedzialność i indywidualne podejście do
             każdego projektu. Fotele HENRY nie powstają na anonimowej linii produkcyjnej. Projektujemy i
@@ -367,8 +367,7 @@ export function PhilosophyExperience() {
       </section>
 
       <p className={styles.materialsNote} data-philosophy-reveal>
-        Każdy fotel HENRY może zostać dopasowany do swojego właściciela: od konfiguracji i funkcji, przez rodzaj
-        skóry i tkaniny, aż po drewno, przeszycia i detale wykończenia.
+        Naszą inspiracją jest historia kina, miejsca w którym rzemiosło i emocje zawsze szły w parze.
       </p>
 
       <figure className={styles.craftsman} data-philosophy-reveal>
