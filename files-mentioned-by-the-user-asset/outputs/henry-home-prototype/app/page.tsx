@@ -198,7 +198,7 @@ export default function Home() {
             {heroMoment >= 0 && <p key={heroMoment}><span>0{heroMoment + 1}</span>{heroMoments[heroMoment]}</p>}
           </div>
           <div className="scroll-cue"><span>Przewiń, aby wejść</span><i><b /></i></div>
-          <p className="hero-note">Concept visualization</p>
+          <p className="hero-note">Wizualizacja koncepcyjna</p>
         </div>
       </section>
 
@@ -212,13 +212,12 @@ export default function Home() {
         </div>
         <figure className="brand-story__photo image-reveal" data-reveal>
           <img src="/media/brand-story-recliner.png" alt="Fotel HENRY z pledem i miską popcornu" loading="lazy" />
-          <figcaption className="concept-note">Concept visualization</figcaption>
         </figure>
       </section>
 
       <section id="kolekcje" className="collections" ref={collectionsRef}>
         <div className="collections-stage">
-          <div className="collections-head"><p className="collections-head__left">Nasze kolekcje<span className="concept-note">Concept visualization</span></p><p>Trzy sposoby<br />odczuwania komfortu</p></div>
+          <div className="collections-head"><p className="collections-head__left">Nasze kolekcje<span className="concept-note">Wizualizacja koncepcyjna</span></p><p>Trzy sposoby<br />odczuwania komfortu</p></div>
           <div className="collections-track" ref={collectionsTrackRef}>
             <Link href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
               <img src="/media/atelier-cinema-row.png" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
@@ -251,7 +250,7 @@ export default function Home() {
           <p className="arrangements__head-left" data-reveal>Aranżacje</p>
           <p data-reveal>Zobacz, jak fotele HENRY<br />komponują się we wnętrzach</p>
         </div>
-        <p className="arrangements__note concept-note" data-reveal>Concept visualization</p>
+        <p className="arrangements__note concept-note" data-reveal>Wizualizacja koncepcyjna</p>
         <div className="arrangements__grid">
           <Link href="/kolekcje/atelier/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Atelier">
             <img src="/media/inspiracje/atelier/atelier-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Atelier" loading="lazy" />
@@ -313,11 +312,11 @@ export default function Home() {
         <div className="bespoke__gallery">
           <figure className="bespoke__main spread-reveal spread-reveal--center" data-reveal>
             <img src="/media/bespoke-private-residence.webp" alt="Indywidualny projekt prywatnej sali kinowej HENRY" loading="lazy" />
-            <figcaption><span>Private Residence</span><span>Concept visualization</span></figcaption>
+            <figcaption><span>Private Residence</span><span>Wizualizacja koncepcyjna</span></figcaption>
           </figure>
           <figure className="bespoke__detail spread-reveal spread-reveal--left" data-reveal>
             <img src="/media/bespoke-reading-nook.webp" alt="Fotel HENRY w prywatnej bibliotece" loading="lazy" />
-            <figcaption><span>Projektowanie doświadczenia</span><span>Concept visualization</span></figcaption>
+            <figcaption><span>Projektowanie doświadczenia</span><span>Wizualizacja koncepcyjna</span></figcaption>
           </figure>
           <figure className="bespoke__object spread-reveal spread-reveal--right" data-reveal>
             <img src="/media/bespoke-custom-form.jpg" alt="Fotele HENRY wykonane na zamówienie w sali kinowej" loading="lazy" />
