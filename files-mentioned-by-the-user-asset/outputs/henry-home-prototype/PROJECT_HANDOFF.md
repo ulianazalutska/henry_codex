@@ -95,6 +95,15 @@ npm test
 - фон `#171615`, частина секцій `#1A1A1A`;
 - home hero має залишатися кінематографічним, але скрол не повинен відчуватися зламаним або блокувати користувача.
 
+**AI-візуалізації (2026-09-10):** усі зображення й відео на головній є AI-згенерованими (реальних крісел/інтер'єрів там немає), тож кожне з них тепер має дискретний підпис `Concept visualization` (клас `.concept-note` у `globals.css`, там де немає окремого `<figcaption>`) — узгоджено з клієнтом і базується на вимогах ст. 50 EU AI Act (чинна з 2 серпня 2026 р.):
+  - hero-відео — `.hero-note` в нижньому лівому куті;
+  - секція Nasze kolekcje (3 фото) — під заголовком зліва;
+  - секція Aranżacje — заголовок переписано без слова "rzeczywistych" (раніше стверджував "реальні інтер'єри"), підпис під заголовком;
+  - Bespoke-секція "Od pierwszej linii do ostatniego detalu" — `bespoke-private-residence.webp` і `bespoke-reading-nook.webp` мають підпис у `figcaption` (прибрано рік "2026" біля Private Residence, щоб не натякати на конкретний реальний проєкт); `bespoke-custom-form.jpg` — реальне фото, без підпису;
+  - Philosophy-секція "Najwyższa jakość nie potrzebuje hałasu" — `figcaption` під фото.
+
+  Наступний крок: та сама перевірка потрібна для Atelier/Lounge product pages, `Inspiracje` галерей і Filozofia HENRY (`craftsman.png`, `manifesto.png`, cinema-grid) — там статус AI vs реальне фото ще не зафіксовано.
+
 ### Загальна сторінка колекцій — `/kolekcje`
 
 Реалізована сторінка входу до трьох колекцій із переходами:

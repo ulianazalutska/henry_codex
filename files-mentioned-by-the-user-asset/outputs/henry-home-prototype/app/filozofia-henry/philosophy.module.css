@@ -19,7 +19,7 @@
 .intro { padding: clamp(150px, 20vh, 220px) var(--gutter) 9vh; text-align: center; }
 .intro > p:first-child { margin: 0; color: #d9a341; font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
 .intro h1 { margin: 3px 0 0; font-size: clamp(2.4rem, 4.6vw, 3.6rem); font-weight: 300; letter-spacing: -.03em; }
-.introText { max-width: 555px; margin: 0px auto 0; color: #a7a19a; font-size: clamp(.85rem, 1vw, .95rem); line-height: 1.7; }
+.introText { max-width: 640px; margin: 0px auto 0; color: #a7a19a; font-size: clamp(.85rem, 1vw, .95rem); line-height: 1.7; }
 .introLabel { display: block; margin-top: 22px; color: #d9a341; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
 
 .hero { height: min(72vh, 700px); min-height: 460px; margin: 4vh var(--gutter) 0; overflow: hidden; background: #101010; }
@@ -133,7 +133,7 @@
 
 .valuesCaption { max-width: 560px; margin: 0 auto; padding: 10vh 0vh; color: #817b75; font-size: .99rem; line-height: 1.7; text-align: center; }
 
-.manifesto { position: relative; height: 82svh; min-height: 560px; overflow: hidden; }
+.manifesto { position: relative; width: 90%; height: 82svh; min-height: 560px; margin: 0 auto; overflow: hidden; }
 .manifesto > img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s cubic-bezier(.16, 1, .3, 1); }
 .manifesto:hover > img { transform: scale(1.015); }
 .manifestoShade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10, 9, 8, .75), rgba(10, 9, 8, .12) 55%); }

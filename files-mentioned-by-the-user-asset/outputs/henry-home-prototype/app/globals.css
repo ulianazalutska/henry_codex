@@ -608,6 +608,17 @@ blockquote {
   }
 }
 
+.hero-note {
+  position: absolute;
+  left: clamp(22px, 6vw, 92px);
+  bottom: 9vh;
+  opacity: var(--hero-cue-opacity);
+  color: rgba(255, 255, 255, .55);
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-size: 9px;
+}
+
 .scroll-cue {
   position: absolute;
   right: clamp(22px, 5vw, 72px);
@@ -762,6 +773,14 @@ figcaption {
   font-size: 9px;
 }
 
+.concept-note {
+  margin: 0;
+  color: #77716b;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-size: 9px;
+}
+
 .about__copy {
   padding-bottom: 2vw;
 }
@@ -831,6 +850,12 @@ figcaption {
 
 .collections-head__left {
   text-align: left;
+}
+
+.collections-head__left .concept-note {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, .5);
 }
 
 .collections-head span {
@@ -1092,7 +1117,12 @@ button:hover .diagonal-arrow,
   justify-content: space-between;
   align-items: flex-end;
   gap: 24px;
-  margin-bottom: 5vh;
+  margin-bottom: 1.6vh;
+}
+
+.arrangements__note {
+  margin: 0 0 3.4vh;
+  text-align: right;
 }
 
 .arrangements__head-left {

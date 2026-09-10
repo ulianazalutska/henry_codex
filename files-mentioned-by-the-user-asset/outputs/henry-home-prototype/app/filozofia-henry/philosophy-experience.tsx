@@ -9,6 +9,7 @@ const sketchGalleryImages = [
   "/media/filozofia-henry/sketch-gallery-1.png",
   "/media/filozofia-henry/sketch-gallery-2.png",
   "/media/filozofia-henry/sketch-gallery-3.png",
+  "/media/filozofia-henry/sketch-gallery-4-gmina-logo.png",
 ];
 
 // Karuzela historii tymczasowo wyłączona (patrz sekcja "Dziedzictwo kina" niżej) — dane zachowane na wypadek powrotu.
@@ -326,11 +327,12 @@ export function PhilosophyExperience() {
       <SiteNavigation />
 
       <section className={styles.intro} aria-labelledby="philosophy-title" data-philosophy-reveal>
-        <p>Stworzone na tę chwilę</p>
-        <h1 id="philosophy-title">O HENRY</h1>
+        <p>Stworzony na wyjątkowe chwile</p>
+        <h1 id="philosophy-title">FILOZOFIA HENRY</h1>
         <p className={styles.introText}>
-          25 lat doświadczenia. Ponad 1,5 miliona wyprodukowanych foteli kinowych. Jedna pasja do doskonałego
-          komfortu — od profesjonalnych sal kinowych po najbardziej osobiste wnętrza
+          Wierzymy, że prawdziwy komfort rodzi się z pasji, doświadczenia i szacunku do ponadczasowych wartości.
+          Ponad 25 lat doświadczenia i blisko 2 miliony wyprodukowanych foteli.
+          Od profesjonalnych sal kinowych i teatralnych po najbardziej osobiste wnętrza kin domowych.
         </p>
         <span className={styles.introLabel}>To jest HENRY</span>
       </section>
@@ -353,11 +355,11 @@ export function PhilosophyExperience() {
 
       <section className={styles.sketch} data-philosophy-reveal>
         <div className={styles.sketchText}>
-          <h2>firma rodzinna. manufaktura w Polsce</h2>
+          <h2>Firma rodzinna. Manufaktura w Polsce</h2>
           <p>
-            Jesteśmy firmą rodzinną. Wierzymy w relacje, odpowiedzialność za produkt i indywidualne podejście do
-            każdego projektu. Dlatego fotele HENRY nie powstają na anonimowej linii produkcyjnej. Projektujemy je i
-            tworzymy w Polsce, w naszej manufakturze w Dąbrowie Chełmińskiej, wykorzystując starannie wybrane
+            Jesteśmy firmą rodzinną dlatego wierzymy w relacje, odpowiedzialność i indywidualne podejście do
+            każdego projektu. Fotele HENRY nie powstają na anonimowej linii produkcyjnej. Projektujemy i
+            tworzymy je w Polsce, w naszej manufakturze w Dąbrowie Chełmińskiej, wykorzystując starannie wybrane
             materiały i sprawdzone komponenty.
           </p>
         </div>
@@ -386,12 +388,12 @@ export function PhilosophyExperience() {
             alt="Neonowy szyld &quot;Cinema&quot; na fasadzie kina"
           />
           <img
-            src="/media/filozofia-henry/cinema-grid-cinetech.png"
-            alt="Nowoczesna sala kinowa z ekranem Cinetech"
+            src="/media/filozofia-henry/cinema-grid-cinetech.jpg"
+            alt="Projektor kinowy w trakcie emisji, snop światła w ciemnej sali"
           />
           <img
-            src="/media/filozofia-henry/cinema-grid-teatro.png"
-            alt="Archiwalne zdjęcie fasady zabytkowego kina Teatro Cinema"
+            src="/media/filozofia-henry/cinema-grid-teatro.jpg"
+            alt="Zbliżenie na szpulę filmową z taśmą 35mm"
           />
         </div>
         <div className={styles.cinemaGridText}>
@@ -424,7 +426,7 @@ export function PhilosophyExperience() {
       </p>
 
       <section className={styles.manifesto} data-philosophy-reveal>
-        <img src="/media/filozofia-henry/manifesto.jpg" alt="Zabytkowa sala kinowa Picturehouse z rzędami czerwonych foteli" />
+        <img src="/media/filozofia-henry/manifesto.png" alt="Fotel HENRY w profilu z nałożoną siatką proporcji Fibonacciego" />
         <div className={styles.manifestoShade} />
         <div className={styles.manifestoCopy}>
           <h2 key={activeManifesto}>
