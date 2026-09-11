@@ -3439,7 +3439,7 @@ button:hover .diagonal-arrow,
   position: absolute;
   overflow: hidden;
   margin: 0;
-  background: #10100f;
+  /* background: #10100f; */
 }
 
 .product-feature-box figure img {
@@ -3452,6 +3452,14 @@ button:hover .diagonal-arrow,
 .product-feature-box:hover figure img {
   transform: scale(1.035);
   filter: brightness(1.07);
+}
+
+.product-features--vesper-solo .product-feature-box figure img {
+  object-fit: contain;
+}
+
+.product-features--vesper-solo .product-features__grid-clip {
+  margin-top: 6vh;
 }
 
 .product-feature-box__caption {
@@ -3512,10 +3520,10 @@ button:hover .diagonal-arrow,
 }
 
 .product-feature-box.boxB .product-feature-box__caption {
-  left: 0;
-  top: 82%;
+  left: 0px;
+  top: 77%;
   width: 78%;
-  bottom: 0;
+  bottom: 0px;
 }
 
 .product-feature-box.boxC {
@@ -3533,10 +3541,10 @@ button:hover .diagonal-arrow,
 }
 
 .product-feature-box.boxC .product-feature-box__caption {
-  left: 0;
-  top: 77%;
+  left: 0px;
+  top: 60%;
   width: 84%;
-  bottom: 0;
+  bottom: 0px;
 }
 
 .product-feature-box.boxD {
@@ -3554,10 +3562,10 @@ button:hover .diagonal-arrow,
 }
 
 .product-feature-box.boxD .product-feature-box__caption {
-  left: 0;
-  top: 84%;
+  left: 0px;
+  top: 72%;
   width: 92%;
-  bottom: 0;
+  bottom: 0px;
 }
 
 .product-feature-box.boxE {
@@ -3583,6 +3591,14 @@ button:hover .diagonal-arrow,
   flex-direction: column;
   justify-content: end;
   text-align: right;
+}
+
+.product-features--vesper-solo .product-feature-box.boxE {
+  left: auto;
+  right: 0.49%;
+  top: 78.24%;
+  width: 64.05%;
+  height: 16.44%;
 }
 
 .product-feature-box.boxF {
@@ -3662,7 +3678,7 @@ button:hover .diagonal-arrow,
 }
 
 .product-materials {
-  padding: 18vh var(--product-gutter) 20vh;
+  padding: 18vh var(--product-gutter) 5vh;
 }
 
 .product-materials header h2 {
@@ -3884,16 +3900,48 @@ button:hover .diagonal-arrow,
 }
 
 .material-lab__equipment-preview figure {
+  position: relative;
   margin: 0;
   overflow: hidden;
   border-radius: 2px;
   background: #111;
+  aspect-ratio: 1.35 / 1;
 }
 
-.material-lab__equipment-preview figure img {
+.material-lab__equipment-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 1.35 / 1;
+  height: 100%;
   object-fit: cover;
+}
+
+.material-lab__equipment-img.is-current {
+  animation: materialCrossIn .7s var(--ease) both;
+}
+
+.material-lab__equipment-img.is-outgoing {
+  animation: materialCrossOut .7s var(--ease) both;
+}
+
+.material-lab__equipment-list--two-col {
+  flex-basis: 640px;
+  column-count: 2;
+  column-gap: clamp(24px, 3vw, 48px);
+}
+
+.material-lab__equipment-list--two-col button {
+  break-inside: avoid;
+}
+
+.material-lab__equipment-preview--fit figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.material-lab__equipment-preview--fit .material-lab__equipment-img {
+  object-fit: contain;
 }
 
 .product-arrangements {
@@ -4101,6 +4149,11 @@ button:hover .diagonal-arrow,
   .material-lab__equipment-list {
     flex-basis: auto;
     width: 100%;
+  }
+
+  .material-lab__equipment-list--two-col {
+    flex-basis: auto;
+    column-count: 1;
   }
 }
 

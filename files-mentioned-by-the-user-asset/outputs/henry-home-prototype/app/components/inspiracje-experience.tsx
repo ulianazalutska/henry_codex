@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import type { HenryCollection } from "../collections-data";
 
@@ -20,12 +19,19 @@ export function InspiracjeExperience({ collection }: { collection: HenryCollecti
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-inspiracje-reveal]"));
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      }),
+      (entries) => {
+        // Stagger by the order items intersect together (same scroll moment), not by their
+        // DOM index — the gallery is a CSS multi-column (fills top-to-bottom per column, not
+        // row by row), so index-based delays don't match which items actually appear together.
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .forEach((entry, batchIndex) => {
+            const target = entry.target as HTMLElement;
+            target.style.transitionDelay = `${(batchIndex % 3) * 90}ms`;
+            target.classList.add("is-visible");
+            observer.unobserve(target);
+          });
+      },
       { threshold: 0.1, rootMargin: "0px 0px -6%" }
     );
     nodes.forEach((node) => observer.observe(node));
@@ -51,7 +57,6 @@ export function InspiracjeExperience({ collection }: { collection: HenryCollecti
               className="inspiracje-gallery__item"
               data-inspiracje-reveal
               key={`${src}-${index}`}
-              style={{ transitionDelay: `${(index % 6) * 70}ms` } as CSSProperties}
             >
               <img src={src} alt={`${collection.name} — aranżacja ${index + 1}`} loading="lazy" />
             </figure>

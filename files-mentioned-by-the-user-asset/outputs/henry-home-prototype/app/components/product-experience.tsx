@@ -49,12 +49,56 @@ const featureCards = [
   },
 ];
 
+const vesperSoloStandardRoot = "/media/product-pages/vesper-solo/standard-equipment";
+
+const vesperSoloFeatureCards = [
+  {
+    title: "Naturalna skóra",
+    image: `${vesperSoloStandardRoot}/vesper-solo-standard-01-skora.webp`,
+    copy: "Naturalna skóra starzeje się z godnością, zyskując z czasem głębszy charakter i miękkość w dotyku.",
+  },
+  {
+    title: "Wykończenie drewna",
+    image: `${vesperSoloStandardRoot}/vesper-solo-standard-02-wykonczenie-drewna.webp`,
+    copy: "Drewniana podstawa wykończona ręcznie, z widoczną strukturą słojów podkreślającą rzemieślniczy charakter fotela.",
+  },
+  {
+    title: "Elektryczna regulacja",
+    image: `${vesperSoloStandardRoot}/vesper-solo-standard-03-elektryczna-regulacja.webp`,
+    copy: "Cicha, elektryczna regulacja oparcia i podnóżka pozwala płynnie przejść od pozycji siedzącej do pełnego relaksu.",
+  },
+  {
+    title: "Uchwyt na kubek",
+    image: `${vesperSoloStandardRoot}/vesper-solo-standard-04-uchwyt-na-kubek.webp`,
+    copy: "Dyskretnie wkomponowany uchwyt trzyma napój w zasięgu ręki, nie zaburzając czystej linii fotela.",
+  },
+  {
+    title: "Oświetlenie ambientowe",
+    image: `${vesperSoloStandardRoot}/vesper-solo-standard-05-oswietlenie-ambientowe.webp`,
+    copy: "Delikatne podświetlenie buduje nastrój seansu, zmiękczając kontury fotela w przyciemnionym pomieszczeniu.",
+  },
+];
+
 const equipmentOptions = [
   { key: "cup", number: "01", title: "Cup holder Hot & Cold", description: "Chłodzi lub podgrzewa napój.", image: "/media/personalizacja/cup.png" },
   { key: "heat", number: "02", title: "Mata grzewcza", description: "Ciepło w oparciu i siedzisku.", image: "/media/personalizacja/heat.png" },
   { key: "speaker", number: "03", title: "Dźwięk osobisty", description: "Głośniki zintegrowane z zagłówkiem.", image: "/media/personalizacja/detail-speaker.png" },
   { key: "holder", number: "04", title: "Uchwyt na telefon lub tablet", description: "Ekran zawsze w odpowiednim miejscu.", image: "/media/personalizacja/holder.png" },
   { key: "headrest", number: "05", title: "Elektryczny zagłówek", description: "Płynna regulacja dopasowana do sylwetki.", image: "/media/personalizacja/headrest.png" },
+];
+
+const vesperSoloEquipmentRoot = "/media/product-pages/vesper-solo/equipment";
+
+const vesperSoloEquipmentOptions = [
+  { key: "poduszka", number: "01", title: "Poduszka Henry", description: "Dodatkowe wsparcie i komfort w dowolnym miejscu fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-01-poduszka-henry.webp` },
+  { key: "stolik", number: "02", title: "Stolik Vesper", description: "Praktyczny stolik boczny dopasowany do bryły fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-02-stolik-vesper.webp` },
+  { key: "zaglowek", number: "03", title: "Regulacja zagłówka Vesper", description: "Precyzyjne dopasowanie podparcia głowy i szyi.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-03-regulacja-zaglowka.webp` },
+  { key: "podgrzewanie", number: "04", title: "Podgrzewanie oparcia i siedziska", description: "Delikatne ciepło w oparciu i siedzisku.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-04-podgrzewanie.webp` },
+  { key: "grzanie-chlodzenie", number: "05", title: "Funkcja grzania i chłodzenia", description: "Dwukierunkowa regulacja temperatury na życzenie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-05-grzanie-chlodzenie.webp` },
+  { key: "oswietlenie", number: "06", title: "Dodatkowe oświetlenie ambientowe", description: "Subtelne podświetlenie budujące nastrój wieczorem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-06-oswietlenie.webp` },
+  { key: "glosnik", number: "07", title: "Głośnik", description: "Dźwięk osobisty zintegrowany z fotelem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-07-glosnik.webp` },
+  { key: "schowek", number: "08", title: "Schowek w podłokietniku", description: "Miejsce na drobiazgi zawsze pod ręką.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-08-schowek.webp` },
+  { key: "niezalezne-mechanizmy", number: "09", title: "Niezależne mechanizmy regulacji", description: "Oparcie i podnóżek regulowane niezależnie od siebie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-09-niezalezne-mechanizmy.webp` },
 ];
 
 const novaLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
@@ -87,8 +131,12 @@ const materialTabs: Array<{ key: MaterialKey; label: string }> = [
 // the last box, measured in JS since that can't be derived from the box percentages alone.
 const featureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 103.68, 94.68];
 
-function featureGridBottomFraction(boxCount: number) {
-  return Math.max(...featureBoxBottomPercent.slice(0, boxCount)) / 100;
+// Vesper Solo drops box F and repositions box E (see .product-features--vesper-solo
+// .product-feature-box.boxE in globals.css), so its bottom edge is 78.24 + 16.44 = 94.68.
+const vesperFeatureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 94.68];
+
+function featureGridBottomFraction(boxCount: number, boundaries: number[] = featureBoxBottomPercent) {
+  return Math.max(...boundaries.slice(0, boxCount)) / 100;
 }
 
 export function ProductExperience({ collection, product, isReady, isHero }: { collection: HenryCollection; product: HenryProduct; isReady: boolean; isHero: boolean }) {
@@ -104,17 +152,20 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
   const featureGridRef = useRef<HTMLDivElement>(null);
   const [featureGridClipHeight, setFeatureGridClipHeight] = useState<number>();
-  const featureBoxCount = isHero ? featureCards.length : productPhotoCards.length;
+  const isVesperSolo = product.slug === "vesper-solo";
+  const featuresReady = isReady || isVesperSolo;
+  const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : featureCards;
+  const featureBoxCount = isHero ? activeFeatureCards.length : productPhotoCards.length;
 
   useEffect(() => {
     const grid = featureGridRef.current;
     if (!grid) return;
-    const bottomFraction = featureGridBottomFraction(featureBoxCount);
+    const bottomFraction = featureGridBottomFraction(featureBoxCount, isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : featureBoxBottomPercent);
     const measure = () => setFeatureGridClipHeight(grid.offsetWidth * (2475 / 1313) * bottomFraction);
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [featureBoxCount]);
+  }, [featureBoxCount, isHero, isVesperSolo]);
 
   const slides = useMemo(() => {
     if (isReady) return novaSlides;
@@ -137,7 +188,8 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   }), [isReady, product.leatherSwatches]);
   const activeMaterialLabel = materialTabs.find((item) => item.key === materialKey)?.label ?? materialTabs[0].label;
   const activeSwatches = materialSwatches[materialKey];
-  const activeEquipmentData = equipmentOptions[Math.min(activeEquipmentOption, equipmentOptions.length - 1)];
+  const activeEquipmentOptions = isVesperSolo ? vesperSoloEquipmentOptions : equipmentOptions;
+  const activeEquipmentData = activeEquipmentOptions[Math.min(activeEquipmentOption, activeEquipmentOptions.length - 1)];
   const activeSwatchData = activeSwatches[Math.min(activeSwatch, activeSwatches.length - 1)] as MaterialSwatch | undefined;
   const [outgoingPreview, setOutgoingPreview] = useState<string | null>(null);
   const previousPreviewRef = useRef<string | undefined>(activeSwatchData?.previewImg);
@@ -152,6 +204,20 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     }
     previousPreviewRef.current = nextPreview;
   }, [activeSwatchData?.previewImg]);
+
+  const [outgoingEquipment, setOutgoingEquipment] = useState<string | null>(null);
+  const previousEquipmentRef = useRef<string | undefined>(activeEquipmentData.image);
+
+  useEffect(() => {
+    const nextImage = activeEquipmentData.image;
+    if (previousEquipmentRef.current && previousEquipmentRef.current !== nextImage) {
+      setOutgoingEquipment(previousEquipmentRef.current);
+      const timeout = setTimeout(() => setOutgoingEquipment(null), 700);
+      previousEquipmentRef.current = nextImage;
+      return () => clearTimeout(timeout);
+    }
+    previousEquipmentRef.current = nextImage;
+  }, [activeEquipmentData.image]);
 
   const prevIndex = (activeSlide - 1 + slides.length) % slides.length;
   const nextIndex = (activeSlide + 1) % slides.length;
@@ -224,6 +290,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                 <span className="product-carousel__peek-num">{String(prevIndex + 1).padStart(2, "0")}<i aria-hidden="true" /></span>
               </button>
             )}
+            {/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex -- drag/swipe carousel surface: no native element supports pointer-drag + arrow-key slide navigation together, so this stays a focusable div by design */}
             <div
               className="product-carousel__stage"
               onPointerDown={handlePointerDown}
@@ -243,6 +310,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                 </figure>
               ))}
             </div>
+            {/* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
             {slides.length > 1 && (
               <button type="button" className="product-carousel__peek product-carousel__peek--next" onClick={() => moveSlide(1)} aria-label={`Pokaż zdjęcie ${nextIndex + 1}`}>
                 <img src={slides[nextIndex].src} alt="" draggable={false} />
@@ -266,8 +334,8 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
           </div>
           {materialKey === "combinations" ? (
             <div className="material-lab__equipment">
-              <div className="material-lab__equipment-list" role="tablist" aria-label="Opcje wyposażenia">
-                {equipmentOptions.map((item, index) => (
+              <div className={`material-lab__equipment-list${isVesperSolo ? " material-lab__equipment-list--two-col" : ""}`} role="tablist" aria-label="Opcje wyposażenia">
+                {activeEquipmentOptions.map((item, index) => (
                   <button
                     className={index === activeEquipmentOption ? "is-active" : ""}
                     onClick={() => setActiveEquipmentOption(index)}
@@ -280,8 +348,13 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                   </button>
                 ))}
               </div>
-              <article id="product-equipment-preview" className="material-lab__equipment-preview" role="tabpanel">
-                <figure key={activeEquipmentData.key}><img src={activeEquipmentData.image} alt={activeEquipmentData.title} /></figure>
+              <article id="product-equipment-preview" className={`material-lab__equipment-preview${isVesperSolo ? " material-lab__equipment-preview--fit" : ""}`} role="tabpanel">
+                <figure>
+                  {outgoingEquipment && outgoingEquipment !== activeEquipmentData.image && (
+                    <img key={`prev-${outgoingEquipment}`} className="material-lab__equipment-img is-outgoing" src={outgoingEquipment} alt="" aria-hidden="true" />
+                  )}
+                  <img key={`current-${activeEquipmentData.image}`} className="material-lab__equipment-img is-current" src={activeEquipmentData.image} alt={activeEquipmentData.title} />
+                </figure>
               </article>
             </div>
           ) : activeSwatches.length > 0 ? (
@@ -312,7 +385,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
       </section>
       )}
 
-      <section className="product-features">
+      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}`}>
         {isHero && (
           <header data-product-reveal>
             <h2>Technologia która znika</h2>
@@ -321,10 +394,10 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         <div className="product-features__grid-clip" style={{ height: featureGridClipHeight ? `${featureGridClipHeight}px` : undefined }}>
         <div className="product-features__grid" ref={featureGridRef}>
           {isHero ? (
-            featureCards.map((feature, index) => (
-              <article className={`product-feature-box box${String.fromCharCode(65 + index)}${isReady ? "" : " is-placeholder"}`} data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
+            activeFeatureCards.map((feature, index) => (
+              <article className={`product-feature-box box${String.fromCharCode(65 + index)}${featuresReady ? "" : " is-placeholder"}`} data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
                 <figure>
-                  {isReady ? <img src={feature.image} alt={feature.title} /> : <><span>H</span><small>Materiały w przygotowaniu</small></>}
+                  {featuresReady ? <img src={feature.image} alt={feature.title} /> : <><span>H</span><small>Materiały w przygotowaniu</small></>}
                 </figure>
                 <div className="product-feature-box__caption">
                   <h3>{feature.title}</h3>
@@ -347,7 +420,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
       </section>
 
-      <Link href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}`)}`} className={`product-arrangements${isHero ? "" : " product-arrangements--tight"}`} data-product-reveal>
+      <Link id="aranzacje" href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}#aranzacje`)}`} className={`product-arrangements${isHero ? "" : " product-arrangements--tight"}`} data-product-reveal>
         <div className="product-arrangements__frame">
           <img className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${collection.name} w aranżacjach`} />
           <div className="product-arrangements__veil" />
