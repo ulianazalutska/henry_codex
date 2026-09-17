@@ -148,7 +148,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     { title: "W aranżacji", copy: "Zobacz więcej w sekcji Aranżacje poniżej." },
   ];
   const [activeSlide, setActiveSlide] = useState(0);
-  const [materialKey, setMaterialKey] = useState<MaterialKey>("leather");
+  const [materialKey, setMaterialKey] = useState<MaterialKey>("combinations");
   const [activeSwatch, setActiveSwatch] = useState(0);
   const [activeEquipmentOption, setActiveEquipmentOption] = useState(0);
   const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
