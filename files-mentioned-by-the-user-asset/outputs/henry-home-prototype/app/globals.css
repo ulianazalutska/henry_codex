@@ -3677,6 +3677,36 @@ button:hover .diagonal-arrow,
   color: var(--gold);
 }
 
+.material-lab__technical {
+  width: 100%;
+  min-height: 280px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #090909;
+}
+
+.material-lab__technical img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.material-lab__technical.is-placeholder {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  border: 1px solid rgba(217, 163, 65, .14);
+  color: #716a63;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 9px;
+}
+
+.material-lab__technical.is-placeholder small {
+  color: var(--gold);
+}
+
 .product-materials {
   padding: 18vh var(--product-gutter) 5vh;
 }
@@ -3747,7 +3777,7 @@ button:hover .diagonal-arrow,
   aspect-ratio: 1;
   overflow: hidden;
   border: 1px solid transparent;
-  border-radius: 2px;
+  border-radius: 50%;
   transition: border-color .3s ease, transform .4s var(--ease);
 }
 
@@ -3801,6 +3831,7 @@ button:hover .diagonal-arrow,
 
 .material-lab__preview figcaption span {
   color: #77716b;
+  font-size: 12px;
 }
 
 .material-lab__preview figcaption strong {

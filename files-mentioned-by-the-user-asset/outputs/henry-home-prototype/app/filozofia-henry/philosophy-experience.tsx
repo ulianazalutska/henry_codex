@@ -10,6 +10,8 @@ const sketchGalleryImages = [
   "/media/filozofia-henry/sketch-gallery-2.png",
   "/media/filozofia-henry/sketch-gallery-3.png",
   "/media/filozofia-henry/sketch-gallery-4-gmina-logo.png",
+  "/media/filozofia-henry/sketch-gallery-5-foto2.jpg",
+  "/media/filozofia-henry/sketch-gallery-6-foto3.png",
 ];
 
 // Karuzela historii tymczasowo wyłączona (patrz sekcja "Dziedzictwo kina" niżej) — dane zachowane na wypadek powrotu.
@@ -67,9 +69,9 @@ const timeline = [
 ];
 
 const values = [
-  { title: "Niezawodność", image: "/media/filozofia-henry/value-forma.png" },
-  { title: "Komfort", image: "/media/filozofia-henry/value-komfort.png" },
-  { title: "Precyzja", image: "/media/filozofia-henry/value-trwalosc.png" },
+  { title: "Niezawodność", image: "/media/filozofia-henry/value-niezawodnosc.png" },
+  { title: "Komfort", image: "/media/filozofia-henry/value-komfort-foto5.png" },
+  { title: "Precyzja", image: "/media/filozofia-henry/value-precyzja-foto4.png" },
 ];
 
 const manifestoMessages = [
@@ -338,11 +340,7 @@ export function PhilosophyExperience() {
       </section>
 
       <figure className={styles.hero} data-philosophy-reveal>
-        <picture>
-          <source media="(max-width: 640px)" srcSet="/media/filozofia-henry/hero-mobile.png" />
-          <source media="(max-width: 980px)" srcSet="/media/filozofia-henry/hero-tablet.png" />
-          <img src="/media/filozofia-henry/hero.png" alt="Rzędy zabytkowych foteli kinowych oświetlonych światłem projektora" />
-        </picture>
+        <img src="/media/filozofia-henry/hero-foto7.png" alt="Rzędy zabytkowych foteli kinowych oświetlonych światłem projektora" />
       </figure>
 
       <section className={styles.designed} data-philosophy-reveal>
@@ -396,11 +394,11 @@ export function PhilosophyExperience() {
           />
         </div>
         <div className={styles.cinemaGridText}>
-          <h2>25 lat dla największych kin na świecie</h2>
+          <h2>Prawdopodobnie siedziałeś na naszym fotelu…</h2>
           <p>
             HENRY wyrasta z ponad 25 lat doświadczenia w projektowaniu i produkcji foteli kinowych. Przez lata
-            tworzyliśmy rozwiązania dla największych operatorów kinowych na świecie, w tym dla Cineworld,
-            dostarczając ponad 1,5 miliona foteli do obiektów w wielu krajach.
+            tworzyliśmy rozwiązania dla największych operatorów kinowych na świecie, takich jak Cineworld, Pathe,
+            Cineplexx, Helios, Cinema City, dostarczając blisko 2 miliony foteli do obiektów w wielu krajach.
           </p>
         </div>
       </section>
@@ -425,7 +423,7 @@ export function PhilosophyExperience() {
       </p>
 
       <section className={styles.manifesto} data-philosophy-reveal>
-        <img src="/media/filozofia-henry/manifesto.png" alt="Fotel HENRY w profilu z nałożoną siatką proporcji Fibonacciego" />
+        <img src="/media/filozofia-henry/manifesto-transparent.png" alt="Fotel HENRY w profilu z nałożoną siatką proporcji Fibonacciego" />
         <div className={styles.manifestoShade} />
         <div className={styles.manifestoCopy}>
           <h2 key={activeManifesto}>

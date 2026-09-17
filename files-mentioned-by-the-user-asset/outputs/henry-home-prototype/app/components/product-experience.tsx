@@ -5,7 +5,7 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
-type MaterialKey = "leather" | "wood" | "quilting" | "combinations";
+type MaterialKey = "leather" | "wood" | "quilting" | "combinations" | "technical";
 type MaterialSwatch = { name: string; swatchImg: string; previewImg: string };
 
 const novaRoot = "/media/product-pages/nova-solo";
@@ -90,15 +90,16 @@ const equipmentOptions = [
 const vesperSoloEquipmentRoot = "/media/product-pages/vesper-solo/equipment";
 
 const vesperSoloEquipmentOptions = [
-  { key: "poduszka", number: "01", title: "Poduszka Henry", description: "Dodatkowe wsparcie i komfort w dowolnym miejscu fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-01-poduszka-henry.webp` },
-  { key: "stolik", number: "02", title: "Stolik Vesper", description: "Praktyczny stolik boczny dopasowany do bryły fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-02-stolik-vesper.webp` },
-  { key: "zaglowek", number: "03", title: "Regulacja zagłówka Vesper", description: "Precyzyjne dopasowanie podparcia głowy i szyi.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-03-regulacja-zaglowka.webp` },
-  { key: "podgrzewanie", number: "04", title: "Podgrzewanie oparcia i siedziska", description: "Delikatne ciepło w oparciu i siedzisku.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-04-podgrzewanie.webp` },
-  { key: "grzanie-chlodzenie", number: "05", title: "Funkcja grzania i chłodzenia", description: "Dwukierunkowa regulacja temperatury na życzenie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-05-grzanie-chlodzenie.webp` },
-  { key: "oswietlenie", number: "06", title: "Dodatkowe oświetlenie ambientowe", description: "Subtelne podświetlenie budujące nastrój wieczorem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-06-oswietlenie.webp` },
-  { key: "glosnik", number: "07", title: "Głośnik", description: "Dźwięk osobisty zintegrowany z fotelem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-07-glosnik.webp` },
-  { key: "schowek", number: "08", title: "Schowek w podłokietniku", description: "Miejsce na drobiazgi zawsze pod ręką.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-08-schowek.webp` },
-  { key: "niezalezne-mechanizmy", number: "09", title: "Niezależne mechanizmy regulacji", description: "Oparcie i podnóżek regulowane niezależnie od siebie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-09-niezalezne-mechanizmy.webp` },
+  { key: "henry-command", number: "01", title: "HENRY Command", description: "Inteligentny panel sterowania. Centralne sterowanie funkcjami fotela z poziomu intuicyjnego ekranu dotykowego. Pozycja fotela, pamięć ustawień, masaż, ogrzewanie i Ambient Lighting — wszystko w jednym miejscu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-00-henry-command.png` },
+  { key: "poduszka", number: "02", title: "Poduszka Henry", description: "Dodatkowe wsparcie i komfort w dowolnym miejscu fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-01-poduszka-henry.webp` },
+  { key: "stolik", number: "03", title: "Stolik Vesper", description: "Praktyczny stolik boczny dopasowany do bryły fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-02-stolik-vesper.webp` },
+  { key: "zaglowek", number: "04", title: "Regulacja zagłówka Vesper", description: "Precyzyjne dopasowanie podparcia głowy i szyi.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-03-regulacja-zaglowka.webp` },
+  { key: "podgrzewanie", number: "05", title: "Podgrzewanie oparcia i siedziska", description: "Delikatne ciepło w oparciu i siedzisku.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-04-podgrzewanie.webp` },
+  { key: "grzanie-chlodzenie", number: "06", title: "Funkcja grzania i chłodzenia", description: "Dwukierunkowa regulacja temperatury na życzenie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-05-grzanie-chlodzenie.webp` },
+  { key: "oswietlenie", number: "07", title: "Dodatkowe oświetlenie ambientowe", description: "Subtelne podświetlenie budujące nastrój wieczorem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-06-oswietlenie.webp` },
+  { key: "glosnik", number: "08", title: "Głośnik", description: "Dźwięk osobisty zintegrowany z fotelem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-07-glosnik.webp` },
+  { key: "schowek", number: "09", title: "Schowek w podłokietniku", description: "Miejsce na drobiazgi zawsze pod ręką.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-08-schowek.webp` },
+  { key: "niezalezne-mechanizmy", number: "10", title: "Niezależne mechanizmy regulacji", description: "Oparcie i podnóżek regulowane niezależnie od siebie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-09-niezalezne-mechanizmy.webp` },
 ];
 
 const novaLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
@@ -116,11 +117,12 @@ const novaQuiltingSwatches: MaterialSwatch[] = ["Diamond", "Channel", "Chevron",
   return { name, swatchImg: file, previewImg: file };
 });
 
-const materialTabs: Array<{ key: MaterialKey; label: string }> = [
-  { key: "leather", label: "Skóra" },
-  { key: "wood", label: "Drewno" },
-  { key: "quilting", label: "Pikowanie" },
+const materialTabs: Array<{ key: MaterialKey; label: string; captionLabel?: string }> = [
   { key: "combinations", label: "Opcje wyposażenia" },
+  { key: "leather", label: "Barwa skóry", captionLabel: "Naturalna włoska skóra Mezzo Fiore" },
+  { key: "wood", label: "Wykończenie drewna" },
+  { key: "quilting", label: "Styl pikowania" },
+  { key: "technical", label: "Wymiary" },
 ];
 
 // Bottom edge (top% + height%) of each mosaic slot box{A..F} in .product-feature-box,
@@ -185,8 +187,11 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     wood: isReady ? novaWoodSwatches : [],
     quilting: isReady ? novaQuiltingSwatches : [],
     combinations: [],
+    technical: [],
   }), [isReady, product.leatherSwatches]);
-  const activeMaterialLabel = materialTabs.find((item) => item.key === materialKey)?.label ?? materialTabs[0].label;
+  const activeMaterial = materialTabs.find((item) => item.key === materialKey) ?? materialTabs[0];
+  const activeMaterialLabel = activeMaterial.label;
+  const activeMaterialCaption = activeMaterial.captionLabel ?? activeMaterial.label;
   const activeSwatches = materialSwatches[materialKey];
   const activeEquipmentOptions = isVesperSolo ? vesperSoloEquipmentOptions : equipmentOptions;
   const activeEquipmentData = activeEquipmentOptions[Math.min(activeEquipmentOption, activeEquipmentOptions.length - 1)];
@@ -321,6 +326,41 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
       </section>
 
+      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}`}>
+        {isHero && (
+          <header data-product-reveal>
+            <h2>Luksus w standardzie</h2>
+          </header>
+        )}
+        <div className="product-features__grid-clip" style={{ height: featureGridClipHeight ? `${featureGridClipHeight}px` : undefined }}>
+        <div className="product-features__grid" ref={featureGridRef}>
+          {isHero ? (
+            activeFeatureCards.map((feature, index) => (
+              <article className={`product-feature-box box${String.fromCharCode(65 + index)}${featuresReady ? "" : " is-placeholder"}`} data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
+                <figure>
+                  {featuresReady ? <img src={feature.image} alt={feature.title} /> : <><span>H</span><small>Materiały w przygotowaniu</small></>}
+                </figure>
+                <div className="product-feature-box__caption">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.copy}</p>
+                </div>
+              </article>
+            ))
+          ) : (
+            productPhotoCards.map((card, index) => (
+              <article className={`product-feature-box box${String.fromCharCode(65 + index)}`} data-product-reveal key={card.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
+                <figure><img src={product.image} alt={product.name} /></figure>
+                <div className="product-feature-box__caption">
+                  <h3>{card.title}</h3>
+                  <p>{card.copy}</p>
+                </div>
+              </article>
+            ))
+          )}
+        </div>
+        </div>
+      </section>
+
       {isHero && (
       <section className="product-materials">
         <header data-product-reveal>
@@ -357,6 +397,10 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                 </figure>
               </article>
             </div>
+          ) : materialKey === "technical" ? (
+            <figure className={`material-lab__technical${isReady ? "" : " is-placeholder"}`}>
+              {isReady ? <img src={`${novaRoot}/dimensions.png`} alt="Nova Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>H</span><small>Rysunek techniczny w przygotowaniu</small></>}
+            </figure>
           ) : activeSwatches.length > 0 ? (
             <div className="material-lab__content">
               <div className="material-lab__swatches">
@@ -375,7 +419,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                     <img key={`current-${activeSwatchData.previewImg}`} className="material-lab__preview-img is-current" src={activeSwatchData.previewImg} alt={`${product.name} — ${activeSwatchData.name}`} />
                   )}
                 </div>
-                <figcaption key={activeSwatchData?.name}><span>{activeMaterialLabel}</span><strong>{activeSwatchData?.name}</strong></figcaption>
+                <figcaption key={activeSwatchData?.name}><span>{activeMaterialCaption}</span><strong>{activeSwatchData?.name}</strong></figcaption>
               </figure>
             </div>
           ) : (
@@ -385,41 +429,6 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
       </section>
       )}
 
-      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}`}>
-        {isHero && (
-          <header data-product-reveal>
-            <h2>Technologia która znika</h2>
-          </header>
-        )}
-        <div className="product-features__grid-clip" style={{ height: featureGridClipHeight ? `${featureGridClipHeight}px` : undefined }}>
-        <div className="product-features__grid" ref={featureGridRef}>
-          {isHero ? (
-            activeFeatureCards.map((feature, index) => (
-              <article className={`product-feature-box box${String.fromCharCode(65 + index)}${featuresReady ? "" : " is-placeholder"}`} data-product-reveal key={feature.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
-                <figure>
-                  {featuresReady ? <img src={feature.image} alt={feature.title} /> : <><span>H</span><small>Materiały w przygotowaniu</small></>}
-                </figure>
-                <div className="product-feature-box__caption">
-                  <h3>{feature.title}</h3>
-                  <p>{feature.copy}</p>
-                </div>
-              </article>
-            ))
-          ) : (
-            productPhotoCards.map((card, index) => (
-              <article className={`product-feature-box box${String.fromCharCode(65 + index)}`} data-product-reveal key={card.title} style={{ "--reveal-delay": `${(index % 2) * 110}ms` } as CSSProperties}>
-                <figure><img src={product.image} alt={product.name} /></figure>
-                <div className="product-feature-box__caption">
-                  <h3>{card.title}</h3>
-                  <p>{card.copy}</p>
-                </div>
-              </article>
-            ))
-          )}
-        </div>
-        </div>
-      </section>
-
       <Link id="aranzacje" href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}#aranzacje`)}`} className={`product-arrangements${isHero ? "" : " product-arrangements--tight"}`} data-product-reveal>
         <div className="product-arrangements__frame">
           <img className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${collection.name} w aranżacjach`} />
@@ -427,15 +436,6 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
         <h2 className="product-arrangements__heading">Zobacz {collection.name}<br />w aranżacjach <span className="diagonal-arrow" aria-hidden="true" /></h2>
       </Link>
-
-      <section className="product-specification">
-        <header data-product-reveal>
-          <h2>Technical <em>features</em></h2>
-        </header>
-        <figure className={isReady ? "" : "is-placeholder"} data-product-reveal>
-          {isReady ? <img src={`${novaRoot}/dimensions.png`} alt="Nova Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>Rysunek techniczny</span><small>W przygotowaniu</small></>}
-        </figure>
-      </section>
     </>
   );
 }
