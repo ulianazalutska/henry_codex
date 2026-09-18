@@ -41,6 +41,11 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
       </div>
 
       <section className="product-catalogue">
+        <Link href={`/kolekcje/${collection.slug}/inspiracje`} className="collection-arrangements">
+          <img className="collection-arrangements__img" src={collection.inspirationImages?.[0] || collection.detail} alt={`${collection.name} w aranżacjach`} />
+          <div className="collection-arrangements__veil" />
+          <h2 className="collection-arrangements__heading">Zobacz {collection.name}<br />w aranżacjach <span className="diagonal-arrow" aria-hidden="true" /></h2>
+        </Link>
         <div className="product-gallery">
           {collection.products.map((product, index) => (
             <Link className={`product-pair ${index % 2 ? "product-pair--reverse" : ""} ${product.catalogueScene && product.catalogueCutout ? "is-ready" : "is-placeholder"}`} href={`/kolekcje/${collection.slug}/${product.slug}`} key={product.slug}>

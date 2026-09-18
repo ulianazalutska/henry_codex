@@ -250,6 +250,17 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     setActiveSlide((prev) => (prev + direction + slides.length) % slides.length);
   };
 
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+
+  useEffect(() => {
+    if (slides.length <= 1 || isCarouselPaused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [slides.length, isCarouselPaused]);
+
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.button !== 0) return;
     dragState.current = { pointerId: event.pointerId, startX: event.clientX };
@@ -287,7 +298,17 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
           <h2>Wybierz swój nastrój</h2>
           <p>{isReady ? "Trzy interpretacje tej samej bryły. Zmieniaj kolorystykę i zobacz, jak Nova Solo reaguje na charakter wnętrza." : "Kolejne wizualizacje modelu pojawią się tutaj po przygotowaniu materiałów."}</p>
         </header>
-        <div className="product-carousel" data-product-reveal aria-roledescription="carousel" aria-label={`Wizualizacje ${product.name}`}>
+        <div
+          className="product-carousel"
+          data-product-reveal
+          aria-roledescription="carousel"
+          aria-label={`Wizualizacje ${product.name}`}
+          onMouseEnter={() => setIsCarouselPaused(true)}
+          onMouseLeave={() => setIsCarouselPaused(false)}
+          onPointerDown={() => setIsCarouselPaused(true)}
+          onPointerUp={() => setIsCarouselPaused(false)}
+          onPointerCancel={() => setIsCarouselPaused(false)}
+        >
           <div className="product-carousel__viewport">
             {slides.length > 1 && (
               <button type="button" className="product-carousel__peek product-carousel__peek--prev" onClick={() => moveSlide(-1)} aria-label={`Pokaż zdjęcie ${prevIndex + 1}`}>
