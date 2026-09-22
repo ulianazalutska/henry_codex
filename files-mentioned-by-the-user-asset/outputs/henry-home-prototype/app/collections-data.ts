@@ -2,6 +2,7 @@ export type HenryLeatherSwatch = {
   name: string;
   swatch: string;
   preview: string;
+  reference?: string;
 };
 
 export type HenryProduct = {
@@ -14,6 +15,8 @@ export type HenryProduct = {
   catalogueCutout?: string;
   galleryImages?: string[];
   leatherSwatches?: HenryLeatherSwatch[];
+  woodSwatches?: HenryLeatherSwatch[];
+  quiltingSwatches?: HenryLeatherSwatch[];
   arrangementsImage?: string;
   description: string;
 };
@@ -56,6 +59,13 @@ export const collections: HenryCollection[] = [
         { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-10.webp" },
         { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-11.webp" },
         { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-12.webp" },
+      ], woodSwatches: [
+        { name: "Smoked Ebony Gloss", swatch: "/media/product-pages/vesper-solo/materials/wood/swatch-smoked-ebony-gloss.webp", preview: "/media/product-pages/vesper-solo/materials/wood/preview-smoked-ebony-gloss.webp", reference: "/media/product-pages/vesper-solo/materials/wood/wood-leather-reference.webp" },
+      ], quiltingSwatches: [
+        { name: "Grand Diamond", swatch: "/media/product-pages/vesper-solo/materials/quilting/swatch-grand-diamond.webp", preview: "/media/product-pages/vesper-solo/materials/quilting/preview-grand-diamond.webp" },
+        { name: "Horizontal Channel", swatch: "/media/product-pages/vesper-solo/materials/quilting/swatch-horizontal-channel.webp", preview: "/media/product-pages/vesper-solo/materials/quilting/preview-horizontal-channel.webp" },
+        { name: "Square Grid", swatch: "/media/product-pages/vesper-solo/materials/quilting/swatch-square-grid.webp", preview: "/media/product-pages/vesper-solo/materials/quilting/preview-square-grid.webp" },
+        { name: "Vertical Channel", swatch: "/media/product-pages/vesper-solo/materials/quilting/swatch-vertical-channel.webp", preview: "/media/product-pages/vesper-solo/materials/quilting/preview-vertical-channel.webp" },
       ], arrangementsImage: "/media/product-pages/vesper-solo/vesper-solo-arrangements.webp", description: "Indywidualny fotel kinowy o pełnej, otulającej formie." },
       { name: "Vesper Duo", slug: "vesper-duo", image: "/media/atelier-ivory.webp", catalogueImage: "/media/collection-pages/atelier-vesper-duo.webp", description: "Dwa miejsca połączone wspólnym rytmem i detalem." },
       { name: "Vesper Ensemble", slug: "vesper-ensemble", image: "/media/atelier-caramel-room.webp", catalogueImage: "/media/collection-pages/atelier-vesper-ensemble.webp", catalogueFit: "contain", description: "Modułowy układ dla większej, prywatnej strefy seansu." },
@@ -87,6 +97,14 @@ export const collections: HenryCollection[] = [
         { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-10.png" },
         { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-11.png" },
         { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-12.png" },
+      ], woodSwatches: [
+        { name: "Smoked Ebony Gloss", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-smoked-ebony-gloss.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-smoked-ebony-gloss.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-smoked-ebony-gloss.webp" },
+        { name: "American Walnut Satin", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-american-walnut-satin.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-american-walnut-satin.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-american-walnut-satin.webp" },
+        { name: "Natural Oak Satin", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-natural-oak-satin.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-natural-oak-satin.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-natural-oak-satin.webp" },
+      ], quiltingSwatches: [
+        { name: "Horizontal Channel", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-horizontal-channel.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-horizontal-channel.webp" },
+        { name: "Square Grid", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-square-grid.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-square-grid.webp" },
+        { name: "Vertical Channel", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-vertical-channel.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-vertical-channel.webp" },
       ] },
       { name: "Nova Duo", slug: "nova-duo", image: "/media/studio-cinema-front.webp", catalogueImage: "/media/collection-pages/studio-nova-duo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-duo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-duo-cutout.png", description: "Kameralna konfiguracja dla dwojga." },
       { name: "Nova Ensemble", slug: "nova-ensemble", image: "/media/studio-cinema-wide.webp", catalogueImage: "/media/collection-pages/studio-nova-ensemble.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-ensemble-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-ensemble-cutout.png", description: "Elastyczny układ dla wielorzędowych sal kinowych." },
@@ -118,6 +136,16 @@ export const collections: HenryCollection[] = [
         { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-10.webp" },
         { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-11.webp" },
         { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-12.webp" },
+      ], woodSwatches: [
+        { name: "American Walnut Satin", swatch: "/media/product-pages/solaris-solo/materials/wood/swatch-american-walnut-satin.webp", preview: "/media/product-pages/solaris-solo/materials/wood/preview-american-walnut-satin.webp", reference: "/media/product-pages/solaris-solo/materials/wood/reference-american-walnut-satin.webp" },
+        { name: "Smoked Ebony Gloss", swatch: "/media/product-pages/solaris-solo/materials/wood/swatch-smoked-ebony-gloss.webp", preview: "/media/product-pages/solaris-solo/materials/wood/preview-smoked-ebony-gloss.webp", reference: "/media/product-pages/solaris-solo/materials/wood/reference-smoked-ebony-gloss.webp" },
+        { name: "Natural Oak Satin", swatch: "/media/product-pages/solaris-solo/materials/wood/swatch-natural-oak-satin.webp", preview: "/media/product-pages/solaris-solo/materials/wood/preview-natural-oak-satin.webp", reference: "/media/product-pages/solaris-solo/materials/wood/reference-natural-oak-satin.webp" },
+      ], quiltingSwatches: [
+        { name: "Vertical Channel", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-vertical-channel.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-vertical-channel.webp" },
+        { name: "Square Grid", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-square-grid.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-square-grid.webp" },
+        { name: "Deep Button", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-deep-button.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-deep-button.webp" },
+        { name: "Horizontal Channel", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-horizontal-channel.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-horizontal-channel.webp" },
+        { name: "Diamond", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-diamond.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-diamond.webp" },
       ], description: "Obrotowy fotel wypoczynkowy o miękkiej, eleganckiej bryle." },
       { name: "Solaris Duo", slug: "solaris-duo", image: "/media/lounge-ivory-pair.webp", catalogueImage: "/media/collection-pages/lounge-solaris-duo.webp", catalogueFit: "contain", description: "Komfort dla dwojga w lekkiej, salonowej kompozycji." },
       { name: "Solaris Chaise", slug: "solaris-chaise", image: "/media/lounge-pair.webp", catalogueImage: "/media/collection-pages/lounge-solaris-chaise.webp", description: "Wydłużona forma do odpoczynku, filmu i muzyki." },

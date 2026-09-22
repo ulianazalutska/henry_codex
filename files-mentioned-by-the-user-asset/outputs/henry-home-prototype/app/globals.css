@@ -496,10 +496,7 @@ blockquote {
 }
 
 .cinematic-hero {
-  --hero-intro-opacity: 1;
-  --hero-cue-opacity: 1;
-  --hero-progress: .04;
-  height: 470vh;
+  height: 100vh;
   background: var(--ink);
 }
 
@@ -512,18 +509,9 @@ blockquote {
 }
 
 .cinematic-hero__frame {
-  --hero-scale: 1;
-  --hero-rotate: 0deg;
-  --hero-shift: 0vh;
-  --hero-radius: 0px;
-  --hero-dim: 0;
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border-radius: var(--hero-radius);
-  transform: translate3d(0, var(--hero-shift), 0) scale(var(--hero-scale)) rotate(var(--hero-rotate));
-  transform-origin: 50% 48%;
-  will-change: transform, border-radius;
 }
 
 .cinematic-hero__video {
@@ -537,7 +525,6 @@ blockquote {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(0, 0, 0, var(--hero-dim)), rgba(0, 0, 0, var(--hero-dim))),
     linear-gradient(90deg, rgba(0, 0, 0, .38), transparent 46%),
     linear-gradient(0deg, rgba(0, 0, 0, .38), transparent 36%);
   pointer-events: none;
@@ -547,7 +534,6 @@ blockquote {
   position: absolute;
   left: clamp(22px, 6vw, 92px);
   bottom: 15vh;
-  opacity: var(--hero-intro-opacity);
 }
 
 .hero-intro p {
@@ -570,81 +556,14 @@ blockquote {
   font-size: 105px;
 }
 
-.hero-moment {
-  position: absolute;
-  left: clamp(22px, 6vw, 92px);
-  top: 53%;
-  min-height: 60px;
-}
-
-.hero-moment p {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin: 0;
-  font-size: clamp(1.3rem, 2.4vw, 2.7rem);
-  font-weight: 300;
-  letter-spacing: -.04em;
-  animation: heroMomentIn .9s var(--ease) both;
-}
-
-.hero-moment p span {
-  color: var(--gold);
-  font-size: 9px;
-  letter-spacing: .16em;
-}
-
-@keyframes heroMomentIn {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-    filter: blur(5px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
 .hero-note {
   position: absolute;
   left: clamp(22px, 6vw, 92px);
   bottom: 9vh;
-  opacity: var(--hero-cue-opacity);
   color: rgba(255, 255, 255, .55);
   text-transform: uppercase;
   letter-spacing: .15em;
   font-size: 9px;
-}
-
-.scroll-cue {
-  position: absolute;
-  right: clamp(22px, 5vw, 72px);
-  bottom: 9vh;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  opacity: var(--hero-cue-opacity);
-  text-transform: uppercase;
-  letter-spacing: .15em;
-  font-size: 9px;
-}
-
-.scroll-cue i {
-  position: relative;
-  width: 1px;
-  height: 76px;
-  background: rgba(255, 255, 255, .28);
-}
-
-.scroll-cue b {
-  position: absolute;
-  inset: 0;
-  background: var(--gold);
-  transform: scaleY(var(--hero-progress));
-  transform-origin: top;
 }
 
 .brand-story {
@@ -681,7 +600,7 @@ blockquote {
 }
 
 .brand-story__photo {
-  width: min(900px, 100%);
+  width: min(640px, 100%);
 }
 
 .brand-story__photo img {
@@ -1697,7 +1616,7 @@ button:hover .diagonal-arrow,
   }
 
   .cinematic-hero {
-    height: 390vh;
+    height: 100vh;
   }
 
   .cinematic-hero__video {
@@ -1711,20 +1630,6 @@ button:hover .diagonal-arrow,
   .hero-intro p {
     max-width: 230px;
     line-height: 1.5;
-  }
-
-  .hero-moment {
-    left: 22px;
-    right: 22px;
-    top: 58%;
-  }
-
-  .hero-moment p {
-    align-items: flex-start;
-  }
-
-  .scroll-cue {
-    right: 20px;
   }
 
   .brand-story {
@@ -1993,11 +1898,6 @@ button:hover .diagonal-arrow,
 
   .cinematic-hero__frame {
     transform: none;
-  }
-
-  .hero-moment,
-  .scroll-cue {
-    display: none;
   }
 
   .brand-story__word {
@@ -3856,6 +3756,44 @@ button:hover .diagonal-arrow,
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.material-lab__wood-reference {
+  grid-column: span 4;
+  align-self: center;
+  position: relative;
+  aspect-ratio: 16 / 11;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(217, 163, 65, .18);
+  background: #100f0e;
+}
+
+.material-lab__wood-reference img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+.material-lab__wood-reference img.is-current {
+  animation: materialCrossIn .7s var(--ease) both;
+}
+
+.material-lab__wood-reference img.is-outgoing {
+  animation: materialCrossOut .7s var(--ease) both;
+}
+
+.material-lab__wood-reference figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: #77716b;
 }
 
 .material-lab__preview {

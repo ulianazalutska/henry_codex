@@ -5,14 +5,6 @@ import Link from "next/link";
 import { SiteFooter } from "./components/site-footer";
 import { SiteNavigation } from "./components/site-navigation";
 
-const heroMoments = [
-  "Podejdź bliżej.",
-  "Każda przestrzeń ma swój rytm.",
-  "Światło prowadzi dalej.",
-  "Komfort zaczyna się przed seansem.",
-  "Zrealizujmy Twoją wizję.",
-];
-
 const storyParagraphs = [
   "Henry tworzy fotele premium do prywatnych sal kinowych, stref relaksu oraz nowoczesnych wnętrz mieszkalnych. Łączymy ponadczasowy design, najwyższej jakości materiały oraz precyzyjne wykonanie, aby stworzyć meble, które zapewniają wyjątkowy komfort na długie lata.",
 ];
@@ -46,30 +38,19 @@ function useReveal() {
 }
 
 export default function Home() {
-  const heroRef = useRef<HTMLElement>(null);
-  const heroFrameRef = useRef<HTMLDivElement>(null);
   const collectionsRef = useRef<HTMLElement>(null);
   const collectionsTrackRef = useRef<HTMLDivElement>(null);
   const collectionsProgressRef = useRef<HTMLElement>(null);
   const storyRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [storyPlaying, setStoryPlaying] = useState(false);
-  const [heroMoment, setHeroMoment] = useState(-1);
 
   useReveal();
 
   useEffect(() => {
-    const hero = heroRef.current;
-    const frameElement = heroFrameRef.current;
     const video = videoRef.current;
-    if (!hero || !frameElement || !video) return;
+    if (!video) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let frame = 0;
-    let targetTime = 0;
-    let lastSeek = 0;
-    let lastMoment = -1;
     let objectUrl: string | null = null;
     let cancelled = false;
 
@@ -86,60 +67,16 @@ export default function Home() {
       })
       .catch(() => {});
 
-    const measure = () => {
-      const distance = Math.max(1, hero.offsetHeight - window.innerHeight);
-      const next = Math.min(1, Math.max(0, (window.scrollY - hero.offsetTop) / distance));
-      const exit = Math.max(0, Math.min(1, (next - 0.82) / 0.18));
-      const introOpacity = Math.max(0, 1 - next * 6);
-      const cueOpacity = Math.max(0, 1 - next * 7);
-
-      frameElement.style.setProperty("--hero-scale", String(1 - exit * 0.18));
-      frameElement.style.setProperty("--hero-rotate", `${exit * -2.2}deg`);
-      frameElement.style.setProperty("--hero-shift", `${exit * -7}vh`);
-      frameElement.style.setProperty("--hero-radius", `${exit * 12}px`);
-      frameElement.style.setProperty("--hero-dim", String(exit * 0.42));
-      hero.style.setProperty("--hero-intro-opacity", String(introOpacity));
-      hero.style.setProperty("--hero-cue-opacity", String(cueOpacity));
-      hero.style.setProperty("--hero-progress", String(Math.max(0.04, next)));
-      if (Number.isFinite(video.duration)) targetTime = next * Math.max(0, video.duration - 0.08);
-
-      const moment = next < 0.12 || next > 0.84 ? -1 : Math.min(4, Math.floor((next - 0.12) / 0.144));
-      if (moment !== lastMoment) {
-        lastMoment = moment;
-        setHeroMoment(moment);
-      }
-    };
-
-    const tick = (time: number) => {
-      if (
-        video.readyState >= 2 &&
-        !video.seeking &&
-        time - lastSeek > 34 &&
-        Math.abs(video.currentTime - targetTime) > 0.035
-      ) {
-        video.currentTime = targetTime;
-        lastSeek = time;
-      }
-      frame = requestAnimationFrame(tick);
-    };
-
     const initialize = () => {
-      video.pause();
-      measure();
+      video.loop = true;
+      video.play().catch(() => {});
     };
 
     video.addEventListener("loadedmetadata", initialize);
-    window.addEventListener("scroll", measure, { passive: true });
-    window.addEventListener("resize", measure);
-    measure();
-    frame = requestAnimationFrame(tick);
 
     return () => {
       cancelled = true;
-      cancelAnimationFrame(frame);
       video.removeEventListener("loadedmetadata", initialize);
-      window.removeEventListener("scroll", measure);
-      window.removeEventListener("resize", measure);
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
   }, []);
@@ -183,21 +120,16 @@ export default function Home() {
     <main>
       <SiteNavigation />
 
-      <section id="top" className="cinematic-hero" ref={heroRef} aria-label="Cinematic entrance to HENRY">
+      <section id="top" className="cinematic-hero" aria-label="Cinematic entrance to HENRY">
         <div className="cinematic-hero__sticky">
-          <div className="cinematic-hero__frame" ref={heroFrameRef}>
+          <div className="cinematic-hero__frame">
             <video ref={videoRef} className="cinematic-hero__video" muted playsInline preload="auto" poster="/media/henry-entrance-poster.jpg" aria-label="Przejście korytarzem do prywatnej sali kinowej HENRY" />
             <div className="cinematic-hero__shade" />
           </div>
           <div className="hero-intro">
-            <p>Prywatne kino. Zaprojektowane wokół Ciebie
-            </p>
-            <h1>Wejdź do świata<br /><span>HENRY</span></h1>
+            <p>Ręcznie wykonane fotele do prywatnych sal kinowych</p>
+            <h1>Twoje kino.<br /><span>Twoje zasady.</span></h1>
           </div>
-          <div className="hero-moment" aria-live="polite">
-            {heroMoment >= 0 && <p key={heroMoment}><span>0{heroMoment + 1}</span>{heroMoments[heroMoment]}</p>}
-          </div>
-          <div className="scroll-cue"><span>Przewiń, aby wejść</span><i><b /></i></div>
           <p className="hero-note">Wizualizacja koncepcyjna</p>
         </div>
       </section>
@@ -211,7 +143,7 @@ export default function Home() {
           <p className="brand-story__origin">Designed &amp; Made in Poland</p>
         </div>
         <figure className="brand-story__photo image-reveal" data-reveal>
-          <img src="/media/brand-story-recliner.png" alt="Fotel HENRY z pledem i miską popcornu" loading="lazy" />
+          <img src="/media/brand-story-recliner.webp" alt="Fotel HENRY z pledem i miską popcornu" loading="lazy" />
         </figure>
       </section>
 
@@ -220,21 +152,21 @@ export default function Home() {
           <div className="collections-head"><p className="collections-head__left">Nasze kolekcje<span className="concept-note">Wizualizacja koncepcyjna</span></p><p>Trzy sposoby<br />odczuwania komfortu</p></div>
           <div className="collections-track" ref={collectionsTrackRef}>
             <Link href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
-              <img src="/media/atelier-cinema-row.png" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
+              <img src="/media/atelier-cinema-row.webp" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" /><h3>Atelier</h3>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>
             </Link>
             <Link href="/kolekcje/studio" className="collection collection--atelier" aria-label="Zobacz kolekcję Studio">
-              <img src="/media/studio-study-chair.png" alt="Bordowy fotel HENRY w gabinecie" loading="lazy" />
+              <img src="/media/studio-study-chair.webp" alt="Rząd foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" /><h3>Studio</h3>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>
             </Link>
             <Link href="/kolekcje/lounge" className="collection collection--atelier" aria-label="Zobacz kolekcję Lounge">
-              <img src="/media/lounge-fireplace.png" alt="Zielony fotel HENRY przy kominku" loading="lazy" />
+              <img src="/media/lounge-fireplace.webp" alt="Fotel i szezlong HENRY przy kominku z widokiem na morze" loading="lazy" />
               <div className="collection__veil" /><h3>Lounge</h3>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
@@ -253,13 +185,13 @@ export default function Home() {
         <p className="arrangements__note concept-note" data-reveal>Wizualizacja koncepcyjna</p>
         <div className="arrangements__grid">
           <Link href="/kolekcje/atelier/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Atelier">
-            <img src="/media/inspiracje/atelier/atelier-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Atelier" loading="lazy" />
+            <img src="/media/arrangements-atelier.webp" alt="Aranżacja wnętrza z fotelami HENRY Atelier" loading="lazy" />
             <div className="arrangement__veil" />
             <h3>Atelier</h3>
             <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
           </Link>
           <Link href="/kolekcje/studio/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Studio">
-            <img src="/media/inspiracje/studio/studio-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Studio" loading="lazy" />
+            <img src="/media/arrangements-studio.webp" alt="Aranżacja wnętrza z fotelami HENRY Studio" loading="lazy" />
             <div className="arrangement__veil" />
             <h3>Studio</h3>
             <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
@@ -295,7 +227,7 @@ export default function Home() {
         </h2>
         <div className="about__composition">
           <figure className="about__image image-reveal" data-reveal>
-            <img src="/media/about-feeling.jpg" alt="Kobieta odpoczywająca w naturalnym świetle" loading="lazy" />
+            <img src="/media/about-feeling.webp" alt="Rząd kremowych foteli HENRY w prywatnej sali kinowej" loading="lazy" />
           </figure>
           <div className="about__copy" data-reveal>
             <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem</p>
@@ -323,7 +255,7 @@ export default function Home() {
           </figure>
         </div>
         <div className="bespoke__cta-row">
-          <Link className="text-link bespoke__cta" href="/projekty-indywidualne" data-reveal>Zobacz projekty indywidualne <span className="diagonal-arrow" aria-hidden="true" /></Link>
+          <Link className="text-link bespoke__cta" href="/projekty-indywidualne" data-reveal>PROJEKTY INDYWIDUALNE <span className="diagonal-arrow" aria-hidden="true" /></Link>
         </div>
       </section>
 

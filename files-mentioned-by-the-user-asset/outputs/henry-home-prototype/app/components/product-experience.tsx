@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
 type MaterialKey = "leather" | "wood" | "quilting" | "combinations" | "technical";
-type MaterialSwatch = { name: string; swatchImg: string; previewImg: string };
+type MaterialSwatch = { name: string; swatchImg: string; previewImg: string; referenceImg?: string };
 
 const novaRoot = "/media/product-pages/nova-solo";
 
@@ -184,11 +184,15 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     leather: product.leatherSwatches
       ? product.leatherSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
       : isReady ? novaLeatherSwatches : [],
-    wood: isReady ? novaWoodSwatches : [],
-    quilting: isReady ? novaQuiltingSwatches : [],
+    wood: product.woodSwatches
+      ? product.woodSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview, referenceImg: item.reference }))
+      : isReady ? novaWoodSwatches : [],
+    quilting: product.quiltingSwatches
+      ? product.quiltingSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
+      : isReady ? novaQuiltingSwatches : [],
     combinations: [],
     technical: [],
-  }), [isReady, product.leatherSwatches]);
+  }), [isReady, product.leatherSwatches, product.woodSwatches, product.quiltingSwatches]);
   const activeMaterial = materialTabs.find((item) => item.key === materialKey) ?? materialTabs[0];
   const activeMaterialLabel = activeMaterial.label;
   const activeMaterialCaption = activeMaterial.captionLabel ?? activeMaterial.label;
@@ -209,6 +213,20 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     }
     previousPreviewRef.current = nextPreview;
   }, [activeSwatchData?.previewImg]);
+
+  const [outgoingReference, setOutgoingReference] = useState<string | null>(null);
+  const previousReferenceRef = useRef<string | undefined>(activeSwatchData?.referenceImg);
+
+  useEffect(() => {
+    const nextReference = activeSwatchData?.referenceImg;
+    if (previousReferenceRef.current && previousReferenceRef.current !== nextReference) {
+      setOutgoingReference(previousReferenceRef.current);
+      const timeout = setTimeout(() => setOutgoingReference(null), 700);
+      previousReferenceRef.current = nextReference;
+      return () => clearTimeout(timeout);
+    }
+    previousReferenceRef.current = nextReference;
+  }, [activeSwatchData?.referenceImg]);
 
   const [outgoingEquipment, setOutgoingEquipment] = useState<string | null>(null);
   const previousEquipmentRef = useRef<string | undefined>(activeEquipmentData.image);
@@ -430,6 +448,15 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                     <img src={swatch.swatchImg} alt="" />
                   </button>
                 ))}
+                {materialKey === "wood" && activeSwatchData?.referenceImg && (
+                  <figure className="material-lab__wood-reference">
+                    {outgoingReference && outgoingReference !== activeSwatchData.referenceImg && (
+                      <img key={`ref-prev-${outgoingReference}`} className="is-outgoing" src={outgoingReference} alt="" aria-hidden="true" />
+                    )}
+                    <img key={`ref-current-${activeSwatchData.referenceImg}`} className="is-current" src={activeSwatchData.referenceImg} alt={`Zestawienia kolorystyczne skóry z wykończeniem ${activeSwatchData.name} — ${product.name}`} />
+                    <figcaption>Zestawienia kolorystyczne</figcaption>
+                  </figure>
+                )}
               </div>
               <figure className="material-lab__preview">
                 <div className="material-lab__preview-stack">
