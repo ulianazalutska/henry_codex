@@ -8,11 +8,12 @@ import styles from "./philosophy.module.css";
 const sketchGalleryImages = [
   "/media/filozofia-henry/sketch-gallery-2.png",
   "/media/filozofia-henry/sketch-gallery-3.png",
-  "/media/filozofia-henry/sketch-gallery-4-gmina-logo.png",
+  "/media/filozofia-henry/sketch-gallery-4-gmina-logo-v2.png",
   "/media/filozofia-henry/sketch-gallery-5-foto2.jpg",
   "/media/filozofia-henry/sketch-gallery-6-foto3.png",
   "/media/filozofia-henry/sketch-gallery-7-foto12.webp",
-  "/media/filozofia-henry/sketch-gallery-8-foto13.webp",
+  "/media/filozofia-henry/sketch-gallery-8-foto13-v2.png",
+  "/media/filozofia-henry/sketch-gallery-9-foto14.png",
 ];
 
 // Karuzela historii tymczasowo wyłączona (patrz sekcja "Dziedzictwo kina" niżej) — dane zachowane na wypadek powrotu.

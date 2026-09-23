@@ -1237,26 +1237,18 @@ button:hover .diagonal-arrow,
   border-bottom-color: var(--warm-gold);
 }
 
-.spread-reveal--center[data-reveal] {
-  opacity: 0;
-  transform: scaleX(.76);
-  transform-origin: center;
-}
-
-.spread-reveal--left[data-reveal] {
-  opacity: 0;
-  transform: translateX(18vw) scale(.96);
-}
-
+.spread-reveal--center[data-reveal],
+.spread-reveal--left[data-reveal],
 .spread-reveal--right[data-reveal] {
   opacity: 0;
-  transform: translateX(-18vw) scale(.96);
+  transform: translateY(28px) scale(.97);
+  transform-origin: center;
 }
 
 .spread-reveal[data-reveal].is-visible {
   opacity: 1;
-  transform: translateX(0) scale(1);
-  transition: opacity 1s var(--ease), transform 1.55s var(--ease);
+  transform: translateY(0) scale(1);
+  transition: opacity 1.3s var(--ease), transform 1.7s var(--ease);
 }
 
 .text-link {
@@ -1791,11 +1783,6 @@ button:hover .diagonal-arrow,
 
   .bespoke__cta.text-link {
     grid-column: 2;
-  }
-
-  .spread-reveal--left[data-reveal],
-  .spread-reveal--right[data-reveal] {
-    transform: translateX(0) translateY(30px) scale(.95);
   }
 
   .philosophy__lead {

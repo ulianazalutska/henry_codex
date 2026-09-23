@@ -247,11 +247,12 @@ export default function Home() {
             <figcaption><span>Private Residence</span><span>Wizualizacja koncepcyjna</span></figcaption>
           </figure>
           <figure className="bespoke__detail spread-reveal spread-reveal--left" data-reveal>
-            <img src="/media/bespoke-reading-nook.webp" alt="Fotel HENRY w prywatnej bibliotece" loading="lazy" />
-            <figcaption><span>Projektowanie doświadczenia</span><span>Wizualizacja koncepcyjna</span></figcaption>
+            <img src="/media/bespoke-reading-nook.png" alt="Rząd bordowych foteli HENRY w prywatnej sali kinowej" loading="lazy" />
+            <figcaption><span>Projektowanie doświadczenia</span></figcaption>
           </figure>
           <figure className="bespoke__object spread-reveal spread-reveal--right" data-reveal>
-            <img src="/media/bespoke-custom-form.jpg" alt="Fotele HENRY wykonane na zamówienie w sali kinowej" loading="lazy" />
+            <img src="/media/bespoke-custom-form.png" alt="Rząd czarnych foteli HENRY w sali kinowej z czerwonym dywanem" loading="lazy" />
+            <figcaption><span>Moment premiery</span></figcaption>
           </figure>
         </div>
         <div className="bespoke__cta-row">
