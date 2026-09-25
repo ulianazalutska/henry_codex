@@ -18,34 +18,24 @@ const novaSlides = [
 
 const featureCards = [
   {
-    title: "Integrated Controls",
-    image: `${novaRoot}/feature-controls.png`,
-    copy: "Intuicyjny panel sterowania pozwala wygodnie regulować pozycję fotela, zapewniając pełną kontrolę bez przerywania seansu.",
+    title: "Wykończenie drewna",
+    image: `${novaRoot}/feature-wood-finish.png`,
+    copy: "Szlachetny fornir drewna podkreśla precyzję wykonania, dodając fotelowi eleganckiego, ciepłego charakteru.",
   },
   {
-    title: "Personal Side Table",
-    image: `${novaRoot}/feature-side-table.png`,
-    copy: "Praktyczny stolik boczny pozwala mieć najważniejsze rzeczy zawsze pod ręką — od napoju po pilot czy smartfon.",
+    title: "Naturalna skóra",
+    image: `${novaRoot}/feature-premium-leather.png`,
+    copy: "Wybierana skóra najwyższej jakości starzeje się z godnością, zyskując z czasem głębszy charakter i miękkość w dotyku.",
   },
   {
-    title: "Electric Recline",
+    title: "Elektryczna regulacja",
     image: `${novaRoot}/feature-recline.png`,
     copy: "Płynna, elektryczna regulacja oparcia i podnóżka pozwala dopasować pozycję do chwili pełnego relaksu.",
   },
   {
-    title: "Illuminated Cup Holder",
+    title: "Podświetlany uchwyt na kubek",
     image: `${novaRoot}/feature-cup-holder.png`,
     copy: "Podświetlany uchwyt na kubek zapewnia wygodny dostęp do napoju, nawet podczas seansu przy zgaszonym świetle.",
-  },
-  {
-    title: "Adjustable Headrest",
-    image: `${novaRoot}/feature-headrest.png`,
-    copy: "Regulowany zagłówek pozwala precyzyjnie dopasować podparcie głowy i szyi, zapewniając komfort podczas każdego seansu.",
-  },
-  {
-    title: "Ambient LED Lighting",
-    image: `${novaRoot}/feature-led.png`,
-    copy: "Subtelne podświetlenie LED tworzy wyjątkową atmosferę i podkreśla elegancję fotela nawet w całkowitej ciemności.",
   },
 ];
 
@@ -137,6 +127,10 @@ const featureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 103.68, 94.68];
 // .product-feature-box.boxE in globals.css), so its bottom edge is 78.24 + 16.44 = 94.68.
 const vesperFeatureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 94.68];
 
+// Nova Solo raises boxB and boxD (see .product-features--nova-solo .product-feature-box.boxB/.boxD
+// in globals.css), so their bottom edges shrink to 22 + 22.55 = 44.55 and 48 + 35.01 = 83.01.
+const novaFeatureBoxBottomPercent = [22.15, 44.55, 63.53, 83.01];
+
 function featureGridBottomFraction(boxCount: number, boundaries: number[] = featureBoxBottomPercent) {
   return Math.max(...boundaries.slice(0, boxCount)) / 100;
 }
@@ -155,6 +149,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const featureGridRef = useRef<HTMLDivElement>(null);
   const [featureGridClipHeight, setFeatureGridClipHeight] = useState<number>();
   const isVesperSolo = product.slug === "vesper-solo";
+  const isNovaSolo = product.slug === "nova-solo";
   const featuresReady = isReady || isVesperSolo;
   const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : featureCards;
   const featureBoxCount = isHero ? activeFeatureCards.length : productPhotoCards.length;
@@ -162,7 +157,8 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   useEffect(() => {
     const grid = featureGridRef.current;
     if (!grid) return;
-    const bottomFraction = featureGridBottomFraction(featureBoxCount, isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : featureBoxBottomPercent);
+    const boundaries = isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : isHero && isNovaSolo ? novaFeatureBoxBottomPercent : featureBoxBottomPercent;
+    const bottomFraction = featureGridBottomFraction(featureBoxCount, boundaries);
     const measure = () => setFeatureGridClipHeight(grid.offsetWidth * (2475 / 1313) * bottomFraction);
     measure();
     window.addEventListener("resize", measure);
@@ -365,7 +361,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
       </section>
 
-      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}`}>
+      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}${isNovaSolo ? " product-features--nova-solo" : ""}`}>
         {isHero && (
           <header data-product-reveal>
             <h2>Luksus w standardzie</h2>

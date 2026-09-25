@@ -144,6 +144,10 @@ export default function Home() {
         </div>
         <figure className="brand-story__photo image-reveal" data-reveal>
           <img src="/media/brand-story-recliner.webp" alt="Fotel HENRY z pledem i miską popcornu" loading="lazy" />
+          <figcaption className="brand-story__quote">
+            „Film to życie, z którego wymazano plamy nudy”<br />
+            <span>Alfred Hitchcock</span>
+          </figcaption>
         </figure>
       </section>
 
