@@ -154,6 +154,7 @@ export default function Home() {
             <Link href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
               <img src="/media/atelier-cinema-row.webp" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" /><h3>Atelier</h3>
+              <span>Klasyka luksusu w nowoczesnym wydaniu.<b>elegancka · ponadczasowa · wyrafinowana</b></span>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>
@@ -161,6 +162,7 @@ export default function Home() {
             <Link href="/kolekcje/studio" className="collection collection--atelier" aria-label="Zobacz kolekcję Studio">
               <img src="/media/studio-study-chair.webp" alt="Rząd foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" /><h3>Studio</h3>
+              <span>Nowoczesna forma. Kinowe DNA.<b>nowoczesna · architektoniczna · minimalistyczna</b></span>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>
@@ -168,6 +170,7 @@ export default function Home() {
             <Link href="/kolekcje/lounge" className="collection collection--atelier" aria-label="Zobacz kolekcję Lounge">
               <img src="/media/lounge-fireplace.webp" alt="Fotel i szezlong HENRY przy kominku z widokiem na morze" loading="lazy" />
               <div className="collection__veil" /><h3>Lounge</h3>
+              <span>Luksus, który staje się częścią codzienności.<b>luksusowa · komfortowa · współczesna</b></span>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>

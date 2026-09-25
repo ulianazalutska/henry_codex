@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavigation } from "../../components/site-navigation";
+import { RevealText } from "../../components/reveal-text";
 import { collections, getCollection } from "../../collections-data";
 
 export function generateStaticParams() {
@@ -38,6 +39,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
 
       <div className="collection-detail-hero__title-bar">
         <h1>{collection.name}</h1>
+        <RevealText text={collection.description} className="collection-detail-hero__description" />
       </div>
 
       <section className="product-catalogue">
