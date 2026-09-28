@@ -77,10 +77,24 @@ const equipmentOptions = [
   { key: "headrest", number: "05", title: "Elektryczny zagłówek", description: "Płynna regulacja dopasowana do sylwetki.", image: "/media/personalizacja/headrest.png" },
 ];
 
+const novaSoloEquipmentRoot = "/media/product-pages/nova-solo/equipment";
+
+const novaSoloEquipmentOptions = [
+  ...equipmentOptions,
+  { key: "masaz", number: "06", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${novaSoloEquipmentRoot}/nova-solo-equipment-06-funkcja-masazu.webp` },
+];
+
+const solarisSoloEquipmentRoot = "/media/product-pages/solaris-solo/equipment";
+
+const solarisSoloEquipmentOptions = [
+  ...equipmentOptions,
+  { key: "masaz", number: "06", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-06-funkcja-masazu.webp` },
+];
+
 const vesperSoloEquipmentRoot = "/media/product-pages/vesper-solo/equipment";
 
 const vesperSoloEquipmentOptions = [
-  { key: "henry-command", number: "01", title: "HENRY Command", description: "Inteligentny panel sterowania. Centralne sterowanie funkcjami fotela z poziomu intuicyjnego ekranu dotykowego. Pozycja fotela, pamięć ustawień, masaż, ogrzewanie i Ambient Lighting — wszystko w jednym miejscu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-00-henry-command.png` },
+  { key: "henry-command", number: "01", title: "HENRY Command", description: "Inteligentny panel sterowania. Centralne sterowanie funkcjami fotela z poziomu intuicyjnego ekranu dotykowego. Pozycja fotela, pamięć ustawień, masaż, ogrzewanie i Ambient Lighting — wszystko w jednym miejscu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-00-henry-command.webp` },
   { key: "poduszka", number: "02", title: "Poduszka Henry", description: "Dodatkowe wsparcie i komfort w dowolnym miejscu fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-01-poduszka-henry.webp` },
   { key: "stolik", number: "03", title: "Stolik Vesper", description: "Praktyczny stolik boczny dopasowany do bryły fotela.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-02-stolik-vesper.webp` },
   { key: "zaglowek", number: "04", title: "Regulacja zagłówka Vesper", description: "Precyzyjne dopasowanie podparcia głowy i szyi.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-03-regulacja-zaglowka.webp` },
@@ -90,6 +104,7 @@ const vesperSoloEquipmentOptions = [
   { key: "glosnik", number: "08", title: "Głośnik", description: "Dźwięk osobisty zintegrowany z fotelem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-07-glosnik.webp` },
   { key: "schowek", number: "09", title: "Schowek w podłokietniku", description: "Miejsce na drobiazgi zawsze pod ręką.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-08-schowek.webp` },
   { key: "niezalezne-mechanizmy", number: "10", title: "Niezależne mechanizmy regulacji", description: "Oparcie i podnóżek regulowane niezależnie od siebie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-09-niezalezne-mechanizmy.webp` },
+  { key: "masaz", number: "11", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-10-funkcja-masazu.webp` },
 ];
 
 const novaLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
@@ -150,6 +165,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const [featureGridClipHeight, setFeatureGridClipHeight] = useState<number>();
   const isVesperSolo = product.slug === "vesper-solo";
   const isNovaSolo = product.slug === "nova-solo";
+  const isSolarisSolo = product.slug === "solaris-solo";
   const featuresReady = isReady || isVesperSolo;
   const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : featureCards;
   const featureBoxCount = isHero ? activeFeatureCards.length : productPhotoCards.length;
@@ -193,7 +209,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const activeMaterialLabel = activeMaterial.label;
   const activeMaterialCaption = activeMaterial.captionLabel ?? activeMaterial.label;
   const activeSwatches = materialSwatches[materialKey];
-  const activeEquipmentOptions = isVesperSolo ? vesperSoloEquipmentOptions : equipmentOptions;
+  const activeEquipmentOptions = isVesperSolo ? vesperSoloEquipmentOptions : isNovaSolo ? novaSoloEquipmentOptions : isSolarisSolo ? solarisSoloEquipmentOptions : equipmentOptions;
   const activeEquipmentData = activeEquipmentOptions[Math.min(activeEquipmentOption, activeEquipmentOptions.length - 1)];
   const activeSwatchData = activeSwatches[Math.min(activeSwatch, activeSwatches.length - 1)] as MaterialSwatch | undefined;
   const [outgoingPreview, setOutgoingPreview] = useState<string | null>(null);
