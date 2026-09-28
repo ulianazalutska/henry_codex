@@ -3798,12 +3798,18 @@ button:hover .diagonal-arrow,
   gap: clamp(13px, 2vw, 28px);
 }
 
+.material-lab__swatches--quilting {
+  grid-template-columns: repeat(3, minmax(96px, 1fr));
+  max-width: 680px;
+}
+
 .material-lab__swatches button {
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
+  background: #0c0c0c;
   border: 1px solid transparent;
-  border-radius: 50%;
+  border-radius: 2px;
   transition: border-color .3s ease, transform .4s var(--ease);
 }
 
@@ -4220,6 +4226,10 @@ button:hover .diagonal-arrow,
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .material-lab__swatches--quilting {
+    grid-template-columns: repeat(3, minmax(80px, 1fr));
+  }
+
   .material-lab__equipment {
     gap: 5vw;
   }
@@ -4465,6 +4475,10 @@ button:hover .diagonal-arrow,
   .material-lab__swatches {
     grid-template-columns: repeat(4, 1fr);
     gap: 13px;
+  }
+
+  .material-lab__swatches--quilting {
+    grid-template-columns: repeat(3, minmax(72px, 1fr));
   }
 
   .material-lab__preview {

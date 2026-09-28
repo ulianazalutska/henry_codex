@@ -102,6 +102,8 @@ export const collections: HenryCollection[] = [
         { name: "American Walnut Satin", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-american-walnut-satin.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-american-walnut-satin.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-american-walnut-satin.webp" },
         { name: "Natural Oak Satin", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-natural-oak-satin.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-natural-oak-satin.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-natural-oak-satin.webp" },
       ], quiltingSwatches: [
+        { name: "Diamond", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-diamond.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-diamond.webp" },
+        { name: "Grand Diamond", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-grand-diamond.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-grand-diamond.webp" },
         { name: "Horizontal Channel", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-horizontal-channel.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-horizontal-channel.webp" },
         { name: "Square Grid", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-square-grid.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-square-grid.webp" },
         { name: "Vertical Channel", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-vertical-channel.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-vertical-channel.webp" },

@@ -454,7 +454,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
             </figure>
           ) : activeSwatches.length > 0 ? (
             <div className="material-lab__content">
-              <div className="material-lab__swatches">
+              <div className={`material-lab__swatches${materialKey === "quilting" ? " material-lab__swatches--quilting" : ""}`}>
                 {activeSwatches.map((swatch, index) => (
                   <button className={index === activeSwatch ? "is-active" : ""} onClick={() => setActiveSwatch(index)} aria-label={`Wybierz ${swatch.name}`} aria-pressed={index === activeSwatch} key={swatch.name}>
                     <img src={swatch.swatchImg} alt="" />
