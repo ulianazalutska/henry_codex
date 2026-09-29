@@ -3803,6 +3803,73 @@ button:hover .diagonal-arrow,
   max-width: 680px;
 }
 
+.material-lab__finishes {
+  display: grid;
+  gap: clamp(22px, 3vw, 40px);
+}
+
+.material-lab__woods {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.6vw, 22px);
+}
+
+.material-lab__woods button {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 8px 8px;
+  color: #adadad;
+  text-align: left;
+  background: #0c0c0c;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 2px;
+  transition: border-color .3s ease, color .3s ease;
+}
+
+.material-lab__woods button:hover {
+  color: #fff;
+}
+
+.material-lab__woods button.is-active {
+  color: #fff;
+  border-color: var(--gold);
+}
+
+.material-lab__woods img {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.material-lab__woods span {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.material-lab__content.material-lab__content--finishes {
+  grid-template-columns: 1.5fr .7fr;
+  gap: 4vw;
+}
+
+.material-lab__swatches.material-lab__swatches--finishes {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 14px);
+}
+
+.material-lab__swatches.material-lab__swatches--finishes button {
+  aspect-ratio: 2 / 1;
+  background: transparent;
+}
+
+.material-lab__swatches.material-lab__swatches--finishes img {
+  object-fit: contain;
+}
+
 .material-lab__swatches button {
   position: relative;
   aspect-ratio: 1;
@@ -4472,6 +4539,11 @@ button:hover .diagonal-arrow,
     padding-top: 60px;
   }
 
+  .material-lab__content.material-lab__content--finishes {
+    grid-template-columns: 1fr;
+    gap: 65px;
+  }
+
   .material-lab__swatches {
     grid-template-columns: repeat(4, 1fr);
     gap: 13px;
@@ -4479,6 +4551,14 @@ button:hover .diagonal-arrow,
 
   .material-lab__swatches--quilting {
     grid-template-columns: repeat(3, minmax(72px, 1fr));
+  }
+
+  .material-lab__woods {
+    grid-template-columns: 1fr;
+  }
+
+  .material-lab__swatches.material-lab__swatches--finishes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .material-lab__preview {

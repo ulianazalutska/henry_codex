@@ -5,6 +5,40 @@ export type HenryLeatherSwatch = {
   reference?: string;
 };
 
+export type HenryFinish = {
+  name: string;
+  woodSwatch: string;
+  leathers: HenryLeatherSwatch[];
+};
+
+const finishLeathers: Array<{ name: string; slug: string }> = [
+  { name: "Ivory White", slug: "ivory-white" },
+  { name: "Ivory Cream", slug: "ivory-cream" },
+  { name: "Sand Beige", slug: "sand-beige" },
+  { name: "Cool Taupe", slug: "cool-taupe" },
+  { name: "Cognac Tan", slug: "cognac-tan" },
+  { name: "Deep Chocolate", slug: "deep-chocolate" },
+  { name: "Muted Olive", slug: "muted-olive" },
+  { name: "Deep Forest", slug: "deep-forest" },
+  { name: "Cool Graphite", slug: "cool-graphite" },
+  { name: "Graphite Black", slug: "graphite-black" },
+  { name: "Deep Navy", slug: "deep-navy" },
+  { name: "Burgundy Wine", slug: "burgundy-wine" },
+];
+
+function buildFinish(productSlug: string, name: string, woodSlug: string): HenryFinish {
+  const root = `/media/product-pages/${productSlug}/materials`;
+  return {
+    name,
+    woodSwatch: `${root}/wood/swatch-${woodSlug}.webp`,
+    leathers: finishLeathers.map((leather) => ({
+      name: leather.name,
+      swatch: `${root}/finishes/${woodSlug}/swatch-${leather.slug}.webp`,
+      preview: `${root}/finishes/${woodSlug}/preview-${leather.slug}.webp`,
+    })),
+  };
+}
+
 export type HenryProduct = {
   name: string;
   slug: string;
@@ -17,6 +51,7 @@ export type HenryProduct = {
   leatherSwatches?: HenryLeatherSwatch[];
   woodSwatches?: HenryLeatherSwatch[];
   quiltingSwatches?: HenryLeatherSwatch[];
+  finishes?: HenryFinish[];
   arrangementsImage?: string;
   description: string;
 };
@@ -84,7 +119,7 @@ export const collections: HenryCollection[] = [
     detail: "/media/collection-pages/studio-detail.webp",
     inspirationImages: Array.from({ length: 9 }, (_, i) => `/media/inspiracje/studio/studio-${String(i + 1).padStart(2, "0")}.webp`),
     products: [
-      { name: "Nova Solo", slug: "nova-solo", image: "/media/studio-black.webp", catalogueImage: "/media/collection-pages/studio-nova-solo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-solo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-solo-cutout.png", arrangementsImage: "/media/product-pages/nova-solo/nova-solo-arrangements.png", description: "Samodzielny fotel o czystej, architektonicznej linii.", leatherSwatches: [
+      { name: "Nova Solo", slug: "nova-solo", image: "/media/studio-black.webp", catalogueImage: "/media/collection-pages/studio-nova-solo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-solo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-solo-cutout.png", arrangementsImage: "/media/product-pages/nova-solo/nova-solo-arrangements.png", finishes: [buildFinish("nova-solo", "Smoked Ebony Gloss", "smoked-ebony-gloss"), buildFinish("nova-solo", "Natural Oak Satin", "natural-oak-satin"), buildFinish("nova-solo", "American Walnut Satin", "american-walnut-satin")], description: "Samodzielny fotel o czystej, architektonicznej linii.", leatherSwatches: [
         { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-01.png" },
         { name: "Ivory Cream", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-02.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-02.png" },
         { name: "Sand Beige", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-03.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-03.png" },

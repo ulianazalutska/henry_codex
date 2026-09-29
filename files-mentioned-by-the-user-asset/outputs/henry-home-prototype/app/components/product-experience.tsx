@@ -5,7 +5,7 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
-type MaterialKey = "leather" | "wood" | "quilting" | "combinations" | "technical";
+type MaterialKey = "finishes" | "leather" | "wood" | "quilting" | "combinations" | "technical";
 type MaterialSwatch = { name: string; swatchImg: string; previewImg: string; referenceImg?: string };
 
 const novaRoot = "/media/product-pages/nova-solo";
@@ -124,6 +124,7 @@ const novaQuiltingSwatches: MaterialSwatch[] = ["Diamond", "Channel", "Chevron",
 
 const materialTabs: Array<{ key: MaterialKey; label: string; captionLabel?: string }> = [
   { key: "combinations", label: "Opcje wyposażenia" },
+  { key: "finishes", label: "Materiały i wykończenia", captionLabel: "Naturalna włoska skóra Mezzo Fiore" },
   { key: "leather", label: "Barwa skóry", captionLabel: "Naturalna włoska skóra Mezzo Fiore" },
   { key: "wood", label: "Wykończenie drewna" },
   { key: "quilting", label: "Styl pikowania" },
@@ -159,6 +160,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const [activeSlide, setActiveSlide] = useState(0);
   const [materialKey, setMaterialKey] = useState<MaterialKey>("combinations");
   const [activeSwatch, setActiveSwatch] = useState(0);
+  const [activeFinish, setActiveFinish] = useState(0);
   const [activeEquipmentOption, setActiveEquipmentOption] = useState(0);
   const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
   const featureGridRef = useRef<HTMLDivElement>(null);
@@ -192,7 +194,16 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
       { src: collection.hero, label: `${collection.name} / kolekcja` },
     ];
   }, [collection.hero, collection.name, isReady, product]);
+  const finishes = product.finishes;
+  const activeFinishData = finishes?.[Math.min(activeFinish, (finishes?.length ?? 1) - 1)];
+  const visibleMaterialTabs = useMemo(
+    () => materialTabs.filter((tab) => (finishes ? tab.key !== "leather" && tab.key !== "wood" : tab.key !== "finishes")),
+    [finishes],
+  );
   const materialSwatches = useMemo<Record<MaterialKey, MaterialSwatch[]>>(() => ({
+    finishes: activeFinishData
+      ? activeFinishData.leathers.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
+      : [],
     leather: product.leatherSwatches
       ? product.leatherSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
       : isReady ? novaLeatherSwatches : [],
@@ -204,8 +215,8 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
       : isReady ? novaQuiltingSwatches : [],
     combinations: [],
     technical: [],
-  }), [isReady, product.leatherSwatches, product.woodSwatches, product.quiltingSwatches]);
-  const activeMaterial = materialTabs.find((item) => item.key === materialKey) ?? materialTabs[0];
+  }), [isReady, activeFinishData, product.leatherSwatches, product.woodSwatches, product.quiltingSwatches]);
+  const activeMaterial = visibleMaterialTabs.find((item) => item.key === materialKey) ?? visibleMaterialTabs[0];
   const activeMaterialLabel = activeMaterial.label;
   const activeMaterialCaption = activeMaterial.captionLabel ?? activeMaterial.label;
   const activeSwatches = materialSwatches[materialKey];
@@ -274,6 +285,10 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const changeMaterial = (key: MaterialKey) => {
     setMaterialKey(key);
     setActiveSwatch(0);
+  };
+
+  const changeFinish = (index: number) => {
+    setActiveFinish(index);
   };
 
   const moveSlide = (direction: number) => {
@@ -419,7 +434,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </header>
         <div className="material-lab" data-product-reveal>
           <div className="material-lab__tabs" role="tablist" aria-label="Kategorie wykończeń">
-            {materialTabs.map((material) => (
+            {visibleMaterialTabs.map((material) => (
               <button role="tab" aria-selected={material.key === materialKey} className={material.key === materialKey ? "is-active" : ""} onClick={() => changeMaterial(material.key)} key={material.key}>{material.label}</button>
             ))}
           </div>
@@ -453,10 +468,21 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
               {isReady ? <img src={`${novaRoot}/dimensions.png`} alt="Nova Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>H</span><small>Rysunek techniczny w przygotowaniu</small></>}
             </figure>
           ) : activeSwatches.length > 0 ? (
-            <div className="material-lab__content">
-              <div className={`material-lab__swatches${materialKey === "quilting" ? " material-lab__swatches--quilting" : ""}`}>
+            <div className={`material-lab__content${materialKey === "finishes" ? " material-lab__content--finishes" : ""}`}>
+              <div className={materialKey === "finishes" ? "material-lab__finishes" : undefined}>
+              {materialKey === "finishes" && finishes && (
+                <div className="material-lab__woods" role="group" aria-label="Wykończenie drewna">
+                  {finishes.map((finish, index) => (
+                    <button type="button" className={index === activeFinish ? "is-active" : ""} onClick={() => changeFinish(index)} aria-pressed={index === activeFinish} key={finish.name}>
+                      <img src={finish.woodSwatch} alt="" />
+                      <span>{finish.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+              <div className={`material-lab__swatches${materialKey === "quilting" ? " material-lab__swatches--quilting" : ""}${materialKey === "finishes" ? " material-lab__swatches--finishes" : ""}`}>
                 {activeSwatches.map((swatch, index) => (
-                  <button className={index === activeSwatch ? "is-active" : ""} onClick={() => setActiveSwatch(index)} aria-label={`Wybierz ${swatch.name}`} aria-pressed={index === activeSwatch} key={swatch.name}>
+                  <button className={index === activeSwatch ? "is-active" : ""} onClick={() => setActiveSwatch(index)} aria-label={materialKey === "finishes" && activeFinishData ? `Wybierz ${swatch.name} z wykończeniem ${activeFinishData.name}` : `Wybierz ${swatch.name}`} aria-pressed={index === activeSwatch} key={swatch.name}>
                     <img src={swatch.swatchImg} alt="" />
                   </button>
                 ))}
@@ -470,16 +496,17 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                   </figure>
                 )}
               </div>
+              </div>
               <figure className="material-lab__preview">
                 <div className="material-lab__preview-stack">
                   {outgoingPreview && outgoingPreview !== activeSwatchData?.previewImg && (
                     <img key={`prev-${outgoingPreview}`} className="material-lab__preview-img is-outgoing" src={outgoingPreview} alt="" aria-hidden="true" />
                   )}
                   {activeSwatchData && (
-                    <img key={`current-${activeSwatchData.previewImg}`} className="material-lab__preview-img is-current" src={activeSwatchData.previewImg} alt={`${product.name} — ${activeSwatchData.name}`} />
+                    <img key={`current-${activeSwatchData.previewImg}`} className="material-lab__preview-img is-current" src={activeSwatchData.previewImg} alt={materialKey === "finishes" && activeFinishData ? `${product.name} — ${activeSwatchData.name}, ${activeFinishData.name}` : `${product.name} — ${activeSwatchData.name}`} />
                   )}
                 </div>
-                <figcaption key={activeSwatchData?.name}><span>{activeMaterialCaption}</span><strong>{activeSwatchData?.name}</strong></figcaption>
+                <figcaption key={activeSwatchData?.name}><span>{activeMaterialCaption}</span><strong>{activeSwatchData?.name}{materialKey === "finishes" && activeFinishData ? ` · ${activeFinishData.name}` : ""}</strong></figcaption>
               </figure>
             </div>
           ) : (
