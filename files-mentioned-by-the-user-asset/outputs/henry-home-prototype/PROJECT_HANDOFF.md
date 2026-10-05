@@ -222,6 +222,58 @@ Accordion технічних деталей має бути початково �
 - Заголовок "Firma rodzinna. Manufaktura w Polsce" розбито на два рядки.
 - Фото в секції `manifesto` (крісло з золотою сіткою Фібоначчі, наприкінці сторінки) замінено на версію з більшим порожнім простором знизу — текст, що з'являється поверх (`manifestoCopy`), більше не перетинає золоту рамку.
 
+## 6.2. Зміни 2026-09-29 (Nova Solo — «Materiały i wykończenia»)
+
+Запушено в `main` (коміт `605ada0`), задеплоєно на `henry-seating-preview` (версія `46896817`).
+
+**Вимога клієнта:** об'єднати «Barwa skóry» і «Wykończenie drewna» в одну вкладку «Materiały i wykończenia». Спочатку вибір дерева, під ним 12 пробок «шкіра + дерево», клік змінює фото фотеля (колір шкіри + обране дерево). Vesper: дерево одне (Smoked Ebony Gloss). Nova: 3 дерева (Smoked Ebony Gloss, Natural Oak Satin, American Walnut Satin). Останній абзац клієнтського повідомлення повторював «Nova» — імовірно, мався на увазі Solaris (питання клієнту ще відкрите).
+
+**Готовність:** реалізовано **лише для Nova Solo**. Vesper Solo і Solaris Solo лишаються зі старими окремими вкладками «Barwa skóry» / «Wykończenie drewna», поки клієнт не надішле відповідні фото.
+
+**Дані (`app/collections-data.ts`):**
+- Нові типи/помічники: `HenryFinish` (`name`, `woodSwatch`, `leathers[]`), `finishLeathers` (12 кольорів зі slug), `buildFinish(productSlug, name, woodSlug)`; нове необов'язкове поле `HenryProduct.finishes`.
+- Заповнено лише в Nova Solo: `finishes: [buildFinish("nova-solo", …)]` для трьох дерев. Щоб підключити іншу модель, достатньо додати `finishes` з тими ж викликами (файли мають лежати за шаблоном нижче).
+
+**UI (`app/components/product-experience.tsx`):**
+- `MaterialKey` отримав `"finishes"`. Вкладки фільтруються `visibleMaterialTabs`: якщо в продукту є `finishes`, показуємо «Materiały i wykończenia» замість «Barwa skóry»/«Wykończenie drewna»; інакше — старі вкладки.
+- Стан: `activeFinish` (індекс дерева) + наявний `activeSwatch` (шкіра). Зміна дерева зберігає обраний колір шкіри. Підпис під фото: «Колір · Дерево», alt містить колір і дерево. Ряд дерев має `aria-pressed`.
+
+**Стилі (`app/globals.css`):** `.material-lab__woods` (3 колонки), `.material-lab__swatches--finishes` (4 колонки, пробки 2:1 без обрізання, `object-fit: contain`), `.material-lab__content--finishes` (колонки 1.5fr/.7fr, gap 4vw). На мобільному дерева в стовпчик, пробки по 2 в ряд, контент в одну колонку. Селектори мають подвійний клас, бо загальне `.material-lab__swatches button` (aspect-ratio 1, cover) стоїть у файлі нижче і інакше перебиває.
+
+**Ассети** (`public/media/product-pages/nova-solo/materials/finishes/<american-walnut-satin|natural-oak-satin|smoked-ebony-gloss>/`, webp, ~5,7 MB разом): `preview-<колір>.webp` (фотель без фону, 1537×1023 з альфою), `swatch-<колір>.webp` (пробка шкіри + дерева, макс. 1000 px), `wood-<дерево>.webp` (окрема пробка; для SEG клієнт не надіслав — UI бере вже наявні `materials/wood/swatch-*.webp`). Джерело: `asset/Strona Produktu/Nova Solo/new barwy kolorów + drewno/`. **Порядок фото фотелів у клієнта не збігається з нумерацією пробок і різний у кожній з трьох папок** — файли зіставлено з кольорами візуально; Ivory White та Ivory Cream у SEG розрізнялись за теплотою відтінку (слабка різниця), варто перевірити на сторінці.
+
+**Відомі обмеження / наступні кроки:**
+- Клієнт називає колір №9 **Cool Graphite**; у старих даних Vesper/Solaris він досі «Warm Graphite» — узгодити при міграції цих моделей.
+- Отримати від клієнта фото для Vesper (1 дерево × 12) і, за підтвердженням, Solaris (3 × 12); для Vesper дерево одне — ряд вибору дерева можна приховати.
+- Старі вкладки й ассети (`materials/wood/reference-*.webp`) для Nova поки лишаються на диску, але UI їх більше не показує.
+- Візуально в браузері перевірено лише користувачем (десктоп); мобільну розкладку варто пройти окремо.
+
+## 6.3. Зміни 2026-10-05 (Nova Solo — конфігуратор «Materiały i wykończenia», чорний фон сайту)
+
+Запушено в `main` (коміт `7dcfb88`), задеплоєно на `henry-seating-preview` (версія `6df68681`). Цей запис **замінює UI з розділу 6.2** для Nova Solo; дані (`finishes`, `buildFinish`) лишаються.
+
+**Вимога клієнта:** під заголовком вкладки короткий опис («Materiały definiują charakter fotela…»), під ним два великі квадрати (шкіра і дерево, з назвою й описом), під кожним маленькі кружечки кольорів. Клік по кружечку міняє свій квадрат і фото фотеля; фото завжди відповідає обом виборам (шкіра × дерево). Поруч з квадратами більше фото фотеля. Фон усього сайту — чорний. Приклад поведінки: romo.com/collections/plains/okero.
+
+**Готовність:** лише **Nova Solo** (проба). Vesper Solo і Solaris Solo лишаються зі старими вкладками, поки клієнт не надішле комбінації шкіра × дерево.
+
+**Дані (`app/collections-data.ts`):** `HenryLeatherSwatch.card?` (велика картка шкіри), `HenryFinish.woodCard` (велика картка дерева). `buildFinish` тепер бере кружечки з `materials/dots/` і картки з `materials/cards/`. «American Walnut Satin» перейменовано на **American Walnut Gloss** (slug `american-walnut-gloss`), відповідно до клієнтського зразка.
+
+**UI (`app/components/product-experience.tsx`):** нова гілка для `materialKey === "finishes"` (перед загальним блоком зі swatch-ами): `.material-config` — інтро, два `.material-config__picker` (квадрат + кружечки) і фото фотеля з наявним crossfade (`outgoingPreview`). Стан той самий: `activeFinish` (дерево) + `activeSwatch` (шкіра). Інші вкладки (Pikowanie, Wyposażenie, Dane techniczne) не змінювались.
+
+**Стилі (`app/globals.css`, у кінці файлу):** блок `.material-config*` — 2 колонки квадратів + фото фотеля (1.15fr/.85fr), кружечки шкіри в 2 ряди по 6 (`.material-config__dots--leather`), кружечки 30 px (24 px на мобільному), `prefers-reduced-motion` вимикає анімацію. Інтро: `margin: 0 auto` (без нижнього відступу — правка користувача).
+
+**Чорний фон сайту:** `--ink` і `--section` → `#000`; усі `background: #171615 / #1a1a1a / #171512` у `globals.css` і всіх `*.module.css` замінено на `#000`. Також `#141312` (`.product-specification`), `#151413` (`.closing` у Personalizacja), напівпрозорі краї каруселі (`rgba(0,0,0,.92)`) і меню в Kontakt. Свідомо лишено: плейсхолдери під фото (`#101010`, `#0c0c0c`), виділення розгорнутого рядка FAQ (`#1d1c1a`), `color: #171615` на золотих кнопках. Не пройдено в браузері всі сторінки — перевірити шви на стиках секцій.
+
+**Ассети** (`public/media/product-pages/nova-solo/materials/`, webp): `finishes/<american-walnut-gloss|natural-oak-satin|smoked-ebony-gloss>/preview-<колір>.webp` (36 фото фотелів, 1537×1023, альфа), `cards/{leather,wood}-<slug>.webp` (15 карток 1000×1000 з назвою й описом, описи дерева «запечені» в картинки), `dots/{leather,wood}-<slug>.webp` (15 мініатюр 120 px, виріз із текстури картки). Джерело: `asset/Strona Produktu/Nova Solo/new barwy kolorów + drewno/` (папки `AWS+skóry`, `NOS+skóry`, `SEG + skóra`, `wzornik kolory i drewno`). Імена файлів у клієнта не містять кольору, порядок різний у кожній папці — зіставлено візуально. **Ivory White / Ivory Cream у наборі SEG розрізняються слабко** (`pikowanie nova.png` = White, `-11` = Cream); якщо переплутано, обміняти `preview-ivory-white.webp` і `preview-ivory-cream.webp` у `finishes/smoked-ebony-gloss/`.
+
+**Відомі обмеження / наступні кроки:**
+- Старі `swatch-*.webp` у `finishes/*/` і папка `finishes/american-walnut-satin/` більше не використовуються кодом — можна видалити після підтвердження.
+- Кружечки — вирізки з текстури картки, не плоский колір; клієнт може попросити інакше.
+- Опису для шкіри окремим текстом немає (на картці лише назва + «Naturalna włoska skóra Mezzo Fiore»); опис дерева можна змінити лише новою карткою.
+- Vesper Solo (1 дерево × 12 шкір) і Solaris Solo (3 × 12) — чекаємо на фото комбінацій від клієнта. Для Vesper в iCloud клієнта лежать нові зразки; зараз у проєкті лише Smoked Ebony Gloss і 12 фото за кольором шкіри.
+- Cool Graphite (Nova) vs Warm Graphite (Vesper/Solaris) — узгодити назву при міграції.
+- Чорний фон: пройти всі сторінки (головна, колекції, продукт, блог, FAQ, Kontakt, Personalizacja, Filozofia, Projekty indywidualne) на швах.
+
 ## 7. Спільна навігація та footer
 
 Burger має три послідовні панелі:
