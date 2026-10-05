@@ -1,7 +1,7 @@
 .page {
   --gutter: clamp(24px, 5.4vw, 84px);
   overflow: hidden;
-  background: #171615;
+  background: #000;
   color: #f4f1ed;
 }
 
@@ -75,7 +75,7 @@
 .galleryCard figcaption { margin-top: 12px; color: #837c75; text-transform: uppercase; letter-spacing: .1em; font-size: 8px; line-height: 1.5; }
 
 /* Materials loupe strip */
-.materials { padding: 6vh var(--gutter) 20vh; background: #1a1a1a; }
+.materials { padding: 6vh var(--gutter) 20vh; background: #000; }
 .materialsStrip { display: grid; grid-template-columns: repeat(7, 1fr); gap: clamp(10px, 1.4vw, 20px); margin-top: 16vh; }
 .materialTile { position: relative; overflow: hidden; background: #111; }
 .materialTile img { width: 100%; aspect-ratio: .82 / 1; object-fit: cover; }

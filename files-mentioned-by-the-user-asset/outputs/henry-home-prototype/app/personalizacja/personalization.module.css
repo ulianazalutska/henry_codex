@@ -1,7 +1,7 @@
 .page {
   --gutter: clamp(24px, 5.2vw, 80px);
   overflow: hidden;
-  background: #171615;
+  background: #000;
   color: #f4f1ed;
 }
 
@@ -50,7 +50,7 @@
   min-height: 720px;
   padding: 4vh var(--gutter);
   place-items: center;
-  background: #1a1a1a;
+  background: #000;
 }
 .detailGalleryInner { display: grid; width: min(90vw, 90vh, 960px); aspect-ratio: 1; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: clamp(10px, 1.5vw, 22px); }
 .detailGallery figure { position: relative; z-index: 1; min-width: 0; min-height: 0; margin: 0; overflow: hidden; background: #111; }
@@ -143,7 +143,7 @@
 .equipmentPreview h3 { margin: 0; font-size: clamp(1.7rem, 3vw, 3rem); font-weight: 300; letter-spacing: -.045em; }
 .equipmentPreview p { grid-column: 2; margin: 10px 0 0; color: #827b74; font-size: 10px; }
 
-.materials { padding: 20vh var(--gutter) 24vh; background: #1a1a1a; }
+.materials { padding: 20vh var(--gutter) 24vh; background: #000; }
 .materials > header { display: grid; grid-template-columns: .55fr 1.45fr; gap: 7vw; }
 .materials header h2 { margin: 0; }
 .materialPanels { display: flex; height: min(72vh, 760px); min-height: 590px; gap: 12px; margin-top: 15vh; }
@@ -166,7 +166,7 @@
 .materialVariants button.isSelected { border-color: #d9a341; }
 .materialVariants img { width: 100%; height: 100%; object-fit: cover; }
 
-.closing { padding: 22vh var(--gutter) 24vh; background: #151413; }
+.closing { padding: 22vh var(--gutter) 24vh; background: #000; }
 .closing h2 { max-width: 1250px; }
 .closing a { display: flex; justify-content: space-between; margin-top: 12vh; padding: 19px 2px; border-top: 1px solid rgba(217, 163, 65, .55); border-bottom: 1px solid rgba(217, 163, 65, .55); color: #e7e2dd; text-transform: uppercase; letter-spacing: .16em; font-size: 8px; transition: padding .45s cubic-bezier(.16, 1, .3, 1), color .3s ease; }
 .closing a:hover { padding-left: 12px; padding-right: 12px; color: #d9a341; }

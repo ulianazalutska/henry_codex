@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
 type MaterialKey = "finishes" | "leather" | "wood" | "quilting" | "combinations" | "technical";
-type MaterialSwatch = { name: string; swatchImg: string; previewImg: string; referenceImg?: string };
+type MaterialSwatch = { name: string; swatchImg: string; previewImg: string; referenceImg?: string; cardImg?: string };
 
 const novaRoot = "/media/product-pages/nova-solo";
 
@@ -202,7 +202,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   );
   const materialSwatches = useMemo<Record<MaterialKey, MaterialSwatch[]>>(() => ({
     finishes: activeFinishData
-      ? activeFinishData.leathers.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
+      ? activeFinishData.leathers.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview, cardImg: item.card }))
       : [],
     leather: product.leatherSwatches
       ? product.leatherSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
@@ -467,6 +467,47 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
             <figure className={`material-lab__technical${isReady ? "" : " is-placeholder"}`}>
               {isReady ? <img src={`${novaRoot}/dimensions.png`} alt="Nova Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>H</span><small>Rysunek techniczny w przygotowaniu</small></>}
             </figure>
+          ) : materialKey === "finishes" && finishes && activeFinishData && activeSwatchData ? (
+            <div className="material-config">
+              <p className="material-config__intro">Materiały definiują charakter fotela. Wybierz naturalną włoską skórę i wykończenie drewna, tworząc kompozycję dopasowaną do Twojego wnętrza.</p>
+              <div className="material-config__body">
+                <div className="material-config__pickers">
+                  <div className="material-config__picker">
+                    <figure className="material-config__square">
+                      {activeSwatchData.cardImg && <img key={activeSwatchData.cardImg} src={activeSwatchData.cardImg} alt={`Skóra ${activeSwatchData.name}`} />}
+                    </figure>
+                    <div className="material-config__dots material-config__dots--leather" role="group" aria-label="Barwa skóry">
+                      {activeSwatches.map((swatch, index) => (
+                        <button type="button" className={index === activeSwatch ? "is-active" : ""} onClick={() => setActiveSwatch(index)} aria-label={`Wybierz skórę ${swatch.name}`} aria-pressed={index === activeSwatch} title={swatch.name} key={swatch.name}>
+                          <img src={swatch.swatchImg} alt="" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="material-config__picker">
+                    <figure className="material-config__square">
+                      <img key={activeFinishData.woodCard} src={activeFinishData.woodCard} alt={`Drewno ${activeFinishData.name}`} />
+                    </figure>
+                    <div className="material-config__dots" role="group" aria-label="Wykończenie drewna">
+                      {finishes.map((finish, index) => (
+                        <button type="button" className={index === activeFinish ? "is-active" : ""} onClick={() => changeFinish(index)} aria-label={`Wybierz drewno ${finish.name}`} aria-pressed={index === activeFinish} title={finish.name} key={finish.name}>
+                          <img src={finish.woodSwatch} alt="" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <figure className="material-lab__preview material-config__chair">
+                  <div className="material-lab__preview-stack">
+                    {outgoingPreview && outgoingPreview !== activeSwatchData.previewImg && (
+                      <img key={`prev-${outgoingPreview}`} className="material-lab__preview-img is-outgoing" src={outgoingPreview} alt="" aria-hidden="true" />
+                    )}
+                    <img key={`current-${activeSwatchData.previewImg}`} className="material-lab__preview-img is-current" src={activeSwatchData.previewImg} alt={`${product.name} — ${activeSwatchData.name}, ${activeFinishData.name}`} />
+                  </div>
+                  <figcaption key={`${activeSwatchData.name}-${activeFinishData.name}`}><span>{activeMaterialCaption}</span><strong>{activeSwatchData.name} · {activeFinishData.name}</strong></figcaption>
+                </figure>
+              </div>
+            </div>
           ) : activeSwatches.length > 0 ? (
             <div className={`material-lab__content${materialKey === "finishes" ? " material-lab__content--finishes" : ""}`}>
               <div className={materialKey === "finishes" ? "material-lab__finishes" : undefined}>

@@ -1,6 +1,6 @@
 .page {
   --gutter: clamp(24px, 5.2vw, 82px);
-  background: #171615;
+  background: #000;
   color: #f2efeb;
 }
 
@@ -54,7 +54,7 @@
 .cardImage {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #1a1a1a;
+  background: #000;
 }
 .cardImage img {
   width: 100%;
