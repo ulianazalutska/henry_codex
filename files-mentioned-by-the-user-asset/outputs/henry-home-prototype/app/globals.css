@@ -4790,6 +4790,7 @@ button:hover .diagonal-arrow,
   font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.8;
   text-align: center;
+  text-wrap: balance;
 }
 
 .material-config__body {
