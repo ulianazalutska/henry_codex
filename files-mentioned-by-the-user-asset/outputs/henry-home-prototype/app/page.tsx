@@ -136,11 +136,18 @@ export default function Home() {
 
       <section className={`brand-story ${storyPlaying ? "is-playing" : ""}`} ref={storyRef} aria-label="O marce HENRY">
         <div className="brand-story__copy">
+          <p className="brand-story__label">HENRY by MEGAN</p>
           {storyParagraphs.map((paragraph, index) => {
             const offset = storyParagraphs.slice(0, index).reduce((sum, item) => sum + item.split(" ").length, 0);
             return <p key={paragraph}><HighlightText text={paragraph} offset={offset} /></p>;
           })}
-          <p className="brand-story__origin">Designed &amp; Made in Poland</p>
+          <p className="brand-story__origin">
+            Designed &amp; Made in Poland
+            <svg className="brand-story__flag" viewBox="0 0 16 10" role="img" aria-label="Flaga Polski">
+              <rect width="16" height="5" fill="#fff" />
+              <rect y="5" width="16" height="5" fill="#dc143c" />
+            </svg>
+          </p>
         </div>
         <figure className="brand-story__photo image-reveal" data-reveal>
           <img src="/media/brand-story-recliner.webp" alt="Fotel HENRY z pledem i miską popcornu" loading="lazy" />

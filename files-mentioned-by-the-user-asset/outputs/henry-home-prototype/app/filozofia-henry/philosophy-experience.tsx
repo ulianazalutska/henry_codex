@@ -322,7 +322,7 @@ export function PhilosophyExperience() {
   useEffect(() => {
     const id = window.setInterval(() => {
       setActiveManifesto((current) => (current + 1) % manifestoMessages.length);
-    }, 5000);
+    }, 7000);
     return () => window.clearInterval(id);
   }, []);
 
@@ -338,7 +338,11 @@ export function PhilosophyExperience() {
           Ponad 25 lat doświadczenia i blisko 2 miliony wyprodukowanych foteli.
           Od profesjonalnych sal kinowych i teatralnych po najbardziej osobiste wnętrza kin domowych.
         </p>
-        <span className={styles.introLabel}>To jest HENRY</span>
+        <p className={styles.introBrand}>HENRY by MEGAN</p>
+        <svg className={styles.introFlag} viewBox="0 0 16 10" role="img" aria-label="Flaga Polski">
+          <rect width="16" height="5" fill="#fff" />
+          <rect y="5" width="16" height="5" fill="#dc143c" />
+        </svg>
       </section>
 
       <figure className={styles.hero} data-philosophy-reveal>
@@ -398,7 +402,7 @@ export function PhilosophyExperience() {
         <div className={styles.cinemaGridText}>
           <h2>Prawdopodobnie siedziałeś na naszym fotelu…</h2>
           <p>
-            HENRY wyrasta z ponad 25 lat doświadczenia w projektowaniu i produkcji foteli kinowych. Przez lata
+            HENRY wyrasta z ponad 25 lat doświadczenia firmy MEGAN w projektowaniu i produkcji foteli kinowych. Przez lata
             tworzyliśmy rozwiązania dla największych operatorów kinowych na świecie, takich jak Cineworld, Pathe,
             Cineplexx, Helios, Cinema City, dostarczając blisko 2 miliony foteli do obiektów w wielu krajach.
           </p>
