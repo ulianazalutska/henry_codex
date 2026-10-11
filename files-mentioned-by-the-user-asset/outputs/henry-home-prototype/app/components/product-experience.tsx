@@ -139,13 +139,16 @@ const materialTabs: Array<{ key: MaterialKey; label: string; captionLabel?: stri
 // the last box, measured in JS since that can't be derived from the box percentages alone.
 const featureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 103.68, 94.68];
 
-// Vesper Solo drops box F and repositions box E (see .product-features--vesper-solo
-// .product-feature-box.boxE in globals.css), so its bottom edge is 78.24 + 16.44 = 94.68.
-const vesperFeatureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 94.68];
+// Vesper Solo raises boxB/boxD (same tightening as Nova/Solaris below), drops box F and
+// repositions box E (see .product-features--vesper-solo .product-feature-box.boxB/.boxD/.boxE
+// in globals.css), so bottom edges are 22 + 22.55 = 44.55, 48 + 35.01 = 83.01, 70.24 + 16.44 = 86.68.
+const vesperFeatureBoxBottomPercent = [22.15, 44.55, 63.53, 83.01, 86.68];
 
-// Nova Solo raises boxB and boxD (see .product-features--nova-solo .product-feature-box.boxB/.boxD
-// in globals.css), so their bottom edges shrink to 22 + 22.55 = 44.55 and 48 + 35.01 = 83.01.
-const novaFeatureBoxBottomPercent = [22.15, 44.55, 63.53, 83.01];
+// Nova Solo and Solaris Solo raise boxB and boxD (see .product-features--nova-solo and
+// .product-features--solaris-solo .product-feature-box.boxB/.boxD in globals.css) to close the
+// large empty gaps the base (untightened) positions leave between boxes, so their bottom edges
+// shrink to 22 + 22.55 = 44.55 and 48 + 35.01 = 83.01.
+const tightenedFeatureBoxBottomPercent = [22.15, 44.55, 63.53, 83.01];
 
 function featureGridBottomFraction(boxCount: number, boundaries: number[] = featureBoxBottomPercent) {
   return Math.max(...boundaries.slice(0, boxCount)) / 100;
@@ -175,13 +178,13 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   useEffect(() => {
     const grid = featureGridRef.current;
     if (!grid) return;
-    const boundaries = isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : isHero && isNovaSolo ? novaFeatureBoxBottomPercent : featureBoxBottomPercent;
+    const boundaries = isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : isHero && (isNovaSolo || isSolarisSolo) ? tightenedFeatureBoxBottomPercent : featureBoxBottomPercent;
     const bottomFraction = featureGridBottomFraction(featureBoxCount, boundaries);
     const measure = () => setFeatureGridClipHeight(grid.offsetWidth * (2475 / 1313) * bottomFraction);
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [featureBoxCount, isHero, isVesperSolo]);
+  }, [featureBoxCount, isHero, isVesperSolo, isNovaSolo, isSolarisSolo]);
 
   const slides = useMemo(() => {
     if (isReady) return novaSlides;
@@ -392,7 +395,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
       </section>
 
-      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}${isNovaSolo ? " product-features--nova-solo" : ""}`}>
+      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}${isNovaSolo ? " product-features--nova-solo" : ""}${isSolarisSolo ? " product-features--solaris-solo" : ""}`}>
         {isHero && (
           <header data-product-reveal>
             <h2>Luksus w standardzie</h2>
