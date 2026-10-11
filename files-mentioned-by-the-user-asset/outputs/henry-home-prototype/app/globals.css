@@ -916,7 +916,8 @@ figcaption {
 }
 
 .collection>h3,
-.collection__copy h3 {
+.collection__copy h3,
+.collection__text h3 {
   margin: 0;
   font-size: clamp(5rem, 9vw, 13rem);
   line-height: .87;
@@ -924,35 +925,42 @@ figcaption {
   font-weight: 300;
 }
 
-.collection>h3 {
+.collection__text {
   position: absolute;
   left: clamp(22px, 6vw, 92px);
-  bottom: 10vh;
+  right: clamp(22px, 6vw, 92px);
+  bottom: 9vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.collection__text h3 {
+  margin: 0 0 26px;
 }
 
 .collection>span,
-.collection__copy>span {
-  font-size: 22px;
-  line-height: 1.5;
+.collection__copy>span,
+.collection__text>span {
+  font-weight: 300;
+  letter-spacing: .2px;
+  font-size: 17px;
+  line-height: .8;
   color: #fff;
 }
 
-.collection>span {
-  position: absolute;
-  left: 42%;
-  right: clamp(22px, 6vw, 92px);
-  bottom: 11vh;
-  max-width: none;
+.collection__text>span {
+  max-width: 500px;
 }
 
 .collection span b {
   display: block;
   margin-top: 15px;
   color: var(--gold);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: .12em;
+  letter-spacing: .1em;
 }
 
 .diagonal-arrow {
@@ -1749,18 +1757,13 @@ button:hover .diagonal-arrow,
     height: 92vh;
   }
 
-  .collection--atelier>h3 {
-    bottom: 15vh;
-  }
-
-  .collection--atelier>p {
-    bottom: 28vh;
-  }
-
-  .collection--atelier>span {
+  .collection--atelier .collection__text {
     left: 22px;
-    right: auto;
+    right: 22px;
     bottom: 6vh;
+  }
+
+  .collection--atelier .collection__text>span {
     max-width: 260px;
   }
 
