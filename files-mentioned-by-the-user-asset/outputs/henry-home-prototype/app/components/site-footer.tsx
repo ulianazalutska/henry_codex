@@ -10,7 +10,7 @@ export function SiteFooter() {
         </div>
         <div><h3>Kolekcje</h3><Link href="/kolekcje/atelier">Atelier</Link><Link href="/kolekcje/lounge">Lounge</Link><Link href="/kolekcje/studio">Studio</Link></div>
         <div><h3>Dla klienta</h3><Link href="/filozofia-henry">O nas</Link><Link href="/faq">FAQ</Link><Link href="/blog">Blog</Link><Link href="/kontakt">Kontakt</Link></div>
-        <div><h3>Kontakt</h3><a href="tel:+48604783396">+48 604 783 396</a><a href="mailto:info@henryseating.com">info@henryseating.com</a><p>Otowice 41<br />86-070 Dąbrowa Chełmińska<br />Polska</p></div>
+        <div><h3>Kontakt</h3><a href="tel:+48604783396">+48 604 783 396</a><a href="mailto:info@henryseating.com">info@henryseating.com</a><p>Otowice 41<br />86-070 Dąbrowa Chełmińska<br />Polska</p><a href="https://meganseating.com" target="_blank" rel="noopener noreferrer">meganseating.com</a></div>
         <div className="footer-directory__social">
           <h3>Obserwuj nas</h3>
           <div>

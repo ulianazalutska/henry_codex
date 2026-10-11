@@ -169,24 +169,7 @@ export const collections: HenryCollection[] = [
     detail: "/media/collection-pages/lounge-detail.webp",
     inspirationImages: Array.from({ length: 15 }, (_, i) => `/media/inspiracje/lounge/lounge-${String(i + 1).padStart(2, "0")}.webp`),
     products: [
-      { name: "Solaris Solo", slug: "solaris-solo", image: "/media/lounge-evening-alt.webp", catalogueImage: "/media/collection-pages/lounge-solaris-solo.webp", catalogueFit: "contain", leatherSwatches: [
-        { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-01.webp" },
-        { name: "Ivory Cream", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-02.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-02.webp" },
-        { name: "Sand Beige", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-03.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-03.webp" },
-        { name: "Cool Taupe", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-04.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-04.webp" },
-        { name: "Cognac Tan", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-05.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-05.webp" },
-        { name: "Deep Chocolate", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-06.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-06.webp" },
-        { name: "Muted Olive", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-07.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-07.webp" },
-        { name: "Deep Forest", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-08.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-08.webp" },
-        { name: "Warm Graphite", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-09.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-09.webp" },
-        { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-10.webp" },
-        { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-11.webp" },
-        { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/solaris-solo/materials/leather/preview-12.webp" },
-      ], woodSwatches: [
-        { name: "American Walnut Satin", swatch: "/media/product-pages/solaris-solo/materials/wood/swatch-american-walnut-satin.webp", preview: "/media/product-pages/solaris-solo/materials/wood/preview-american-walnut-satin.webp", reference: "/media/product-pages/solaris-solo/materials/wood/reference-american-walnut-satin.webp" },
-        { name: "Smoked Ebony Gloss", swatch: "/media/product-pages/solaris-solo/materials/wood/swatch-smoked-ebony-gloss.webp", preview: "/media/product-pages/solaris-solo/materials/wood/preview-smoked-ebony-gloss.webp", reference: "/media/product-pages/solaris-solo/materials/wood/reference-smoked-ebony-gloss.webp" },
-        { name: "Natural Oak Satin", swatch: "/media/product-pages/solaris-solo/materials/wood/swatch-natural-oak-satin.webp", preview: "/media/product-pages/solaris-solo/materials/wood/preview-natural-oak-satin.webp", reference: "/media/product-pages/solaris-solo/materials/wood/reference-natural-oak-satin.webp" },
-      ], quiltingSwatches: [
+      { name: "Solaris Solo", slug: "solaris-solo", image: "/media/lounge-evening-alt.webp", catalogueImage: "/media/collection-pages/lounge-solaris-solo.webp", catalogueFit: "contain", finishes: [buildFinish("solaris-solo", "Smoked Ebony Gloss", "smoked-ebony-gloss"), buildFinish("solaris-solo", "American Walnut Gloss", "american-walnut-gloss"), buildFinish("solaris-solo", "American Walnut Satin", "american-walnut-satin"), buildFinish("solaris-solo", "Natural Oak Satin", "natural-oak-satin")], quiltingSwatches: [
         { name: "Vertical Channel", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-vertical-channel.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-vertical-channel.webp" },
         { name: "Square Grid", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-square-grid.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-square-grid.webp" },
         { name: "Deep Button", swatch: "/media/product-pages/solaris-solo/materials/quilting/swatch-deep-button.webp", preview: "/media/product-pages/solaris-solo/materials/quilting/preview-deep-button.webp" },
