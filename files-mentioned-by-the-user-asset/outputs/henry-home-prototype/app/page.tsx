@@ -127,7 +127,7 @@ export default function Home() {
             <div className="cinematic-hero__shade" />
           </div>
           <div className="hero-intro">
-            <p>Ręcznie wykonane fotele do prywatnych sal kinowych</p>
+            <p>HENRY fotele do prywatnych sal kinowych</p>
             <h1>Twoje kino.<br /><span>Twoje zasady.</span></h1>
           </div>
           <p className="hero-note">Wizualizacja koncepcyjna</p>
