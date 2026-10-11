@@ -409,6 +409,13 @@ export function PhilosophyExperience() {
         </div>
       </section>
 
+      <section className={styles.meganProof} aria-label="Realizacje kinowe MEGAN" data-philosophy-reveal>
+        <p className={styles.meganProofLabel}>HENRY by MEGAN</p>
+        <img src="/media/filozofia-henry/megan-realizacja-1.png" alt="Sala kinowa z fotelami MEGAN w czerwonej skórze" />
+        <img src="/media/filozofia-henry/megan-realizacja-2.png" alt="Sala kinowa z pikowanymi fotelami MEGAN i podświetlanymi schodami" />
+        <img src="/media/filozofia-henry/megan-realizacja-3.png" alt="Zabytkowa sala kinowa z fotelami MEGAN w secesyjnym wnętrzu" />
+      </section>
+
       <div className={styles.valuesHeading} data-philosophy-reveal>
         <p>Trzy wartości.</p>
         <h2>Jeden efekt.</h2>

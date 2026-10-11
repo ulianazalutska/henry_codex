@@ -49,6 +49,20 @@
   .cinemaGridLarge { grid-row: auto; }
 }
 
+.meganProof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 0 var(--gutter) 12vh; }
+.meganProofLabel { grid-column: 1 / -1; margin: 0 0 22px; color: #d9a341; font-size: 12px; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; text-align: center; }
+.meganProof img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+@media (max-width: 980px) {
+  .meganProof { grid-template-columns: repeat(2, 1fr); }
+  .meganProof img:nth-child(3) { display: none; }
+}
+
+@media (max-width: 640px) {
+  .meganProof { grid-template-columns: 1fr; gap: 10px; padding: 0 var(--gutter) 90px; }
+  .meganProof img:nth-child(3) { display: block; }
+}
+
 .designed { padding: 10vh var(--gutter) 4vh; text-align: center; }
 .designed h2 { margin: 0; font-size: clamp(1.8rem, 3.1vw, 1.6rem); font-weight: 300; line-height: 1.15; }
 .designed p { max-width: 640px; margin: 26px auto 0; color: #a7a19a; font-size: clamp(.85rem, 1vw, .95rem); line-height: 1.7; }

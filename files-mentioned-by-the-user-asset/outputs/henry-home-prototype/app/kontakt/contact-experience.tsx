@@ -117,11 +117,11 @@ export function ContactExperience() {
 
       <section className={styles.gallery} aria-label="Przestrzenie HENRY">
         <figure className={styles.galleryPrimary} data-contact-reveal>
-          <div><img src="/media/kontakt/showroom.png" alt="Gabinet HENRY z biurkiem i fotelem premium" /></div>
+          <div><img src="/media/kontakt/siedziba-otowice.png" alt="Widok lotniczy na siedzibę HENRY w Otowicach" /></div>
           <figcaption><span>Przestrzeń HENRY</span><span>Otowice / Polska</span></figcaption>
         </figure>
         <figure className={styles.gallerySecondary} data-contact-reveal>
-          <div><img src="/media/kontakt/przestrzen.png" alt="Showroom HENRY z fotelami do prywatnej sali kinowej" /></div>
+          <div><img src="/media/kontakt/mapa-otowice.png" alt="Mapa lokalizacji siedziby HENRY w Otowicach" /></div>
           <figcaption><span>Private showroom</span><span>By appointment</span></figcaption>
         </figure>
       </section>
