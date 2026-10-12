@@ -174,7 +174,7 @@ export function ContactExperience() {
       </section>
 
       <section className={styles.social} data-contact-reveal>
-        <h2>Obserwuj<br /><em>HENRY.</em></h2>
+        <h2>Obserwuj<br /><em>HENRY</em></h2>
         <div>
           {socialLinks.map((social) => (
             <a href="#" key={social.label}>

@@ -6,54 +6,165 @@ import { SiteFooter } from "../components/site-footer";
 import { SiteNavigation } from "../components/site-navigation";
 import styles from "./bespoke.module.css";
 
-const scope = ["Kształt", "Tkanina", "Wymiar", "Pikowanie", "Wyposażenie"];
+const media = "/media/projekty-indywidualne";
 
-const realizations = [
+const customChairs = [
+  { image: `${media}/s1/koniakowy-led.webp`, alt: "Fotel w kolorze koniakowym z ciepłym podświetleniem podstawy" },
+  { image: `${media}/s1/czerwony-led.webp`, alt: "Czerwony fotel kinowy z pikowaniem i niebieskim podświetleniem LED" },
+];
+
+const themes = [
+  { image: `${media}/s2/futurystyczne.webp`, label: "Futurystyczne", note: "Sala kinowa z widokiem na Ziemię" },
+  { image: `${media}/s2/route-66.webp`, label: "Route 66", note: "Kino retro z wysokimi oparciami" },
+  { image: `${media}/s2/noir.webp`, label: "Noir Cinema", note: "Czerń, biel i pikowana skóra" },
+  { image: `${media}/s2/haunted.webp`, label: "Haunted Cinema", note: "Klasyczny salon z czerwonymi fotelami" },
+  { image: `${media}/s2/space-opera.webp`, label: "Space Opera", note: "Wnętrze statku kosmicznego" },
+  { image: `${media}/s2/neon-graffiti.webp`, label: "Neon & graffiti", note: "Miejski klimat i czerwone fotele" },
+  { image: `${media}/s2/american-dream.webp`, label: "American Dream", note: "Kino w stylu retro z barem" },
+  { image: `${media}/s2/city-scape.webp`, label: "City Scape", note: "Fotele w loftowym wnętrzu z barem" },
+];
+
+const spaceRooms = [
+  { image: `${media}/s3/classic-czerwien.webp`, alt: "Prywatna sala kinowa z czerwonymi fotelami na podeście" },
+  { image: `${media}/s3/oliwka.webp`, alt: "Sala kinowa w oliwkowych tonach z sofą i szezlongiem" },
+  { image: `${media}/s3/pomarancz-granat.webp`, alt: "Wielomiejscowa sala kinowa z sofami w kolorach pomarańczu i granatu" },
+  { image: `${media}/s3/gwiazdy-czerwien.webp`, alt: "Sala kinowa pod rozgwieżdżonym sufitem z czerwonymi fotelami" },
+  { image: `${media}/s3/czern-skora.webp`, alt: "Rząd czarnych skórzanych foteli kinowych na czerwonym dywanie" },
+  { image: `${media}/s3/biblioteka.webp`, alt: "Brązowa sofa kinowa przed regałem z kolekcją filmów" },
+  { image: `${media}/s3/czern-narozna.webp`, alt: "Czarna sofa narożna i fotele w sali kinowej" },
+  { image: `${media}/s3/zolta-sofa.webp`, alt: "Żółta sofa dwuosobowa z poduszkami, wizualizacja produktu" },
+];
+
+const spaceExamples = [
+  "Indywidualne układy foteli kinowych.",
+  "Sofy i siedziska wieloosobowe.",
+  "Niestandardowe konfiguracje modułowe.",
+  "Fotele i siedziska o indywidualnych wymiarach.",
+  "Rozwiązania dla pomieszczeń o nietypowej architekturze.",
+  "Specjalne konstrukcje i układy siedzisk.",
+];
+
+const technology = [
   {
-    image: "/media/projekty-indywidualne/realizacja-rim-light-cinema.jpg",
-    caption: "Fotele kinowe, aksamit, pikowanie diamentowe",
-    depth: 0.55,
+    id: "komfort",
+    label: "Komfort i relaks",
+    items: [
+      "Zaawansowane systemy regulacji elektrycznej.",
+      "Indywidualne systemy masażu.",
+      "Podgrzewanie i wentylacja siedzisk.",
+      "Mechanizmy obrotowe i bujania.",
+      "Indywidualne systemy podparcia ciała.",
+    ],
+    images: [
+      { image: `${media}/s4/masaz.webp`, alt: "Fotel z systemem masażu, infografika stref masażu" },
+      { image: `${media}/s4/mechanizm.webp`, alt: "Fotel w pozycji relaksacyjnej, widoczny mechanizm regulacji" },
+      { image: `${media}/s4/podgrzewanie.webp`, alt: "Fotel z podgrzewanym siedziskiem i oparciem" },
+    ],
   },
   {
-    image: "/media/projekty-indywidualne/realizacja-shelf-cinema.jpg",
-    caption: "Sala kinowa z zabudową, skóra, oświetlenie w półkach",
-    depth: 1,
+    id: "multimedia",
+    label: "Multimedia i rozrywka",
+    items: [
+      "Zintegrowane systemy audio.",
+      "Głośniki wibracyjne i systemy basowe.",
+      "Indywidualne systemy sterowania.",
+      "Integracja z automatyką inteligentnego domu.",
+      "Oświetlenie ambientowe.",
+    ],
+    images: [
+      { image: `${media}/s4/bluetooth.webp`, alt: "Fotel ze zintegrowanym głośnikiem i łącznością Bluetooth" },
+      { image: `${media}/s4/panel-henry.webp`, alt: "Panel sterowania HENRY Command w podłokietniku" },
+      { image: `${media}/s4/uchwyt-led.webp`, alt: "Podłokietnik z niebiesko podświetlanym uchwytem na kubek" },
+    ],
   },
   {
-    image: "/media/projekty-indywidualne/realizacja-velvet-cinema.jpg",
-    caption: "Sofa i panele ścienne, aksamit, pikowanie guzikowe",
-    depth: 0.7,
-  },
-  {
-    image: "/media/projekty-indywidualne/realizacja-blue-glow-cinema.jpg",
-    caption: "Rząd foteli kinowych, skóra, oświetlenie punktowe",
-    depth: 1.15,
+    id: "wyposazenie",
+    label: "Wyposażenie specjalne",
+    items: [
+      "Zintegrowane mini lodówki.",
+      "Chłodzone i podgrzewane uchwyty na napoje.",
+      "Indywidualne konsole i stoliki.",
+      "Ukryte schowki i moduły.",
+      "Uchwyty na urządzenia mobilne.",
+      "Dedykowane rozwiązania na indywidualne zamówienie.",
+    ],
+    images: [
+      { image: `${media}/s4/barek.webp`, alt: "Ukryty barek z drewnianą szufladą w podłokietniku" },
+      { image: `${media}/s4/stolik.webp`, alt: "Obrotowy drewniany stolik przy fotelu" },
+      { image: `${media}/s4/sterowanie-uchwyt.webp`, alt: "Podłokietnik z uchwytem na kubek i przyciskami sterowania" },
+    ],
   },
 ];
 
-const materials = [
-  { image: "/media/projekty-indywidualne/materials/stitch-macro.jpg", label: "Szew ozdobny" },
-  { image: "/media/projekty-indywidualne/materials/stitch-square-double-diamond.jpg", label: "Square Double Diamond" },
-  { image: "/media/projekty-indywidualne/materials/stitch-square-diamond.jpg", label: "Square Diamond" },
-  { image: "/media/projekty-indywidualne/materials/stitch-curve.jpg", label: "Curve" },
-  { image: "/media/projekty-indywidualne/materials/stitch-double-diamond.jpg", label: "Double Diamond" },
-  { image: "/media/projekty-indywidualne/materials/stitch-diamond.jpg", label: "Diamond" },
-  { image: "/media/projekty-indywidualne/materials/stitch-hex.jpg", label: "Hex" },
-];
+type Craft = {
+  id: string;
+  label: string;
+  tiles: { image: string; alt: string; loupe?: boolean }[];
+};
 
-const process = [
-  { number: "01", title: "Konsultacja", description: "Rozmawiamy o funkcji, stylu i przestrzeni." },
-  { number: "02", title: "Projekt", description: "Szkic formy, wymiarów i konstrukcji." },
-  { number: "03", title: "Dobór materiałów", description: "Tkanina, skóra, drewno, pikowanie." },
-  { number: "04", title: "Realizacja", description: "Wykonanie w pracowni HENRY." },
-  { number: "05", title: "Montaż", description: "Dostawa i wykończenie na miejscu." },
+const crafts: Craft[] = [
+  {
+    id: "pikowanie",
+    label: "Sztuka pikowania",
+    tiles: [
+      { image: `${media}/s5/katalog-pikowanie-skora.webp`, alt: "Katalog wzorów pikowania skóry", loupe: true },
+      { image: `${media}/s5/katalog-pikowanie-tkaniny.webp`, alt: "Katalog wzorów pikowania tkanin", loupe: true },
+    ],
+  },
+  {
+    id: "szycie",
+    label: "Sztuka szycia",
+    tiles: [
+      { image: `${media}/s5/szycie-burgund.webp`, alt: "Rzemieślnik szyjący burgundową tapicerkę skórzaną" },
+      { image: `${media}/s5/katalog-przeszycia.webp`, alt: "Katalog opcji przeszyć tapicerskich", loupe: true },
+      { image: `${media}/s5/szew-zielona-skora.webp`, alt: "Szew na zielonej skórze pod stopką maszyny" },
+    ],
+  },
+  {
+    id: "materialy",
+    label: "Wyjątkowe materiały",
+    tiles: [
+      { image: `${media}/s5/probki-skor.webp`, alt: "Warstwowe próbki skór w bogatych kolorach" },
+      { image: `${media}/s5/tkaniny-aksamit.webp`, alt: "Rolki aksamitnych tkanin w różnych kolorach" },
+      { image: `${media}/s5/katalog-forniry-1.webp`, alt: "Katalog fornirów drewnianych", loupe: true },
+      { image: `${media}/s5/katalog-forniry-2.webp`, alt: "Katalog fornirów drewnianych, kolejna selekcja", loupe: true },
+    ],
+  },
 ];
 
 export function BespokeExperience() {
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const processRef = useRef<HTMLElement>(null);
-  const processLineRef = useRef<HTMLSpanElement>(null);
-  const [activeStep, setActiveStep] = useState(-1);
+  const [theme, setTheme] = useState(0);
+  const [tech, setTech] = useState(0);
+  const [techImage, setTechImage] = useState(0);
+  const roomsRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const heroInnerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const frame = heroRef.current;
+    const inner = heroInnerRef.current;
+    if (!frame || !inner || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const rect = frame.getBoundingClientRect();
+      const span = window.innerHeight + rect.height;
+      const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / span));
+      inner.style.transform = `translate3d(0, ${(progress * 16 - 8).toFixed(3)}%, 0)`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-proj-reveal]"));
@@ -69,46 +180,11 @@ export function BespokeExperience() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const cards = Array.from(galleryRef.current?.querySelectorAll<HTMLElement>("[data-depth]") ?? []);
-    if (!cards.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let frame = 0;
-    const tick = () => {
-      const viewportCenter = window.innerHeight / 2;
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.top + rect.height / 2;
-        const depth = Number(card.dataset.depth ?? "1");
-        const offset = (viewportCenter - cardCenter) * 0.07 * depth;
-        card.style.transform = `translate3d(0, ${offset}px, 0)`;
-      });
-      frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
-  useEffect(() => {
-    const section = processRef.current;
-    const line = processLineRef.current;
-    if (!section || !line) return;
-
-    const measure = () => {
-      const start = section.offsetTop - window.innerHeight * 0.65;
-      const distance = Math.max(1, section.offsetHeight - window.innerHeight * 0.35);
-      const progress = Math.min(1, Math.max(0, (window.scrollY - start) / distance));
-      line.style.transform = `scaleX(${progress})`;
-      setActiveStep(Math.floor(progress * process.length + 0.001) - 1);
-    };
-    measure();
-    window.addEventListener("scroll", measure, { passive: true });
-    window.addEventListener("resize", measure);
-    return () => {
-      window.removeEventListener("scroll", measure);
-      window.removeEventListener("resize", measure);
-    };
-  }, []);
+  const scrollRooms = (direction: 1 | -1) => {
+    const track = roomsRef.current;
+    if (!track) return;
+    track.scrollBy({ left: direction * track.clientWidth * 0.7, behavior: "smooth" });
+  };
 
   const moveLens = (event: React.MouseEvent<HTMLDivElement>) => {
     const tile = event.currentTarget;
@@ -128,93 +204,259 @@ export function BespokeExperience() {
     if (lens) lens.style.opacity = "0";
   };
 
+  const activeTech = technology[tech];
+
   return (
     <main id="top" className={styles.page}>
       <SiteNavigation />
 
+      {/* 00 — Wprowadzenie */}
       <section className={styles.hero} aria-labelledby="bespoke-title">
-        <p className={styles.eyebrow}>Bez ograniczeń kolekcji</p>
-        <h1 id="bespoke-title">Projekty<br /><em>indywidualne.</em></h1>
-        <div className={styles.heroStitch} aria-hidden="true"><i /><i /></div>
-        <div className={styles.heroIntro}>
-          <p>Kształt, tkanina, wymiar, pikowanie — poza granicami kolekcji Vesper, Nova i Solaris.</p>
-          <span>Pracujemy z architektami, projektantami wnętrz i klientami indywidualnymi nad meblami, których nie ma jeszcze w żadnym katalogu.</span>
-        </div>
-      </section>
-
-      <section className={styles.concept} aria-label="Przykład projektu indywidualnego">
-        <figure className={styles.conceptFigure} data-proj-reveal>
-          <div className={styles.conceptFrame}>
-            <img src="/media/projekty-indywidualne/koncepcja-orbit.webp" alt="Koncepcyjna wizualizacja fotela w stylistyce kosmicznej" loading="lazy" />
+        <div className={styles.heroText}>
+          <p className={styles.eyebrow}>Wyjątkowe projekty. Nieograniczone możliwości.</p>
+          <h1 id="bespoke-title">Indywidualne projekty<br />i realizacje</h1>
+          <div className={styles.heroBody}>
+            <p>W HENRY wierzymy, że najbardziej wyjątkowe projekty powstają wtedy, gdy kreatywność spotyka się z doświadczeniem i możliwościami technologicznymi.</p>
+            <p>Dlatego tworzymy również fotele i systemy siedzisk projektowane całkowicie od podstaw z myślą o indywidualnych potrzebach, wyjątkowych wnętrzach i niepowtarzalnych wizjach naszych klientów.</p>
+            <p>Od pojedynczego, autorskiego fotela po zaawansowane rozwiązania dla prywatnych kin i luksusowych przestrzeni.</p>
           </div>
-          <figcaption>Wizualizacja koncepcyjna — nie zdjęcie gotowej realizacji</figcaption>
+        </div>
+        <figure className={styles.heroImage} ref={heroRef}>
+          <div className={styles.heroParallax} ref={heroInnerRef}>
+            <img src={`${media}/hero-fotele.webp`} alt="Skórzane zagłówki foteli kinowych w kolorze koniakowym z pikowaniem diamentowym i godłem HENRY" />
+          </div>
+          <p className={`${styles.eyebrow} ${styles.heroCaption}`}>Twoja wizja<br />Nasze doświadczenie<br />Wspólny projekt</p>
         </figure>
-        <blockquote className={styles.conceptQuote} data-proj-reveal>
-          <p>„Jeśli klient zechce fotele w stylistyce kosmicznej —<br />taki projekt zrobimy.”</p>
-        </blockquote>
       </section>
 
-      <ul className={styles.scope} aria-label="Zakres personalizacji" data-proj-reveal>
-        {scope.map((item) => <li key={item}>{item}</li>)}
-      </ul>
-
-      <section className={styles.gallery} aria-labelledby="realizacje-title">
-        <div className={styles.sectionLead} data-proj-reveal>
-          <p>Zrealizowane projekty</p>
-          <h2 id="realizacje-title">Kilka<br /><em>przykładów.</em></h2>
-        </div>
-        <div className={styles.galleryGrid} ref={galleryRef}>
-          {realizations.map((item) => (
-            <figure key={item.image} className={styles.galleryCard} data-proj-reveal data-depth={item.depth}>
-              <div><img src={item.image} alt={item.caption} loading="lazy" /></div>
-              <figcaption>{item.caption}</figcaption>
-            </figure>
-          ))}
+      {/* 01 — Indywidualny projekt foteli */}
+      <section className={`${styles.chapter} ${styles.chapterCustom}`} aria-labelledby="ch1-title">
+        <div className={styles.split}>
+          <div className={styles.copyColumn} data-proj-reveal>
+            <h2 id="ch1-title">Fotele tworzone<br />od podstaw</h2>
+            <p>Tworzymy autorskie projekty foteli, w których każdy element może zostać zaprojektowany zgodnie z indywidualną wizją klienta.</p>
+            <p>Forma, proporcje, ergonomia, materiały i detale — wszystko powstaje z myślą o stworzeniu wyjątkowego mebla, który nie jest częścią kolekcji.</p>
+            <p>Od minimalistycznej elegancji po odważne, futurystyczne formy. Łączymy kreatywność projektową z wieloletnim doświadczeniem w produkcji luksusowych siedzisk.</p>
+            <p className={styles.statement}>Nie ograniczamy się do gotowych rozwiązań. Tworzymy nowe.</p>
+          </div>
+          <div className={styles.chairGrid}>
+            {customChairs.map((item) => (
+              <figure key={item.image} className={styles.chairCard} data-proj-reveal>
+                <div><img src={item.image} alt={item.alt} loading="lazy" /></div>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className={styles.materials} aria-labelledby="materials-title">
-        <div className={styles.sectionLead} data-proj-reveal>
-          <p>Tkaniny i wykończenia</p>
-          <h2 id="materials-title">Poczuj<br /><em>fakturę.</em></h2>
-          <Link href="/personalizacja" className={styles.materialsLink}>Zobacz pełną paletę materiałów <span aria-hidden="true">↗</span></Link>
+      {/* 02 — Tematyczne fotele kinowe */}
+      <section className={`${styles.chapter} ${styles.chapterDark}`} aria-labelledby="ch2-title">
+        <div className={styles.chapterHead} data-proj-reveal>
+          <div>
+            <h2 id="ch2-title">Kiedy inspiracja staje się<br />projektem.</h2>
+            <p className={styles.goldLine}>Fotel, który odzwierciedla Twoją pasję.</p>
+          </div>
+          <div className={styles.chapterCopy}>
+            <p className={styles.lead}>Świat kina, motoryzacji, architektury i nieograniczonej wyobraźni.</p>
+            <p>Niektóre fotele mogą być czymś więcej niż elementem wyposażenia wnętrza. Mogą opowiadać historię, nawiązywać do pasji właściciela lub stać się centralnym punktem wyjątkowej przestrzeni.</p>
+            <p>Projektujemy fotele inspirowane światem filmu, science fiction, motoryzacji, kosmosu i współczesnego designu.</p>
+            <p>Każdy projekt jest indywidualną interpretacją wybranego motywu, łączącą oryginalne wzornictwo z komfortem i funkcjonalnością.</p>
+          </div>
         </div>
-        <div className={styles.materialsStrip} data-proj-reveal>
-          {materials.map((material) => (
-            <div key={material.label} className={styles.materialTile} onMouseMove={moveLens} onMouseLeave={leaveLens}>
-              <img src={material.image} alt={material.label} loading="lazy" />
-              <span className={styles.materialLens} data-lens style={{ backgroundImage: `url(${material.image})` }} aria-hidden="true" />
-              <p>{material.label}</p>
+
+        <div className={styles.themeViewer} data-proj-reveal>
+          <div className={styles.themeStage}>
+            {themes.map((item, index) => (
+              <img
+                key={item.image}
+                src={item.image}
+                alt={`${item.label} — ${item.note}`}
+                loading={index === 0 ? "eager" : "lazy"}
+                className={index === theme ? styles.isActive : undefined}
+                aria-hidden={index === theme ? undefined : true}
+              />
+            ))}
+          </div>
+          <ul className={styles.themeList} role="tablist" aria-label="Motywy projektów">
+            {themes.map((item, index) => (
+              <li key={item.label}>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={index === theme}
+                  className={index === theme ? styles.isActive : undefined}
+                  onClick={() => setTheme(index)}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{item.label}</strong>
+                  <em>{item.note}</em>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 03 — Rozwiązania dla przestrzeni */}
+      <section className={styles.chapter} aria-labelledby="ch3-title">
+        <div className={styles.spaceTop} data-proj-reveal>
+          <div className={styles.spaceCopy}>
+            <h2 id="ch3-title">Rozwiązania stworzone<br />dla Twojej przestrzeni</h2>
+            <p className={styles.spaceLead}>Każda przestrzeń zasługuje na indywidualne podejście.</p>
+            <p>Projektujemy niestandardowe systemy siedzisk dostosowane do architektury wnętrza, liczby użytkowników oraz oczekiwanej funkcjonalności.</p>
+            <p>Od pojedynczych foteli i ekskluzywnych sof po wielomiejscowe konfiguracje, rozwiązania modułowe i specjalistyczne systemy dla prywatnych sal kinowych.</p>
+            <p>Tworzymy rozwiązania, które łączą komfort, ergonomię i wyjątkową estetykę.</p>
+          </div>
+
+          <div className={styles.roomsWrap}>
+            <div className={styles.roomsTrack} ref={roomsRef} aria-label="Przykłady sal kinowych i aranżacji">
+              {spaceRooms.map((item) => (
+                <figure key={item.image} className={styles.roomCard}>
+                  <img src={item.image} alt={item.alt} loading="lazy" draggable={false} />
+                </figure>
+              ))}
+            </div>
+            <div className={styles.roomsControls}>
+              <button type="button" onClick={() => scrollRooms(-1)} aria-label="Poprzednie zdjęcia">
+                <svg width="9" height="15" viewBox="0 0 9 15" fill="none" aria-hidden="true">
+                  <path d="M8 1L1.5 7.5L8 14" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <button type="button" onClick={() => scrollRooms(1)} aria-label="Następne zdjęcia">
+                <svg width="9" height="15" viewBox="0 0 9 15" fill="none" aria-hidden="true">
+                  <path d="M1 1L7.5 7.5L1 14" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.spaceFoot} data-proj-reveal>
+          <div>
+            <h3 className={styles.listTitle}>Przykładowe możliwości</h3>
+            <ul className={styles.ruleList}>
+              {spaceExamples.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+          <p className={styles.bigStatement}>Nie dopasowujemy przestrzeni do mebli<br /><em>Projektujemy meble dla przestrzeni</em></p>
+        </div>
+      </section>
+
+      {/* 04 — Komfort i technologia */}
+      <section className={`${styles.chapter} ${styles.chapterDark}`} aria-labelledby="ch4-title">
+        <div className={styles.chapterHead} data-proj-reveal>
+          <div>
+            <h2 id="ch4-title">Innowacje projektowane<br /><em>wokół Ciebie</em></h2>
+          </div>
+          <div className={styles.chapterCopy}>
+            <p className={styles.lead}>Komfort przyszłości zaczyna się od indywidualnych potrzeb</p>
+            <p>Nowoczesne technologie otwierają zupełnie nowe możliwości projektowania luksusowych siedzisk.</p>
+            <p>W HENRY możemy opracowywać indywidualne rozwiązania łączące zaawansowaną mechanikę, elektronikę, multimedia i funkcje komfortu.</p>
+            <p>Od inteligentnych systemów regulacji po zintegrowane rozwiązania audio, oświetlenie i dodatkowe wyposażenie — technologia staje się integralną częścią projektu.</p>
+            <p>Projektujemy komfort, który wykracza poza standardowe rozwiązania.</p>
+          </div>
+        </div>
+
+        <div className={styles.techBlock} data-proj-reveal>
+          <p className={styles.techTitle}>Możliwości technologiczne</p>
+          <p className={styles.footnote}>Wszystkie rozwiązania technologiczne podlegają indywidualnej analizie konstrukcyjnej i technicznej.</p>
+          <div className={styles.techTabs} role="tablist" aria-label="Obszary technologii">
+            {technology.map((group, index) => (
+              <button
+                key={group.id}
+                type="button"
+                role="tab"
+                id={`tech-tab-${group.id}`}
+                aria-selected={index === tech}
+                aria-controls="tech-panel"
+                className={index === tech ? styles.isActive : undefined}
+                onClick={() => { setTech(index); setTechImage(0); }}
+              >
+                {group.label}
+              </button>
+            ))}
+          </div>
+          <div className={styles.techPanel} id="tech-panel" role="tabpanel" aria-labelledby={`tech-tab-${activeTech.id}`} key={activeTech.id}>
+            <ul className={styles.ruleList}>
+              {activeTech.items.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+            <div className={styles.techGallery}>
+              <div className={styles.techStage}>
+                {activeTech.images.map((item, index) => (
+                  <img
+                    key={item.image}
+                    src={item.image}
+                    alt={item.alt}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    className={index === techImage ? styles.isActive : undefined}
+                    aria-hidden={index === techImage ? undefined : true}
+                  />
+                ))}
+              </div>
+              <ul className={styles.techThumbs}>
+                {activeTech.images.map((item, index) => (
+                  <li key={item.image}>
+                    <button
+                      type="button"
+                      className={index === techImage ? styles.isActive : undefined}
+                      onClick={() => setTechImage(index)}
+                      aria-label={`Pokaż zdjęcie ${index + 1}: ${item.alt}`}
+                      aria-pressed={index === techImage}
+                    >
+                      <img src={item.image} alt="" loading="lazy" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 05 — Materiały i kunszt wykonania */}
+      <section className={`${styles.chapter} ${styles.chapterMaterials}`} aria-labelledby="ch5-title">
+        <div className={styles.chapterHead} data-proj-reveal>
+          <div>
+            <p className={styles.kicker}>Ekskluzywne materiały i kunszt wykonania</p>
+            <h2 id="ch5-title">Detale tworzone dla<br />wyjątkowych projektów</h2>
+            <p className={styles.goldLine}>Każdy detal może powstać specjalnie dla Twojego projektu</p>
+          </div>
+          <div className={styles.chapterCopy}>
+            <p className={styles.lead}>Indywidualny projekt zasługuje na indywidualne wykończenie</p>
+            <p>W autorskich realizacjach HENRY materiały i detale stają się integralną częścią procesu projektowego.</p>
+            <p>Ekskluzywne skóry, wyjątkowe tkaniny, szlachetne drewno, niestandardowe elementy dekoracyjne oraz indywidualnie opracowane przeszycia i pikowania pozwalają nadać każdemu projektowi niepowtarzalny charakter.</p>
+            <p>Nie ograniczamy się do standardowej palety materiałów ani gotowych wzorów.</p>
+          </div>
+        </div>
+
+        <div className={styles.crafts}>
+          {crafts.map((craft) => (
+            <div key={craft.id} className={styles.craft} data-proj-reveal>
+              <h3>{craft.label}</h3>
+              <div className={`${styles.craftTiles} ${styles[`tiles${craft.tiles.length}`]}`}>
+                {craft.tiles.map((tile) => (
+                  tile.loupe ? (
+                    <div key={tile.image} className={`${styles.craftTile} ${styles.hasLens}`} onMouseMove={moveLens} onMouseLeave={leaveLens}>
+                      <img src={tile.image} alt={tile.alt} loading="lazy" />
+                      <span className={styles.lens} data-lens style={{ backgroundImage: `url(${tile.image})` }} aria-hidden="true" />
+                    </div>
+                  ) : (
+                    <div key={tile.image} className={styles.craftTile}>
+                      <img src={tile.image} alt={tile.alt} loading="lazy" />
+                    </div>
+                  )
+                ))}
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className={styles.process} aria-labelledby="process-title" ref={processRef}>
-        <div className={styles.sectionLead} data-proj-reveal>
-          <p>Jak pracujemy</p>
-          <h2 id="process-title">Od pomysłu<br /><em>do wnętrza.</em></h2>
-        </div>
-        <div className={styles.processTrack}>
-          <span className={styles.processLine} ref={processLineRef} aria-hidden="true" />
-          <ol>
-            {process.map((step, index) => (
-              <li key={step.number} className={index <= activeStep ? styles.isActive : undefined}>
-                <span className={styles.processNumber}>{step.number}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className={styles.audience} data-proj-reveal>
-        <p>Dla architektów, projektantów wnętrz i klientów indywidualnych, którzy potrzebują mebla dopasowanego do konkretnej przestrzeni.</p>
-      </section>
-
       <section className={styles.cta} data-proj-reveal>
-        <h2>Masz własny<br /><em>pomysł?</em></h2>
+        <div>
+          <p className={styles.eyebrow}>Zacznijmy rozmowę</p>
+          <h2>Twoja wizja<br /><em>Nasze doświadczenie</em><br />Wspólny projekt</h2>
+        </div>
         <Link href={`/kontakt?topic=${encodeURIComponent("Projekt indywidualny")}`} className={styles.ctaLink}>
           Opowiedz nam o swoim projekcie <span aria-hidden="true">↗</span>
         </Link>
