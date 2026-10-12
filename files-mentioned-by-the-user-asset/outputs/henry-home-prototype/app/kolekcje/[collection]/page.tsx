@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
   const { collection: slug } = await params;
   const collection = getCollection(slug);
   if (!collection) return {};
-  const title = `${collection.name} — kolekcja HENRY`;
+  const title = `${collection.title} — HENRY`;
   return {
     title,
     description: collection.description,
@@ -34,19 +34,19 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
     <main id="top" className={`collection-detail collection-detail--${collection.slug}`}>
       <SiteNavigation />
       <header className="collection-detail-hero">
-        <img src={collection.hero} alt={`Kolekcja ${collection.name} HENRY`} />
+        <img src={collection.hero} alt={`${collection.title} HENRY`} />
       </header>
 
       <div className="collection-detail-hero__title-bar">
-        <h1>{collection.name}</h1>
+        <h1>{collection.title}</h1>
         <RevealText text={collection.description} className="collection-detail-hero__description" />
       </div>
 
       <section className="product-catalogue">
         <Link href={`/kolekcje/${collection.slug}/inspiracje`} className="collection-arrangements">
-          <img className="collection-arrangements__img" src={collection.inspirationImages?.[0] || collection.detail} alt={`${collection.name} w aranżacjach`} />
+          <img className="collection-arrangements__img" src={collection.inspirationImages?.[0] || collection.detail} alt={`${collection.title} w aranżacjach`} />
           <div className="collection-arrangements__veil" />
-          <h2 className="collection-arrangements__heading">Zobacz {collection.name}<br />w aranżacjach <span className="diagonal-arrow" aria-hidden="true" /></h2>
+          <h2 className="collection-arrangements__heading">Zobacz kolekcję {collection.name}<br />w aranżacjach <span className="diagonal-arrow" aria-hidden="true" /></h2>
         </Link>
         <div className="product-gallery">
           {collection.products.map((product, index) => (
@@ -65,7 +65,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
                 {product.catalogueScene ? (
                   <img src={product.catalogueScene} alt={`${product.name} we wnętrzu HENRY`} loading="lazy" />
                 ) : (
-                  <span><em>{String(index + 1).padStart(2, "0")}</em><small>{collection.name}</small></span>
+                  <span><em>{String(index + 1).padStart(2, "0")}</em><small>{collection.title}</small></span>
                 )}
                 <i className="diagonal-arrow" aria-hidden="true" />
               </figure>
@@ -75,7 +75,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
       </section>
 
       <Link className="next-collection" href={`/kolekcje/${next.slug}`}>
-        <p>Następna kolekcja</p><h2>{next.name}</h2><span>Odkryj <i className="diagonal-arrow" aria-hidden="true" /></span>
+        <p>Następna kolekcja</p><h2>{next.title}</h2><span>Odkryj <i className="diagonal-arrow" aria-hidden="true" /></span>
         <img src={next.hero} alt="" loading="lazy" />
       </Link>
       <SiteFooter />

@@ -25,9 +25,18 @@ interface ExecutionContext {
 // dangerouslyAllowSVG: true in next.config.js and uncomment below:
 // const imageConfig: ImageConfig = { dangerouslyAllowSVG: true };
 
+// Stare nazwy kolekcji (Atelier/Studio/Lounge) -> nowe (Vesper/Nova/Solaris).
+const legacyCollectionSlugs: Record<string, string> = { atelier: "vesper", studio: "nova", lounge: "solaris" };
+
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+
+    const legacy = url.pathname.match(/^\/kolekcje\/(atelier|studio|lounge)(\/.*)?$/);
+    if (legacy) {
+      url.pathname = `/kolekcje/${legacyCollectionSlugs[legacy[1]]}${legacy[2] ?? ""}`;
+      return Response.redirect(url.toString(), 301);
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];

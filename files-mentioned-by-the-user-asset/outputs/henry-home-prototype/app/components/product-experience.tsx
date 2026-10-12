@@ -193,10 +193,10 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     }
     return [
       { src: product.image, label: `${product.name} / materiały w przygotowaniu` },
-      { src: product.catalogueImage || product.image, label: `${collection.name} / zapowiedź` },
-      { src: collection.hero, label: `${collection.name} / kolekcja` },
+      { src: product.catalogueImage || product.image, label: `${collection.title} / zapowiedź` },
+      { src: collection.hero, label: `${collection.title} / kolekcja` },
     ];
-  }, [collection.hero, collection.name, isReady, product]);
+  }, [collection.hero, collection.title, isReady, product]);
   const finishes = product.finishes;
   const activeFinishData = finishes?.[Math.min(activeFinish, (finishes?.length ?? 1) - 1)];
   const visibleMaterialTabs = useMemo(
@@ -334,7 +334,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   return (
     <>
       <section className={`product-hero ${isReady ? "" : "product-hero--placeholder"}`}>
-        <img className="product-hero__photo" src={heroImage} alt={`${product.name} — ${collection.name}`} />
+        <img className="product-hero__photo" src={heroImage} alt={`${product.name} — ${collection.title}`} />
         <div className="product-hero__veil" />
         <h1>{product.name}</h1>
         <img className="product-hero__scroll" src="/media/product-pages/nova-solo/arrow-down.svg" alt="" aria-hidden="true" />
@@ -562,10 +562,10 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
 
       <Link id="aranzacje" href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}#aranzacje`)}`} className={`product-arrangements${isHero ? "" : " product-arrangements--tight"}`} data-product-reveal>
         <div className="product-arrangements__frame">
-          <img className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${collection.name} w aranżacjach`} />
+          <img className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${collection.title} w aranżacjach`} />
           <div className="product-arrangements__veil" />
         </div>
-        <h2 className="product-arrangements__heading">Zobacz {collection.name}<br />w aranżacjach <span className="diagonal-arrow" aria-hidden="true" /></h2>
+        <h2 className="product-arrangements__heading">Zobacz kolekcję {collection.name}<br />w aranżacjach <span className="diagonal-arrow" aria-hidden="true" /></h2>
       </Link>
     </>
   );

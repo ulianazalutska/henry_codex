@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
   const { collection: slug } = await params;
   const collection = getCollection(slug);
   if (!collection) return {};
-  const title = `Inspiracje — ${collection.name} — HENRY`;
+  const title = `Inspiracje — ${collection.title} — HENRY`;
   return {
     title,
     description: `Aranżacje wnętrz z kolekcją ${collection.name} HENRY.`,

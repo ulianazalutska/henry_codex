@@ -919,9 +919,9 @@ figcaption {
 .collection__copy h3,
 .collection__text h3 {
   margin: 0;
-  font-size: clamp(5rem, 9vw, 13rem);
+  font-size: clamp(5rem, 6vw, 13rem);
   line-height: .87;
-  letter-spacing: -.02em;
+  letter-spacing: -.05em;
   font-weight: 300;
 }
 
@@ -2185,8 +2185,8 @@ button:hover .diagonal-arrow,
   animation: collectionArrow 1.8s ease infinite;
 }
 
-/* Studio hero: nieco niższy kadr niż pozostałe kolekcje, żeby wszystkie fotele mieściły się w widoku (bez pasków/letterboxingu — nadal object-fit: cover). */
-.collection-detail--studio .collection-detail-hero {
+/* Nova hero: nieco niższy kadr niż pozostałe kolekcje, żeby wszystkie fotele mieściły się w widoku (bez pasków/letterboxingu — nadal object-fit: cover). */
+.collection-detail--nova .collection-detail-hero {
   height: 67vh;
   min-height: 650px;
   max-height: 654px;
@@ -2538,7 +2538,7 @@ button:hover .diagonal-arrow,
   color: #6f675f;
 }
 
-/* Wszystkie kolekcje dopasowane 1:1 do makiety Figma (wzór: Studio) — bez intro/nagłówka katalogu, podpis pod zdjęciem, footer z paddingiem. */
+/* Wszystkie kolekcje dopasowane 1:1 do makiety Figma (wzór: Nova) — bez intro/nagłówka katalogu, podpis pod zdjęciem, footer z paddingiem. */
 .product-catalogue {
   padding-top: clamp(40px, 6vh, 88px);
 }

@@ -162,33 +162,33 @@ export default function Home() {
         <div className="collections-stage">
           <div className="collections-head"><p className="collections-head__left">Nasze kolekcje<span className="concept-note">Wizualizacja koncepcyjna</span></p><p>Trzy sposoby<br />odczuwania komfortu</p></div>
           <div className="collections-track" ref={collectionsTrackRef}>
-            <Link href="/kolekcje/atelier" className="collection collection--atelier" aria-label="Zobacz kolekcję Atelier">
+            <Link href="/kolekcje/vesper" className="collection collection--atelier" aria-label="Zobacz kolekcję Vesper">
               <img src="/media/atelier-cinema-row.webp" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" />
               <div className="collection__text">
-                <h3>Atelier</h3>
+                <h3>Kolekcja Vesper</h3>
                 <span>Klasyka luksusu w nowoczesnym wydaniu.<b>elegancka · ponadczasowa · wyrafinowana</b></span>
               </div>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>
             </Link>
-            <Link href="/kolekcje/studio" className="collection collection--atelier" aria-label="Zobacz kolekcję Studio">
+            <Link href="/kolekcje/nova" className="collection collection--atelier" aria-label="Zobacz kolekcję Nova">
               <img src="/media/studio-study-chair.webp" alt="Rząd foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" />
               <div className="collection__text">
-                <h3>Studio</h3>
+                <h3>Kolekcja Nova</h3>
                 <span>Nowoczesna forma. Kinowe DNA.<b>nowoczesna · architektoniczna · minimalistyczna</b></span>
               </div>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>
             </Link>
-            <Link href="/kolekcje/lounge" className="collection collection--atelier" aria-label="Zobacz kolekcję Lounge">
+            <Link href="/kolekcje/solaris" className="collection collection--atelier" aria-label="Zobacz kolekcję Solaris">
               <img src="/media/lounge-fireplace.webp" alt="Fotel i szezlong HENRY przy kominku z widokiem na morze" loading="lazy" />
               <div className="collection__veil" />
               <div className="collection__text">
-                <h3>Lounge</h3>
+                <h3>Kolekcja Solaris</h3>
                 <span>Luksus, który staje się częścią codzienności.<b>luksusowa · komfortowa · współczesna</b></span>
               </div>
               <div className="collection__cta" aria-hidden="true">
@@ -207,22 +207,22 @@ export default function Home() {
         </div>
         <p className="arrangements__note concept-note" data-reveal>Wizualizacja koncepcyjna</p>
         <div className="arrangements__grid">
-          <Link href="/kolekcje/atelier/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Atelier">
-            <img src="/media/arrangements-atelier.webp" alt="Aranżacja wnętrza z fotelami HENRY Atelier" loading="lazy" />
+          <Link href="/kolekcje/vesper/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Vesper">
+            <img src="/media/arrangements-atelier.webp" alt="Aranżacja wnętrza z fotelami HENRY Vesper" loading="lazy" />
             <div className="arrangement__veil" />
-            <h3>Atelier</h3>
+            <h3>Kolekcja Vesper</h3>
             <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
           </Link>
-          <Link href="/kolekcje/studio/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Studio">
-            <img src="/media/arrangements-studio.webp" alt="Aranżacja wnętrza z fotelami HENRY Studio" loading="lazy" />
+          <Link href="/kolekcje/nova/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Nova">
+            <img src="/media/arrangements-studio.webp" alt="Aranżacja wnętrza z fotelami HENRY Nova" loading="lazy" />
             <div className="arrangement__veil" />
-            <h3>Studio</h3>
+            <h3>Kolekcja Nova</h3>
             <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
           </Link>
-          <Link href="/kolekcje/lounge/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Lounge">
-            <img src="/media/inspiracje/lounge/lounge-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Lounge" loading="lazy" />
+          <Link href="/kolekcje/solaris/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Solaris">
+            <img src="/media/inspiracje/lounge/lounge-01.webp" alt="Aranżacja wnętrza z fotelami HENRY Solaris" loading="lazy" />
             <div className="arrangement__veil" />
-            <h3>Lounge</h3>
+            <h3>Kolekcja Solaris</h3>
             <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
           </Link>
         </div>

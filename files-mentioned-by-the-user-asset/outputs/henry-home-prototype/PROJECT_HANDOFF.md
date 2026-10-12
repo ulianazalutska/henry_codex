@@ -83,7 +83,7 @@ npm test
 
 - кінематографічний video hero;
 - story/brand секції;
-- переходи до Atelier, Studio і Lounge;
+- переходи до Vesper, Nova і Solaris;
 - Projekty indywidualne teaser;
 - Filozofia HENRY teaser;
 - спільний footer.
@@ -102,37 +102,37 @@ npm test
   - Bespoke-секція "Od pierwszej linii do ostatniego detalu" — `bespoke-private-residence.webp` і `bespoke-reading-nook.webp` мають підпис у `figcaption` (прибрано рік "2026" біля Private Residence, щоб не натякати на конкретний реальний проєкт); `bespoke-custom-form.jpg` — реальне фото, без підпису;
   - Philosophy-секція "Najwyższa jakość nie potrzebuje hałasu" — `figcaption` під фото.
 
-  Наступний крок: та сама перевірка потрібна для Atelier/Lounge product pages, `Inspiracje` галерей і Filozofia HENRY (`craftsman.png`, `manifesto.png`, cinema-grid) — там статус AI vs реальне фото ще не зафіксовано.
+  Наступний крок: та сама перевірка потрібна для Vesper/Solaris product pages, `Inspiracje` галерей і Filozofia HENRY (`craftsman.png`, `manifesto.png`, cinema-grid) — там статус AI vs реальне фото ще не зафіксовано.
 
 ### Загальна сторінка колекцій — `/kolekcje`
 
 Реалізована сторінка входу до трьох колекцій із переходами:
 
-- `/kolekcje/atelier`
-- `/kolekcje/studio`
-- `/kolekcje/lounge`
+- `/kolekcje/vesper`
+- `/kolekcje/nova`
+- `/kolekcje/solaris`
 
 ### Шаблон колекції — `/kolekcje/[collection]`
 
 Реалізовано спільний layout: hero приблизно 60vh, statement/detail, список моделей, перехід до наступної колекції, footer.
 
-- **Studio:** наповнена готовими paired scene/cutout зображеннями для всіх п'яти моделей.
-- **Atelier:** маршрут і структура готові, але фінальних scene/cutout матеріалів немає; частина подачі є placeholder/catalogue content.
-- **Lounge:** маршрут і структура готові, але фінальних scene/cutout матеріалів немає; частина подачі є placeholder/catalogue content.
+- **Nova (раніше Studio):** наповнена готовими paired scene/cutout зображеннями для всіх п'яти моделей.
+- **Vesper (раніше Atelier):** маршрут і структура готові, але фінальних scene/cutout матеріалів немає; частина подачі є placeholder/catalogue content.
+- **Solaris (раніше Lounge):** маршрут і структура готові, але фінальних scene/cutout матеріалів немає; частина подачі є placeholder/catalogue content.
 
 ### Шаблон продукту — `/kolekcje/[collection]/[product]`
 
 Динамічні маршрути створені для всіх 14 моделей, але повністю наповнена лише **Studio / Nova Solo**:
 
-- `/kolekcje/studio/nova-solo`
+- `/kolekcje/nova/nova-solo`
 
 Для Nova Solo реалізовані hero, drag/swipe carousel, блок оснащення, dimensions, materials/finishes, accordion технічних деталей і CTA.
 
 Інші 13 маршрутів існують, але показують спільну структуру з placeholder-контентом:
 
-- Atelier: Vesper Solo, Duo, Ensemble, Chaise, Crest — 5.
-- Studio: Nova Duo, Ensemble, Chaise, Crest — 4.
-- Lounge: Solaris Solo, Duo, Chaise, Orbit — 4.
+- Vesper: Vesper Solo, Duo, Ensemble, Chaise, Crest — 5.
+- Nova: Nova Duo, Ensemble, Chaise, Crest — 4.
+- Solaris: Solaris Solo, Duo, Chaise, Orbit — 4.
 
 Ключові вимоги до product carousel:
 
@@ -279,7 +279,7 @@ Accordion технічних деталей має бути початково �
 Burger має три послідовні панелі:
 
 1. основні розділи;
-2. Atelier / Studio / Lounge;
+2. Vesper / Nova / Solaris;
 3. моделі вибраної колекції.
 
 Панелі повільно виїжджають, не обов'язково займають повну ширину екрану; фон сторінки затемнюється і розмивається. Повторний клік по активній категорії закриває її вкладену панель. Пункти першої панелі: Kolekcje, Personalizacja, Projekty indywidualne, Filozofia Henry, Dla architektów, Kontakt.
@@ -304,9 +304,9 @@ Footer має бути однаковим на всіх сторінках і в
    - Наступний крок: клієнт має підтвердити текст process-кроків (Konsultacja/Projekt/Dobór materiałów/Realizacja/Montaż) і чи можна лишати AI-рендер на сторінці постійно.
 2. **Dla architektów** — `/dla-architektow`.
    - Пункт уже є в burger, маршрут відсутній.
-3. ~~**Inspiracje для колекції**~~ Реалізовано (2026-09-03) як `/kolekcje/[collection]/inspiracje` — одна сторінка на колекцію (Atelier/Studio/Lounge), а не на продукт; кожна продуктова сторінка лінкує на inspiracje своєї колекції. Фото заповнені для всіх трьох колекцій (див. розділ 6).
+3. ~~**Inspiracje для колекції**~~ Реалізовано (2026-09-03) як `/kolekcje/[collection]/inspiracje` — одна сторінка на колекцію (Vesper/Nova/Solaris), а не на продукт; кожна продуктова сторінка лінкує на inspiracje своєї колекції. Фото заповнені для всіх трьох колекцій (див. розділ 6).
 4. Повне наповнення 13 placeholder product pages.
-5. Фінальні paired scene/cutout assets для Atelier і Lounge.
+5. Фінальні paired scene/cutout assets для Vesper і Solaris.
 
 ### Другорядний backlog
 
@@ -347,7 +347,7 @@ Footer має бути однаковим на всіх сторінках і в
 3. Створити `/projekty-indywidualne` на матеріалах із `asset/Projekty Indywidualne/`, зберігши спільні navigation/footer і стиль HENRY.
 4. Створити `/dla-architektow` після отримання або узгодження змісту.
 5. Узгодити структуру `Inspiracje`, потім реалізувати один повний приклад для Nova Solo і масштабувати шаблон.
-6. По мірі надходження матеріалів наповнювати решту продуктів та Atelier/Lounge.
+6. По мірі надходження матеріалів наповнювати решту продуктів та Vesper/Solaris.
 
 ## 10. Як працювати з користувачем
 
@@ -362,3 +362,12 @@ Footer має бути однаковим на всіх сторінках і в
 ```text
 Відкрий папку outputs/henry-home-prototype. Повністю прочитай AGENTS.md, PROJECT_HANDOFF.md і релевантні частини CREATIVE_DIRECTION.md. Потім перевір git status, останні коміти та поточний build. Не видаляй наявні staged/untracked зміни. Працюй локально з GitHub-проєктом, не використовуй ChatGPT Sites. Спілкуйся зі мною українською, а контент сайту залишай польською. Після перевірки коротко скажи, який фактичний стан проєкту та що потрібно зробити наступним.
 ```
+
+
+## Перейменування колекцій (2026-10-12)
+
+За вимогою клієнта колекції називаються як крісла: **Kolekcja Vesper** (було Atelier), **Kolekcja Nova** (було Studio), **Kolekcja Solaris** (було Lounge).
+- `app/collections-data.ts`: `name` = "Vesper/Nova/Solaris", нове поле `title` = "Kolekcja …" (для заголовків/меню/футера), `slug` = `vesper|nova|solaris`.
+- Старі URL `/kolekcje/atelier|studio|lounge[/...]` редіректяться 301 у `worker/index.ts`.
+- Назви файлів зображень і папка `public/media/inspiracje/{atelier,studio,lounge}` навмисно НЕ перейменовані; CSS-клас `collection--atelier` на головній — внутрішній.
+- Тексти (головна, FAQ, блог-placeholder, bespoke, футер, меню) оновлено.

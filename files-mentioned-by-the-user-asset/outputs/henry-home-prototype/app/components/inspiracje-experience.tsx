@@ -47,7 +47,7 @@ export function InspiracjeExperience({ collection }: { collection: HenryCollecti
 
       <header className="inspiracje-header">
         <p className="inspiracje-header__overline">Inspiracje</p>
-        <h1>{collection.name}</h1>
+        <h1>{collection.title}</h1>
       </header>
 
       {images.length > 0 ? (
@@ -58,7 +58,7 @@ export function InspiracjeExperience({ collection }: { collection: HenryCollecti
               data-inspiracje-reveal
               key={`${src}-${index}`}
             >
-              <img src={src} alt={`${collection.name} — aranżacja ${index + 1}`} loading="lazy" />
+              <img src={src} alt={`${collection.title} — aranżacja ${index + 1}`} loading="lazy" />
             </figure>
           ))}
         </div>

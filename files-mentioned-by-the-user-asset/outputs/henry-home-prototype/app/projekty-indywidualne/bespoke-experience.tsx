@@ -137,7 +137,7 @@ export function BespokeExperience() {
         <h1 id="bespoke-title">Projekty<br /><em>indywidualne.</em></h1>
         <div className={styles.heroStitch} aria-hidden="true"><i /><i /></div>
         <div className={styles.heroIntro}>
-          <p>Kształt, tkanina, wymiar, pikowanie — poza granicami kolekcji Atelier, Studio i Lounge.</p>
+          <p>Kształt, tkanina, wymiar, pikowanie — poza granicami kolekcji Vesper, Nova i Solaris.</p>
           <span>Pracujemy z architektami, projektantami wnętrz i klientami indywidualnymi nad meblami, których nie ma jeszcze w żadnym katalogu.</span>
         </div>
       </section>

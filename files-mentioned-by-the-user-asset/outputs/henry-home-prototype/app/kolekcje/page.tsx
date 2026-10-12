@@ -6,7 +6,7 @@ import { collections } from "../collections-data";
 
 export const metadata: Metadata = {
   title: "Kolekcje — HENRY",
-  description: "Poznaj kolekcje foteli HENRY: Atelier, Studio i Lounge.",
+  description: "Poznaj kolekcje foteli HENRY: Kolekcja Vesper, Kolekcja Nova i Kolekcja Solaris.",
   openGraph: { title: "Kolekcje — HENRY", description: "Trzy różne sposoby odczuwania komfortu.", images: [collections[0].hero] },
   twitter: { title: "Kolekcje — HENRY", description: "Trzy różne sposoby odczuwania komfortu.", images: [collections[0].hero] },
 };
@@ -25,10 +25,10 @@ export default function CollectionsPage() {
       <section className="collection-chapters" aria-label="Kolekcje HENRY">
         {collections.map((collection) => (
           <Link id={collection.slug} className="collection-chapter" href={`/kolekcje/${collection.slug}`} key={collection.slug}>
-            <img src={collection.hero} alt={`Kolekcja ${collection.name} HENRY`} />
+            <img src={collection.hero} alt={`${collection.title} HENRY`} />
             <span className="collection-chapter__shade" />
             <div className="collection-chapter__caption">
-              <h2>{collection.name}</h2>
+              <h2>{collection.title}</h2>
               <span className="collection-chapter__cta">
                 Zobacz wszystkie elementy kolekcji
                 <img className="collection-chapter__arrow" src="/media/arrow-gold.svg" alt="" aria-hidden="true" />

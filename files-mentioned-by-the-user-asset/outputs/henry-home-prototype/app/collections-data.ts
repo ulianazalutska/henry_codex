@@ -65,6 +65,7 @@ export type HenryProduct = {
 
 export type HenryCollection = {
   name: string;
+  title: string;
   slug: string;
   index: string;
   overline: string;
@@ -78,11 +79,12 @@ export type HenryCollection = {
 
 export const collections: HenryCollection[] = [
   {
-    name: "Atelier",
-    slug: "atelier",
+    name: "Vesper",
+    title: "Kolekcja Vesper",
+    slug: "vesper",
     index: "01",
     overline: "Rzemiosło w najbardziej osobistej formie",
-    description: "Atelier to najbardziej reprezentacyjna kolekcja HENRY. Wyraziste proporcje, szlachetne materiały i dopracowane detale tworzą fotele o eleganckim, ponadczasowym charakterze. To kolekcja dla prywatnych kin i wnętrz, w których komfort ma iść w parze z prestiżem, a każdy detal może zostać dopasowany do indywidualnej wizji.",
+    description: "Kolekcja Vesper to najbardziej reprezentacyjna kolekcja HENRY. Wyraziste proporcje, szlachetne materiały i dopracowane detale tworzą fotele o eleganckim, ponadczasowym charakterze. To kolekcja dla prywatnych kin i wnętrz, w których komfort ma iść w parze z prestiżem, a każdy detal może zostać dopasowany do indywidualnej wizji.",
     statement: "Rzeźbiarska forma. Precyzja wykonania. Komfort dopasowany do Ciebie.",
     hero: "/media/collection-pages/atelier-hero.webp",
     detail: "/media/collection-pages/atelier-detail.webp",
@@ -118,11 +120,12 @@ export const collections: HenryCollection[] = [
     ],
   },
   {
-    name: "Studio",
-    slug: "studio",
+    name: "Nova",
+    title: "Kolekcja Nova",
+    slug: "nova",
     index: "02",
     overline: "Architektura prywatnego kina",
-    description: "Studio interpretuje doświadczenie HENRY w projektowaniu profesjonalnych przestrzeni kinowych w bardziej współczesny i architektoniczny sposób. Czystsze linie, modułowość i zintegrowana technologia pozwalają tworzyć komfortowe układy dopasowane do konkretnego wnętrza — od pojedynczych foteli po rozbudowane konfiguracje wielorzędowe.",
+    description: "Kolekcja Nova interpretuje doświadczenie HENRY w projektowaniu profesjonalnych przestrzeni kinowych w bardziej współczesny i architektoniczny sposób. Czystsze linie, modułowość i zintegrowana technologia pozwalają tworzyć komfortowe układy dopasowane do konkretnego wnętrza — od pojedynczych foteli po rozbudowane konfiguracje wielorzędowe.",
     statement: "Każdy rząd, światło i proporcja budują jedno doświadczenie.",
     hero: "/media/collection-pages/studio-hero.webp",
     detail: "/media/collection-pages/studio-detail.webp",
@@ -159,11 +162,12 @@ export const collections: HenryCollection[] = [
     ],
   },
   {
-    name: "Lounge",
-    slug: "lounge",
+    name: "Solaris",
+    title: "Kolekcja Solaris",
+    slug: "solaris",
     index: "03",
     overline: "Codzienny rytuał komfortu",
-    description: "Lounge przenosi komfort HENRY poza przestrzeń kina. Miękkie formy, bardziej swobodne proporcje i wyjątkowa wygoda tworzą kolekcję zaprojektowaną do odpoczynku — od filmu i muzyki po rozmowę czy chwilę z książką. Fotele, sofy, szezlongi i stoliki pozwalają budować kompletne, eleganckie przestrzenie wypoczynkowe.",
+    description: "Kolekcja Solaris przenosi komfort HENRY poza przestrzeń kina. Miękkie formy, bardziej swobodne proporcje i wyjątkowa wygoda tworzą kolekcję zaprojektowaną do odpoczynku — od filmu i muzyki po rozmowę czy chwilę z książką. Fotele, sofy, szezlongi i stoliki pozwalają budować kompletne, eleganckie przestrzenie wypoczynkowe.",
     statement: "Kino, muzyka i cisza — w rytmie codzienności.",
     hero: "/media/collection-pages/lounge-hero.webp",
     detail: "/media/collection-pages/lounge-detail.webp",

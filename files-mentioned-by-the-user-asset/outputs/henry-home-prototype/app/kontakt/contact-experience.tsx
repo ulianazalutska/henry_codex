@@ -84,7 +84,7 @@ export function ContactExperience() {
       <SiteNavigation />
 
       <header className={styles.hero}>
-        <h1>Porozmawiajmy<span>o przestrzeni</span></h1>
+        <h1>Porozmawiajmy<span>o Twoim kinie</span></h1>
         <div className={styles.heroIntro}>
           <p>Każdy wyjątkowy projekt zaczyna się od rozmowy</p>
           <span>Opowiedz nam o swoim wnętrzu, jego rytmie i o tym, jak chcesz się w nim czuć.</span>
@@ -117,7 +117,7 @@ export function ContactExperience() {
 
       <section className={styles.gallery} aria-label="Przestrzenie HENRY">
         <figure className={styles.galleryPrimary} data-contact-reveal>
-          <div><img src="/media/kontakt/siedziba-otowice.png" alt="Widok lotniczy na siedzibę HENRY w Otowicach" /></div>
+          <div><img src="/media/kontakt/siedziba-otowice.webp" alt="Widok lotniczy na siedzibę HENRY w Otowicach" /></div>
           <figcaption><span>Przestrzeń HENRY</span><span>Otowice / Polska</span></figcaption>
         </figure>
         <figure className={styles.gallerySecondary} data-contact-reveal>

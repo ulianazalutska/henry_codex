@@ -183,7 +183,7 @@ export function SiteNavigation() {
             {/* Trzecia kolumna (lista modeli) jest tymczasowo wyłączona — strzałka zostaje jako element dekoracyjny, ale cały wiersz prowadzi bezpośrednio do strony kolekcji. */}
             {collections.map((collection) => (
               <Link className="menu-list__item menu-list__item--toggle" href={`/kolekcje/${collection.slug}`} onClick={closeMenu} key={collection.slug}>
-                <span>{collection.name}</span><img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
+                <span>{collection.title}</span><img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
               </Link>
             ))}
           </nav>
@@ -195,7 +195,7 @@ export function SiteNavigation() {
 
         {/*
           Trzecia kolumna (lista modeli danej kolekcji) jest tymczasowo wyłączona —
-          jeszcze nie jest potrzebna. Strzałka przy Atelier/Studio/Lounge zostaje
+          jeszcze nie jest potrzebna. Strzałka przy Vesper/Nova/Solaris zostaje
           wyłącznie jako dekoracja (patrz menu-column--collections wyżej).
           Żeby przywrócić: odkomentować poniższy blok i przywrócić onClick/aria-expanded
           na przyciskach kolekcji.
@@ -206,7 +206,7 @@ export function SiteNavigation() {
               <>
                 <div className="menu-panel__mobile-top"><button onClick={() => setOpenCollection(null)}>← Kolekcje</button></div>
                 <div className="menu-products-heading">
-                  <Link href={`/kolekcje/${activeCollection.slug}`} onClick={closeMenu}>{activeCollection.name} <span className="diagonal-arrow" aria-hidden="true" /></Link>
+                  <Link href={`/kolekcje/${activeCollection.slug}`} onClick={closeMenu}>{activeCollection.title} <span className="diagonal-arrow" aria-hidden="true" /></Link>
                 </div>
                 <nav className="menu-list menu-list--products" aria-label={`Modele ${activeCollection.name}`}>
                   {activeCollection.products.map((product) => (
