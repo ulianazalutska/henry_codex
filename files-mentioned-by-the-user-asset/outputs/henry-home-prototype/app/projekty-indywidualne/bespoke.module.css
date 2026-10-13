@@ -2,7 +2,7 @@
   --gutter: clamp(24px, 5.4vw, 84px);
   --ease: cubic-bezier(.22, 1, .36, 1);
   overflow: hidden;
-  background: #171615;
+  background: #000;
   color: #f4f1ed;
 }
 
@@ -24,7 +24,7 @@
 }
 
 /* ---------- 00 Intro ---------- */
-.hero { background: #1a1a1a; }
+.hero { background: #000; }
 .heroText { animation: heroReveal 1.1s .1s cubic-bezier(.16, 1, .3, 1) both; max-width: 1100px; margin: 0 auto; padding: calc(72px + 12vh) var(--gutter) 9vh; text-align: center; }
 .hero h1 {
   margin: 2.5vh 0 2vh;
@@ -38,14 +38,14 @@
 .heroBody p { margin: 0; color: #cfc9c2; font-size: 14px; line-height: 1.75; }
 .heroText .eyebrow { line-height: 1.7; }
 .heroImage { position: relative; margin: 0; overflow: hidden; background: #000; aspect-ratio: 2400 / 781; min-height: 260px; }
-.heroImage::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(23, 22, 21, 0) 35%, rgba(23, 22, 21, .88) 100%); pointer-events: none; }
+.heroImage::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, .88) 100%); pointer-events: none; }
 .heroParallax { position: absolute; top: -10%; left: 0; width: 100%; height: 120%; will-change: transform; }
 .heroParallax img { display: block; width: 100%; height: 100%; object-fit: cover; animation: heroZoom 2.2s var(--ease) both; }
 .heroCaption { position: absolute; z-index: 2; right: 0; bottom: clamp(18px, 4vw, 44px); left: 0; margin: 0; padding: 0 var(--gutter); text-align: center; font-size: clamp(11px, 1vw, 14px); letter-spacing: .1em; line-height: 1.7; }
 
 /* ---------- Chapters ---------- */
-.chapter { padding: 16vh var(--gutter); background: #171615; }
-.chapterDark { background: #1a1a1a; }
+.chapter { padding: 16vh var(--gutter); background: #000; }
+.chapterDark { background: #000; }
 .chapter h2 { margin: 3vh 0 0; font-size: clamp(2.3rem, 4.8vw, 5rem); font-weight: 300; line-height: 1.1; letter-spacing: -.055em; }
 .chapterHead { display: grid; grid-template-columns: 1.1fr .9fr; gap: 7vw; align-items: start; }
 .chapterCopy { max-width: 700px; padding-top: 3vh; }
@@ -158,7 +158,7 @@
 .lens { position: absolute; z-index: 2; width: 150px; height: 150px; border: 1px solid #d9a341; border-radius: 50%; background-repeat: no-repeat; background-size: 320% 320%; box-shadow: 0 22px 44px rgba(0, 0, 0, .55); opacity: 0; transform: translate(-50%, -50%); transition: opacity .25s ease; pointer-events: none; }
 
 /* ---------- CTA ---------- */
-.cta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 6vh; padding: 14vh var(--gutter) 18vh; background: #171615; border-top: 1px solid rgba(217, 163, 65, .3); }
+.cta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 6vh; padding: 14vh var(--gutter) 18vh; background: #000; border-top: 1px solid rgba(217, 163, 65, .3); }
 .cta h2 { margin: 3vh 0 0; font-size: clamp(2rem, 3.6vw, 3.8rem); font-weight: 300; line-height: 1; letter-spacing: -.06em; }
 .ctaLink { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid #d9a341; color: #e8e3dd; text-transform: uppercase; letter-spacing: .12em; font-size: 11px; transition: color .3s ease, padding-left .45s var(--ease); }
 .ctaLink:hover { padding-left: 10px; color: #d9a341; }
