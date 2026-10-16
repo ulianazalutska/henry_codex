@@ -85,10 +85,9 @@
 .themeStage img.isActive { opacity: 1; transform: scale(1); }
 .themeList { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(255, 255, 255, .12); }
 .themeList li { flex: 1; border-bottom: 1px solid rgba(255, 255, 255, .12); }
-.themeList button { display: grid; grid-template-columns: 34px 1fr; grid-template-rows: auto auto; width: 100%; height: 100%; padding: 12px 0; border: 0; background: none; color: #8a837c; text-align: left; cursor: pointer; font: inherit; transition: color .4s ease, padding-left .5s var(--ease); }
-.themeList button span { grid-row: 1 / 3; font-size: 10px; letter-spacing: .1em; padding-top: 3px; }
+.themeList button { display: grid; grid-template-columns: 34px 1fr; align-items: center; width: 100%; height: 100%; padding: 12px 0; border: 0; background: none; color: #8a837c; text-align: left; cursor: pointer; font: inherit; transition: color .4s ease, padding-left .5s var(--ease); }
+.themeList button span { font-size: 10px; letter-spacing: .1em; }
 .themeList button strong { font-size: 14px; font-weight: 400; letter-spacing: -.01em; }
-.themeList button em { font-size: 11px; color: inherit; opacity: .75; }
 .themeList button:hover,
 .themeList button.isActive { color: #f4f1ed; padding-left: 10px; }
 .themeList button.isActive span { color: #d9a341; }
@@ -154,6 +153,7 @@
 .tiles4 { grid-template-columns: 1.1fr 1.3fr .8fr .8fr; align-items: start; }
 .craftTile { position: relative; overflow: hidden; background: #0e0e0e; }
 .craftTile img { display: block; width: 100%; height: auto; }
+.craftCrop img { object-fit: cover; object-position: 50% 62%; }
 .hasLens { cursor: zoom-in; }
 .lens { position: absolute; z-index: 2; width: 150px; height: 150px; border: 1px solid #d9a341; border-radius: 50%; background-repeat: no-repeat; background-size: 320% 320%; box-shadow: 0 22px 44px rgba(0, 0, 0, .55); opacity: 0; transform: translate(-50%, -50%); transition: opacity .25s ease; pointer-events: none; }
 

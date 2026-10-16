@@ -14,25 +14,32 @@ const customChairs = [
 ];
 
 const themes = [
-  { image: `${media}/s2/futurystyczne.webp`, label: "Futurystyczne", note: "Sala kinowa z widokiem na Ziemię" },
-  { image: `${media}/s2/route-66.webp`, label: "Route 66", note: "Kino retro z wysokimi oparciami" },
-  { image: `${media}/s2/noir.webp`, label: "Noir Cinema", note: "Czerń, biel i pikowana skóra" },
-  { image: `${media}/s2/haunted.webp`, label: "Haunted Cinema", note: "Klasyczny salon z czerwonymi fotelami" },
-  { image: `${media}/s2/space-opera.webp`, label: "Space Opera", note: "Wnętrze statku kosmicznego" },
-  { image: `${media}/s2/neon-graffiti.webp`, label: "Neon & graffiti", note: "Miejski klimat i czerwone fotele" },
-  { image: `${media}/s2/american-dream.webp`, label: "American Dream", note: "Kino w stylu retro z barem" },
-  { image: `${media}/s2/city-scape.webp`, label: "City Scape", note: "Fotele w loftowym wnętrzu z barem" },
+  { image: `${media}/s2/futuristic-space.webp`, label: "Futuristic Space" },
+  { image: `${media}/s2/route-66.webp`, label: "Route 66" },
+  { image: `${media}/s2/noir-cinema.webp`, label: "Noir Cinema" },
+  { image: `${media}/s2/haunted-cinema.webp`, label: "Haunted Cinema" },
+  { image: `${media}/s2/american-dream.webp`, label: "American Dream" },
+  { image: `${media}/s2/city-graffiti.webp`, label: "City & Graffiti" },
+  { image: `${media}/s2/art-deco.webp`, label: "Art Deco" },
+  { image: `${media}/s2/desert-empire.webp`, label: "Desert Empire" },
+  { image: `${media}/s2/fast-cars.webp`, label: "Fast Cars" },
+  { image: `${media}/s2/yacht-club.webp`, label: "Yacht Club" },
+  { image: `${media}/s2/special-agent.webp`, label: "Special Agent" },
 ];
 
 const spaceRooms = [
-  { image: `${media}/s3/classic-czerwien.webp`, alt: "Prywatna sala kinowa z czerwonymi fotelami na podeście" },
-  { image: `${media}/s3/oliwka.webp`, alt: "Sala kinowa w oliwkowych tonach z sofą i szezlongiem" },
-  { image: `${media}/s3/pomarancz-granat.webp`, alt: "Wielomiejscowa sala kinowa z sofami w kolorach pomarańczu i granatu" },
+  { image: `${media}/s3/classic-czerwien.webp`, alt: "Prywatna sala kinowa z czerwonymi fotelami na podeście i barem" },
+  { image: `${media}/s3/oliwka.webp`, alt: "Sala kinowa w oliwkowych tonach z sofami i szezlongami" },
   { image: `${media}/s3/gwiazdy-czerwien.webp`, alt: "Sala kinowa pod rozgwieżdżonym sufitem z czerwonymi fotelami" },
-  { image: `${media}/s3/czern-skora.webp`, alt: "Rząd czarnych skórzanych foteli kinowych na czerwonym dywanie" },
-  { image: `${media}/s3/biblioteka.webp`, alt: "Brązowa sofa kinowa przed regałem z kolekcją filmów" },
-  { image: `${media}/s3/czern-narozna.webp`, alt: "Czarna sofa narożna i fotele w sali kinowej" },
-  { image: `${media}/s3/zolta-sofa.webp`, alt: "Żółta sofa dwuosobowa z poduszkami, wizualizacja produktu" },
+  { image: `${media}/s3/szarosc-czern.webp`, alt: "Wielomiejscowa sala kinowa z szarymi i czarnymi sofami oraz szezlongami" },
+  { image: `${media}/s3/blekitny-blask.webp`, alt: "Prywatne kino w błękitnym blasku z fotelami w kolorze koniakowym" },
+  { image: `${media}/s3/biblioteka.webp`, alt: "Brązowa skórzana sofa kinowa przed regałem z kolekcją filmów" },
+  { image: `${media}/s3/sofa-czern.webp`, alt: "Czarna sofa narożna i fotele w szarej sali kinowej z pikowanymi panelami" },
+  { image: `${media}/s3/fotele-czerwony-dywan.webp`, alt: "Rząd czarnych skórzanych foteli kinowych na czerwonym dywanie" },
+  { image: `${media}/s3/czarne-fotele-pikowane.webp`, alt: "Sala kinowa z czarnymi pikowanymi fotelami i zasłonami" },
+  { image: `${media}/s3/rzad-czarna-skora.webp`, alt: "Rząd czarnych skórzanych foteli kinowych z uchwytami na napoje" },
+  { image: `${media}/s3/kino-czerwony-dywan.webp`, alt: "Kino domowe z czarną sofą kinową na czerwonym dywanie" },
+  { image: `${media}/s3/szezlong-burgund.webp`, alt: "Burgundowo-czekoladowy szezlong z emblematem H i poduszkami" },
 ];
 
 const spaceExamples = [
@@ -56,9 +63,14 @@ const technology = [
       "Indywidualne systemy podparcia ciała.",
     ],
     images: [
+      { image: `${media}/s4/mechanizm.webp`, alt: "Fotel w pozycji relaksacyjnej z widocznym mechanizmem regulacji elektrycznej" },
       { image: `${media}/s4/masaz.webp`, alt: "Fotel z systemem masażu, infografika stref masażu" },
-      { image: `${media}/s4/mechanizm.webp`, alt: "Fotel w pozycji relaksacyjnej, widoczny mechanizm regulacji" },
       { image: `${media}/s4/podgrzewanie.webp`, alt: "Fotel z podgrzewanym siedziskiem i oparciem" },
+      { image: `${media}/s4/obrotowy.webp`, alt: "Fotel obrotowy 360°" },
+      { image: `${media}/s4/bujany.webp`, alt: "Fotel bujany z efektem ruchu" },
+      { image: `${media}/s4/zaglowek.webp`, alt: "Regulowany zagłówek fotela z animacją ruchu" },
+      { image: `${media}/s4/poduszka-h.webp`, alt: "Kremowa poduszka z emblematem H" },
+      { image: `${media}/s4/uchwyt-led.webp`, alt: "Podłokietnik z niebiesko podświetlanym uchwytem na kubek" },
     ],
   },
   {
@@ -73,8 +85,10 @@ const technology = [
     ],
     images: [
       { image: `${media}/s4/bluetooth.webp`, alt: "Fotel ze zintegrowanym głośnikiem i łącznością Bluetooth" },
-      { image: `${media}/s4/panel-henry.webp`, alt: "Panel sterowania HENRY Command w podłokietniku" },
-      { image: `${media}/s4/uchwyt-led.webp`, alt: "Podłokietnik z niebiesko podświetlanym uchwytem na kubek" },
+      { image: `${media}/s4/sterowniki.webp`, alt: "Podłokietnik z podświetlanymi sterownikami" },
+      { image: `${media}/s4/panel-henry-menu.webp`, alt: "Panel sterowania HENRY Command w podłokietniku z opisem funkcji" },
+      { image: `${media}/s4/aplikacja-henry.webp`, alt: "Aplikacja HENRY na smartfonie do sterowania fotelem" },
+      { image: `${media}/s4/oswietlenie.webp`, alt: "Fotel z nastrojowym oświetleniem ambientowym" },
     ],
   },
   {
@@ -90,8 +104,12 @@ const technology = [
     ],
     images: [
       { image: `${media}/s4/barek.webp`, alt: "Ukryty barek z drewnianą szufladą w podłokietniku" },
-      { image: `${media}/s4/stolik.webp`, alt: "Obrotowy drewniany stolik przy fotelu" },
-      { image: `${media}/s4/sterowanie-uchwyt.webp`, alt: "Podłokietnik z uchwytem na kubek i przyciskami sterowania" },
+      { image: `${media}/s4/podgrzewany-uchwyt.webp`, alt: "Podłokietnik z chłodzonym i podgrzewanym uchwytem na napoje" },
+      { image: `${media}/s4/wino.webp`, alt: "Uchwyt na kieliszek wina przy konsoli fotela" },
+      { image: `${media}/s4/stolik-debowy.webp`, alt: "Obrotowy stolik z drewna przy fotelu" },
+      { image: `${media}/s4/lampka-stolik.webp`, alt: "Fotel z lampką i orzechowym stolikiem" },
+      { image: `${media}/s4/schowek.webp`, alt: "Fotel z ukrytym schowkiem w podłokietniku" },
+      { image: `${media}/s4/tablet.webp`, alt: "Uchwyt na tablet przy fotelu" },
     ],
   },
 ];
@@ -99,7 +117,7 @@ const technology = [
 type Craft = {
   id: string;
   label: string;
-  tiles: { image: string; alt: string; loupe?: boolean }[];
+  tiles: { image: string; alt: string; loupe?: boolean; ratio?: string }[];
 };
 
 const crafts: Craft[] = [
@@ -107,30 +125,36 @@ const crafts: Craft[] = [
     id: "pikowanie",
     label: "Sztuka pikowania",
     tiles: [
-      { image: `${media}/s5/katalog-pikowanie-skora.webp`, alt: "Katalog wzorów pikowania skóry", loupe: true },
-      { image: `${media}/s5/katalog-pikowanie-tkaniny.webp`, alt: "Katalog wzorów pikowania tkanin", loupe: true },
+      { image: `${media}/s5/maszyna-haftujaca.webp`, alt: "Maszyna haftująca pikowanie na kremowej skórze", ratio: "2 / 1" },
+      { image: `${media}/s5/pikowanie-tkaniny.webp`, alt: "Katalog luksusowych wzorów pikowania tkanin", loupe: true },
     ],
   },
   {
     id: "szycie",
-    label: "Sztuka szycia",
+    label: "Kunszt szycia",
     tiles: [
-      { image: `${media}/s5/szycie-burgund.webp`, alt: "Rzemieślnik szyjący burgundową tapicerkę skórzaną" },
-      { image: `${media}/s5/katalog-przeszycia.webp`, alt: "Katalog opcji przeszyć tapicerskich", loupe: true },
-      { image: `${media}/s5/szew-zielona-skora.webp`, alt: "Szew na zielonej skórze pod stopką maszyny" },
+      { image: `${media}/s5/szycie-burgund.webp`, alt: "Rzemieślnik szyjący burgundową tapicerkę skórzaną", ratio: "3 / 2" },
+      { image: `${media}/s5/sciegi-katalog.webp`, alt: "Katalog ściegów tapicerskich na skórze", loupe: true },
     ],
   },
   {
-    id: "materialy",
-    label: "Wyjątkowe materiały",
+    id: "tkaniny",
+    label: "Wyjątkowe tkaniny",
     tiles: [
-      { image: `${media}/s5/probki-skor.webp`, alt: "Warstwowe próbki skór w bogatych kolorach" },
-      { image: `${media}/s5/tkaniny-aksamit.webp`, alt: "Rolki aksamitnych tkanin w różnych kolorach" },
-      { image: `${media}/s5/katalog-forniry-1.webp`, alt: "Katalog fornirów drewnianych", loupe: true },
-      { image: `${media}/s5/katalog-forniry-2.webp`, alt: "Katalog fornirów drewnianych, kolejna selekcja", loupe: true },
+      { image: `${media}/s5/tkaniny-probki.webp`, alt: "Elegancka kompozycja próbek tkanin i skór" },
+      { image: `${media}/s5/tkaniny-showroom.webp`, alt: "Luksusowe tkaniny premium w showroomie" },
+    ],
+  },
+  {
+    id: "drewno",
+    label: "Drewniany sznyt",
+    tiles: [
+      { image: `${media}/s5/forniry-1.webp`, alt: "Ekskluzywna paleta fornirów drewnianych: zebrano, heban, palisander, orzech", loupe: true },
+      { image: `${media}/s5/forniry-2.webp`, alt: "Ekskluzywna paleta fornirów drewnianych: dąb, orzech, klon, wiśnia", loupe: true },
     ],
   },
 ];
+
 
 export function BespokeExperience() {
   const [theme, setTheme] = useState(0);
@@ -257,11 +281,11 @@ export function BespokeExperience() {
       <section className={`${styles.chapter} ${styles.chapterDark}`} aria-labelledby="ch2-title">
         <div className={styles.chapterHead} data-proj-reveal>
           <div>
-            <h2 id="ch2-title">Kiedy inspiracja staje się<br />projektem.</h2>
-            <p className={styles.goldLine}>Fotel, który odzwierciedla Twoją pasję.</p>
+            <h2 id="ch2-title">Kiedy inspiracja staje się projektem</h2>
+            <p className={styles.goldLine}>Fotel, który odzwierciedla Twoją pasję</p>
           </div>
           <div className={styles.chapterCopy}>
-            <p className={styles.lead}>Świat kina, motoryzacji, architektury i nieograniczonej wyobraźni.</p>
+            <p className={styles.lead}>Świat kina, motoryzacji, architektury i nieograniczonej wyobraźni</p>
             <p>Niektóre fotele mogą być czymś więcej niż elementem wyposażenia wnętrza. Mogą opowiadać historię, nawiązywać do pasji właściciela lub stać się centralnym punktem wyjątkowej przestrzeni.</p>
             <p>Projektujemy fotele inspirowane światem filmu, science fiction, motoryzacji, kosmosu i współczesnego designu.</p>
             <p>Każdy projekt jest indywidualną interpretacją wybranego motywu, łączącą oryginalne wzornictwo z komfortem i funkcjonalnością.</p>
@@ -274,7 +298,7 @@ export function BespokeExperience() {
               <img
                 key={item.image}
                 src={item.image}
-                alt={`${item.label} — ${item.note}`}
+                alt={item.label}
                 loading={index === 0 ? "eager" : "lazy"}
                 className={index === theme ? styles.isActive : undefined}
                 aria-hidden={index === theme ? undefined : true}
@@ -293,7 +317,6 @@ export function BespokeExperience() {
                 >
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <strong>{item.label}</strong>
-                  <em>{item.note}</em>
                 </button>
               </li>
             ))}
@@ -307,7 +330,7 @@ export function BespokeExperience() {
           <div className={styles.spaceCopy}>
             <h2 id="ch3-title">Rozwiązania stworzone<br />dla Twojej przestrzeni</h2>
             <p className={styles.spaceLead}>Każda przestrzeń zasługuje na indywidualne podejście.</p>
-            <p>Projektujemy niestandardowe systemy siedzisk dostosowane do architektury wnętrza, liczby użytkowników oraz oczekiwanej funkcjonalności.</p>
+            <p>Projektujemy niestandardowe systemy mebli dostosowanych do architektury wnętrza, liczby użytkowników oraz oczekiwanej funkcjonalności.</p>
             <p>Od pojedynczych foteli i ekskluzywnych sof po wielomiejscowe konfiguracje, rozwiązania modułowe i specjalistyczne systemy dla prywatnych sal kinowych.</p>
             <p>Tworzymy rozwiązania, które łączą komfort, ergonomię i wyjątkową estetykę.</p>
           </div>
@@ -354,9 +377,9 @@ export function BespokeExperience() {
           </div>
           <div className={styles.chapterCopy}>
             <p className={styles.lead}>Komfort przyszłości zaczyna się od indywidualnych potrzeb</p>
-            <p>Nowoczesne technologie otwierają zupełnie nowe możliwości projektowania luksusowych siedzisk.</p>
+            <p>Nowoczesne technologie otwierają zupełnie nowe możliwości projektowania luksusowych foteli.</p>
             <p>W HENRY możemy opracowywać indywidualne rozwiązania łączące zaawansowaną mechanikę, elektronikę, multimedia i funkcje komfortu.</p>
-            <p>Od inteligentnych systemów regulacji po zintegrowane rozwiązania audio, oświetlenie i dodatkowe wyposażenie — technologia staje się integralną częścią projektu.</p>
+            <p>Od inteligentnych systemów regulacji po zintegrowane rozwiązania audio, oświetlenie i dodatkowe wyposażenie. Technologia staje się integralną częścią projektu.</p>
             <p>Projektujemy komfort, który wykracza poza standardowe rozwiązania.</p>
           </div>
         </div>
@@ -445,8 +468,8 @@ export function BespokeExperience() {
                       <span className={styles.lens} data-lens style={{ backgroundImage: `url(${tile.image})` }} aria-hidden="true" />
                     </div>
                   ) : (
-                    <div key={tile.image} className={styles.craftTile}>
-                      <img src={tile.image} alt={tile.alt} loading="lazy" />
+                    <div key={tile.image} className={`${styles.craftTile} ${tile.ratio ? styles.craftCrop : ""}`}>
+                      <img src={tile.image} alt={tile.alt} loading="lazy" style={tile.ratio ? { aspectRatio: tile.ratio } : undefined} />
                     </div>
                   )
                 ))}

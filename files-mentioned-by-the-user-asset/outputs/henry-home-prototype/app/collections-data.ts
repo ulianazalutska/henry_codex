@@ -88,7 +88,7 @@ export const collections: HenryCollection[] = [
     statement: "Rzeźbiarska forma. Precyzja wykonania. Komfort dopasowany do Ciebie.",
     hero: "/media/collection-pages/atelier-hero.webp",
     detail: "/media/collection-pages/atelier-detail.webp",
-    inspirationImages: Array.from({ length: 9 }, (_, i) => `/media/inspiracje/atelier/atelier-${String(i + 1).padStart(2, "0")}.webp`),
+    inspirationImages: Array.from({ length: 34 }, (_, i) => `/media/inspiracje/atelier/atelier-${String(i + 1).padStart(2, "0")}.webp`),
     products: [
       { name: "Vesper Solo", slug: "vesper-solo", finishes: [buildFinish("vesper-solo", "Smoked Ebony Gloss", "smoked-ebony-gloss"), buildFinish("vesper-solo", "American Walnut Gloss", "american-walnut-gloss")], image: "/media/atelier-vesper-solo-hero.webp", catalogueImage: "/media/collection-pages/atelier-vesper-solo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/atelier-products/vesper-solo-scene.webp", catalogueCutout: "/media/collection-pages/atelier-products/vesper-solo-cutout.webp", galleryImages: ["/media/product-pages/vesper-solo/vesper-solo-01.webp", "/media/product-pages/vesper-solo/vesper-solo-02.webp", "/media/product-pages/vesper-solo/vesper-solo-03.webp"], leatherSwatches: [
         { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/vesper-solo/materials/leather/preview-01.webp" },
