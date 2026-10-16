@@ -380,3 +380,34 @@ Footer має бути однаковим на всіх сторінках і в
 - Assets: webp у `public/media/projekty-indywidualne/s1…s5/`. Навмисно НЕ використано `Category_block_fabric…` та `SIC-26/SIC-28` (схожі на чужі сайти — потрібне підтвердження прав).
 - Відкрите: (1) назви 8 тем у секції 02 і їх підписи взято з імен файлів, не звірено з клієнтом; (2) кімнатні візуалізації в секціях 02/03 позначені "Wizualizacja koncepcyjna" (за правилом AI-візуалізацій) — підтвердити, які саме кадри реальні/AI; (3) alt-тексти описові, написані за зображеннями; (4) візуальну перевірку desktop/mobile робить користувач.
 - Оновлення 2026-10-12 (після перших правок): hero = темний центрований текстовий блок (весь з'являється разом: opacity + translateY 48px + blur 6px, як intro на `/filozofia-henry`) + широке фото `hero-fotele.webp` з паралаксом на `requestAnimationFrame` (без GSAP; контейнер 120% висоти, зсув ±8%), градієнт унизу й золотий підпис «Twoja wizja / Nasze doświadczenie / Wspólny projekt» поверх фото. Секція 01 — лише 2 фото. Секція 03 — макет клієнтки: текст ліворуч, карусель праворуч зі стрілками-шевронами. Секція 04 — одна сцена з мініатюрами замість 3 великих фото. Секція 05 — шапка за макетом клієнтки. Нумерацію секцій і підписи «Wizualizacja koncepcyjna» прибрано за її проханням (AI-маркування на цій сторінці зараз відсутнє — рішення за клієнтом). У `/kontakt` прибрано крапку в «Obserwuj HENRY».
+
+## Клієнтські правки 2026-10-16 (головна, меню, футер, Vesper/Noven/Solaris)
+
+Коміт `b572b29` (запушений і задеплоєний у `henry-seating-preview`, версія `92fe61e4`). Візуально перевірено в Chrome лише розділ «Luksus w standardzie» Solaris Solo (desktop ~1421 px) і початок вкладки «Opcje wyposażenia» Solaris; решту перевіряє користувач.
+
+**Головна, меню, футер**
+- Картки колекцій на головній: заголовок тільки «Vesper / Noven / Solaris» (без «Kolekcja»), опис + теги справа (`.collection__text` у `globals.css`, на мобільному — стовпчик). Заголовки в секції «Aranżacje» не чіпали («Kolekcja Vesper…»).
+- Бургер-меню: підпункти колекцій через `collection.name`; порядок Kolekcje → Filozofia Henry → Projekty indywidualne → Dla architektów → Kontakt.
+- Блок «Następna kolekcja» на сторінці колекції: `next.name`.
+- Футер: назви без «Kolekcja», «O nas» → «Filozofia Henry», іконку YouTube прибрано (на `/kontakt` YouTube ще є — рішення відкрите).
+- Секція bespoke: фото `bespoke-burgundy-seats.webp`. Секція Filozofia: фото `philosophy-scorsese-cinema.webp` (16:9, цитата Scorsese у самому фото), фото на всю ширину, під ним зліва текст + кнопка «Poznaj nas bliżej» (`gap: 10px`), справа цитата «Projektujemy dla momentu…».
+
+**Опції wyposażenia (вкладка «Opcje wyposażenia», `product-experience.tsx`)**
+- Noven Solo: 10 опцій (HENRY Command, Poduszka Henry, Stolik Noven, Regulacja zagłówka, Podgrzewanie, Grzanie/chłodzenie, Oświetlenie, Głośnik, Niezależne mechanizmy, Masaż), зображення `public/media/product-pages/noven-solo/equipment/`.
+- Vesper Solo: додано «Uchwyt na kieliszek» (11) і «Uchwyt na telefon lub tablet» (12), «Funkcja masażu» тепер 13.
+- Solaris Solo: 8 нових опцій (Poduszka Henry, Stolik, Regulacja zagłówka, Podgrzewanie, Niezależna regulacja dwoma siłownikami, Uchwyt na kieliszek, Uchwyt na telefon lub tablet, Masaż); HENRY Command/grzanie-chłodzenie/oświetlenie/głośnik прибрані (нема в новій папці). Для Noven і Solaris вмикається той самий двоколонковий список і `--fit` превʼю, що й у Vesper.
+- Описи опцій писали за зразком Vesper і за фото — клієнт їх не затверджував. «Stolik Noven» утворено за аналогією до «Stolik Vesper».
+
+**«Luksus w standardzie»**
+- Vesper і Noven: замінено фото шкіри (`vesper-solo-standard-01-skora.webp`, `noven-solo/feature-premium-leather.webp`).
+- Solaris Solo: 5 карток (Naturalna skóra, Wykończenie drewna, Elektryczna regulacja, Funkcja bujania, Obrót 360°), `solarisSoloFeatureCards`, зображення `public/media/product-pages/solaris-solo/standard-equipment/`. Описи карток — наші, не клієнтські. Розкладка — окрема 12-колонкова CSS-сітка (`.product-features.product-features--solaris-solo`, `@media (min-width: 641px)`): картинка сама визначає свою рамку (`height: auto`), текст під фото, спільні відступи. Колонки: skóra 2–5, drewno 8–11 (з відступом зверху), regulacja 1–5, bujanie 8–11, obrót 3–7 (`margin-top: -3vw`). Мобільна (≤640 px) лишається старою логікою. Урок: класи `.product-feature-box.boxX` мають більшу специфічність за `.product-features--solaris-solo .product-feature-box`, тому Solaris-правила підсилені префіксом `.product-features.` і стоять після базових.
+
+**Сторінка `/kolekcje/vesper` — каталожні фото**
+- Усі 5 карток мають `catalogueScene` + `catalogueCutout` (`public/media/collection-pages/atelier-products/`, webp, cutout з прозорістю).
+- Перейменування: Vesper Ensemble → **Vesper Corner** (`vesper-corner`), Vesper Crest → **Vesper Side Table** (`vesper-side-table`). Старі URL `vesper-ensemble` і `vesper-crest` більше не існують (редіректів немає). Опис Side Table замінено на «Praktyczny stolik boczny dopasowany do bryły fotela.»; опис Corner лишився старий. Файл `atelier-vesper-ensemble.webp`/`atelier-vesper-crest.webp` як `catalogueImage` не перейменовано.
+
+**Відкрите / наступне**
+1. Візуальна перевірка desktop+mobile: `/kolekcje/vesper`, `/kolekcje/noven/noven-solo`, `/kolekcje/solaris/solaris-solo` (особливо вертикальні фото у списку опцій — HENRY Command, Grzanie/chłodzenie).
+2. Рішення клієнта: YouTube на `/kontakt`; чи потрібні Solaris-опції, які прибрали; редіректи зі старих `vesper-ensemble`/`vesper-crest`.
+3. Мобільна версія нової розкладки Solaris Solo не перевірялась.
+4. Невикористані файли: `public/media/philosophy-cinema-seats.png`, `public/media/bespoke-reading-nook.png`.
