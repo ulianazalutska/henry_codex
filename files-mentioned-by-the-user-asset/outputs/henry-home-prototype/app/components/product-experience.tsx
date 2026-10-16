@@ -24,7 +24,7 @@ const featureCards = [
   },
   {
     title: "Naturalna skóra",
-    image: `${novenRoot}/feature-premium-leather.png`,
+    image: `${novenRoot}/feature-premium-leather.webp`,
     copy: "Wybierana skóra najwyższej jakości starzeje się z godnością, zyskując z czasem głębszy charakter i miękkość w dotyku.",
   },
   {
@@ -36,6 +36,36 @@ const featureCards = [
     title: "Podświetlany uchwyt na kubek",
     image: `${novenRoot}/feature-cup-holder.png`,
     copy: "Podświetlany uchwyt na kubek zapewnia wygodny dostęp do napoju, nawet podczas seansu przy zgaszonym świetle.",
+  },
+];
+
+const solarisSoloStandardRoot = "/media/product-pages/solaris-solo/standard-equipment";
+
+const solarisSoloFeatureCards = [
+  {
+    title: "Naturalna skóra",
+    image: `${solarisSoloStandardRoot}/solaris-solo-standard-01-skora.webp`,
+    copy: "100% naturalna skóra starzeje się z godnością, zyskując z czasem głębszy charakter i miękkość w dotyku.",
+  },
+  {
+    title: "Wykończenie drewna",
+    image: `${solarisSoloStandardRoot}/solaris-solo-standard-02-wykonczenie-drewna.webp`,
+    copy: "Drewniana podstawa o widocznej strukturze słojów podkreśla rzemieślniczy charakter fotela.",
+  },
+  {
+    title: "Elektryczna regulacja",
+    image: `${solarisSoloStandardRoot}/solaris-solo-standard-03-elektryczna-regulacja.webp`,
+    copy: "Cicha, elektryczna regulacja oparcia i podnóżka pozwala płynnie przejść od pozycji siedzącej do pełnego relaksu.",
+  },
+  {
+    title: "Funkcja bujania",
+    image: `${solarisSoloStandardRoot}/solaris-solo-standard-04-funkcja-bujania.webp`,
+    copy: "Delikatne kołysanie fotela wprowadza w stan głębokiego odprężenia.",
+  },
+  {
+    title: "Obrót 360°",
+    image: `${solarisSoloStandardRoot}/solaris-solo-standard-05-obrot-360.webp`,
+    copy: "Obrotowa podstawa pozwala swobodnie ustawić fotel w dowolnym kierunku.",
   },
 ];
 
@@ -80,15 +110,29 @@ const equipmentOptions = [
 const novenSoloEquipmentRoot = "/media/product-pages/noven-solo/equipment";
 
 const novenSoloEquipmentOptions = [
-  ...equipmentOptions,
-  { key: "masaz", number: "06", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-06-funkcja-masazu.webp` },
+  { key: "henry-command", number: "01", title: "HENRY Command", description: "Inteligentny panel sterowania. Centralne sterowanie funkcjami fotela z poziomu intuicyjnego ekranu dotykowego. Pozycja fotela, pamięć ustawień, masaż, ogrzewanie i Ambient Lighting — wszystko w jednym miejscu.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-00-henry-command.webp` },
+  { key: "poduszka", number: "02", title: "Poduszka Henry", description: "Dodatkowe wsparcie i komfort w dowolnym miejscu fotela.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-01-poduszka-henry.webp` },
+  { key: "stolik", number: "03", title: "Stolik Noven", description: "Praktyczny stolik boczny dopasowany do bryły fotela.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-02-stolik-noven.webp` },
+  { key: "zaglowek", number: "04", title: "Regulacja zagłówka", description: "Precyzyjne dopasowanie podparcia głowy i szyi.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-03-regulacja-zaglowka.webp` },
+  { key: "podgrzewanie", number: "05", title: "Podgrzewanie oparcia i siedziska", description: "Delikatne ciepło w oparciu i siedzisku.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-04-podgrzewanie.webp` },
+  { key: "grzanie-chlodzenie", number: "06", title: "Funkcja grzania i chłodzenia", description: "Dwukierunkowa regulacja temperatury na życzenie.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-05-grzanie-chlodzenie.webp` },
+  { key: "oswietlenie", number: "07", title: "Dodatkowe oświetlenie ambientowe", description: "Subtelne podświetlenie budujące nastrój wieczorem.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-06-oswietlenie.webp` },
+  { key: "glosnik", number: "08", title: "Głośnik", description: "Dźwięk osobisty zintegrowany z fotelem.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-07-glosnik.webp` },
+  { key: "niezalezne-mechanizmy", number: "09", title: "Niezależne mechanizmy regulacji", description: "Oparcie i podnóżek regulowane niezależnie od siebie.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-08-niezalezne-mechanizmy.webp` },
+  { key: "masaz", number: "10", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-09-funkcja-masazu.webp` },
 ];
 
 const solarisSoloEquipmentRoot = "/media/product-pages/solaris-solo/equipment";
 
 const solarisSoloEquipmentOptions = [
-  ...equipmentOptions,
-  { key: "masaz", number: "06", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-06-funkcja-masazu.webp` },
+  { key: "poduszka", number: "01", title: "Poduszka Henry", description: "Dodatkowe wsparcie i komfort w dowolnym miejscu fotela.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-01-poduszka-henry.webp` },
+  { key: "stolik", number: "02", title: "Stolik", description: "Praktyczny stolik boczny dopasowany do bryły fotela.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-02-stolik.webp` },
+  { key: "zaglowek", number: "03", title: "Regulacja zagłówka", description: "Precyzyjne dopasowanie podparcia głowy i szyi.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-03-regulacja-zaglowka.webp` },
+  { key: "podgrzewanie", number: "04", title: "Podgrzewanie oparcia i siedziska", description: "Delikatne ciepło w oparciu i siedzisku.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-04-podgrzewanie.webp` },
+  { key: "niezalezne-mechanizmy", number: "05", title: "Niezależna regulacja dwoma siłownikami", description: "Oparcie i podnóżek regulowane niezależnie od siebie.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-05-niezalezne-mechanizmy.webp` },
+  { key: "uchwyt-kieliszek", number: "06", title: "Uchwyt na kieliszek", description: "Stabilne miejsce na kieliszek wina zawsze pod ręką.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-06-uchwyt-kieliszek.webp` },
+  { key: "uchwyt-tablet", number: "07", title: "Uchwyt na telefon lub tablet", description: "Ekran zawsze w odpowiednim miejscu.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-07-uchwyt-tablet.webp` },
+  { key: "masaz", number: "08", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${solarisSoloEquipmentRoot}/solaris-solo-equipment-08-funkcja-masazu.webp` },
 ];
 
 const vesperSoloEquipmentRoot = "/media/product-pages/vesper-solo/equipment";
@@ -104,7 +148,9 @@ const vesperSoloEquipmentOptions = [
   { key: "glosnik", number: "08", title: "Głośnik", description: "Dźwięk osobisty zintegrowany z fotelem.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-07-glosnik.webp` },
   { key: "schowek", number: "09", title: "Schowek w podłokietniku", description: "Miejsce na drobiazgi zawsze pod ręką.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-08-schowek.webp` },
   { key: "niezalezne-mechanizmy", number: "10", title: "Niezależne mechanizmy regulacji", description: "Oparcie i podnóżek regulowane niezależnie od siebie.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-09-niezalezne-mechanizmy.webp` },
-  { key: "masaz", number: "11", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-10-funkcja-masazu.webp` },
+  { key: "uchwyt-kieliszek", number: "11", title: "Uchwyt na kieliszek", description: "Stabilne miejsce na kieliszek wina zawsze pod ręką.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-11-uchwyt-kieliszek.webp` },
+  { key: "uchwyt-tablet", number: "12", title: "Uchwyt na telefon lub tablet", description: "Ekran zawsze w odpowiednim miejscu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-12-uchwyt-tablet.webp` },
+  { key: "masaz", number: "13", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-10-funkcja-masazu.webp` },
 ];
 
 const novenLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
@@ -171,14 +217,14 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const isVesperSolo = product.slug === "vesper-solo";
   const isNovenSolo = product.slug === "noven-solo";
   const isSolarisSolo = product.slug === "solaris-solo";
-  const featuresReady = isReady || isVesperSolo;
-  const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : featureCards;
+  const featuresReady = isReady || isVesperSolo || isSolarisSolo;
+  const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : isSolarisSolo ? solarisSoloFeatureCards : featureCards;
   const featureBoxCount = isHero ? activeFeatureCards.length : productPhotoCards.length;
 
   useEffect(() => {
     const grid = featureGridRef.current;
     if (!grid) return;
-    const boundaries = isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : isHero && (isNovenSolo || isSolarisSolo) ? tightenedFeatureBoxBottomPercent : featureBoxBottomPercent;
+    const boundaries = isHero && (isVesperSolo || isSolarisSolo) ? vesperFeatureBoxBottomPercent : isHero && isNovenSolo ? tightenedFeatureBoxBottomPercent : featureBoxBottomPercent;
     const bottomFraction = featureGridBottomFraction(featureBoxCount, boundaries);
     const measure = () => setFeatureGridClipHeight(grid.offsetWidth * (2475 / 1313) * bottomFraction);
     measure();
@@ -443,7 +489,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
           </div>
           {materialKey === "combinations" ? (
             <div className="material-lab__equipment">
-              <div className={`material-lab__equipment-list${isVesperSolo ? " material-lab__equipment-list--two-col" : ""}`} role="tablist" aria-label="Opcje wyposażenia">
+              <div className={`material-lab__equipment-list${isVesperSolo || isNovenSolo || isSolarisSolo ? " material-lab__equipment-list--two-col" : ""}`} role="tablist" aria-label="Opcje wyposażenia">
                 {activeEquipmentOptions.map((item, index) => (
                   <button
                     className={index === activeEquipmentOption ? "is-active" : ""}
@@ -457,7 +503,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                   </button>
                 ))}
               </div>
-              <article id="product-equipment-preview" className={`material-lab__equipment-preview${isVesperSolo ? " material-lab__equipment-preview--fit" : ""}`} role="tabpanel">
+              <article id="product-equipment-preview" className={`material-lab__equipment-preview${isVesperSolo || isNovenSolo || isSolarisSolo ? " material-lab__equipment-preview--fit" : ""}`} role="tabpanel">
                 <figure>
                   {outgoingEquipment && outgoingEquipment !== activeEquipmentData.image && (
                     <img key={`prev-${outgoingEquipment}`} className="material-lab__equipment-img is-outgoing" src={outgoingEquipment} alt="" aria-hidden="true" />
