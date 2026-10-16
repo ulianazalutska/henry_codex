@@ -411,3 +411,24 @@ Footer має бути однаковим на всіх сторінках і в
 2. Рішення клієнта: YouTube на `/kontakt`; чи потрібні Solaris-опції, які прибрали; редіректи зі старих `vesper-ensemble`/`vesper-crest`.
 3. Мобільна версія нової розкладки Solaris Solo не перевірялась.
 4. Невикористані файли: `public/media/philosophy-cinema-seats.png`, `public/media/bespoke-reading-nook.png`.
+
+## Vesper Duo і блок про велюр на Vesper Solo (2026-10-16)
+
+Джерело: iCloud `Henry www/VESPER NA GOTOWO/Vesper Duo + opis` та `Henry www/VESPER - WELUR`. Не перевірено в браузері, не збиралось (`npm run build`), не комітилось і не деплоїлось.
+
+**Vesper Duo (`vesper-duo`)**
+- 4 фото клієнта (webp) у `public/media/product-pages/vesper-duo/`: `vesper-duo-01-front-cognac`, `-02-olive-relax`, `-03-cognac-angle`, `-04-burgundy-room`.
+- У `app/collections-data.ts`: hero (`image`) = кадр 03; `galleryImages` (карусель) = 01, 02, 04; `arrangementsImage` = 04.
+- 3 блоки з підписами під каруселлю лишились **заглушками** (`product.image` + «Detal wykończenia» / «W aranżacji») за рішенням користувача. Текст клієнта з `Vesper Duo opis..pages` (3 блоки: «Luksus, który można poczuć», «Komfort i technologia bez kompromisów», «Twoje miejsce. Twój komfort. Twoje kino.») на сайт не вставлено, лише готовий до вставки.
+- Обмеження: фото лише 4, кадр 04 (бордова в кімнаті) стоїть у каруселі й в Aranżacje. Потрібні ще кадри.
+
+**Vesper Solo — секція про велюр (`product-velour`)**
+- Між `material-lab` і «Zobacz kolekcję… w aranżacjach», тільки для `vesper-solo` (`isVesperSolo` у `product-experience.tsx`).
+- Вміст за макетом `PROJEKT V100.png`: центрований текст клієнта (дослівно з `Vesper welur.pages`), два фотелі (велюр; шкіра + велюр), стрічка кольорів тканини. Фото: `public/media/product-pages/vesper-solo/velour/`.
+- Стилі `.product-velour*` у `app/globals.css`: текст `font-weight: 300`, `margin-bottom: 6vh` (розмір обрано навмання, не затверджено), мобільний варіант в одну колонку.
+- Перевірити: чорне тло фотелів зливається з фоном; мобільна версія.
+
+**Відкрите**
+1. Перевірка в браузері desktop+mobile: `/kolekcje/vesper/vesper-duo`, `/kolekcje/vesper/vesper-solo`.
+2. Чи показувати на Vesper Duo текст клієнта і де (на не-hero сторінці для нього немає секції).
+3. Чи потрібна Duo секція опційного обладнання, як у Solo (потрібні фото й перелік).

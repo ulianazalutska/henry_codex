@@ -606,6 +606,21 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
       </section>
       )}
 
+      {isVesperSolo && (
+        <section className="product-velour" aria-labelledby="product-velour-copy">
+          <p id="product-velour-copy" className="product-velour__copy" data-product-reveal>
+            Fotele HENRY dostępne są również w eleganckiej tapicerce welurowej, która nadaje im wyjątkową miękkość, przytulność i luksusowy charakter. Możesz wybrać fotel w całości wykończony welurem lub stworzyć indywidualną kompozycję, łącząc naturalną skórę z tkaniną welurową.
+            <br />
+            Dwa szlachetne materiały, nieograniczone możliwości personalizacji.
+          </p>
+          <div className="product-velour__chairs">
+            <img src="/media/product-pages/vesper-solo/velour/vesper-velour-armchair.webp" alt="Vesper Solo w całości w tapicerce welurowej" data-product-reveal />
+            <img src="/media/product-pages/vesper-solo/velour/vesper-velour-leather-armchair.webp" alt="Vesper Solo — połączenie naturalnej skóry i weluru" data-product-reveal style={{ "--reveal-delay": "110ms" } as CSSProperties} />
+          </div>
+          <img className="product-velour__swatches" src="/media/product-pages/vesper-solo/velour/vesper-velour-swatches.webp" alt="Kolory tkaniny welurowej" data-product-reveal />
+        </section>
+      )}
+
       <Link id="aranzacje" href={`/kolekcje/${collection.slug}/inspiracje?from=${encodeURIComponent(`/kolekcje/${collection.slug}/${product.slug}#aranzacje`)}`} className={`product-arrangements${isHero ? "" : " product-arrangements--tight"}`} data-product-reveal>
         <div className="product-arrangements__frame">
           <img className="product-arrangements__img" src={product.arrangementsImage || product.image} alt={`${collection.title} w aranżacjach`} />
