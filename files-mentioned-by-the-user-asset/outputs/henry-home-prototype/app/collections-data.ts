@@ -29,7 +29,7 @@ const finishLeathers: Array<{ name: string; slug: string }> = [
 ];
 
 // Cards and dots are shared between models; only the chair photos are per product.
-const sharedMaterialsRoot = "/media/product-pages/nova-solo/materials";
+const sharedMaterialsRoot = "/media/product-pages/noven-solo/materials";
 
 function buildFinish(productSlug: string, name: string, woodSlug: string): HenryFinish {
   const root = `/media/product-pages/${productSlug}/materials`;
@@ -120,45 +120,45 @@ export const collections: HenryCollection[] = [
     ],
   },
   {
-    name: "Nova",
-    title: "Kolekcja Nova",
-    slug: "nova",
+    name: "Noven",
+    title: "Kolekcja Noven",
+    slug: "noven",
     index: "02",
     overline: "Architektura prywatnego kina",
-    description: "Kolekcja Nova interpretuje doświadczenie HENRY w projektowaniu profesjonalnych przestrzeni kinowych w bardziej współczesny i architektoniczny sposób. Czystsze linie, modułowość i zintegrowana technologia pozwalają tworzyć komfortowe układy dopasowane do konkretnego wnętrza — od pojedynczych foteli po rozbudowane konfiguracje wielorzędowe.",
+    description: "Kolekcja Noven interpretuje doświadczenie HENRY w projektowaniu profesjonalnych przestrzeni kinowych w bardziej współczesny i architektoniczny sposób. Czystsze linie, modułowość i zintegrowana technologia pozwalają tworzyć komfortowe układy dopasowane do konkretnego wnętrza — od pojedynczych foteli po rozbudowane konfiguracje wielorzędowe.",
     statement: "Każdy rząd, światło i proporcja budują jedno doświadczenie.",
     hero: "/media/collection-pages/studio-hero.webp",
     detail: "/media/collection-pages/studio-detail.webp",
     inspirationImages: Array.from({ length: 9 }, (_, i) => `/media/inspiracje/studio/studio-${String(i + 1).padStart(2, "0")}.webp`),
     products: [
-      { name: "Nova Solo", slug: "nova-solo", image: "/media/studio-black.webp", catalogueImage: "/media/collection-pages/studio-nova-solo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-solo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-solo-cutout.png", arrangementsImage: "/media/product-pages/nova-solo/nova-solo-arrangements.png", finishes: [buildFinish("nova-solo", "Smoked Ebony Gloss", "smoked-ebony-gloss"), buildFinish("nova-solo", "Natural Oak Satin", "natural-oak-satin"), buildFinish("nova-solo", "American Walnut Gloss", "american-walnut-gloss"), buildFinish("nova-solo", "American Walnut Satin", "american-walnut-satin")], description: "Samodzielny fotel o czystej, architektonicznej linii.", leatherSwatches: [
-        { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-01.png" },
-        { name: "Ivory Cream", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-02.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-02.png" },
-        { name: "Sand Beige", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-03.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-03.png" },
-        { name: "Cool Taupe", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-04.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-04.png" },
-        { name: "Cognac Tan", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-05.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-05.png" },
-        { name: "Deep Chocolate", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-06.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-06.png" },
-        { name: "Muted Olive", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-07.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-07.png" },
-        { name: "Deep Forest", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-08.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-08.png" },
-        { name: "Warm Graphite", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-09.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-09.png" },
-        { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-10.png" },
-        { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-11.png" },
-        { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/nova-solo/materials/leather/preview-12.png" },
+      { name: "Noven Solo", slug: "noven-solo", image: "/media/studio-black.webp", catalogueImage: "/media/collection-pages/studio-noven-solo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/noven-solo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/noven-solo-cutout.png", arrangementsImage: "/media/product-pages/noven-solo/noven-solo-arrangements.png", finishes: [buildFinish("noven-solo", "Smoked Ebony Gloss", "smoked-ebony-gloss"), buildFinish("noven-solo", "Natural Oak Satin", "natural-oak-satin"), buildFinish("noven-solo", "American Walnut Gloss", "american-walnut-gloss"), buildFinish("noven-solo", "American Walnut Satin", "american-walnut-satin")], description: "Samodzielny fotel o czystej, architektonicznej linii.", leatherSwatches: [
+        { name: "Ivory White", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-01.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-01.png" },
+        { name: "Ivory Cream", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-02.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-02.png" },
+        { name: "Sand Beige", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-03.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-03.png" },
+        { name: "Cool Taupe", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-04.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-04.png" },
+        { name: "Cognac Tan", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-05.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-05.png" },
+        { name: "Deep Chocolate", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-06.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-06.png" },
+        { name: "Muted Olive", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-07.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-07.png" },
+        { name: "Deep Forest", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-08.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-08.png" },
+        { name: "Warm Graphite", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-09.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-09.png" },
+        { name: "Graphite Black", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-10.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-10.png" },
+        { name: "Deep Navy", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-11.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-11.png" },
+        { name: "Burgundy Wine", swatch: "/media/product-pages/vesper-solo/materials/leather/swatch-12.webp", preview: "/media/product-pages/noven-solo/materials/leather/preview-12.png" },
       ], woodSwatches: [
-        { name: "Smoked Ebony Gloss", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-smoked-ebony-gloss.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-smoked-ebony-gloss.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-smoked-ebony-gloss.webp" },
-        { name: "American Walnut Satin", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-american-walnut-satin.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-american-walnut-satin.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-american-walnut-satin.webp" },
-        { name: "Natural Oak Satin", swatch: "/media/product-pages/nova-solo/materials/wood/swatch-natural-oak-satin.webp", preview: "/media/product-pages/nova-solo/materials/wood/preview-natural-oak-satin.webp", reference: "/media/product-pages/nova-solo/materials/wood/reference-natural-oak-satin.webp" },
+        { name: "Smoked Ebony Gloss", swatch: "/media/product-pages/noven-solo/materials/wood/swatch-smoked-ebony-gloss.webp", preview: "/media/product-pages/noven-solo/materials/wood/preview-smoked-ebony-gloss.webp", reference: "/media/product-pages/noven-solo/materials/wood/reference-smoked-ebony-gloss.webp" },
+        { name: "American Walnut Satin", swatch: "/media/product-pages/noven-solo/materials/wood/swatch-american-walnut-satin.webp", preview: "/media/product-pages/noven-solo/materials/wood/preview-american-walnut-satin.webp", reference: "/media/product-pages/noven-solo/materials/wood/reference-american-walnut-satin.webp" },
+        { name: "Natural Oak Satin", swatch: "/media/product-pages/noven-solo/materials/wood/swatch-natural-oak-satin.webp", preview: "/media/product-pages/noven-solo/materials/wood/preview-natural-oak-satin.webp", reference: "/media/product-pages/noven-solo/materials/wood/reference-natural-oak-satin.webp" },
       ], quiltingSwatches: [
-        { name: "Diamond", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-diamond.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-diamond.webp" },
-        { name: "Grand Diamond", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-grand-diamond.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-grand-diamond.webp" },
-        { name: "Horizontal Channel", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-horizontal-channel.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-horizontal-channel.webp" },
-        { name: "Square Grid", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-square-grid.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-square-grid.webp" },
-        { name: "Vertical Channel", swatch: "/media/product-pages/nova-solo/materials/quilting/swatch-vertical-channel.webp", preview: "/media/product-pages/nova-solo/materials/quilting/preview-vertical-channel.webp" },
+        { name: "Diamond", swatch: "/media/product-pages/noven-solo/materials/quilting/swatch-diamond.webp", preview: "/media/product-pages/noven-solo/materials/quilting/preview-diamond.webp" },
+        { name: "Grand Diamond", swatch: "/media/product-pages/noven-solo/materials/quilting/swatch-grand-diamond.webp", preview: "/media/product-pages/noven-solo/materials/quilting/preview-grand-diamond.webp" },
+        { name: "Horizontal Channel", swatch: "/media/product-pages/noven-solo/materials/quilting/swatch-horizontal-channel.webp", preview: "/media/product-pages/noven-solo/materials/quilting/preview-horizontal-channel.webp" },
+        { name: "Square Grid", swatch: "/media/product-pages/noven-solo/materials/quilting/swatch-square-grid.webp", preview: "/media/product-pages/noven-solo/materials/quilting/preview-square-grid.webp" },
+        { name: "Vertical Channel", swatch: "/media/product-pages/noven-solo/materials/quilting/swatch-vertical-channel.webp", preview: "/media/product-pages/noven-solo/materials/quilting/preview-vertical-channel.webp" },
       ] },
-      { name: "Nova Duo", slug: "nova-duo", image: "/media/studio-cinema-front.webp", catalogueImage: "/media/collection-pages/studio-nova-duo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-duo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-duo-cutout.png", description: "Kameralna konfiguracja dla dwojga." },
-      { name: "Nova Ensemble", slug: "nova-ensemble", image: "/media/studio-cinema-wide.webp", catalogueImage: "/media/collection-pages/studio-nova-ensemble.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-ensemble-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-ensemble-cutout.png", description: "Elastyczny układ dla wielorzędowych sal kinowych." },
-      { name: "Nova Chaise", slug: "nova-chaise", image: "/media/private-viewing.webp", catalogueImage: "/media/collection-pages/studio-nova-chaise.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-chaise-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-chaise-cutout.png", description: "Kinowa ergonomia w bardziej swobodnej proporcji." },
-      { name: "Nova Crest", slug: "nova-crest", image: "/media/studio-cinema-bespoke.webp", catalogueImage: "/media/collection-pages/studio-nova-crest.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/nova-crest-scene.png", catalogueCutout: "/media/collection-pages/studio-products/nova-crest-cutout.png", description: "Rozbudowana konfiguracja dla najbardziej wymagających wnętrz." },
+      { name: "Noven Duo", slug: "noven-duo", image: "/media/studio-cinema-front.webp", catalogueImage: "/media/collection-pages/studio-noven-duo.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/noven-duo-scene.png", catalogueCutout: "/media/collection-pages/studio-products/noven-duo-cutout.png", description: "Kameralna konfiguracja dla dwojga." },
+      { name: "Noven Ensemble", slug: "noven-ensemble", image: "/media/studio-cinema-wide.webp", catalogueImage: "/media/collection-pages/studio-noven-ensemble.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/noven-ensemble-scene.png", catalogueCutout: "/media/collection-pages/studio-products/noven-ensemble-cutout.png", description: "Elastyczny układ dla wielorzędowych sal kinowych." },
+      { name: "Noven Chaise", slug: "noven-chaise", image: "/media/private-viewing.webp", catalogueImage: "/media/collection-pages/studio-noven-chaise.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/noven-chaise-scene.png", catalogueCutout: "/media/collection-pages/studio-products/noven-chaise-cutout.png", description: "Kinowa ergonomia w bardziej swobodnej proporcji." },
+      { name: "Noven Crest", slug: "noven-crest", image: "/media/studio-cinema-bespoke.webp", catalogueImage: "/media/collection-pages/studio-noven-crest.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/studio-products/noven-crest-scene.png", catalogueCutout: "/media/collection-pages/studio-products/noven-crest-cutout.png", description: "Rozbudowana konfiguracja dla najbardziej wymagających wnętrz." },
     ],
   },
   {

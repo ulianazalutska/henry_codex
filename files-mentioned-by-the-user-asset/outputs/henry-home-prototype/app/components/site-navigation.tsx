@@ -163,8 +163,8 @@ export function SiteNavigation() {
             <button className={`menu-list__item menu-list__item--toggle ${collectionsOpen ? "is-active" : ""}`} onClick={toggleCollections} aria-expanded={collectionsOpen}>
               <span>Kolekcje</span><img src="/media/vector-chevron.svg" alt="" />
             </button>
-            <Link href="/projekty-indywidualne" onClick={closeMenu}>Projekty indywidualne</Link>
             <Link href="/filozofia-henry" onClick={closeMenu}>Filozofia Henry</Link>
+            <Link href="/projekty-indywidualne" onClick={closeMenu}>Projekty indywidualne</Link>
             <Link href="/dla-architektow" onClick={closeMenu}>Dla architektów</Link>
             <Link href="/kontakt" onClick={closeMenu}>Kontakt</Link>
           </nav>
@@ -183,7 +183,7 @@ export function SiteNavigation() {
             {/* Trzecia kolumna (lista modeli) jest tymczasowo wyłączona — strzałka zostaje jako element dekoracyjny, ale cały wiersz prowadzi bezpośrednio do strony kolekcji. */}
             {collections.map((collection) => (
               <Link className="menu-list__item menu-list__item--toggle" href={`/kolekcje/${collection.slug}`} onClick={closeMenu} key={collection.slug}>
-                <span>{collection.title}</span><img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
+                <span>{collection.name}</span><img src="/media/vector-chevron.svg" alt="" aria-hidden="true" />
               </Link>
             ))}
           </nav>
@@ -195,7 +195,7 @@ export function SiteNavigation() {
 
         {/*
           Trzecia kolumna (lista modeli danej kolekcji) jest tymczasowo wyłączona —
-          jeszcze nie jest potrzebna. Strzałka przy Vesper/Nova/Solaris zostaje
+          jeszcze nie jest potrzebna. Strzałka przy Vesper/Noven/Solaris zostaje
           wyłącznie jako dekoracja (patrz menu-column--collections wyżej).
           Żeby przywrócić: odkomentować poniższy blok i przywrócić onClick/aria-expanded
           na przyciskach kolekcji.

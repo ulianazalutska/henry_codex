@@ -83,7 +83,7 @@ npm test
 
 - кінематографічний video hero;
 - story/brand секції;
-- переходи до Vesper, Nova і Solaris;
+- переходи до Vesper, Noven і Solaris;
 - Projekty indywidualne teaser;
 - Filozofia HENRY teaser;
 - спільний footer.
@@ -109,29 +109,29 @@ npm test
 Реалізована сторінка входу до трьох колекцій із переходами:
 
 - `/kolekcje/vesper`
-- `/kolekcje/nova`
+- `/kolekcje/noven`
 - `/kolekcje/solaris`
 
 ### Шаблон колекції — `/kolekcje/[collection]`
 
 Реалізовано спільний layout: hero приблизно 60vh, statement/detail, список моделей, перехід до наступної колекції, footer.
 
-- **Nova (раніше Studio):** наповнена готовими paired scene/cutout зображеннями для всіх п'яти моделей.
+- **Noven (раніше Studio):** наповнена готовими paired scene/cutout зображеннями для всіх п'яти моделей.
 - **Vesper (раніше Atelier):** маршрут і структура готові, але фінальних scene/cutout матеріалів немає; частина подачі є placeholder/catalogue content.
 - **Solaris (раніше Lounge):** маршрут і структура готові, але фінальних scene/cutout матеріалів немає; частина подачі є placeholder/catalogue content.
 
 ### Шаблон продукту — `/kolekcje/[collection]/[product]`
 
-Динамічні маршрути створені для всіх 14 моделей, але повністю наповнена лише **Studio / Nova Solo**:
+Динамічні маршрути створені для всіх 14 моделей, але повністю наповнена лише **Studio / Noven Solo**:
 
-- `/kolekcje/nova/nova-solo`
+- `/kolekcje/noven/noven-solo`
 
-Для Nova Solo реалізовані hero, drag/swipe carousel, блок оснащення, dimensions, materials/finishes, accordion технічних деталей і CTA.
+Для Noven Solo реалізовані hero, drag/swipe carousel, блок оснащення, dimensions, materials/finishes, accordion технічних деталей і CTA.
 
 Інші 13 маршрутів існують, але показують спільну структуру з placeholder-контентом:
 
 - Vesper: Vesper Solo, Duo, Ensemble, Chaise, Crest — 5.
-- Nova: Nova Duo, Ensemble, Chaise, Crest — 4.
+- Noven: Noven Duo, Ensemble, Chaise, Crest — 4.
 - Solaris: Solaris Solo, Duo, Chaise, Orbit — 4.
 
 Ключові вимоги до product carousel:
@@ -208,12 +208,12 @@ Accordion технічних деталей має бути початково �
 - Питання клієнту ще не закрите: чи видаляти секції "Komfort nie zaczyna się w fotelu" і "Od pierwszej linii do ostatniego detalu" зі Strona Główna — очікує відповіді.
 
 **Karta produktu (`app/components/product-experience.tsx`, `app/globals.css`):**
-- Введено концепцію **hero vs non-hero продукту**. Hero = перший товар кожної колекції (Vesper Solo / Nova Solo / Solaris Solo), обчислюється в `app/kolekcje/[collection]/[product]/page.tsx` як `collection.products[0]?.slug === product.slug`, передається пропом `isHero`.
+- Введено концепцію **hero vs non-hero продукту**. Hero = перший товар кожної колекції (Vesper Solo / Noven Solo / Solaris Solo), обчислюється в `app/kolekcje/[collection]/[product]/page.tsx` як `collection.products[0]?.slug === product.slug`, передається пропом `isHero`.
 - **Не-hero продукти** (Duo/Ensemble/Chaise/Crest/Orbit) тепер спрощені: секція "Dotyk tworzy charakter" (вибір Skóra/Drewno/Pikowanie/Opcje wyposażenia) повністю прибрана. Замість колишньої "Technologia która znika" — 3 фото товару (`product.image`, full-bleed lifestyle-кадр, **не** `catalogueImage`, бо той — обрізаний/з паддінгами) з короткими підписами, без заголовка секції. Підсумкова структура: hero-фото → карусель → 3 фото з описами → "Zobacz w aranżacjach" → Technical features.
-- **Hero-продукти**: таб матеріалів "Kombinacje" перейменовано на "Opcje wyposażenia" — показує опційне обладнання (Cup holder Hot & Cold, mata grzewcza, głośniki, uchwyt na telefon, elektryczny zagłówek), реалізовано як список+прев'ю модуль за зразком `app/personalizacja/personalization-experience.tsx` (секція `equipment`). Секція, що раніше звалася "Opcje wyposażenia" (featureCards, 6 карток: Integrated Controls / Personal Side Table / Electric Recline / Illuminated Cup Holder / Adjustable Headrest / Ambient LED Lighting), перейменована на "Technologia która znika" і показує це саме стандартне обладнання — **для Nova Solo/Solaris Solo контент і мозаїчна розкладка (box A–F) залишаються повністю оригінальними, не змінювати без звірки з клієнтським референсом-скріншотом**. Для Vesper Solo ця секція тепер має власний контент, див. нижче.
+- **Hero-продукти**: таб матеріалів "Kombinacje" перейменовано на "Opcje wyposażenia" — показує опційне обладнання (Cup holder Hot & Cold, mata grzewcza, głośniki, uchwyt na telefon, elektryczny zagłówek), реалізовано як список+прев'ю модуль за зразком `app/personalizacja/personalization-experience.tsx` (секція `equipment`). Секція, що раніше звалася "Opcje wyposażenia" (featureCards, 6 карток: Integrated Controls / Personal Side Table / Electric Recline / Illuminated Cup Holder / Adjustable Headrest / Ambient LED Lighting), перейменована на "Technologia która znika" і показує це саме стандартне обладнання — **для Noven Solo/Solaris Solo контент і мозаїчна розкладка (box A–F) залишаються повністю оригінальними, не змінювати без звірки з клієнтським референсом-скріншотом**. Для Vesper Solo ця секція тепер має власний контент, див. нижче.
 - **Vesper Solo — реальні фото "Opcje wyposażenia" (2026-09-11):** для `vesper-solo` таб "Opcje wyposażenia" тепер показує 9 власних позицій із реальними фото клієнта (замість спільного generic-списку з 5 позицій, який лишається дефолтом для решти продуктів): Poduszka Henry, Stolik Vesper, Regulacja zagłówka Vesper, Podgrzewanie oparcia i siedziska, Funkcja grzania i chłodzenia, Dodatkowe oświetlenie ambientowe, Głośnik, Schowek w podłokietniku, Niezależne mechanizmy regulacji. Джерело фото: `asset/Strona Produktu/Atelier/Vesper solo/Opce Wyposażenia/` (оригінали PNG ~2MB кожен) → сконвертовано в webp (~65–150KB) і скопійовано в `public/media/product-pages/vesper-solo/equipment/`. У коді: масив `vesperSoloEquipmentOptions` в `product-experience.tsx`, вибір масиву — `product.slug === "vesper-solo" ? vesperSoloEquipmentOptions : equipmentOptions`. Описи (`description`) написані як заглушки на основі назв файлів — не звірені з клієнтом, замінити при отриманні реальних формулювань.
-- **Vesper Solo — реальні фото "Technologia która znika" (2026-09-11):** для `vesper-solo` мозаїка тепер має власні 5 карток (замість спільного `featureCards` із заглушками Nova, і замість 6 боксів — бокс "Adjustable Headrest" прибрано, лишились A–E): Naturalna skóra, Wykończenie drewna, Elektryczna regulacja, Uchwyt na kubek, Oświetlenie ambientowe (усі назви й описи польською, на відміну від Nova/Solaris, де заголовки залишаються англійськими — оригінальний контент не чіпали). Джерело фото: `asset/Strona Produktu/Atelier/Vesper solo/Wyposażenie standardowe/` → webp у `public/media/product-pages/vesper-solo/standard-equipment/`. Масив `vesperSoloFeatureCards`, вибір через `activeFeatureCards` (`isVesperSolo ? vesperSoloFeatureCards : featureCards`). Оскільки реального контенту раніше не було, рендер картинки/плейсхолдера тепер керується новою змінною `featuresReady = isReady || isVesperSolo` (а не голим `isReady`, який істинний лише для Nova Solo) — якщо додаватимете реальний контент для інших продуктів, розширюйте цю умову так само. Копірайти (`copy`) — придумані маркетингові тексти, не звірені з клієнтом, без конкретних характеристик/цифр (дотримано правила "не вигадувати факти про HENRY"). Фото не обрізаються: `.product-features--vesper-solo .product-feature-box figure img { object-fit: contain }` (скоуп тільки на Vesper Solo — базовий `.product-feature-box figure img` для Nova/Solaris лишився `cover`, як і був).
-- **Vesper Solo — бокс E репозиціонований (2026-09-11):** через видалення боксу F (`Adjustable Headrest` більше немає, а колишній контент боксу F зайняв слот E) базові координати `.product-feature-box.boxE` (розроблені під 6-боксову мозаїку) виглядали не на своєму місці для 5-боксової версії. Додано скоуп-клас `.product-features--vesper-solo .product-feature-box.boxE` (`right:0.49%; top:78.24%; width:64.05%; height:16.44%; left:auto`) — **діє тільки для Vesper Solo**, базовий `.boxE` (для Nova/Solaris із 6 боксами) не чіпали. Відповідно до цього також заведено окремий масив `vesperFeatureBoxBottomPercent` (без значення для F) для авто-обрахунку висоти `.product-features__grid-clip` — інакше під Vesper Solo лишався б зайвий порожній простір знизу мозаїки.
+- **Vesper Solo — реальні фото "Technologia która znika" (2026-09-11):** для `vesper-solo` мозаїка тепер має власні 5 карток (замість спільного `featureCards` із заглушками Noven, і замість 6 боксів — бокс "Adjustable Headrest" прибрано, лишились A–E): Naturalna skóra, Wykończenie drewna, Elektryczna regulacja, Uchwyt na kubek, Oświetlenie ambientowe (усі назви й описи польською, на відміну від Noven/Solaris, де заголовки залишаються англійськими — оригінальний контент не чіпали). Джерело фото: `asset/Strona Produktu/Atelier/Vesper solo/Wyposażenie standardowe/` → webp у `public/media/product-pages/vesper-solo/standard-equipment/`. Масив `vesperSoloFeatureCards`, вибір через `activeFeatureCards` (`isVesperSolo ? vesperSoloFeatureCards : featureCards`). Оскільки реального контенту раніше не було, рендер картинки/плейсхолдера тепер керується новою змінною `featuresReady = isReady || isVesperSolo` (а не голим `isReady`, який істинний лише для Noven Solo) — якщо додаватимете реальний контент для інших продуктів, розширюйте цю умову так само. Копірайти (`copy`) — придумані маркетингові тексти, не звірені з клієнтом, без конкретних характеристик/цифр (дотримано правила "не вигадувати факти про HENRY"). Фото не обрізаються: `.product-features--vesper-solo .product-feature-box figure img { object-fit: contain }` (скоуп тільки на Vesper Solo — базовий `.product-feature-box figure img` для Noven/Solaris лишився `cover`, як і був).
+- **Vesper Solo — бокс E репозиціонований (2026-09-11):** через видалення боксу F (`Adjustable Headrest` більше немає, а колишній контент боксу F зайняв слот E) базові координати `.product-feature-box.boxE` (розроблені під 6-боксову мозаїку) виглядали не на своєму місці для 5-боксової версії. Додано скоуп-клас `.product-features--vesper-solo .product-feature-box.boxE` (`right:0.49%; top:78.24%; width:64.05%; height:16.44%; left:auto`) — **діє тільки для Vesper Solo**, базовий `.boxE` (для Noven/Solaris із 6 боксами) не чіпали. Відповідно до цього також заведено окремий масив `vesperFeatureBoxBottomPercent` (без значення для F) для авто-обрахунку висоти `.product-features__grid-clip` — інакше під Vesper Solo лишався б зайвий порожній простір знизу мозаїки.
 - **Важливий технічний момент — авто-висота мозаїки `.product-features__grid`:** бокси A–F позиційовані `position:absolute` з `top`/`height` у відсотках, що завжди рахуються від висоти самого контейнера — тому просте зменшення `aspect-ratio` контейнера НЕ прибирає зайвий пустий простір знизу (відсоток порожнечі лишається сталим при будь-якій висоті). Рішення: `.product-features__grid` завжди тримає оригінальну пропорцію `1313/2475` (щоб % боксів рахувались коректно завжди), а зовні обгорнутий у `.product-features__grid-clip` з `overflow:hidden` і **JS-обрахованою** `height` (via `useEffect` + `featureGridRef`, слухає `resize`) — вимірює реальну ширину контейнера і рахує потрібну видиму висоту через `featureGridBottomFraction(boxCount)` (масив `featureBoxBottomPercent` — bottom-edge % кожного box A–F, перерахувати вручну, якщо будуть змінені `top`/`height` окремих боксів у CSS). На мобільному (`max-width:640px`) `.product-features__grid-clip` скидається на `height:auto!important; overflow:visible`, бо там мозаїка перетворюється на простий вертикальний список (окремий responsive-блок, теж новий).
 - Окремий менший відступ до "Zobacz w aranżacjach" для не-hero сторінок: клас `.product-arrangements--tight` (`margin-top: 8vh` замість `25vh` для hero).
 
@@ -222,17 +222,17 @@ Accordion технічних деталей має бути початково �
 - Заголовок "Firma rodzinna. Manufaktura w Polsce" розбито на два рядки.
 - Фото в секції `manifesto` (крісло з золотою сіткою Фібоначчі, наприкінці сторінки) замінено на версію з більшим порожнім простором знизу — текст, що з'являється поверх (`manifestoCopy`), більше не перетинає золоту рамку.
 
-## 6.2. Зміни 2026-09-29 (Nova Solo — «Materiały i wykończenia»)
+## 6.2. Зміни 2026-09-29 (Noven Solo — «Materiały i wykończenia»)
 
 Запушено в `main` (коміт `605ada0`), задеплоєно на `henry-seating-preview` (версія `46896817`).
 
-**Вимога клієнта:** об'єднати «Barwa skóry» і «Wykończenie drewna» в одну вкладку «Materiały i wykończenia». Спочатку вибір дерева, під ним 12 пробок «шкіра + дерево», клік змінює фото фотеля (колір шкіри + обране дерево). Vesper: дерево одне (Smoked Ebony Gloss). Nova: 3 дерева (Smoked Ebony Gloss, Natural Oak Satin, American Walnut Satin). Останній абзац клієнтського повідомлення повторював «Nova» — імовірно, мався на увазі Solaris (питання клієнту ще відкрите).
+**Вимога клієнта:** об'єднати «Barwa skóry» і «Wykończenie drewna» в одну вкладку «Materiały i wykończenia». Спочатку вибір дерева, під ним 12 пробок «шкіра + дерево», клік змінює фото фотеля (колір шкіри + обране дерево). Vesper: дерево одне (Smoked Ebony Gloss). Noven: 3 дерева (Smoked Ebony Gloss, Natural Oak Satin, American Walnut Satin). Останній абзац клієнтського повідомлення повторював «Noven» — імовірно, мався на увазі Solaris (питання клієнту ще відкрите).
 
-**Готовність:** реалізовано **лише для Nova Solo**. Vesper Solo і Solaris Solo лишаються зі старими окремими вкладками «Barwa skóry» / «Wykończenie drewna», поки клієнт не надішле відповідні фото.
+**Готовність:** реалізовано **лише для Noven Solo**. Vesper Solo і Solaris Solo лишаються зі старими окремими вкладками «Barwa skóry» / «Wykończenie drewna», поки клієнт не надішле відповідні фото.
 
 **Дані (`app/collections-data.ts`):**
 - Нові типи/помічники: `HenryFinish` (`name`, `woodSwatch`, `leathers[]`), `finishLeathers` (12 кольорів зі slug), `buildFinish(productSlug, name, woodSlug)`; нове необов'язкове поле `HenryProduct.finishes`.
-- Заповнено лише в Nova Solo: `finishes: [buildFinish("nova-solo", …)]` для трьох дерев. Щоб підключити іншу модель, достатньо додати `finishes` з тими ж викликами (файли мають лежати за шаблоном нижче).
+- Заповнено лише в Noven Solo: `finishes: [buildFinish("noven-solo", …)]` для трьох дерев. Щоб підключити іншу модель, достатньо додати `finishes` з тими ж викликами (файли мають лежати за шаблоном нижче).
 
 **UI (`app/components/product-experience.tsx`):**
 - `MaterialKey` отримав `"finishes"`. Вкладки фільтруються `visibleMaterialTabs`: якщо в продукту є `finishes`, показуємо «Materiały i wykończenia» замість «Barwa skóry»/«Wykończenie drewna»; інакше — старі вкладки.
@@ -240,21 +240,21 @@ Accordion технічних деталей має бути початково �
 
 **Стилі (`app/globals.css`):** `.material-lab__woods` (3 колонки), `.material-lab__swatches--finishes` (4 колонки, пробки 2:1 без обрізання, `object-fit: contain`), `.material-lab__content--finishes` (колонки 1.5fr/.7fr, gap 4vw). На мобільному дерева в стовпчик, пробки по 2 в ряд, контент в одну колонку. Селектори мають подвійний клас, бо загальне `.material-lab__swatches button` (aspect-ratio 1, cover) стоїть у файлі нижче і інакше перебиває.
 
-**Ассети** (`public/media/product-pages/nova-solo/materials/finishes/<american-walnut-satin|natural-oak-satin|smoked-ebony-gloss>/`, webp, ~5,7 MB разом): `preview-<колір>.webp` (фотель без фону, 1537×1023 з альфою), `swatch-<колір>.webp` (пробка шкіри + дерева, макс. 1000 px), `wood-<дерево>.webp` (окрема пробка; для SEG клієнт не надіслав — UI бере вже наявні `materials/wood/swatch-*.webp`). Джерело: `asset/Strona Produktu/Nova Solo/new barwy kolorów + drewno/`. **Порядок фото фотелів у клієнта не збігається з нумерацією пробок і різний у кожній з трьох папок** — файли зіставлено з кольорами візуально; Ivory White та Ivory Cream у SEG розрізнялись за теплотою відтінку (слабка різниця), варто перевірити на сторінці.
+**Ассети** (`public/media/product-pages/noven-solo/materials/finishes/<american-walnut-satin|natural-oak-satin|smoked-ebony-gloss>/`, webp, ~5,7 MB разом): `preview-<колір>.webp` (фотель без фону, 1537×1023 з альфою), `swatch-<колір>.webp` (пробка шкіри + дерева, макс. 1000 px), `wood-<дерево>.webp` (окрема пробка; для SEG клієнт не надіслав — UI бере вже наявні `materials/wood/swatch-*.webp`). Джерело: `asset/Strona Produktu/Noven Solo/new barwy kolorów + drewno/`. **Порядок фото фотелів у клієнта не збігається з нумерацією пробок і різний у кожній з трьох папок** — файли зіставлено з кольорами візуально; Ivory White та Ivory Cream у SEG розрізнялись за теплотою відтінку (слабка різниця), варто перевірити на сторінці.
 
 **Відомі обмеження / наступні кроки:**
 - Клієнт називає колір №9 **Cool Graphite**; у старих даних Vesper/Solaris він досі «Warm Graphite» — узгодити при міграції цих моделей.
 - Отримати від клієнта фото для Vesper (1 дерево × 12) і, за підтвердженням, Solaris (3 × 12); для Vesper дерево одне — ряд вибору дерева можна приховати.
-- Старі вкладки й ассети (`materials/wood/reference-*.webp`) для Nova поки лишаються на диску, але UI їх більше не показує.
+- Старі вкладки й ассети (`materials/wood/reference-*.webp`) для Noven поки лишаються на диску, але UI їх більше не показує.
 - Візуально в браузері перевірено лише користувачем (десктоп); мобільну розкладку варто пройти окремо.
 
-## 6.3. Зміни 2026-10-05 (Nova Solo — конфігуратор «Materiały i wykończenia», чорний фон сайту)
+## 6.3. Зміни 2026-10-05 (Noven Solo — конфігуратор «Materiały i wykończenia», чорний фон сайту)
 
-Запушено в `main` (коміт `7dcfb88`), задеплоєно на `henry-seating-preview` (версія `6df68681`). Цей запис **замінює UI з розділу 6.2** для Nova Solo; дані (`finishes`, `buildFinish`) лишаються.
+Запушено в `main` (коміт `7dcfb88`), задеплоєно на `henry-seating-preview` (версія `6df68681`). Цей запис **замінює UI з розділу 6.2** для Noven Solo; дані (`finishes`, `buildFinish`) лишаються.
 
 **Вимога клієнта:** під заголовком вкладки короткий опис («Materiały definiują charakter fotela…»), під ним два великі квадрати (шкіра і дерево, з назвою й описом), під кожним маленькі кружечки кольорів. Клік по кружечку міняє свій квадрат і фото фотеля; фото завжди відповідає обом виборам (шкіра × дерево). Поруч з квадратами більше фото фотеля. Фон усього сайту — чорний. Приклад поведінки: romo.com/collections/plains/okero.
 
-**Готовність:** лише **Nova Solo** (проба). Vesper Solo і Solaris Solo лишаються зі старими вкладками, поки клієнт не надішле комбінації шкіра × дерево.
+**Готовність:** лише **Noven Solo** (проба). Vesper Solo і Solaris Solo лишаються зі старими вкладками, поки клієнт не надішле комбінації шкіра × дерево.
 
 **Дані (`app/collections-data.ts`):** `HenryLeatherSwatch.card?` (велика картка шкіри), `HenryFinish.woodCard` (велика картка дерева). `buildFinish` тепер бере кружечки з `materials/dots/` і картки з `materials/cards/`. «American Walnut Satin» перейменовано на **American Walnut Gloss** (slug `american-walnut-gloss`), відповідно до клієнтського зразка.
 
@@ -264,14 +264,14 @@ Accordion технічних деталей має бути початково �
 
 **Чорний фон сайту:** `--ink` і `--section` → `#000`; усі `background: #171615 / #1a1a1a / #171512` у `globals.css` і всіх `*.module.css` замінено на `#000`. Також `#141312` (`.product-specification`), `#151413` (`.closing` у Personalizacja), напівпрозорі краї каруселі (`rgba(0,0,0,.92)`) і меню в Kontakt. Свідомо лишено: плейсхолдери під фото (`#101010`, `#0c0c0c`), виділення розгорнутого рядка FAQ (`#1d1c1a`), `color: #171615` на золотих кнопках. Не пройдено в браузері всі сторінки — перевірити шви на стиках секцій.
 
-**Ассети** (`public/media/product-pages/nova-solo/materials/`, webp): `finishes/<american-walnut-gloss|natural-oak-satin|smoked-ebony-gloss>/preview-<колір>.webp` (36 фото фотелів, 1537×1023, альфа), `cards/{leather,wood}-<slug>.webp` (15 карток 1000×1000 з назвою й описом, описи дерева «запечені» в картинки), `dots/{leather,wood}-<slug>.webp` (15 мініатюр 120 px, виріз із текстури картки). Джерело: `asset/Strona Produktu/Nova Solo/new barwy kolorów + drewno/` (папки `AWS+skóry`, `NOS+skóry`, `SEG + skóra`, `wzornik kolory i drewno`). Імена файлів у клієнта не містять кольору, порядок різний у кожній папці — зіставлено візуально. **Ivory White / Ivory Cream у наборі SEG розрізняються слабко** (`pikowanie nova.png` = White, `-11` = Cream); якщо переплутано, обміняти `preview-ivory-white.webp` і `preview-ivory-cream.webp` у `finishes/smoked-ebony-gloss/`.
+**Ассети** (`public/media/product-pages/noven-solo/materials/`, webp): `finishes/<american-walnut-gloss|natural-oak-satin|smoked-ebony-gloss>/preview-<колір>.webp` (36 фото фотелів, 1537×1023, альфа), `cards/{leather,wood}-<slug>.webp` (15 карток 1000×1000 з назвою й описом, описи дерева «запечені» в картинки), `dots/{leather,wood}-<slug>.webp` (15 мініатюр 120 px, виріз із текстури картки). Джерело: `asset/Strona Produktu/Noven Solo/new barwy kolorów + drewno/` (папки `AWS+skóry`, `NOS+skóry`, `SEG + skóra`, `wzornik kolory i drewno`). Імена файлів у клієнта не містять кольору, порядок різний у кожній папці — зіставлено візуально. **Ivory White / Ivory Cream у наборі SEG розрізняються слабко** (`pikowanie noven.png` = White, `-11` = Cream); якщо переплутано, обміняти `preview-ivory-white.webp` і `preview-ivory-cream.webp` у `finishes/smoked-ebony-gloss/`.
 
 **Відомі обмеження / наступні кроки:**
 - Старі `swatch-*.webp` у `finishes/*/` і папка `finishes/american-walnut-satin/` більше не використовуються кодом — можна видалити після підтвердження.
 - Кружечки — вирізки з текстури картки, не плоский колір; клієнт може попросити інакше.
 - Опису для шкіри окремим текстом немає (на картці лише назва + «Naturalna włoska skóra Mezzo Fiore»); опис дерева можна змінити лише новою карткою.
 - Vesper Solo (1 дерево × 12 шкір) і Solaris Solo (3 × 12) — чекаємо на фото комбінацій від клієнта. Для Vesper в iCloud клієнта лежать нові зразки; зараз у проєкті лише Smoked Ebony Gloss і 12 фото за кольором шкіри.
-- Cool Graphite (Nova) vs Warm Graphite (Vesper/Solaris) — узгодити назву при міграції.
+- Cool Graphite (Noven) vs Warm Graphite (Vesper/Solaris) — узгодити назву при міграції.
 - Чорний фон: пройти всі сторінки (головна, колекції, продукт, блог, FAQ, Kontakt, Personalizacja, Filozofia, Projekty indywidualne) на швах.
 
 ## 7. Спільна навігація та footer
@@ -279,7 +279,7 @@ Accordion технічних деталей має бути початково �
 Burger має три послідовні панелі:
 
 1. основні розділи;
-2. Vesper / Nova / Solaris;
+2. Vesper / Noven / Solaris;
 3. моделі вибраної колекції.
 
 Панелі повільно виїжджають, не обов'язково займають повну ширину екрану; фон сторінки затемнюється і розмивається. Повторний клік по активній категорії закриває її вкладену панель. Пункти першої панелі: Kolekcje, Personalizacja, Projekty indywidualne, Filozofia Henry, Dla architektów, Kontakt.
@@ -304,7 +304,7 @@ Footer має бути однаковим на всіх сторінках і в
    - Наступний крок: клієнт має підтвердити текст process-кроків (Konsultacja/Projekt/Dobór materiałów/Realizacja/Montaż) і чи можна лишати AI-рендер на сторінці постійно.
 2. **Dla architektów** — `/dla-architektow`.
    - Пункт уже є в burger, маршрут відсутній.
-3. ~~**Inspiracje для колекції**~~ Реалізовано (2026-09-03) як `/kolekcje/[collection]/inspiracje` — одна сторінка на колекцію (Vesper/Nova/Solaris), а не на продукт; кожна продуктова сторінка лінкує на inspiracje своєї колекції. Фото заповнені для всіх трьох колекцій (див. розділ 6).
+3. ~~**Inspiracje для колекції**~~ Реалізовано (2026-09-03) як `/kolekcje/[collection]/inspiracje` — одна сторінка на колекцію (Vesper/Noven/Solaris), а не на продукт; кожна продуктова сторінка лінкує на inspiracje своєї колекції. Фото заповнені для всіх трьох колекцій (див. розділ 6).
 4. Повне наповнення 13 placeholder product pages.
 5. Фінальні paired scene/cutout assets для Vesper і Solaris.
 
@@ -346,7 +346,7 @@ Footer має бути однаковим на всіх сторінках і в
 2. Виконати `npm run lint`, `npm run build`, `npm test`; окремо зафіксувати вже наявні помилки, якщо вони не пов'язані з новими змінами.
 3. Створити `/projekty-indywidualne` на матеріалах із `asset/Projekty Indywidualne/`, зберігши спільні navigation/footer і стиль HENRY.
 4. Створити `/dla-architektow` після отримання або узгодження змісту.
-5. Узгодити структуру `Inspiracje`, потім реалізувати один повний приклад для Nova Solo і масштабувати шаблон.
+5. Узгодити структуру `Inspiracje`, потім реалізувати один повний приклад для Noven Solo і масштабувати шаблон.
 6. По мірі надходження матеріалів наповнювати решту продуктів та Vesper/Solaris.
 
 ## 10. Як працювати з користувачем
@@ -366,8 +366,8 @@ Footer має бути однаковим на всіх сторінках і в
 
 ## Перейменування колекцій (2026-10-12)
 
-За вимогою клієнта колекції називаються як крісла: **Kolekcja Vesper** (було Atelier), **Kolekcja Nova** (було Studio), **Kolekcja Solaris** (було Lounge).
-- `app/collections-data.ts`: `name` = "Vesper/Nova/Solaris", нове поле `title` = "Kolekcja …" (для заголовків/меню/футера), `slug` = `vesper|nova|solaris`.
+За вимогою клієнта колекції називаються як крісла: **Kolekcja Vesper** (було Atelier), **Kolekcja Noven** (було Studio), **Kolekcja Solaris** (було Lounge).
+- `app/collections-data.ts`: `name` = "Vesper/Noven/Solaris", нове поле `title` = "Kolekcja …" (для заголовків/меню/футера), `slug` = `vesper|noven|solaris`.
 - Старі URL `/kolekcje/atelier|studio|lounge[/...]` редіректяться 301 у `worker/index.ts`.
 - Назви файлів зображень і папка `public/media/inspiracje/{atelier,studio,lounge}` навмисно НЕ перейменовані; CSS-клас `collection--atelier` на головній — внутрішній.
 - Тексти (головна, FAQ, блог-placeholder, bespoke, футер, меню) оновлено.

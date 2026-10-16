@@ -25,16 +25,16 @@ interface ExecutionContext {
 // dangerouslyAllowSVG: true in next.config.js and uncomment below:
 // const imageConfig: ImageConfig = { dangerouslyAllowSVG: true };
 
-// Stare nazwy kolekcji (Atelier/Studio/Lounge) -> nowe (Vesper/Nova/Solaris).
-const legacyCollectionSlugs: Record<string, string> = { atelier: "vesper", studio: "nova", lounge: "solaris" };
+// Stare nazwy kolekcji (Atelier/Studio/Lounge) -> nowe (Vesper/Noven/Solaris).
+const legacyCollectionSlugs: Record<string, string> = { atelier: "vesper", studio: "noven", lounge: "solaris", nova: "noven" };
 
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
-    const legacy = url.pathname.match(/^\/kolekcje\/(atelier|studio|lounge)(\/.*)?$/);
+    const legacy = url.pathname.match(/^\/kolekcje\/(atelier|studio|lounge|nova)(\/.*)?$/);
     if (legacy) {
-      url.pathname = `/kolekcje/${legacyCollectionSlugs[legacy[1]]}${legacy[2] ?? ""}`;
+      url.pathname = `/kolekcje/${legacyCollectionSlugs[legacy[1]]}${(legacy[2] ?? "").replace(/^\/nova-/, "/noven-")}`;
       return Response.redirect(url.toString(), 301);
     }
 

@@ -35,7 +35,7 @@ export default async function ProductPage({ params }: { params: Promise<{ collec
       <ProductExperience
         collection={collection}
         product={product}
-        isReady={collection.slug === "nova" && product.slug === "nova-solo"}
+        isReady={collection.slug === "noven" && product.slug === "noven-solo"}
         isHero={isHero}
       />
       <SiteFooter />

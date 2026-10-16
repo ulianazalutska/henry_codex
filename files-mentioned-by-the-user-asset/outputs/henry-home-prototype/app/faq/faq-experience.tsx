@@ -40,7 +40,7 @@ const faqData: Record<CategoryKey, FaqItem[]> = {
     {
       question: "Jakie fotele oferuje HENRY?",
       answer:
-        "HENRY tworzy fotele kinowe i meble tapicerowane w trzech kolekcjach — Vesper, Nova i Solaris — od pojedynczych foteli po większe, modułowe układy.",
+        "HENRY tworzy fotele kinowe i meble tapicerowane w trzech kolekcjach — Vesper, Noven i Solaris — od pojedynczych foteli po większe, modułowe układy.",
       link: { href: "/kolekcje", label: "Zobacz kolekcje" },
     },
     {
@@ -63,7 +63,7 @@ const faqData: Record<CategoryKey, FaqItem[]> = {
     },
     {
       question: "Jakie kolekcje mebli są dostępne?",
-      answer: "Obecnie oferujemy trzy kolekcje: Vesper, Nova i Solaris — każda z własnym charakterem i zestawem modeli.",
+      answer: "Obecnie oferujemy trzy kolekcje: Vesper, Noven i Solaris — każda z własnym charakterem i zestawem modeli.",
       link: { href: "/kolekcje", label: "Zobacz kolekcje" },
     },
     {
@@ -74,8 +74,8 @@ const faqData: Record<CategoryKey, FaqItem[]> = {
     {
       question: "Czy można połączyć fotele w rzędy?",
       answer:
-        "Tak, kolekcja Nova została zaprojektowana z myślą o pełnych salach kinowych i układach rzędowych.",
-      link: { href: "/kolekcje/nova", label: "Zobacz kolekcję Nova" },
+        "Tak, kolekcja Noven została zaprojektowana z myślą o pełnych salach kinowych i układach rzędowych.",
+      link: { href: "/kolekcje/noven", label: "Zobacz kolekcję Noven" },
     },
   ],
   kino: [
@@ -92,8 +92,8 @@ const faqData: Record<CategoryKey, FaqItem[]> = {
     },
     {
       question: "Czy fotele kinowe można ustawić w kilku rzędach?",
-      answer: "Tak, kolekcja Nova jest projektowana modułowo, tak aby współpracować z architekturą całej sali kinowej.",
-      link: { href: "/kolekcje/nova", label: "Zobacz kolekcję Nova" },
+      answer: "Tak, kolekcja Noven jest projektowana modułowo, tak aby współpracować z architekturą całej sali kinowej.",
+      link: { href: "/kolekcje/noven", label: "Zobacz kolekcję Noven" },
     },
     {
       question: "Czy można zamówić fotele z dodatkowymi funkcjami?",

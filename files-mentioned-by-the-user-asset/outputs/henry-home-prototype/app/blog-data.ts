@@ -39,7 +39,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "przewodnik-po-skorach-i-tkaninach",
     title: "Przewodnik po skórach i tkaninach HENRY",
-    excerpt: "Czym różnią się materiały obiciowe dostępne w kolekcjach Vesper, Nova i Solaris — i jak dobrać je do wnętrza.",
+    excerpt: "Czym różnią się materiały obiciowe dostępne w kolekcjach Vesper, Noven i Solaris — i jak dobrać je do wnętrza.",
     category: "materialy",
     date: "2026-01-01",
     readingTime: "5 min",
@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "prywatne-kino-domowe-inspiracje",
     title: "Prywatne kino domowe — inspiracje z realizacji HENRY",
-    excerpt: "Jak fotele z kolekcji Nova budują atmosferę sali kinowej razem z architekturą i światłem wnętrza.",
+    excerpt: "Jak fotele z kolekcji Noven budują atmosferę sali kinowej razem z architekturą i światłem wnętrza.",
     category: "wnetrza",
     date: "2026-01-01",
     readingTime: "4 min",

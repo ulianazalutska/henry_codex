@@ -213,12 +213,16 @@ export function BespokeExperience() {
       {/* 00 — Wprowadzenie */}
       <section className={styles.hero} aria-labelledby="bespoke-title">
         <div className={styles.heroText}>
-          <p className={styles.eyebrow}>Wyjątkowe projekty. Nieograniczone możliwości.</p>
-          <h1 id="bespoke-title">Indywidualne projekty<br />i realizacje</h1>
+          <p className={styles.eyebrow}>Podziel się z nami swoją wizją.</p>
+          <h1 id="bespoke-title">Stwórzmy coś wyjątkowego</h1>
           <div className={styles.heroBody}>
-            <p>W HENRY wierzymy, że najbardziej wyjątkowe projekty powstają wtedy, gdy kreatywność spotyka się z doświadczeniem i możliwościami technologicznymi.</p>
-            <p>Dlatego tworzymy również fotele i systemy siedzisk projektowane całkowicie od podstaw z myślą o indywidualnych potrzebach, wyjątkowych wnętrzach i niepowtarzalnych wizjach naszych klientów.</p>
-            <p>Od pojedynczego, autorskiego fotela po zaawansowane rozwiązania dla prywatnych kin i luksusowych przestrzeni.</p>
+            <p>
+              Nie wszystkie wyjątkowe projekty istnieją już dziś. Niektóre dopiero czekają na realizację.<br />
+              Masz pomysł na fotel, którego nie znalazłeś w żadnej kolekcji?<br />Marzysz o niepowtarzalnym projekcie, wyjątkowej konstrukcji lub rozwiązaniu technologicznym stworzonym specjalnie dla Ciebie?<br />
+              W HENRY wierzymy, że najbardziej wyjątkowe projekty powstają wtedy, gdy kreatywność spotyka się z doświadczeniem i możliwościami technologicznymi.<br />
+              Dlatego tworzymy również fotele i systemy siedzisk projektowane całkowicie od podstaw z myślą o indywidualnych potrzebach, wyjątkowych wnętrzach i niepowtarzalnych wizjach naszych klientów.<br />
+              Od pojedynczego, autorskiego fotela po zaawansowane rozwiązania dla prywatnych kin i luksusowych przestrzeni.
+            </p>
           </div>
         </div>
         <figure className={styles.heroImage} ref={heroRef}>
@@ -235,8 +239,8 @@ export function BespokeExperience() {
           <div className={styles.copyColumn} data-proj-reveal>
             <h2 id="ch1-title">Fotele tworzone<br />od podstaw</h2>
             <p>Tworzymy autorskie projekty foteli, w których każdy element może zostać zaprojektowany zgodnie z indywidualną wizją klienta.</p>
-            <p>Forma, proporcje, ergonomia, materiały i detale — wszystko powstaje z myślą o stworzeniu wyjątkowego mebla, który nie jest częścią kolekcji.</p>
-            <p>Od minimalistycznej elegancji po odważne, futurystyczne formy. Łączymy kreatywność projektową z wieloletnim doświadczeniem w produkcji luksusowych siedzisk.</p>
+            <p>Forma, proporcje, ergonomia, materiały i detale, wszystko powstaje z myślą o stworzeniu wyjątkowego mebla, który nie jest częścią kolekcji.</p>
+            <p>Od minimalistycznej elegancji po odważne, futurystyczne formy. Łączymy kreatywność projektową z wieloletnim doświadczeniem w produkcji luksusowych foteli.</p>
             <p className={styles.statement}>Nie ograniczamy się do gotowych rozwiązań. Tworzymy nowe.</p>
           </div>
           <div className={styles.chairGrid}>

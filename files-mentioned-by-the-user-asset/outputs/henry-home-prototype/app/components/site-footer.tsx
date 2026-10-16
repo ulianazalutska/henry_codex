@@ -8,15 +8,14 @@ export function SiteFooter() {
           <img src="/media/henry-logo-gold.png" alt="HENRY" />
           <p>Premium Cinema Seating<br />Made in Poland</p>
         </div>
-        <div><h3>Kolekcje</h3><Link href="/kolekcje/vesper">Kolekcja Vesper</Link><Link href="/kolekcje/solaris">Kolekcja Solaris</Link><Link href="/kolekcje/nova">Kolekcja Nova</Link></div>
-        <div><h3>Dla klienta</h3><Link href="/filozofia-henry">O nas</Link><Link href="/faq">FAQ</Link><Link href="/blog">Blog</Link><Link href="/kontakt">Kontakt</Link></div>
+        <div><h3>Kolekcje</h3><Link href="/kolekcje/vesper">Vesper</Link><Link href="/kolekcje/solaris">Solaris</Link><Link href="/kolekcje/noven">Noven</Link></div>
+        <div><h3>Dla klienta</h3><Link href="/filozofia-henry">Filozofia Henry</Link><Link href="/faq">FAQ</Link><Link href="/blog">Blog</Link><Link href="/kontakt">Kontakt</Link></div>
         <div><h3>Kontakt</h3><a href="tel:+48604783396">+48 604 783 396</a><a href="mailto:info@henryseating.com">info@henryseating.com</a><p>Otowice 41<br />86-070 Dąbrowa Chełmińska<br />Polska</p><a href="https://meganseating.com" target="_blank" rel="noopener noreferrer">meganseating.com</a></div>
         <div className="footer-directory__social">
           <h3>Obserwuj nas</h3>
           <div>
             <a href="#" aria-label="Instagram"><img src="/media/instagram.svg" alt="" /></a>
             <a href="#" aria-label="Facebook"><img src="/media/facebook.svg" alt="" /></a>
-            <a href="#" aria-label="YouTube"><img src="/media/youtube.svg" alt="" /></a>
           </div>
         </div>
       </div>

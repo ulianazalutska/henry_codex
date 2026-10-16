@@ -75,7 +75,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
       </section>
 
       <Link className="next-collection" href={`/kolekcje/${next.slug}`}>
-        <p>Następna kolekcja</p><h2>{next.title}</h2><span>Odkryj <i className="diagonal-arrow" aria-hidden="true" /></span>
+        <p>Następna kolekcja</p><h2>{next.name}</h2><span>Odkryj <i className="diagonal-arrow" aria-hidden="true" /></span>
         <img src={next.hero} alt="" loading="lazy" />
       </Link>
       <SiteFooter />

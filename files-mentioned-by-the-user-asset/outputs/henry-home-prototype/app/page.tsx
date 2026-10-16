@@ -166,18 +166,18 @@ export default function Home() {
               <img src="/media/atelier-cinema-row.webp" alt="Rzędy foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" />
               <div className="collection__text">
-                <h3>Kolekcja Vesper</h3>
+                <h3>Vesper</h3>
                 <span>Klasyka luksusu w nowoczesnym wydaniu.<b>elegancka · ponadczasowa · wyrafinowana</b></span>
               </div>
               <div className="collection__cta" aria-hidden="true">
                 <i className="diagonal-arrow collection__cta-icon" />
               </div>
             </Link>
-            <Link href="/kolekcje/nova" className="collection collection--atelier" aria-label="Zobacz kolekcję Nova">
+            <Link href="/kolekcje/noven" className="collection collection--atelier" aria-label="Zobacz kolekcję Noven">
               <img src="/media/studio-study-chair.webp" alt="Rząd foteli HENRY w prywatnej sali kinowej" loading="lazy" />
               <div className="collection__veil" />
               <div className="collection__text">
-                <h3>Kolekcja Nova</h3>
+                <h3>Noven</h3>
                 <span>Nowoczesna forma. Kinowe DNA.<b>nowoczesna · architektoniczna · minimalistyczna</b></span>
               </div>
               <div className="collection__cta" aria-hidden="true">
@@ -188,7 +188,7 @@ export default function Home() {
               <img src="/media/lounge-fireplace.webp" alt="Fotel i szezlong HENRY przy kominku z widokiem na morze" loading="lazy" />
               <div className="collection__veil" />
               <div className="collection__text">
-                <h3>Kolekcja Solaris</h3>
+                <h3>Solaris</h3>
                 <span>Luksus, który staje się częścią codzienności.<b>luksusowa · komfortowa · współczesna</b></span>
               </div>
               <div className="collection__cta" aria-hidden="true">
@@ -213,10 +213,10 @@ export default function Home() {
             <h3>Kolekcja Vesper</h3>
             <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
           </Link>
-          <Link href="/kolekcje/nova/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Nova">
-            <img src="/media/arrangements-studio.webp" alt="Aranżacja wnętrza z fotelami HENRY Nova" loading="lazy" />
+          <Link href="/kolekcje/noven/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Noven">
+            <img src="/media/arrangements-studio.webp" alt="Aranżacja wnętrza z fotelami HENRY Noven" loading="lazy" />
             <div className="arrangement__veil" />
-            <h3>Kolekcja Nova</h3>
+            <h3>Kolekcja Noven</h3>
             <div className="arrangement__cta" aria-hidden="true"><i className="diagonal-arrow" /></div>
           </Link>
           <Link href="/kolekcje/solaris/inspiracje?from=%2F%23aranzacje" className="arrangement" data-reveal aria-label="Zobacz aranżacje kolekcji Solaris">
@@ -231,13 +231,15 @@ export default function Home() {
       <section id="filozofia-henry" className="philosophy philosophy--compact">
         <p className="philosophy__lead" data-reveal>Najwyższa jakość<br />nie potrzebuje hałasu</p>
         <div className="philosophy__spread">
-          <p data-reveal>Naszą inspiracją jest historia kina, miejsca w którym rzemiosło i emocje zawsze szły w parze</p>
+          <div className="philosophy__intro">
+            <p data-reveal>Naszą inspiracją jest historia kina, miejsca w którym rzemiosło i emocje zawsze szły w parze</p>
+            <Link className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></Link>
+          </div>
           <figure className="image-reveal" data-reveal>
-            <img src="/media/philosophy-cinema-seats.png" alt="Rząd zabytkowych foteli kinowych i rzutnik filmowy" loading="lazy" />
+            <img src="/media/philosophy-scorsese-cinema.webp" alt="Prywatna sala kinowa z ekranem i cytatem Martina Scorsese" loading="lazy" />
           </figure>
           <div className="philosophy__quote-block">
             <blockquote data-reveal>„Projektujemy dla momentu, który zostaje z Tobą po napisach”</blockquote>
-            <Link className="text-link philosophy__link" href="/filozofia-henry" data-reveal>Poznaj nas bliżej <span className="diagonal-arrow" aria-hidden="true" /></Link>
           </div>
         </div>
       </section>
@@ -270,7 +272,7 @@ export default function Home() {
             <figcaption><span>Private Residence</span><span>Wizualizacja koncepcyjna</span></figcaption>
           </figure>
           <figure className="bespoke__detail spread-reveal spread-reveal--left" data-reveal>
-            <img src="/media/bespoke-reading-nook.png" alt="Rząd bordowych foteli HENRY w prywatnej sali kinowej" loading="lazy" />
+            <img src="/media/bespoke-burgundy-seats.webp" alt="Rząd bordowych foteli HENRY w prywatnej sali kinowej" loading="lazy" />
             <figcaption><span>Projektowanie doświadczenia</span></figcaption>
           </figure>
           <figure className="bespoke__object spread-reveal spread-reveal--right" data-reveal>

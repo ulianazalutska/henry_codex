@@ -928,15 +928,17 @@ figcaption {
 .collection__text {
   position: absolute;
   left: clamp(22px, 6vw, 92px);
-  right: clamp(22px, 6vw, 92px);
+  right: calc(6.5vw + 56px);
   bottom: 9vh;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
 }
 
 .collection__text h3 {
-  margin: 0 0 26px;
+  margin: 0;
 }
 
 .collection>span,
@@ -951,6 +953,7 @@ figcaption {
 
 .collection__text>span {
   max-width: 500px;
+  margin-bottom: 1.2vh;
 }
 
 .collection span b {
@@ -1363,7 +1366,51 @@ button:hover .diagonal-arrow,
 }
 
 .philosophy--compact .philosophy__spread {
-  grid-template-columns: 1fr 1.55fr .7fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "media media"
+    "intro quote";
+  gap: clamp(36px, 5vw, 80px) 3vw;
+  align-items: start;
+}
+
+.philosophy--compact .philosophy__intro {
+  grid-area: intro;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.philosophy--compact .philosophy__intro>p {
+  margin: 0;
+  max-width: 400px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.philosophy__intro .philosophy__link {
+  margin-left: 0;
+  color: #fff;
+  border-bottom-color: var(--warm-gold);
+}
+
+.philosophy--compact .philosophy__spread>figure {
+  grid-area: media;
+}
+
+.philosophy--compact .philosophy__spread .philosophy__quote-block {
+  grid-area: quote;
+  align-self: start;
+  justify-self: end;
+  max-width: 640px;
+  gap: 2.4vw;
+}
+
+.philosophy--compact .philosophy__spread blockquote {
+  padding-bottom: 0;
+  font-size: clamp(1.9rem, 2.6vw, 3rem);
 }
 
 .philosophy__spread>p {
@@ -1375,7 +1422,7 @@ button:hover .diagonal-arrow,
 
 .philosophy__spread figure img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
@@ -1761,6 +1808,10 @@ button:hover .diagonal-arrow,
     left: 22px;
     right: 22px;
     bottom: 6vh;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 26px;
   }
 
   .collection--atelier .collection__text>span {
@@ -1862,8 +1913,13 @@ button:hover .diagonal-arrow,
     gap: 65px;
   }
 
-  .philosophy__spread>p {
+  .philosophy__spread>p,
+  .philosophy--compact .philosophy__intro>p {
     max-width: 260px;
+  }
+
+  .philosophy__spread figure img {
+    aspect-ratio: 4 / 3;
   }
 
   .philosophy__spread blockquote {
@@ -2185,8 +2241,8 @@ button:hover .diagonal-arrow,
   animation: collectionArrow 1.8s ease infinite;
 }
 
-/* Nova hero: nieco niższy kadr niż pozostałe kolekcje, żeby wszystkie fotele mieściły się w widoku (bez pasków/letterboxingu — nadal object-fit: cover). */
-.collection-detail--nova .collection-detail-hero {
+/* Noven hero: nieco niższy kadr niż pozostałe kolekcje, żeby wszystkie fotele mieściły się w widoku (bez pasków/letterboxingu — nadal object-fit: cover). */
+.collection-detail--noven .collection-detail-hero {
   height: 67vh;
   min-height: 650px;
   max-height: 654px;
@@ -2538,7 +2594,7 @@ button:hover .diagonal-arrow,
   color: #6f675f;
 }
 
-/* Wszystkie kolekcje dopasowane 1:1 do makiety Figma (wzór: Nova) — bez intro/nagłówka katalogu, podpis pod zdjęciem, footer z paddingiem. */
+/* Wszystkie kolekcje dopasowane 1:1 do makiety Figma (wzór: Noven) — bez intro/nagłówka katalogu, podpis pod zdjęciem, footer z paddingiem. */
 .product-catalogue {
   padding-top: clamp(40px, 6vh, 88px);
 }
@@ -3476,31 +3532,31 @@ button:hover .diagonal-arrow,
 }
 
 .product-features--vesper-solo .product-feature-box figure img,
-.product-features--nova-solo .product-feature-box figure img {
+.product-features--noven-solo .product-feature-box figure img {
   object-fit: contain;
 }
 
-.product-features--nova-solo .product-feature-box.boxA figure {
+.product-features--noven-solo .product-feature-box.boxA figure {
   width: 56%;
 }
 
-.product-features--nova-solo .product-feature-box.boxA .product-feature-box__caption {
+.product-features--noven-solo .product-feature-box.boxA .product-feature-box__caption {
   left: 60%;
 }
 
-.product-features--nova-solo .product-feature-box.boxB {
+.product-features--noven-solo .product-feature-box.boxB {
   top: 22%;
 }
 
-.product-features--nova-solo .product-feature-box.boxD {
+.product-features--noven-solo .product-feature-box.boxD {
   top: 48%;
 }
 
-.product-features--nova-solo .product-feature-box.boxB figure {
+.product-features--noven-solo .product-feature-box.boxB figure {
   width: 98%;
 }
 
-.product-features--nova-solo .product-feature-box.boxB .product-feature-box__caption {
+.product-features--noven-solo .product-feature-box.boxB .product-feature-box__caption {
   width: 98%;
   top: 68%;
 }

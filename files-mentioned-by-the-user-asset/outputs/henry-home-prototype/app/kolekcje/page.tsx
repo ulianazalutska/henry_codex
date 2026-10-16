@@ -6,7 +6,7 @@ import { collections } from "../collections-data";
 
 export const metadata: Metadata = {
   title: "Kolekcje — HENRY",
-  description: "Poznaj kolekcje foteli HENRY: Kolekcja Vesper, Kolekcja Nova i Kolekcja Solaris.",
+  description: "Poznaj kolekcje foteli HENRY: Kolekcja Vesper, Kolekcja Noven i Kolekcja Solaris.",
   openGraph: { title: "Kolekcje — HENRY", description: "Trzy różne sposoby odczuwania komfortu.", images: [collections[0].hero] },
   twitter: { title: "Kolekcje — HENRY", description: "Trzy różne sposoby odczuwania komfortu.", images: [collections[0].hero] },
 };

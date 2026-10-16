@@ -90,7 +90,7 @@ The 17.13-second supplied film maps to a tall sticky scroll stage. Scroll progre
 1. **Cinematic entrance** — pinned, scroll-controlled video and minimal chrome.
 2. **Brand story** — centered logo and long-form copy whose words move from grey to white as the visitor scrolls.
 3. **Istota HENRY** — oversized statement, one immersive cinema interior, and a compact proof-point rail.
-4. **Kolekcje** — horizontal-feeling sequence of Vesper, Nova, Solaris; every world links to its future collection route.
+4. **Kolekcje** — horizontal-feeling sequence of Vesper, Noven, Solaris; every world links to its future collection route.
 5. **Projekty indywidualne** — architectural portfolio composition whose images unfold outward from the center.
 6. **Filozofia HENRY** — sparse magazine-like essay with one quiet product portrait and a dedicated route CTA.
 7. **Kontakt** — oversized HENRY invitation followed by the complete structured footer supplied in the latest reference.

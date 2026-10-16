@@ -8,33 +8,33 @@ import type { HenryCollection, HenryProduct } from "../collections-data";
 type MaterialKey = "finishes" | "leather" | "wood" | "quilting" | "combinations" | "technical";
 type MaterialSwatch = { name: string; swatchImg: string; previewImg: string; referenceImg?: string; cardImg?: string };
 
-const novaRoot = "/media/product-pages/nova-solo";
+const novenRoot = "/media/product-pages/noven-solo";
 
-const novaSlides = [
-  { src: `${novaRoot}/carousel-01.png`, label: "Graphite / Diamond" },
-  { src: `${novaRoot}/carousel-02.png`, label: "Olive / Linear" },
-  { src: `${novaRoot}/carousel-03.png`, label: "Midnight / Linear" },
+const novenSlides = [
+  { src: `${novenRoot}/carousel-01.png`, label: "Graphite / Diamond" },
+  { src: `${novenRoot}/carousel-02.png`, label: "Olive / Linear" },
+  { src: `${novenRoot}/carousel-03.png`, label: "Midnight / Linear" },
 ];
 
 const featureCards = [
   {
     title: "Wykończenie drewna",
-    image: `${novaRoot}/feature-wood-finish.png`,
+    image: `${novenRoot}/feature-wood-finish.png`,
     copy: "Szlachetny fornir drewna podkreśla precyzję wykonania, dodając fotelowi eleganckiego, ciepłego charakteru.",
   },
   {
     title: "Naturalna skóra",
-    image: `${novaRoot}/feature-premium-leather.png`,
+    image: `${novenRoot}/feature-premium-leather.png`,
     copy: "Wybierana skóra najwyższej jakości starzeje się z godnością, zyskując z czasem głębszy charakter i miękkość w dotyku.",
   },
   {
     title: "Elektryczna regulacja",
-    image: `${novaRoot}/feature-recline.png`,
+    image: `${novenRoot}/feature-recline.png`,
     copy: "Płynna, elektryczna regulacja oparcia i podnóżka pozwala dopasować pozycję do chwili pełnego relaksu.",
   },
   {
     title: "Podświetlany uchwyt na kubek",
-    image: `${novaRoot}/feature-cup-holder.png`,
+    image: `${novenRoot}/feature-cup-holder.png`,
     copy: "Podświetlany uchwyt na kubek zapewnia wygodny dostęp do napoju, nawet podczas seansu przy zgaszonym świetle.",
   },
 ];
@@ -77,11 +77,11 @@ const equipmentOptions = [
   { key: "headrest", number: "05", title: "Elektryczny zagłówek", description: "Płynna regulacja dopasowana do sylwetki.", image: "/media/personalizacja/headrest.png" },
 ];
 
-const novaSoloEquipmentRoot = "/media/product-pages/nova-solo/equipment";
+const novenSoloEquipmentRoot = "/media/product-pages/noven-solo/equipment";
 
-const novaSoloEquipmentOptions = [
+const novenSoloEquipmentOptions = [
   ...equipmentOptions,
-  { key: "masaz", number: "06", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${novaSoloEquipmentRoot}/nova-solo-equipment-06-funkcja-masazu.webp` },
+  { key: "masaz", number: "06", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${novenSoloEquipmentRoot}/noven-solo-equipment-06-funkcja-masazu.webp` },
 ];
 
 const solarisSoloEquipmentRoot = "/media/product-pages/solaris-solo/equipment";
@@ -107,18 +107,18 @@ const vesperSoloEquipmentOptions = [
   { key: "masaz", number: "11", title: "Funkcja masażu", description: "Wbudowany masaż wspierający pełny relaks podczas seansu.", image: `${vesperSoloEquipmentRoot}/vesper-solo-equipment-10-funkcja-masazu.webp` },
 ];
 
-const novaLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
-  const file = `${novaRoot}/materials/leather/leather-${String(index + 1).padStart(2, "0")}.png`;
+const novenLeatherSwatches: MaterialSwatch[] = ["Ivory Mist", "Warm Sand", "Natural Taupe", "Stone", "Cognac", "Olive", "Forest", "Graphite", "Onyx", "Midnight", "Charcoal", "Bordeaux"].map((name, index) => {
+  const file = `${novenRoot}/materials/leather/leather-${String(index + 1).padStart(2, "0")}.png`;
   return { name, swatchImg: file, previewImg: file };
 });
 
-const novaWoodSwatches: MaterialSwatch[] = ["Natural Oak", "American Walnut", "Dark Walnut", "Smoked Ebony Gloss"].map((name, index) => {
-  const file = `${novaRoot}/materials/wood/wood-${String(index + 1).padStart(2, "0")}.png`;
+const novenWoodSwatches: MaterialSwatch[] = ["Natural Oak", "American Walnut", "Dark Walnut", "Smoked Ebony Gloss"].map((name, index) => {
+  const file = `${novenRoot}/materials/wood/wood-${String(index + 1).padStart(2, "0")}.png`;
   return { name, swatchImg: file, previewImg: file };
 });
 
-const novaQuiltingSwatches: MaterialSwatch[] = ["Diamond", "Channel", "Chevron", "Linear", "Contour", "Classic"].map((name, index) => {
-  const file = `${novaRoot}/materials/quilting/quilting-${String(index + 1).padStart(2, "0")}.png`;
+const novenQuiltingSwatches: MaterialSwatch[] = ["Diamond", "Channel", "Chevron", "Linear", "Contour", "Classic"].map((name, index) => {
+  const file = `${novenRoot}/materials/quilting/quilting-${String(index + 1).padStart(2, "0")}.png`;
   return { name, swatchImg: file, previewImg: file };
 });
 
@@ -139,12 +139,12 @@ const materialTabs: Array<{ key: MaterialKey; label: string; captionLabel?: stri
 // the last box, measured in JS since that can't be derived from the box percentages alone.
 const featureBoxBottomPercent = [22.15, 48.34, 63.53, 87.28, 103.68, 94.68];
 
-// Vesper Solo raises boxB/boxD (same tightening as Nova/Solaris below), drops box F and
+// Vesper Solo raises boxB/boxD (same tightening as Noven/Solaris below), drops box F and
 // repositions box E (see .product-features--vesper-solo .product-feature-box.boxB/.boxD/.boxE
 // in globals.css), so bottom edges are 22 + 22.55 = 44.55, 48 + 35.01 = 83.01, 70.24 + 16.44 = 86.68.
 const vesperFeatureBoxBottomPercent = [22.15, 44.55, 63.53, 83.01, 86.68];
 
-// Nova Solo and Solaris Solo raise boxB and boxD (see .product-features--nova-solo and
+// Noven Solo and Solaris Solo raise boxB and boxD (see .product-features--noven-solo and
 // .product-features--solaris-solo .product-feature-box.boxB/.boxD in globals.css) to close the
 // large empty gaps the base (untightened) positions leave between boxes, so their bottom edges
 // shrink to 22 + 22.55 = 44.55 and 48 + 35.01 = 83.01.
@@ -169,7 +169,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const featureGridRef = useRef<HTMLDivElement>(null);
   const [featureGridClipHeight, setFeatureGridClipHeight] = useState<number>();
   const isVesperSolo = product.slug === "vesper-solo";
-  const isNovaSolo = product.slug === "nova-solo";
+  const isNovenSolo = product.slug === "noven-solo";
   const isSolarisSolo = product.slug === "solaris-solo";
   const featuresReady = isReady || isVesperSolo;
   const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : featureCards;
@@ -178,16 +178,16 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   useEffect(() => {
     const grid = featureGridRef.current;
     if (!grid) return;
-    const boundaries = isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : isHero && (isNovaSolo || isSolarisSolo) ? tightenedFeatureBoxBottomPercent : featureBoxBottomPercent;
+    const boundaries = isHero && isVesperSolo ? vesperFeatureBoxBottomPercent : isHero && (isNovenSolo || isSolarisSolo) ? tightenedFeatureBoxBottomPercent : featureBoxBottomPercent;
     const bottomFraction = featureGridBottomFraction(featureBoxCount, boundaries);
     const measure = () => setFeatureGridClipHeight(grid.offsetWidth * (2475 / 1313) * bottomFraction);
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [featureBoxCount, isHero, isVesperSolo, isNovaSolo, isSolarisSolo]);
+  }, [featureBoxCount, isHero, isVesperSolo, isNovenSolo, isSolarisSolo]);
 
   const slides = useMemo(() => {
-    if (isReady) return novaSlides;
+    if (isReady) return novenSlides;
     if (product.galleryImages && product.galleryImages.length > 0) {
       return product.galleryImages.map((src) => ({ src, label: product.name }));
     }
@@ -209,13 +209,13 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
       : [],
     leather: product.leatherSwatches
       ? product.leatherSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
-      : isReady ? novaLeatherSwatches : [],
+      : isReady ? novenLeatherSwatches : [],
     wood: product.woodSwatches
       ? product.woodSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview, referenceImg: item.reference }))
-      : isReady ? novaWoodSwatches : [],
+      : isReady ? novenWoodSwatches : [],
     quilting: product.quiltingSwatches
       ? product.quiltingSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
-      : isReady ? novaQuiltingSwatches : [],
+      : isReady ? novenQuiltingSwatches : [],
     combinations: [],
     technical: [],
   }), [isReady, activeFinishData, product.leatherSwatches, product.woodSwatches, product.quiltingSwatches]);
@@ -223,7 +223,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const activeMaterialLabel = activeMaterial.label;
   const activeMaterialCaption = activeMaterial.captionLabel ?? activeMaterial.label;
   const activeSwatches = materialSwatches[materialKey];
-  const activeEquipmentOptions = isVesperSolo ? vesperSoloEquipmentOptions : isNovaSolo ? novaSoloEquipmentOptions : isSolarisSolo ? solarisSoloEquipmentOptions : equipmentOptions;
+  const activeEquipmentOptions = isVesperSolo ? vesperSoloEquipmentOptions : isNovenSolo ? novenSoloEquipmentOptions : isSolarisSolo ? solarisSoloEquipmentOptions : equipmentOptions;
   const activeEquipmentData = activeEquipmentOptions[Math.min(activeEquipmentOption, activeEquipmentOptions.length - 1)];
   const activeSwatchData = activeSwatches[Math.min(activeSwatch, activeSwatches.length - 1)] as MaterialSwatch | undefined;
   const [outgoingPreview, setOutgoingPreview] = useState<string | null>(null);
@@ -329,7 +329,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   };
 
-  const heroImage = isReady ? `${novaRoot}/hero.png` : product.image;
+  const heroImage = isReady ? `${novenRoot}/hero.png` : product.image;
 
   return (
     <>
@@ -337,14 +337,14 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         <img className="product-hero__photo" src={heroImage} alt={`${product.name} — ${collection.title}`} />
         <div className="product-hero__veil" />
         <h1>{product.name}</h1>
-        <img className="product-hero__scroll" src="/media/product-pages/nova-solo/arrow-down.svg" alt="" aria-hidden="true" />
+        <img className="product-hero__scroll" src="/media/product-pages/noven-solo/arrow-down.svg" alt="" aria-hidden="true" />
       </section>
 
       <section className="product-carousel-section">
         <header data-product-reveal>
           <div className="product-eyebrow"><p>Konfiguracje</p></div>
           <h2>Wybierz swój nastrój</h2>
-          <p>{isReady ? "Trzy interpretacje tej samej bryły. Zmieniaj kolorystykę i zobacz, jak Nova Solo reaguje na charakter wnętrza." : "Kolejne wizualizacje modelu pojawią się tutaj po przygotowaniu materiałów."}</p>
+          <p>{isReady ? "Trzy interpretacje tej samej bryły. Zmieniaj kolorystykę i zobacz, jak Noven Solo reaguje na charakter wnętrza." : "Kolejne wizualizacje modelu pojawią się tutaj po przygotowaniu materiałów."}</p>
         </header>
         <div
           className="product-carousel"
@@ -395,7 +395,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
       </section>
 
-      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}${isNovaSolo ? " product-features--nova-solo" : ""}${isSolarisSolo ? " product-features--solaris-solo" : ""}`}>
+      <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}${isNovenSolo ? " product-features--noven-solo" : ""}${isSolarisSolo ? " product-features--solaris-solo" : ""}`}>
         {isHero && (
           <header data-product-reveal>
             <h2>Luksus w standardzie</h2>
@@ -468,7 +468,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
             </div>
           ) : materialKey === "technical" ? (
             <figure className={`material-lab__technical${isReady ? "" : " is-placeholder"}`}>
-              {isReady ? <img src={`${novaRoot}/dimensions.png`} alt="Nova Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>H</span><small>Rysunek techniczny w przygotowaniu</small></>}
+              {isReady ? <img src={`${novenRoot}/dimensions.png`} alt="Noven Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>H</span><small>Rysunek techniczny w przygotowaniu</small></>}
             </figure>
           ) : materialKey === "finishes" && finishes && activeFinishData && activeSwatchData ? (
             <div className="material-config">
