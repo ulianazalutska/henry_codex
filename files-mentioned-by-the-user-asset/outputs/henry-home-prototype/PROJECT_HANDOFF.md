@@ -419,7 +419,8 @@ Footer має бути однаковим на всіх сторінках і в
 **Vesper Duo (`vesper-duo`)**
 - 4 фото клієнта (webp) у `public/media/product-pages/vesper-duo/`: `vesper-duo-01-front-cognac`, `-02-olive-relax`, `-03-cognac-angle`, `-04-burgundy-room`.
 - У `app/collections-data.ts`: hero (`image`) = кадр 03; `galleryImages` (карусель) = 01, 02, 04; `arrangementsImage` = 04.
-- 3 блоки з підписами під каруселлю лишились **заглушками** (`product.image` + «Detal wykończenia» / «W aranżacji») за рішенням користувача. Текст клієнта з `Vesper Duo opis..pages` (3 блоки: «Luksus, który można poczuć», «Komfort i technologia bez kompromisów», «Twoje miejsce. Twój komfort. Twoje kino.») на сайт не вставлено, лише готовий до вставки.
+- **2026-10-18:** замість заглушок «Luksus w standardzie» на `vesper-duo` тепер секція `.duo-story` (`product-experience.tsx`, дані `vesperDuoStory`, стилі в кінці `globals.css`): 4 фото клієнта повністю (без обрізання, 3:2) + весь текст з `Vesper Duo opis..pages` у 3 частинах («Luksus, który można poczuć», «Komfort i technologia bez kompromisów», третя частина про персоналізацію без заголовка) + фінальний кадр 04 і рядок «Twoje miejsce. Twój komfort. Twoje kino.». Не перевірено в браузері (desktop+mobile).
+- (застаріло) 3 блоки з підписами під каруселлю лишились **заглушками** (`product.image` + «Detal wykończenia» / «W aranżacji») за рішенням користувача. Текст клієнта з `Vesper Duo opis..pages` (3 блоки: «Luksus, który można poczuć», «Komfort i technologia bez kompromisów», «Twoje miejsce. Twój komfort. Twoje kino.») на сайт не вставлено, лише готовий до вставки.
 - Обмеження: фото лише 4, кадр 04 (бордова в кімнаті) стоїть у каруселі й в Aranżacje. Потрібні ще кадри.
 
 **Vesper Solo — секція про велюр (`product-velour`)**

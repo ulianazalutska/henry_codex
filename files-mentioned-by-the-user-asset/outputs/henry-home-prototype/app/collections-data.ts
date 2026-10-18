@@ -52,6 +52,7 @@ export type HenryProduct = {
   image: string;
   catalogueImage?: string;
   catalogueFit?: "cover" | "contain";
+  catalogueFill?: boolean;
   catalogueScene?: string;
   catalogueCutout?: string;
   galleryImages?: string[];
@@ -116,7 +117,7 @@ export const collections: HenryCollection[] = [
       { name: "Vesper Duo", slug: "vesper-duo", image: "/media/product-pages/vesper-duo/vesper-duo-03-cognac-angle.webp", galleryImages: ["/media/product-pages/vesper-duo/vesper-duo-01-front-cognac.webp", "/media/product-pages/vesper-duo/vesper-duo-02-olive-relax.webp", "/media/product-pages/vesper-duo/vesper-duo-04-burgundy-room.webp"], arrangementsImage: "/media/product-pages/vesper-duo/vesper-duo-04-burgundy-room.webp", catalogueImage: "/media/collection-pages/atelier-vesper-duo.webp", catalogueScene: "/media/collection-pages/atelier-products/vesper-duo-scene.webp", catalogueCutout: "/media/collection-pages/atelier-products/vesper-duo-cutout.webp", description: "Dwa miejsca połączone wspólnym rytmem i detalem." },
       { name: "Vesper Corner", slug: "vesper-corner", image: "/media/atelier-caramel-room.webp", catalogueImage: "/media/collection-pages/atelier-vesper-ensemble.webp", catalogueFit: "contain", catalogueScene: "/media/collection-pages/atelier-products/vesper-corner-scene.webp", catalogueCutout: "/media/collection-pages/atelier-products/vesper-corner-cutout.webp", description: "Modułowy układ dla większej, prywatnej strefy seansu." },
       { name: "Vesper Chaise", slug: "vesper-chaise", image: "/media/vesper-graphite.webp", catalogueImage: "/media/collection-pages/atelier-vesper-chaise.webp", catalogueScene: "/media/collection-pages/atelier-products/vesper-chaise-scene.webp", catalogueCutout: "/media/collection-pages/atelier-products/vesper-chaise-cutout.webp", description: "Wydłużona forma stworzona do pełnego odprężenia." },
-      { name: "Vesper Side Table", slug: "vesper-side-table", image: "/media/atelier-caramel-study.webp", catalogueImage: "/media/collection-pages/atelier-vesper-crest.webp", catalogueScene: "/media/collection-pages/atelier-products/vesper-side-table-scene.webp", catalogueCutout: "/media/collection-pages/atelier-products/vesper-side-table-cutout.webp", description: "Praktyczny stolik boczny dopasowany do bryły fotela." },
+      { name: "Vesper Side Table", slug: "vesper-side-table", image: "/media/atelier-caramel-study.webp", catalogueImage: "/media/collection-pages/atelier-vesper-crest.webp", catalogueScene: "/media/collection-pages/atelier-products/vesper-side-table-scene.webp", catalogueCutout: "/media/collection-pages/atelier-products/vesper-side-table-photo.webp", catalogueFill: true, description: "Praktyczny stolik boczny dopasowany do bryły fotela." },
     ],
   },
   {

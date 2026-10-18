@@ -50,7 +50,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
         </Link>
         <div className="product-gallery">
           {collection.products.map((product, index) => (
-            <Link className={`product-pair ${index % 2 ? "product-pair--reverse" : ""} ${product.catalogueScene && product.catalogueCutout ? "is-ready" : "is-placeholder"}`} href={`/kolekcje/${collection.slug}/${product.slug}`} key={product.slug}>
+            <Link className={`product-pair ${index % 2 ? "product-pair--reverse" : ""} ${product.catalogueScene && product.catalogueCutout ? "is-ready" : "is-placeholder"}${product.catalogueFill ? " product-pair--fill" : ""}`} href={`/kolekcje/${collection.slug}/${product.slug}`} key={product.slug}>
               <div className="product-pair__cutout">
                 <figure className="product-pair__cutout-frame">
                   {product.catalogueCutout ? (

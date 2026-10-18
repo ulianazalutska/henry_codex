@@ -148,7 +148,7 @@
 .craft { padding: 7vh 0; border-top: 1px solid rgba(217, 163, 65, .3); }
 .craft h3 { margin: 0 0 6vh; font-size: clamp(1.4rem, 2.4vw, 2.4rem); font-weight: 300; letter-spacing: -.04em; }
 .craftTiles { display: grid; gap: clamp(12px, 1.8vw, 26px); align-items: start; }
-.tiles2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; }
+.tiles2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tiles3 { grid-template-columns: 1.2fr .8fr 1.2fr; align-items: center; }
 .tiles4 { grid-template-columns: 1.1fr 1.3fr .8fr .8fr; align-items: start; }
 .craftTile { position: relative; overflow: hidden; background: #0e0e0e; }

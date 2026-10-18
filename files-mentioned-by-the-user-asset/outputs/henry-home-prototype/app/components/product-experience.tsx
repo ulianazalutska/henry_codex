@@ -71,6 +71,46 @@ const solarisSoloFeatureCards = [
 
 const vesperSoloStandardRoot = "/media/product-pages/vesper-solo/standard-equipment";
 
+const vesperDuoRoot = "/media/product-pages/vesper-duo";
+const vesperDuoStory = {
+  title: "Dwie strefy komfortu. Jedno wyjątkowe doświadczenie.",
+  sections: [
+    {
+      title: "Luksus, który można poczuć",
+      image: `${vesperDuoRoot}/vesper-duo-03-cognac-angle.webp`,
+      alt: "Vesper Duo w kolorze koniakowym, widok z boku",
+      paragraphs: [
+        "Vesper Duo to coś więcej niż sofa kinowa. To prywatna przestrzeń relaksu, w której ponadczasowa elegancja spotyka się z nowoczesną technologią i bezkompromisowym komfortem.",
+        "Zaprojektowana z myślą o najbardziej wymagających miłośnikach kina domowego, zachwyca harmonijną sylwetką, perfekcyjnie dopracowanymi detalami i szlachetnymi materiałami. Subtelne linie, miękkie tapicerowanie oraz eleganckie elementy drewniane wykończone na wysoki połysk nadają jej wyjątkowy, luksusowy charakter.",
+        "Dwa niezależne miejsca siedzące pozwalają każdemu użytkownikowi odnaleźć własną definicję wygody. Elektrycznie regulowane oparcia i podnóżki, sterowane oddzielnymi siłownikami, umożliwiają płynne dostosowanie pozycji do indywidualnych preferencji. Delikatne oświetlenie ambientowe, poprowadzone wzdłuż bocznych podłokietników, podkreśla elegancką formę sofy i tworzy niepowtarzalną atmosferę podczas wieczornych seansów.",
+        "Vesper Duo dostępna jest we wszystkich kolorach kolekcji HENRY, w naturalnej skórze, miękkim welurze lub wyrafinowanym połączeniu obu materiałów. Bogactwo dostępnych wykończeń pozwala stworzyć sofę idealnie współgrającą z charakterem wnętrza.",
+      ],
+      lead: "Vesper Duo. Bo prawdziwy luksus zaczyna się tam, gdzie każdy detal ma znaczenie.",
+    },
+    {
+      title: "Komfort i technologia bez kompromisów",
+      image: `${vesperDuoRoot}/vesper-duo-01-front-cognac.webp`,
+      alt: "Vesper Duo w kolorze koniakowym, widok z przodu",
+      paragraphs: [
+        "Za elegancką formą Vesper Duo kryją się zaawansowane rozwiązania, które zmieniają codzienny wypoczynek w wyjątkowe doświadczenie.",
+        "Już w standardowej konfiguracji sofa oferuje dwa niezależnie sterowane miejsca z elektryczną regulacją oparć i podnóżków, dwa zintegrowane cupholdery, ekskluzywne elementy drewniane wykończone na wysoki połysk oraz subtelne oświetlenie ambientowe na bocznych podłokietnikach.",
+      ],
+    },
+    {
+      image: `${vesperDuoRoot}/vesper-duo-02-olive-relax.webp`,
+      alt: "Vesper Duo w kolorze oliwkowym z rozłożonym podnóżkiem",
+      paragraphs: [
+        "Dla osób poszukujących jeszcze większego komfortu Vesper Duo oferuje szerokie możliwości personalizacji. Opcjonalna elektryczna regulacja zagłówków, funkcja masażu oraz podgrzewanie siedzisk pozwalają stworzyć idealne warunki do relaksu. Cupholdery z funkcją chłodzenia i podgrzewania napojów, zintegrowane głośniki, praktyczne schowki w podłokietnikach, elegancki stolik oraz uchwyty na tablet i telefon sprawiają, że wszystko, czego potrzebujesz, znajduje się w zasięgu ręki.",
+        "Całość może zostać wzbogacona o HENRY Command – nowoczesny system sterowania, który zapewnia intuicyjną obsługę funkcji sofy i jeszcze większą swobodę użytkowania.",
+        "Każda Vesper Duo powstaje z myślą o indywidualnych oczekiwaniach właściciela. Starannie dobrane materiały, precyzja wykonania i możliwość personalizacji sprawiają, że staje się ona nie tylko centralnym elementem prywatnej sali kinowej, ale również wyrazem osobistego stylu.",
+      ],
+    },
+  ],
+  closingImage: `${vesperDuoRoot}/vesper-duo-04-burgundy-room.webp`,
+  closingAlt: "Vesper Duo w kolorze burgundowym w prywatnej sali kinowej",
+  closing: "Twoje miejsce. Twój komfort. Twoje kino.",
+};
+
 const vesperSoloFeatureCards = [
   {
     title: "Naturalna skóra",
@@ -216,6 +256,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
   const [featureGridClipHeight, setFeatureGridClipHeight] = useState<number>();
   const isVesperSolo = product.slug === "vesper-solo";
   const isNovenSolo = product.slug === "noven-solo";
+  const isVesperDuo = product.slug === "vesper-duo";
   const isSolarisSolo = product.slug === "solaris-solo";
   const featuresReady = isReady || isVesperSolo || isSolarisSolo;
   const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : isSolarisSolo ? solarisSoloFeatureCards : featureCards;
@@ -441,6 +482,33 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
       </section>
 
+      {isVesperDuo && (
+        <section className="duo-story" aria-labelledby="duo-story-title">
+          <header data-product-reveal>
+            <h2 id="duo-story-title">{vesperDuoStory.title}</h2>
+          </header>
+          <div className="duo-story__grid">
+            {vesperDuoStory.sections.map((section, index) => (
+              <article className={`duo-story__row duo-story__row--${index + 1}`} key={section.image}>
+                <figure className="duo-story__photo" data-product-reveal>
+                  <img src={section.image} alt={section.alt} />
+                </figure>
+                <div className="duo-story__copy" data-product-reveal style={{ "--reveal-delay": "110ms" } as CSSProperties}>
+                  {section.title && <h3>{section.title}</h3>}
+                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  {section.lead && <p className="duo-story__lead">{section.lead}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+          <figure className="duo-story__finale" data-product-reveal>
+            <img src={vesperDuoStory.closingImage} alt={vesperDuoStory.closingAlt} />
+            <figcaption>{vesperDuoStory.closing}</figcaption>
+          </figure>
+        </section>
+      )}
+
+      {!isVesperDuo && (
       <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}${isNovenSolo ? " product-features--noven-solo" : ""}${isSolarisSolo ? " product-features--solaris-solo" : ""}`}>
         {isHero && (
           <header data-product-reveal>
@@ -475,6 +543,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         </div>
         </div>
       </section>
+      )}
 
       {isHero && (
       <section className="product-materials">

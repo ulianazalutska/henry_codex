@@ -5121,3 +5121,137 @@ button:hover .diagonal-arrow,
     animation: none;
   }
 }
+
+/* Vesper Duo: full-frame photos (never cropped) beside the client's copy, split into three editorial sections. */
+.duo-story {
+  padding: 18vh var(--product-gutter) 8vh;
+}
+
+.duo-story>header h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.3vw, 3.1rem);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  text-align: center;
+}
+
+.duo-story__grid {
+  display: grid;
+  gap: clamp(72px, 10vw, 170px);
+  max-width: 90%;
+  margin: 14vh auto 0;
+}
+
+.duo-story__row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2vw;
+  align-items: center;
+}
+
+.duo-story__photo {
+  grid-column: 7 / span 6;
+  grid-row: 1;
+  margin: 0;
+  overflow: hidden;
+}
+
+.duo-story__photo img,
+.duo-story__finale img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.duo-story__copy {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+}
+
+.duo-story__row:nth-child(even) .duo-story__photo {
+  grid-column: 1 / span 6;
+}
+
+.duo-story__row:nth-child(even) .duo-story__copy {
+  grid-column: 8 / span 5;
+}
+
+.duo-story__copy h3 {
+  margin: 0 0 clamp(18px, 2vw, 32px);
+  font-size: clamp(1.1rem, 1.7vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+
+.duo-story__copy p {
+  margin: 0 0 1.2em;
+  color: var(--muted);
+  font-size: clamp(12px, .9vw, 14px);
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.duo-story .duo-story__copy .duo-story__lead {
+  margin: 1.8em 0 0;
+  padding-top: 1.4em;
+  border-top: 1px solid rgba(217, 163, 65, .3);
+  color: #fff;
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 300;
+}
+
+.duo-story__finale {
+  max-width: 90%;
+  margin: clamp(72px, 10vw, 170px) auto 0;
+}
+
+.duo-story__finale figcaption {
+  margin-top: clamp(28px, 4vw, 64px);
+  font-size: clamp(1.4rem, 2.6vw, 2.6rem);
+  font-weight: 300;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .duo-story {
+    padding-top: 100px;
+  }
+
+  .duo-story__grid {
+    max-width: 100%;
+    margin-top: 60px;
+    gap: 56px;
+  }
+
+  .duo-story__finale {
+    max-width: 100%;
+    margin-top: 56px;
+  }
+
+  .duo-story__row {
+    grid-template-columns: 1fr;
+    row-gap: 28px;
+  }
+
+  .duo-story__photo,
+  .duo-story__copy,
+  .duo-story__row:nth-child(even) .duo-story__photo,
+  .duo-story__row:nth-child(even) .duo-story__copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+/* Catalogue pair whose left card is a full-bleed photo instead of a product cutout (Vesper Side Table). */
+.product-pair--fill .product-pair__cutout-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-pair--fill .product-pair__cutout-frame::after {
+  background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 32%);
+  border: 0;
+}
