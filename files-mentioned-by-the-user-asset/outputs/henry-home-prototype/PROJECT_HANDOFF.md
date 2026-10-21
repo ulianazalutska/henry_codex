@@ -433,3 +433,83 @@ Footer має бути однаковим на всіх сторінках і в
 1. Перевірка в браузері desktop+mobile: `/kolekcje/vesper/vesper-duo`, `/kolekcje/vesper/vesper-solo`.
 2. Чи показувати на Vesper Duo текст клієнта і де (на не-hero сторінці для нього немає секції).
 3. Чи потрібна Duo секція опційного обладнання, як у Solo (потрібні фото й перелік).
+
+## Vesper Ottoman (2026-10-21)
+
+Джерело: `asset/Strona Produktu/Atelier/Vesper Ottoman` (7 png + `Vesper Ottoman-opis.pages`). Не перевірено в браузері, не збиралось (`npm run build`), не комітилось і не деплоїлось.
+
+- Новий продукт `vesper-ottoman` у `app/collections-data.ts`, 6-й у колекції Vesper (після Side Table). Меню, sitemap і `/kolekcje/vesper` підхоплюють його автоматично. Опис картки/meta = підзаголовок клієнта «Elegancja, która dopełnia przestrzeń.».
+- Фото (webp) у `public/media/product-pages/vesper-ottoman/`: hero і карусель = 01 (бордовий велюр) + 02 (кремовий з кріслом), `arrangementsImage` = 02.
+- Картка в каталозі `/kolekcje/vesper`: сцена («we wnętrzu») = 02 (кремовий з кріслом), «widok produktu» = 01 (бордовий велюр, за вказівкою користувача) з `catalogueFill: true`, як у Side Table. Справжнього cutout на прозорому тлі немає.
+- Текст клієнта дослівно з `.pages` на сторінці продукту: секція `.duo-story` узагальнена (`ProductStory`, `vesperDuoStory` / `vesperOttomanStory` у `product-experience.tsx`). 4 абзаци, кожен із фото (05, 06, 04, 03), фінальний кадр 07 і закриваючий рядок. Розподіл абзаців по фото обрано мною, клієнт його не задавав.
+- Окремих матеріалів/зразків кольорів для Ottoman у папці не було, секції матеріалів нема (як на інших не-hero продуктах).
+
+**Відкрите:** перевірити в браузері `/kolekcje/vesper` і `/kolekcje/vesper/vesper-ottoman` (desktop + mobile); чи потрібен справжній cutout для картки; чи міняти розподіл фото по абзацах.
+
+## Projekty indywidualne: правки клієнта (2026-10-21)
+
+- Секція 03 («Rozwiązania stworzone dla Twojej przestrzeni»): фото `s3/rzad-czarna-skora.webp` замінено на `s3/kino-bordowe-fotele.webp` (клієнтське `Foto1.jpg`), старий файл видалено.
+- Карусель кімнат тепер листається сама кожні 4,5 с (`ROOMS_AUTOPLAY_INTERVAL` у `bespoke-experience.tsx`), після останнього фото повертається на початок. Пауза: курсор над каруселлю, дотик/скрол/фокус (на 8 с), блок поза екраном, прихована вкладка; при `prefers-reduced-motion` автоплей вимкнений. Стрілки лишились для ручного керування.
+- Фото в каруселі збільшені (`clamp(300px, 38vw, 780px)`), колонка тексту звужена до `min(600px, 40%)`, відступ між текстом і фото зменшено (`clamp(130px, 8vw, 150px)`, у ньому стоять стрілки).
+- Секція 02 (теми): фото тепер розтягується на всю колонку й за висотою збігається зі списком справа (раніше на широких екранах ширину рахував браузер з висоти списку, і між фото та списком була порожнеча).
+- Перевірено в Chrome через iframe на ширинах 390, 768, 1024, 1100, 1240, 1440, 1920, 2471: без горизонтального скролу, стрілки не налазять на текст.
+
+## Прибрано слайдер «Wybierz swój nastrój» з усіх продуктів (2026-10-21)
+
+- За вказівкою клієнта секцію `product-carousel-section` (Konfiguracje / «Wybierz swój nastrój» + слайдер) видалено з усіх 15 сторінок продуктів. Після hero тепер одразу йдуть секції продукту.
+- З `product-experience.tsx` прибрано весь код каруселі (стан, автоплей, drag/swipe, `novenSlides`), з `globals.css` усі правила `.product-carousel*`.
+- Поле `galleryImages` у `collections-data.ts` більше ніде не читається (лишилось у даних для Vesper Solo/Duo/Ottoman). Файли `public/media/product-pages/noven-solo/carousel-0*.png` не видалялись.
+- Перевірено тільки відповіддю сервера (200, без `product-carousel`, `#aranzacje` на місці); у браузері не дивились.
+
+## Головна і контакти: правки клієнта (2026-10-21)
+
+- Головна, секція «Nasze kolekcje»: підписи під назвами колекцій збільшено (`.collection__text>span` у `globals.css`): речення `clamp(17px, 1.15vw, 26px)` (було 17px), золоті теги `clamp(12px, .95vw, 20px)` (було 12px), `line-height` речення 1.3 (було .8, склеювалось би при переносі), відступ між реченням і тегами `clamp(8px, .55vw, 12px)`, `max-width` речення `clamp(420px, 34vw, 760px)`. Перевірено в Chrome на 390–2471px: підпис не налазить на назву колекції й CTA-стрілку.
+- Головна, блок «Projektujemy doświadczenie prywatnego kina …»: прибрано довге тире, тепер «…kina od pierwszego dotyku materiału po ciszę tuż przed seansem».
+- `/kontakt`, «Obserwuj HENRY»: рядок YouTube прибрано (лишились Instagram, Facebook). Це закриває відкрите питання клієнта про YouTube. Файл `public/media/youtube.svg` лишився невикористаним.
+- Відомо: посилання соцмереж на `/kontakt` усе ще `href="#"` (lint-помилка `jsx-a11y/anchor-is-valid`), справжніх URL у проєкті немає.
+
+## Vesper Duo за макетом клієнта + картки Solo/Duo в каталозі (2026-10-21)
+
+Джерело: `asset/Strona Produktu/Vesper Na Gotowo/` (`Vesper Solo`, `Vesper Duo` з `design.png`, `zmiany Duo.png`, `Vesper Duo opis..pages`). Не перевірено в браузері, не збиралось, не комітилось, не деплоїлось.
+
+- **`/kolekcje/vesper`, картка Vesper Solo:** ліве «widok produktu» замінено на `foto V1` (червоний велюр) — `atelier-products/vesper-solo-photo.webp`, `catalogueFill: true`. Старий `vesper-solo-cutout.webp` лишився на диску, не використовується.
+- **Картка Vesper Duo:** сцена = `foto v2` (`vesper-duo-scene.webp`, перезаписано старий файл), «widok produktu» = `foto v3` (`vesper-duo-photo.webp`, `catalogueFill: true`). Старий `vesper-duo-cutout.webp` не використовується.
+- **Сторінка `/kolekcje/vesper/vesper-duo`** переписана за `design.png`: hero = синій велюр (`vesper-duo-hero-navy.webp`) з назвою; по центру текст (`vesperDuoPage` у `product-experience.tsx`, дослівно з `.pages`: «VESPER DUO», золотий підзаголовок, 5 абзаців, золотий рядок «Twoje miejsce. Twój komfort. Twoje kino.»); далі 4 фото в сітці 2×2 (бордовий велюр у кімнаті, taupe, коричнева з розкладеним підніжком, оливкова; на мобільному одна колонка), замість шахового порядку з макета, за вибором користувача; в кінці «Zobacz kolekcję Vesper w aranżacjach» з фото бордової софи.
+- Стара секція `.duo-story` для Duo (4 старі фото й текст про HENRY Command) прибрана, старі `vesper-duo-01…04-*.webp` видалені. `.duo-story` лишилась тільки для Vesper Ottoman.
+- У макеті в тексті на початку була крапка перед «Vesper Duo to coś więcej» і не було крапки в кінці останнього абзацу; на сайті взято текст з `.pages` (без опечатки). Розміри тексту й відступи в макеті не вказані, обрані мною (`.duo-page*` у `globals.css`).
+- Ця розкладка (центрований текст і сітка 2×2) — кандидат для інших продуктів, коли клієнт дасть тексти й фото.
+
+- Пізніше того ж дня: ширина блоку тексту Duo `clamp(640px, 52vw, 900px)`, нижній відступ під золотим підзаголовком `clamp(14px, 1.5vw, 22px)`.
+
+## Рішення про вигляд сторінок продуктів (2026-10-21)
+
+- **Vesper Solo, Noven Solo, Solaris Solo** лишаються як є (повні сторінки: стандартне оснащення, опції, матеріали). Їх за новою розкладкою не переробляємо.
+- **Усі інші продукти** (Vesper Corner / Chaise / Side Table / Ottoman, Noven Duo / Ensemble / Chaise / Crest, Solaris Duo / Chaise / Orbit) мають виглядати як **Vesper Duo**: hero з назвою, по центру текст (заголовок, золотий підзаголовок, абзаци, золотий рядок), сітка 4 фото 2×2, в кінці «Zobacz kolekcję … w aranżacjach».
+- Зараз за цією схемою зроблений тільки Vesper Duo (`vesperDuoPage`, `.duo-page*`). Vesper Ottoman має власну версію (`vesperOttomanStory`, `.duo-story*`: чергування фото й тексту), її потрібно буде привести до розкладки Duo. Решта 8 продуктів показує заглушки «Luksus w standardzie», доки клієнт не дасть тексти й по 4 фото на продукт (плюс hero і фото для «w aranżacjach»).
+- Для переносу розкладки на інші продукти варто зробити дані `vesperDuoPage` загальними (мапа за slug), а не копіювати компонент.
+
+## 2026-10-21: Vesper Corner w układzie Duo
+
+- `/kolekcje/vesper/vesper-corner` używa tej samej strony co Vesper Duo (hero, wyśrodkowany tekst, siatka 2×2, „w aranżacjach”). W `product-experience.tsx` dane są teraz w mapie `simplePages` (klucz = slug): `vesper-duo`, `vesper-corner`. Kolejny produkt = nowy wpis w mapie plus zdjęcia.
+- Tekst z `Vesper Corner-opis.pages` wzięty słowo w słowo. Pierwszy akapit-podtytuł „Elegancja, która tworzy wyjątkową przestrzeń” jest wyświetlany jako złoty podtytuł, zdanie końcowe jako złote zamknięcie.
+- Zdjęcia w `public/media/product-pages/vesper-corner/`: hero = granatowy narożnik (mój wybór, jak w Duo), siatka = oliwkowy, czekoladowy, kremowy z pufą, beżowy w kinie; „w aranżacjach” = beżowy w kinie.
+- Karta w katalogu `/kolekcje/vesper`: widok produktu = `foto v4` (czarny welur), scena = `foto v5` (brązowy salon), `catalogueFill: true`.
+- Do potwierdzenia z klientką: który plik ma być hero (przyjęłam granatowy). Nieużywany: `vesper-corner-cutout.webp`.
+
+## 2026-10-21: Vesper Chaise w układzie Duo
+
+- `/kolekcje/vesper/vesper-chaise` dodany do `simplePages` (`product-experience.tsx`). Tekst słowo w słowo z `Vesper Chaise-opis.pages`; linia „Twój komfort. Twoje zasady.” to wyróżniony śródtytuł (`{ lead }` w `paragraphs`, klasa `.duo-page__lead`).
+- Zdjęcia w `public/media/product-pages/vesper-chaise/`: hero = beżowy szezlong, siatka 2×2 = brązowy, oliwkowy, kino taupe, zestaw taupe; „w aranżacjach” = zestaw taupe. Przydział to mój wybór, do potwierdzenia.
+- Karta katalogu: scena = `foto v6` (lewa), widok produktu = `foto v7` (prawa), `catalogueFill: true`. Nieużywany: `vesper-chaise-cutout.webp`.
+
+## 2026-10-21: Vesper Side Table w układzie Duo
+
+- `/kolekcje/vesper/vesper-side-table` dodany do `simplePages`. Tekst słowo w słowo z `Vesper Side Table.pages`.
+- W folderze klientki są tylko 4 zdjęcia (bez osobnego hero i bez `foto vN`/`zmiany`). Siatka 2×2 = orzech, heban, kino taupe, fotel karmelowy. Hero = `vesper-side-table-armchair-corner.webp` (to samo zdjęcie co czwarte w siatce, wskazane przez użytkowniczkę; wcześniej próbowane `vesper-duo-scene.webp`, odrzucone), „w aranżacjach” = fotel karmelowy. Karta katalogu bez zmian.
+- Pliki w `public/media/product-pages/vesper-side-table/`.
+
+## 2026-10-21: Vesper Ottoman w układzie Duo
+
+- `/kolekcje/vesper/vesper-ottoman` używa `simplePages` jak Duo/Corner/Chaise/Side Table. Dawny układ `.duo-story*` (zdjęcie i tekst na przemian), typ `ProductStory` i jego CSS zostały usunięte.
+- Tekst z `Vesper Ottoman-opis.pages`: „Elegancja, która dopełnia przestrzeń.” jako złoty podtytuł, 4 akapity, złote zamknięcie. Siatka 2×2 = kino (05), kremowy z narożnikiem (06), skóra ze stolikiem (04), granat (03). Hero = 01 (bordowy welur), „w aranżacjach” = 02.
+- `vesper-ottoman-07-olive-leather.webp` nie jest już używany (był zdjęciem zamykającym). Dopasowanie zdjęć do akapitów nie ma już znaczenia, ale wybór 4 z 7 zdjęć to moja decyzja.

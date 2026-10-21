@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { ImageLightbox } from "../components/image-lightbox";
 import { SiteFooter } from "../components/site-footer";
 import { SiteNavigation } from "../components/site-navigation";
 import styles from "./bespoke.module.css";
@@ -37,7 +38,7 @@ const spaceRooms = [
   { image: `${media}/s3/sofa-czern.webp`, alt: "Czarna sofa narożna i fotele w szarej sali kinowej z pikowanymi panelami" },
   { image: `${media}/s3/fotele-czerwony-dywan.webp`, alt: "Rząd czarnych skórzanych foteli kinowych na czerwonym dywanie" },
   { image: `${media}/s3/czarne-fotele-pikowane.webp`, alt: "Sala kinowa z czarnymi pikowanymi fotelami i zasłonami" },
-  { image: `${media}/s3/rzad-czarna-skora.webp`, alt: "Rząd czarnych skórzanych foteli kinowych z uchwytami na napoje" },
+  { image: `${media}/s3/kino-bordowe-fotele.webp`, alt: "Sala kinowa z bordowymi fotelami i lampkami na stolikach" },
   { image: `${media}/s3/kino-czerwony-dywan.webp`, alt: "Kino domowe z czarną sofą kinową na czerwonym dywanie" },
   { image: `${media}/s3/szezlong-burgund.webp`, alt: "Burgundowo-czekoladowy szezlong z emblematem H i poduszkami" },
 ];
@@ -155,14 +156,29 @@ const crafts: Craft[] = [
   },
 ];
 
+// Swatch catalogues (quilting, stitching, veneers) that open in the lightbox on click.
+const zoomableTiles = crafts.flatMap((craft) => craft.tiles.filter((tile) => tile.loupe));
+
+const LENS_ZOOM = 2.5;
+
+const ROOMS_AUTOPLAY_INTERVAL = 4500;
+const ROOMS_RESUME_DELAY = 8000;
 
 export function BespokeExperience() {
   const [theme, setTheme] = useState(0);
   const [tech, setTech] = useState(0);
   const [techImage, setTechImage] = useState(0);
   const roomsRef = useRef<HTMLDivElement>(null);
+  const roomsWrapRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const heroInnerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const [zoomIndex, setZoomIndex] = useState<number | null>(null);
+
+  const closeZoom = useCallback(() => {
+    setZoomIndex(null);
+    triggerRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     const frame = heroRef.current;
@@ -204,6 +220,56 @@ export function BespokeExperience() {
     return () => observer.disconnect();
   }, []);
 
+  // Rooms carousel advances on its own; it holds still while the pointer is over it, after the visitor
+  // touches/scrolls/focuses it, when it is off-screen or the tab is hidden, and never runs under reduced motion.
+  useEffect(() => {
+    const wrap = roomsWrapRef.current;
+    const track = roomsRef.current;
+    if (!wrap || !track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let hovered = false;
+    let visible = false;
+    let pausedUntil = 0;
+
+    const holdOff = () => {
+      pausedUntil = Date.now() + ROOMS_RESUME_DELAY;
+    };
+    const onPointerEnter = (event: PointerEvent) => {
+      if (event.pointerType === "mouse") hovered = true;
+    };
+    const onPointerLeave = () => {
+      hovered = false;
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    }, { threshold: 0.3 });
+
+    const advance = () => {
+      if (hovered || !visible || document.hidden || Date.now() < pausedUntil) return;
+      const cards = Array.from(track.children) as HTMLElement[];
+      if (cards.length < 2) return;
+      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      const origin = cards[0].offsetLeft;
+      const current = cards.findIndex((card) => card.offsetLeft - origin >= track.scrollLeft - 4);
+      const next = atEnd || current === -1 ? 0 : Math.min(current + 1, cards.length - 1);
+      track.scrollTo({ left: cards[next].offsetLeft - origin, behavior: "smooth" });
+    };
+
+    observer.observe(wrap);
+    wrap.addEventListener("pointerenter", onPointerEnter);
+    wrap.addEventListener("pointerleave", onPointerLeave);
+    (["pointerdown", "touchstart", "wheel", "focusin", "keydown"] as const).forEach((type) => wrap.addEventListener(type, holdOff, { passive: true }));
+    const timer = window.setInterval(advance, ROOMS_AUTOPLAY_INTERVAL);
+
+    return () => {
+      window.clearInterval(timer);
+      observer.disconnect();
+      wrap.removeEventListener("pointerenter", onPointerEnter);
+      wrap.removeEventListener("pointerleave", onPointerLeave);
+      (["pointerdown", "touchstart", "wheel", "focusin", "keydown"] as const).forEach((type) => wrap.removeEventListener(type, holdOff));
+    };
+  }, []);
+
   const scrollRooms = (direction: 1 | -1) => {
     const track = roomsRef.current;
     if (!track) return;
@@ -215,12 +281,14 @@ export function BespokeExperience() {
     const lens = tile.querySelector<HTMLElement>("[data-lens]");
     if (!lens) return;
     const rect = tile.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    const offsetX = event.clientX - rect.left;
+    const offsetY = event.clientY - rect.top;
+    // The lens shows the photo at LENS_ZOOM x its on-page size, centred on the cursor.
     lens.style.opacity = "1";
-    lens.style.left = `${x}%`;
-    lens.style.top = `${y}%`;
-    lens.style.backgroundPosition = `${x}% ${y}%`;
+    lens.style.left = `${offsetX}px`;
+    lens.style.top = `${offsetY}px`;
+    lens.style.backgroundSize = `${rect.width * LENS_ZOOM}px ${rect.height * LENS_ZOOM}px`;
+    lens.style.backgroundPosition = `${lens.offsetWidth / 2 - offsetX * LENS_ZOOM}px ${lens.offsetHeight / 2 - offsetY * LENS_ZOOM}px`;
   };
 
   const leaveLens = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -335,7 +403,7 @@ export function BespokeExperience() {
             <p>Tworzymy rozwiązania, które łączą komfort, ergonomię i wyjątkową estetykę.</p>
           </div>
 
-          <div className={styles.roomsWrap}>
+          <div className={styles.roomsWrap} ref={roomsWrapRef}>
             <div className={styles.roomsTrack} ref={roomsRef} aria-label="Przykłady sal kinowych i aranżacji">
               {spaceRooms.map((item) => (
                 <figure key={item.image} className={styles.roomCard}>
@@ -464,8 +532,18 @@ export function BespokeExperience() {
                 {craft.tiles.map((tile) => (
                   tile.loupe ? (
                     <div key={tile.image} className={`${styles.craftTile} ${styles.hasLens}`} onMouseMove={moveLens} onMouseLeave={leaveLens}>
-                      <img src={tile.image} alt={tile.alt} loading="lazy" />
-                      <span className={styles.lens} data-lens style={{ backgroundImage: `url(${tile.image})` }} aria-hidden="true" />
+                      <button
+                        type="button"
+                        className={styles.craftOpen}
+                        aria-label={`Powiększ zdjęcie: ${tile.alt}`}
+                        onClick={(event) => {
+                          triggerRef.current = event.currentTarget;
+                          setZoomIndex(zoomableTiles.findIndex((item) => item.image === tile.image));
+                        }}
+                      >
+                        <img src={tile.image} alt={tile.alt} loading="lazy" draggable={false} />
+                        <span className={styles.lens} data-lens style={{ backgroundImage: `url(${tile.image})` }} aria-hidden="true" />
+                      </button>
                     </div>
                   ) : (
                     <div key={tile.image} className={`${styles.craftTile} ${tile.ratio ? styles.craftCrop : ""}`}>
@@ -490,6 +568,15 @@ export function BespokeExperience() {
       </section>
 
       <SiteFooter />
+
+      {zoomIndex !== null && (
+        <ImageLightbox
+          images={zoomableTiles.map((tile) => ({ src: tile.image, alt: tile.alt }))}
+          index={zoomIndex}
+          onClose={closeZoom}
+          onIndexChange={setZoomIndex}
+        />
+      )}
     </main>
   );
 }

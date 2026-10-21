@@ -1,20 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import type { HenryCollection } from "../collections-data";
+import { ImageLightbox } from "./image-lightbox";
+
+const subscribeNoop = () => () => {};
 
 export function InspiracjeExperience({ collection }: { collection: HenryCollection }) {
   const images = collection.inspirationImages ?? [];
   const collectionHref = `/kolekcje/${collection.slug}`;
-  const [backHref, setBackHref] = useState(collectionHref);
+  const from = useSyncExternalStore(
+    subscribeNoop,
+    () => new URLSearchParams(window.location.search).get("from") ?? "",
+    () => ""
+  );
+  const backHref =
+    from && (from.startsWith(`/kolekcje/${collection.slug}/`) || from.startsWith("/#")) ? from : collectionHref;
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    const from = new URLSearchParams(window.location.search).get("from");
-    if (from && (from.startsWith(`/kolekcje/${collection.slug}/`) || from.startsWith("/#"))) {
-      setBackHref(from);
-    }
-  }, [collection.slug]);
+  const closeLightbox = useCallback(() => {
+    setActiveIndex(null);
+    triggerRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-inspiracje-reveal]"));
@@ -58,7 +67,17 @@ export function InspiracjeExperience({ collection }: { collection: HenryCollecti
               data-inspiracje-reveal
               key={`${src}-${index}`}
             >
-              <img src={src} alt={`${collection.title} — aranżacja ${index + 1}`} loading="lazy" />
+              <button
+                type="button"
+                className="inspiracje-gallery__open"
+                aria-label={`Powiększ zdjęcie ${index + 1}`}
+                onClick={(event) => {
+                  triggerRef.current = event.currentTarget;
+                  setActiveIndex(index);
+                }}
+              >
+                <img src={src} alt={`${collection.title} — aranżacja ${index + 1}`} loading="lazy" draggable={false} />
+              </button>
             </figure>
           ))}
         </div>
@@ -66,6 +85,15 @@ export function InspiracjeExperience({ collection }: { collection: HenryCollecti
         <div className="inspiracje-empty">
           <p>Zdjęcia aranżacji kolekcji {collection.name} są w przygotowaniu.</p>
         </div>
+      )}
+
+      {activeIndex !== null && (
+        <ImageLightbox
+          images={images.map((src, index) => ({ src, alt: `${collection.title} — aranżacja ${index + 1}` }))}
+          index={activeIndex}
+          onClose={closeLightbox}
+          onIndexChange={setActiveIndex}
+        />
       )}
     </main>
   );

@@ -9,7 +9,6 @@ import styles from "./contact.module.css";
 const socialLinks = [
   { label: "Instagram", icon: "/media/instagram.svg" },
   { label: "Facebook", icon: "/media/facebook.svg" },
-  { label: "YouTube", icon: "/media/youtube.svg" },
 ];
 
 const contactTopics = [

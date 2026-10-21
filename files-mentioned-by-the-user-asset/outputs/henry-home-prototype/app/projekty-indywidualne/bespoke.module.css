@@ -80,7 +80,7 @@
 
 /* ---------- 02 ---------- */
 .themeViewer { display: grid; grid-template-columns: 1.7fr 1fr; gap: clamp(20px, 3vw, 44px); margin-top: 12vh; align-items: stretch; }
-.themeStage { position: relative; overflow: hidden; min-height: 380px; background: #000; aspect-ratio: 16 / 10; }
+.themeStage { position: relative; overflow: hidden; min-height: 380px; background: #000; aspect-ratio: 16 / 10; justify-self: stretch; align-self: stretch; }
 .themeStage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity 1s var(--ease), transform 1.6s var(--ease); }
 .themeStage img.isActive { opacity: 1; transform: scale(1); }
 .themeList { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(255, 255, 255, .12); }
@@ -94,7 +94,7 @@
 .themeList button:focus-visible { outline: 1px solid #d9a341; outline-offset: -1px; }
 
 /* ---------- 03 ---------- */
-.spaceTop { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(130px, 11vw, 190px); align-items: start; }
+.spaceTop { display: grid; grid-template-columns: minmax(0, min(600px, 40%)) minmax(0, 1fr); gap: clamp(130px, 8vw, 150px); align-items: start; }
 .spaceCopy { padding-bottom: 2vh; }
 .spaceCopy h2 { margin: 0 0 4vh; white-space: nowrap; font-size: clamp(2rem, 3.4vw, 3.8rem); }
 .spaceCopy p { max-width: 600px; margin: 0; color: #cfc9c2; font-size: 14px; line-height: 1.75; text-wrap: pretty; }
@@ -103,7 +103,7 @@
 .roomsTrack { display: flex; gap: clamp(14px, 2vw, 28px); margin-right: calc(var(--gutter) * -1); padding-right: var(--gutter); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; overscroll-behavior-x: contain; }
 .roomsTrack::-webkit-scrollbar { display: none; }
 .roomsTrack:focus-visible { outline: 1px solid #d9a341; outline-offset: 4px; }
-.roomCard { flex: 0 0 clamp(280px, 33vw, 620px); margin: 0; scroll-snap-align: start; background: #000; }
+.roomCard { flex: 0 0 clamp(300px, 38vw, 780px); margin: 0; scroll-snap-align: start; background: #000; }
 .roomCard img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; user-select: none; -webkit-user-drag: none; }
 .roomsControls { position: absolute; right: 100%; bottom: 0; display: flex; gap: 10px; margin-right: 16px; }
 .roomsControls button { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(217, 163, 65, .7); border-radius: 50%; background: none; color: #d9a341; cursor: pointer; transition: background .4s ease, color .4s ease; }
@@ -155,7 +155,9 @@
 .craftTile img { display: block; width: 100%; height: auto; }
 .craftCrop img { object-fit: cover; object-position: 50% 62%; }
 .hasLens { cursor: zoom-in; }
-.lens { position: absolute; z-index: 2; width: 150px; height: 150px; border: 1px solid #d9a341; border-radius: 50%; background-repeat: no-repeat; background-size: 320% 320%; box-shadow: 0 22px 44px rgba(0, 0, 0, .55); opacity: 0; transform: translate(-50%, -50%); transition: opacity .25s ease; pointer-events: none; }
+.craftOpen { display: block; position: relative; width: 100%; padding: 0; border: 0; background: none; color: inherit; cursor: zoom-in; }
+.craftOpen:focus-visible { outline: 1px solid #d9a341; outline-offset: -1px; }
+.lens { position: absolute; z-index: 2; width: 150px; height: 150px; border: 1px solid #d9a341; border-radius: 50%; background-repeat: no-repeat; box-shadow: 0 22px 44px rgba(0, 0, 0, .55); opacity: 0; transform: translate(-50%, -50%); transition: opacity .25s ease; pointer-events: none; }
 
 /* ---------- CTA ---------- */
 .cta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 6vh; padding: 14vh var(--gutter) 18vh; background: #000; border-top: 1px solid rgba(217, 163, 65, .3); }

@@ -1,20 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import type { HenryCollection, HenryProduct } from "../collections-data";
 
-type MaterialKey = "finishes" | "leather" | "wood" | "quilting" | "combinations" | "technical";
+type MaterialKey = "finishes" | "leather" | "wood" | "quilting" | "combinations";
 type MaterialSwatch = { name: string; swatchImg: string; previewImg: string; referenceImg?: string; cardImg?: string };
 
 const novenRoot = "/media/product-pages/noven-solo";
-
-const novenSlides = [
-  { src: `${novenRoot}/carousel-01.png`, label: "Graphite / Diamond" },
-  { src: `${novenRoot}/carousel-02.png`, label: "Olive / Linear" },
-  { src: `${novenRoot}/carousel-03.png`, label: "Midnight / Linear" },
-];
 
 const featureCards = [
   {
@@ -71,44 +65,118 @@ const solarisSoloFeatureCards = [
 
 const vesperSoloStandardRoot = "/media/product-pages/vesper-solo/standard-equipment";
 
+type SimplePage = {
+  title: string;
+  subtitle: string;
+  paragraphs: Array<string | { lead: string }>;
+  closing: string;
+  photos: Array<{ image: string; alt: string }>;
+};
+
 const vesperDuoRoot = "/media/product-pages/vesper-duo";
-const vesperDuoStory = {
-  title: "Dwie strefy komfortu. Jedno wyjątkowe doświadczenie.",
-  sections: [
-    {
-      title: "Luksus, który można poczuć",
-      image: `${vesperDuoRoot}/vesper-duo-03-cognac-angle.webp`,
-      alt: "Vesper Duo w kolorze koniakowym, widok z boku",
-      paragraphs: [
-        "Vesper Duo to coś więcej niż sofa kinowa. To prywatna przestrzeń relaksu, w której ponadczasowa elegancja spotyka się z nowoczesną technologią i bezkompromisowym komfortem.",
-        "Zaprojektowana z myślą o najbardziej wymagających miłośnikach kina domowego, zachwyca harmonijną sylwetką, perfekcyjnie dopracowanymi detalami i szlachetnymi materiałami. Subtelne linie, miękkie tapicerowanie oraz eleganckie elementy drewniane wykończone na wysoki połysk nadają jej wyjątkowy, luksusowy charakter.",
-        "Dwa niezależne miejsca siedzące pozwalają każdemu użytkownikowi odnaleźć własną definicję wygody. Elektrycznie regulowane oparcia i podnóżki, sterowane oddzielnymi siłownikami, umożliwiają płynne dostosowanie pozycji do indywidualnych preferencji. Delikatne oświetlenie ambientowe, poprowadzone wzdłuż bocznych podłokietników, podkreśla elegancką formę sofy i tworzy niepowtarzalną atmosferę podczas wieczornych seansów.",
-        "Vesper Duo dostępna jest we wszystkich kolorach kolekcji HENRY, w naturalnej skórze, miękkim welurze lub wyrafinowanym połączeniu obu materiałów. Bogactwo dostępnych wykończeń pozwala stworzyć sofę idealnie współgrającą z charakterem wnętrza.",
-      ],
-      lead: "Vesper Duo. Bo prawdziwy luksus zaczyna się tam, gdzie każdy detal ma znaczenie.",
-    },
-    {
-      title: "Komfort i technologia bez kompromisów",
-      image: `${vesperDuoRoot}/vesper-duo-01-front-cognac.webp`,
-      alt: "Vesper Duo w kolorze koniakowym, widok z przodu",
-      paragraphs: [
-        "Za elegancką formą Vesper Duo kryją się zaawansowane rozwiązania, które zmieniają codzienny wypoczynek w wyjątkowe doświadczenie.",
-        "Już w standardowej konfiguracji sofa oferuje dwa niezależnie sterowane miejsca z elektryczną regulacją oparć i podnóżków, dwa zintegrowane cupholdery, ekskluzywne elementy drewniane wykończone na wysoki połysk oraz subtelne oświetlenie ambientowe na bocznych podłokietnikach.",
-      ],
-    },
-    {
-      image: `${vesperDuoRoot}/vesper-duo-02-olive-relax.webp`,
-      alt: "Vesper Duo w kolorze oliwkowym z rozłożonym podnóżkiem",
-      paragraphs: [
-        "Dla osób poszukujących jeszcze większego komfortu Vesper Duo oferuje szerokie możliwości personalizacji. Opcjonalna elektryczna regulacja zagłówków, funkcja masażu oraz podgrzewanie siedzisk pozwalają stworzyć idealne warunki do relaksu. Cupholdery z funkcją chłodzenia i podgrzewania napojów, zintegrowane głośniki, praktyczne schowki w podłokietnikach, elegancki stolik oraz uchwyty na tablet i telefon sprawiają, że wszystko, czego potrzebujesz, znajduje się w zasięgu ręki.",
-        "Całość może zostać wzbogacona o HENRY Command – nowoczesny system sterowania, który zapewnia intuicyjną obsługę funkcji sofy i jeszcze większą swobodę użytkowania.",
-        "Każda Vesper Duo powstaje z myślą o indywidualnych oczekiwaniach właściciela. Starannie dobrane materiały, precyzja wykonania i możliwość personalizacji sprawiają, że staje się ona nie tylko centralnym elementem prywatnej sali kinowej, ale również wyrazem osobistego stylu.",
-      ],
-    },
+const vesperDuoPage: SimplePage = {
+  title: "Vesper Duo",
+  subtitle: "Dwie strefy komfortu. Jedno wyjątkowe doświadczenie.",
+  paragraphs: [
+    "Vesper Duo to coś więcej niż sofa kinowa. To prywatna przestrzeń relaksu, w której ponadczasowa elegancja spotyka się z nowoczesną technologią i bezkompromisowym komfortem.",
+    "Dwa niezależne miejsca siedzące pozwalają każdemu użytkownikowi odnaleźć własną definicję wygody. Elektrycznie regulowane oparcia i podnóżki, sterowane oddzielnymi siłownikami, umożliwiają płynne dostosowanie pozycji do indywidualnych preferencji. Delikatne oświetlenie ambientowe, poprowadzone wzdłuż bocznych podłokietników, podkreśla elegancką formę sofy i tworzy niepowtarzalną atmosferę podczas wieczornych seansów.",
+    "Dla osób poszukujących jeszcze większego komfortu Vesper Duo oferuje szerokie możliwości personalizacji.",
+    "Vesper Duo dostępny jest we wszystkich kolorach kolekcji HENRY, w naturalnej skórze, miękkim welurze lub wyrafinowanym połączeniu obu materiałów. Bogactwo dostępnych wykończeń pozwala stworzyć sofę idealnie współgrającą z charakterem wnętrza.",
+    "Vesper Duo powstaje z myślą o indywidualnych oczekiwaniach właściciela. Starannie dobrane materiały, precyzja wykonania i możliwość personalizacji sprawiają, że staje się ona nie tylko centralnym elementem prywatnej sali kinowej, ale również wyrazem osobistego stylu.",
   ],
-  closingImage: `${vesperDuoRoot}/vesper-duo-04-burgundy-room.webp`,
-  closingAlt: "Vesper Duo w kolorze burgundowym w prywatnej sali kinowej",
   closing: "Twoje miejsce. Twój komfort. Twoje kino.",
+  photos: [
+    { image: `${vesperDuoRoot}/vesper-duo-burgundy-room.webp`, alt: "Vesper Duo w bordowym welurze w prywatnej sali kinowej" },
+    { image: `${vesperDuoRoot}/vesper-duo-taupe.webp`, alt: "Vesper Duo w skórze w kolorze taupe z podświetleniem bocznych podłokietników" },
+    { image: `${vesperDuoRoot}/vesper-duo-brown-relax.webp`, alt: "Vesper Duo w brązowej skórze z rozłożonym podnóżkiem" },
+    { image: `${vesperDuoRoot}/vesper-duo-olive-popcorn.webp`, alt: "Vesper Duo w oliwkowej skórze z pikowaniem" },
+  ],
+};
+
+const vesperCornerRoot = "/media/product-pages/vesper-corner";
+const vesperCornerPage: SimplePage = {
+  title: "Vesper Corner",
+  subtitle: "Elegancja, która tworzy wyjątkową przestrzeń",
+  paragraphs: [
+    "Zaprojektowany z myślą o ekskluzywnych wnętrzach, prywatnych salach kinowych i eleganckich strefach relaksu, Vesper Corner zachwyca harmonijną sylwetką, starannie dopracowanymi detalami oraz ponadczasową estetyką. Jego przestronna, narożna konstrukcja pozwala stworzyć komfortową przestrzeń zarówno do wspólnego oglądania filmów, jak i spokojnego wypoczynku w gronie najbliższych.",
+    "Już w standardowej konfiguracji Vesper Corner oferuje ekskluzywne wykończenia drewniane na wysoki połysk, dwa zintegrowane cupholdery oraz boczne oświetlenie ambientowe.",
+    "Dostępny we wszystkich kolorach kolekcji HENRY, w naturalnej skórze, miękkim welurze lub eleganckim połączeniu obu materiałów, pozwala stworzyć kompozycję idealnie dopasowaną do charakteru wnętrza i indywidualnego stylu właściciela.",
+    "Vesper Corner został stworzony z myślą o tych, którzy oczekują czegoś więcej niż tradycyjnego wypoczynku. Za jego elegancką formą kryją się szerokie możliwości personalizacji oraz nowoczesne rozwiązania, pozwalające dopasować narożnik do indywidualnych potrzeb.",
+    "Każdy Vesper Corner może zostać skonfigurowany z uwzględnieniem charakteru wnętrza, dostępnej przestrzeni oraz preferencji przyszłego właściciela. To swoboda tworzenia mebla, który łączy wyjątkową estetykę z funkcjonalnością dopasowaną do indywidualnego stylu życia.",
+  ],
+  closing: "Wspólna przestrzeń. Wyjątkowe emocje. Komfort bez kompromisów.",
+  photos: [
+    { image: `${vesperCornerRoot}/vesper-corner-olive.webp`, alt: "Vesper Corner w oliwkowym welurze z podświetleniem" },
+    { image: `${vesperCornerRoot}/vesper-corner-chocolate.webp`, alt: "Vesper Corner w czekoladowej skórze z rozłożonym podnóżkiem" },
+    { image: `${vesperCornerRoot}/vesper-corner-cream-ottoman.webp`, alt: "Vesper Corner w kremowej skórze z pufą i ciepłym oświetleniem LED" },
+    { image: `${vesperCornerRoot}/vesper-corner-room-beige.webp`, alt: "Vesper Corner w beżowym welurze w prywatnym kinie domowym" },
+  ],
+};
+
+const vesperChaiseRoot = "/media/product-pages/vesper-chaise";
+const vesperChaisePage: SimplePage = {
+  title: "Vesper Chaise",
+  subtitle: "Luksus, który pozwala zapomnieć o świecie.",
+  paragraphs: [
+    "Są chwile, które zasługują na wyjątkową oprawę. HENRY Vesper Chaise to coś więcej niż elegancki szezlong – to osobista przestrzeń relaksu, w której wyrafinowany design spotyka się z bezkompromisowym komfortem.",
+    "Jego harmonijna, wydłużona sylwetka zaprasza do odpoczynku, a miękkie, starannie wyprofilowane siedzisko pozwala zanurzyć się w świecie wyjątkowej wygody. Szlachetne materiały, precyzyjne przeszycia i subtelne detale podkreślają ekskluzywny charakter mebla, który staje się prawdziwą ozdobą każdego wnętrza.",
+    "Elektryczna regulacja oparcia pozwala jednym ruchem odnaleźć idealną pozycję do czytania, oglądania filmu czy chwili odprężenia. Eleganckie elementy drewniane wykończone na wysoki połysk nadają całości prestiżowego charakteru, a delikatne oświetlenie ambientowe wzdłuż boków tworzy niepowtarzalną atmosferę. Dwa dyskretnie wkomponowane cupholdery sprawiają, że ulubiony napój pozostaje zawsze w zasięgu ręki.",
+    { lead: "Twój komfort. Twoje zasady." },
+    "Każdy detal HENRY Vesper Chaise może zostać dopasowany do indywidualnych oczekiwań. Starannie dobrane rozwiązania technologiczne i szerokie możliwości personalizacji pozwalają stworzyć szezlong, który odzwierciedla Twój styl życia i osobiste poczucie luksusu.",
+  ],
+  closing: "Vesper Chaise to luksus, którego nie trzeba definiować. Wystarczy go poczuć.",
+  photos: [
+    { image: `${vesperChaiseRoot}/vesper-chaise-brown.webp`, alt: "Vesper Chaise w brązowej skórze z pikowaniem i podświetleniem" },
+    { image: `${vesperChaiseRoot}/vesper-chaise-olive.webp`, alt: "Vesper Chaise w oliwkowej skórze z podświetleniem bocznym" },
+    { image: `${vesperChaiseRoot}/vesper-chaise-cinema-taupe.webp`, alt: "Vesper Chaise i fotel w kolorze taupe w prywatnej sali kinowej" },
+    { image: `${vesperChaiseRoot}/vesper-chaise-ensemble-taupe.webp`, alt: "Vesper Chaise w kolorze taupe w zestawie z narożnikiem, fotelem i pufą" },
+  ],
+};
+
+const vesperSideTableRoot = "/media/product-pages/vesper-side-table";
+const vesperSideTablePage: SimplePage = {
+  title: "Vesper Side Table",
+  subtitle: "Elegancja, która zawsze jest pod ręką.",
+  paragraphs: [
+    "Vesper Side Table to więcej niż stolik pomocniczy. To subtelny element luksusu, który dopełnia przestrzeń i sprawia, że każda chwila relaksu staje się jeszcze przyjemniejsza.",
+    "Jego rzeźbiarska forma, płynne linie i perfekcyjnie wyważone proporcje łączą nowoczesny design z ponadczasową elegancją. Starannie zaprojektowana konstrukcja zapewnia stabilność, a kompaktowe wymiary pozwalają ustawić stolik dokładnie tam, gdzie jest najbardziej potrzebny.",
+    "Ulubiona kawa, kieliszek wina, książka czy pilot do kina domowego – wszystko pozostaje w zasięgu ręki. Vesper Side Table doskonale sprawdza się jako elegancki towarzysz foteli, sof i szezlongów z kolekcji HENRY, tworząc z nimi harmonijną, luksusową kompozycję.",
+    "Dostępny w dwóch ekskluzywnych wykończeniach drewna: American Walnut Gloss oraz Smoked Ebony Gloss.",
+  ],
+  closing: "Vesper Side Table – mały detal, który definiuje wielki komfort.",
+  photos: [
+    { image: `${vesperSideTableRoot}/vesper-side-table-walnut.webp`, alt: "Vesper Side Table w wykończeniu American Walnut Gloss" },
+    { image: `${vesperSideTableRoot}/vesper-side-table-ebony.webp`, alt: "Vesper Side Table w wykończeniu Smoked Ebony Gloss" },
+    { image: `${vesperSideTableRoot}/vesper-side-table-cinema-taupe.webp`, alt: "Vesper Side Table między fotelem a szezlongiem w sali kinowej" },
+    { image: `${vesperSideTableRoot}/vesper-side-table-armchair-corner.webp`, alt: "Vesper Side Table obok fotela w karmelowym welurze" },
+  ],
+};
+
+const vesperOttomanRoot = "/media/product-pages/vesper-ottoman";
+const vesperOttomanPage: SimplePage = {
+  title: "Vesper Ottoman",
+  subtitle: "Elegancja, która dopełnia przestrzeń.",
+  paragraphs: [
+    "Prawdziwy luksus kryje się w detalach. Vesper Ottoman to wyjątkowe połączenie wyrafinowanego wzornictwa, szlachetnych materiałów i ponadczasowej elegancji. Zaprojektowany jako naturalne dopełnienie kolekcji Vesper, wnosi do wnętrza harmonię, komfort i subtelny prestiż.",
+    "Doskonale sprawdzi się jako wygodny podnóżek, dodatkowe siedzisko lub elegancki element strefy wypoczynkowej.",
+    "Opcjonalny stolik umieszczony w centralnej części nadaje mu zupełnie nowy wymiar. Wykończony drewnem z kolekcji Vesper, staje się wyrafinowanym akcentem, idealnym na kieliszek wina, filiżankę kawy czy ulubioną książkę.",
+    "Bogata paleta kolorów oraz możliwość wyboru naturalnej skóry lub ekskluzywnej tkaniny welurowej pozwalają stworzyć kompozycję idealnie dopasowaną do charakteru wnętrza.",
+  ],
+  closing: "Vesper Ottoman – mały detal, który zmienia charakter całej przestrzeni.",
+  photos: [
+    { image: `${vesperOttomanRoot}/vesper-ottoman-05-cinema-room.webp`, alt: "Vesper Ottoman w prywatnej sali kinowej przy fotelu i sofie narożnej" },
+    { image: `${vesperOttomanRoot}/vesper-ottoman-06-cream-corner-details.webp`, alt: "Kremowy Vesper Ottoman przed sofą narożną oraz detale pikowania i drewnianej wstawki" },
+    { image: `${vesperOttomanRoot}/vesper-ottoman-04-leather-wood-panel.webp`, alt: "Vesper Ottoman w skórze z drewnianym stolikiem w centralnej części" },
+    { image: `${vesperOttomanRoot}/vesper-ottoman-03-navy-leather.webp`, alt: "Granatowy Vesper Ottoman w naturalnej skórze" },
+  ],
+};
+
+const simplePages: Record<string, SimplePage> = {
+  "vesper-duo": vesperDuoPage,
+  "vesper-corner": vesperCornerPage,
+  "vesper-chaise": vesperChaisePage,
+  "vesper-side-table": vesperSideTablePage,
+  "vesper-ottoman": vesperOttomanPage,
 };
 
 const vesperSoloFeatureCards = [
@@ -214,7 +282,6 @@ const materialTabs: Array<{ key: MaterialKey; label: string; captionLabel?: stri
   { key: "leather", label: "Barwa skóry", captionLabel: "Naturalna włoska skóra Mezzo Fiore" },
   { key: "wood", label: "Wykończenie drewna" },
   { key: "quilting", label: "Styl pikowania" },
-  { key: "technical", label: "Wymiary" },
 ];
 
 // Bottom edge (top% + height%) of each mosaic slot box{A..F} in .product-feature-box,
@@ -246,17 +313,15 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     { title: "Detal wykończenia", copy: "Pełna sesja zdjęciowa modelu zostanie dodana wkrótce." },
     { title: "W aranżacji", copy: "Zobacz więcej w sekcji Aranżacje poniżej." },
   ];
-  const [activeSlide, setActiveSlide] = useState(0);
   const [materialKey, setMaterialKey] = useState<MaterialKey>("combinations");
   const [activeSwatch, setActiveSwatch] = useState(0);
   const [activeFinish, setActiveFinish] = useState(0);
   const [activeEquipmentOption, setActiveEquipmentOption] = useState(0);
-  const dragState = useRef<{ pointerId: number; startX: number } | null>(null);
   const featureGridRef = useRef<HTMLDivElement>(null);
   const [featureGridClipHeight, setFeatureGridClipHeight] = useState<number>();
   const isVesperSolo = product.slug === "vesper-solo";
   const isNovenSolo = product.slug === "noven-solo";
-  const isVesperDuo = product.slug === "vesper-duo";
+  const duoPage = simplePages[product.slug];
   const isSolarisSolo = product.slug === "solaris-solo";
   const featuresReady = isReady || isVesperSolo || isSolarisSolo;
   const activeFeatureCards = isVesperSolo ? vesperSoloFeatureCards : isSolarisSolo ? solarisSoloFeatureCards : featureCards;
@@ -273,17 +338,6 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     return () => window.removeEventListener("resize", measure);
   }, [featureBoxCount, isHero, isVesperSolo, isNovenSolo, isSolarisSolo]);
 
-  const slides = useMemo(() => {
-    if (isReady) return novenSlides;
-    if (product.galleryImages && product.galleryImages.length > 0) {
-      return product.galleryImages.map((src) => ({ src, label: product.name }));
-    }
-    return [
-      { src: product.image, label: `${product.name} / materiały w przygotowaniu` },
-      { src: product.catalogueImage || product.image, label: `${collection.title} / zapowiedź` },
-      { src: collection.hero, label: `${collection.title} / kolekcja` },
-    ];
-  }, [collection.hero, collection.title, isReady, product]);
   const finishes = product.finishes;
   const activeFinishData = finishes?.[Math.min(activeFinish, (finishes?.length ?? 1) - 1)];
   const visibleMaterialTabs = useMemo(
@@ -304,7 +358,6 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
       ? product.quiltingSwatches.map((item) => ({ name: item.name, swatchImg: item.swatch, previewImg: item.preview }))
       : isReady ? novenQuiltingSwatches : [],
     combinations: [],
-    technical: [],
   }), [isReady, activeFinishData, product.leatherSwatches, product.woodSwatches, product.quiltingSwatches]);
   const activeMaterial = visibleMaterialTabs.find((item) => item.key === materialKey) ?? visibleMaterialTabs[0];
   const activeMaterialLabel = activeMaterial.label;
@@ -355,9 +408,6 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     previousEquipmentRef.current = nextImage;
   }, [activeEquipmentData.image]);
 
-  const prevIndex = (activeSlide - 1 + slides.length) % slides.length;
-  const nextIndex = (activeSlide + 1) % slides.length;
-
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-product-reveal]"));
     const observer = new IntersectionObserver((entries) => {
@@ -381,41 +431,6 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
     setActiveFinish(index);
   };
 
-  const moveSlide = (direction: number) => {
-    setActiveSlide((prev) => (prev + direction + slides.length) % slides.length);
-  };
-
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
-
-  useEffect(() => {
-    if (slides.length <= 1 || isCarouselPaused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [slides.length, isCarouselPaused]);
-
-  const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.button !== 0) return;
-    dragState.current = { pointerId: event.pointerId, startX: event.clientX };
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-
-  const handlePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const drag = dragState.current;
-    if (!drag || drag.pointerId !== event.pointerId) return;
-    const distance = event.clientX - drag.startX;
-    dragState.current = null;
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-    if (Math.abs(distance) > 48) moveSlide(distance < 0 ? 1 : -1);
-  };
-
-  const handlePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
-    dragState.current = null;
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-  };
-
   const heroImage = isReady ? `${novenRoot}/hero.png` : product.image;
 
   return (
@@ -427,88 +442,27 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
         <img className="product-hero__scroll" src="/media/product-pages/noven-solo/arrow-down.svg" alt="" aria-hidden="true" />
       </section>
 
-      <section className="product-carousel-section">
-        <header data-product-reveal>
-          <div className="product-eyebrow"><p>Konfiguracje</p></div>
-          <h2>Wybierz swój nastrój</h2>
-          <p>{isReady ? "Trzy interpretacje tej samej bryły. Zmieniaj kolorystykę i zobacz, jak Noven Solo reaguje na charakter wnętrza." : "Kolejne wizualizacje modelu pojawią się tutaj po przygotowaniu materiałów."}</p>
-        </header>
-        <div
-          className="product-carousel"
-          data-product-reveal
-          aria-roledescription="carousel"
-          aria-label={`Wizualizacje ${product.name}`}
-          onMouseEnter={() => setIsCarouselPaused(true)}
-          onMouseLeave={() => setIsCarouselPaused(false)}
-          onPointerDown={() => setIsCarouselPaused(true)}
-          onPointerUp={() => setIsCarouselPaused(false)}
-          onPointerCancel={() => setIsCarouselPaused(false)}
-        >
-          <div className="product-carousel__viewport">
-            {slides.length > 1 && (
-              <button type="button" className="product-carousel__peek product-carousel__peek--prev" onClick={() => moveSlide(-1)} aria-label={`Pokaż zdjęcie ${prevIndex + 1}`}>
-                <img src={slides[prevIndex].src} alt="" draggable={false} />
-                <span className="product-carousel__peek-num">{String(prevIndex + 1).padStart(2, "0")}<i aria-hidden="true" /></span>
-              </button>
-            )}
-            {/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex -- drag/swipe carousel surface: no native element supports pointer-drag + arrow-key slide navigation together, so this stays a focusable div by design */}
-            <div
-              className="product-carousel__stage"
-              onPointerDown={handlePointerDown}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={handlePointerCancel}
-              onDragStart={(event) => event.preventDefault()}
-              onKeyDown={(event) => {
-                if (event.key === "ArrowLeft") moveSlide(-1);
-                if (event.key === "ArrowRight") moveSlide(1);
-              }}
-              tabIndex={0}
-            >
-              {slides.map((slide, index) => (
-                <figure className={`product-carousel__slide ${index === activeSlide ? "is-active" : ""}`} aria-hidden={index !== activeSlide} key={`slide-${index}`}>
-                  <img src={slide.src} alt={index === activeSlide ? `${product.name}: ${slide.label}` : ""} draggable={false} />
-                  <figcaption>{slide.label}</figcaption>
-                </figure>
-              ))}
-            </div>
-            {/* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
-            {slides.length > 1 && (
-              <button type="button" className="product-carousel__peek product-carousel__peek--next" onClick={() => moveSlide(1)} aria-label={`Pokaż zdjęcie ${nextIndex + 1}`}>
-                <img src={slides[nextIndex].src} alt="" draggable={false} />
-                <span className="product-carousel__peek-num"><i aria-hidden="true" />{String(nextIndex + 1).padStart(2, "0")}</span>
-              </button>
-            )}
+      {duoPage && (
+        <section className="duo-page" aria-labelledby="duo-page-title">
+          <div className="duo-page__intro" data-product-reveal>
+            <h2 id="duo-page-title">{duoPage.title}</h2>
+            <p className="duo-page__subtitle">{duoPage.subtitle}</p>
+            {duoPage.paragraphs.map((paragraph) => typeof paragraph === "string"
+              ? <p key={paragraph}>{paragraph}</p>
+              : <p className="duo-page__lead" key={paragraph.lead}>{paragraph.lead}</p>)}
+            <p className="duo-page__closing">{duoPage.closing}</p>
           </div>
-        </div>
-      </section>
-
-      {isVesperDuo && (
-        <section className="duo-story" aria-labelledby="duo-story-title">
-          <header data-product-reveal>
-            <h2 id="duo-story-title">{vesperDuoStory.title}</h2>
-          </header>
-          <div className="duo-story__grid">
-            {vesperDuoStory.sections.map((section, index) => (
-              <article className={`duo-story__row duo-story__row--${index + 1}`} key={section.image}>
-                <figure className="duo-story__photo" data-product-reveal>
-                  <img src={section.image} alt={section.alt} />
-                </figure>
-                <div className="duo-story__copy" data-product-reveal style={{ "--reveal-delay": "110ms" } as CSSProperties}>
-                  {section.title && <h3>{section.title}</h3>}
-                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                  {section.lead && <p className="duo-story__lead">{section.lead}</p>}
-                </div>
-              </article>
+          <div className="duo-page__photos">
+            {duoPage.photos.map((photo) => (
+              <figure key={photo.image} data-product-reveal>
+                <img src={photo.image} alt={photo.alt} loading="lazy" />
+              </figure>
             ))}
           </div>
-          <figure className="duo-story__finale" data-product-reveal>
-            <img src={vesperDuoStory.closingImage} alt={vesperDuoStory.closingAlt} />
-            <figcaption>{vesperDuoStory.closing}</figcaption>
-          </figure>
         </section>
       )}
 
-      {!isVesperDuo && (
+      {!duoPage && (
       <section className={`product-features${isVesperSolo ? " product-features--vesper-solo" : ""}${isNovenSolo ? " product-features--noven-solo" : ""}${isSolarisSolo ? " product-features--solaris-solo" : ""}`}>
         {isHero && (
           <header data-product-reveal>
@@ -581,10 +535,6 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                 </figure>
               </article>
             </div>
-          ) : materialKey === "technical" ? (
-            <figure className={`material-lab__technical${isReady ? "" : " is-placeholder"}`}>
-              {isReady ? <img src={`${novenRoot}/dimensions.png`} alt="Noven Solo — widok z przodu, boku i z góry z wymiarami" /> : <><span>H</span><small>Rysunek techniczny w przygotowaniu</small></>}
-            </figure>
           ) : materialKey === "finishes" && finishes && activeFinishData && activeSwatchData ? (
             <div className="material-config">
               <p className="material-config__intro">Materiały definiują charakter fotela. Wybierz naturalną włoską skórę i wykończenie drewna, tworząc kompozycję dopasowaną do Twojego wnętrza.</p>

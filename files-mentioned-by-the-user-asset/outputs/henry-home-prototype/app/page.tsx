@@ -255,7 +255,7 @@ export default function Home() {
             <img src="/media/about-feeling.webp" alt="Rząd kremowych foteli HENRY w prywatnej sali kinowej" loading="lazy" />
           </figure>
           <div className="about__copy" data-reveal>
-            <p>Projektujemy doświadczenie prywatnego kina — od pierwszego dotyku materiału po ciszę tuż przed seansem</p>
+            <p>Projektujemy doświadczenie prywatnego kina od pierwszego dotyku materiału po ciszę tuż przed seansem</p>
             <p>Forma, ergonomia i technologia spotykają się w jednym celu: stworzyć miejsce, do którego chcesz wracać</p>
           </div>
         </div>

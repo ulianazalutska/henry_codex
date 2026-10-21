@@ -162,8 +162,8 @@ const faqData: Record<CategoryKey, FaqItem[]> = {
     {
       question: "Jakie są wymiary foteli i sof HENRY?",
       answer:
-        "Wymiary różnią się w zależności od modelu i kolekcji — szczegółowe dane znajdziesz na stronie konkretnego produktu lub uzyskasz je od naszego zespołu.",
-      link: { href: "/kolekcje", label: "Zobacz kolekcje" },
+        "Wymiary różnią się w zależności od modelu i kolekcji — szczegółowe dane uzyskasz od naszego zespołu.",
+      link: { href: "/kontakt", label: "Skontaktuj się z nami" },
     },
     {
       question: "Ile miejsca potrzeba przed fotelem i między rzędami?",
