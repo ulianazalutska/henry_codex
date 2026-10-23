@@ -27,9 +27,9 @@ const featureCards = [
     copy: "Płynna, elektryczna regulacja oparcia i podnóżka pozwala dopasować pozycję do chwili pełnego relaksu.",
   },
   {
-    title: "Podświetlany uchwyt na kubek",
+    title: "Uchwyt na kubek",
     image: `${novenRoot}/feature-cup-holder.png`,
-    copy: "Podświetlany uchwyt na kubek zapewnia wygodny dostęp do napoju, nawet podczas seansu przy zgaszonym świetle.",
+    copy: "Uchwyt na kubek zapewnia wygodny dostęp do napoju.",
   },
 ];
 
@@ -564,6 +564,7 @@ export function ProductExperience({ collection, product, isReady, isHero }: { co
                       ))}
                     </div>
                   </div>
+                  <p className="material-config__note">Kolory widoczne na zdjęciach mogą różnić się od rzeczywistych odcieni materiałów. Ostateczny wybór kolorystyki zalecamy dokonywać na podstawie oryginalnego wzornika skór i tkanin HENRY.</p>
                 </div>
                 <figure className="material-lab__preview material-config__chair">
                   <div className="material-lab__preview-stack">

@@ -4050,8 +4050,8 @@ button:hover .diagonal-arrow,
 }
 
 .material-lab__equipment-preview {
-  flex: 0 0 487px;
-  max-width: 487px;
+  flex: 0 1 720px;
+  max-width: 720px;
 }
 
 .material-lab__equipment-preview figure {
@@ -4116,7 +4116,7 @@ button:hover .diagonal-arrow,
 .product-velour__chairs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 6vh auto 0;
 }
 
@@ -4924,7 +4924,7 @@ button:hover .diagonal-arrow,
 }
 
 .material-config {
-  padding: 8vh 0 5vh;
+  padding: 5vh 0 5vh;
 }
 
 .material-config__intro {
@@ -4997,6 +4997,16 @@ button:hover .diagonal-arrow,
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.material-config__note {
+  grid-column: 1 / -1;
+  max-width: 860px;
+  margin: 2vh auto 0;
+  color: #adadad;
+  font-size: clamp(11px, .9vw, 13px);
+  line-height: 1.7;
+  text-align: center;
 }
 
 .material-config__dots--leather {
